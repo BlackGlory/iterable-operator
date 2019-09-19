@@ -1,0 +1,31 @@
+{
+  "name": "iterable-operator",
+  "version": "0.1.0",
+  "description": "Minimalist utility for JavaScript Iterable.",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "repository": "git@github.com:BlackGlory/iterable-operator.git",
+  "author": "BlackGlory <woshenmedoubuzhidao@blackglory.me>",
+  "license": "MIT",
+  "scripts": {
+    "prepublishOnly": "yarn build",
+    "test": "jest --coverage --config jest.config.json",
+    "clean": "rm -rf lib",
+    "build": "tsc --project tsconfig.build.json",
+    "lint": "tslint -t codeFrame 'src/**/*.ts' 'test/**/*.ts'"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.18",
+    "@types/node": "^12.7.5",
+    "husky": "^3.0.5",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.1.0",
+    "tslint": "^5.20.0",
+    "typescript": "^3.6.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint && yarn test"
+    }
+  }
+}
