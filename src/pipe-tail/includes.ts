@@ -1,5 +1,5 @@
 // pipe end
-export function includes<T>(iterable: Iterable<T>, sequence: T[]): boolean {
+export function includes<T>(iterable: Iterable<T>, sequence: ArrayLike<T>): boolean {
   const sequenceLength = sequence.length
   let matchCount = 0
   for (const element of iterable) {

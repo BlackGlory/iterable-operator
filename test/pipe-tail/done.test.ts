@@ -5,3 +5,10 @@ test('done(iterable)', () => {
 
   expect(result).toEqual([1, 2, 3])
 })
+
+test('done(iterable, factory)', () => {
+  const result = done([1, 2, 3], it => new Set(it))
+
+  expect(result).toBeInstanceOf(Set)
+  expect([...result]).toEqual([1, 2, 3])
+})

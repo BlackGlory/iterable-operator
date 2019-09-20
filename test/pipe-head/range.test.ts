@@ -1,15 +1,21 @@
-import { range, head, tail } from '../../src'
+import { range } from '../../src'
 
-test('range() & head()', () => {
-  const first = head(range(), 2)
+test('range(end) & end > 0', () => {
+  const result = range(5)
 
-  expect([...first]).toEqual([Number.MIN_SAFE_INTEGER, Number.MIN_SAFE_INTEGER + 1])
+  expect([...result]).toEqual([0, 1, 2, 3, 4])
 })
 
-test('range() & tail()', () => {
-  const last = tail(range(Number.MAX_SAFE_INTEGER - 1), 2)
+test('range(end) & end < 0', () => {
+  const result = range(-5)
 
-  expect([...last]).toEqual([Number.MAX_SAFE_INTEGER - 1, Number.MAX_SAFE_INTEGER])
+  expect([...result]).toEqual([0, -1, -2, -3, -4])
+})
+
+test('range(end) & end = 0', () => {
+  const result = range(0)
+
+  expect([...result]).toEqual([])
 })
 
 test('range(start, end) & start = end', () => {

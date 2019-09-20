@@ -2,7 +2,7 @@ import { BreakFlag, ContinueFlag } from '../$'
 
 // pipe
 // $
-export function* map<T, U>(iterable: Iterable<T>, fn: (element: T, index: number) => U) {
+export function* map<T, U>(iterable: Iterable<T>, fn: (element: T, index: number) => U): Iterable<U> {
   let index = 0
   for (const element of iterable) {
     try {
@@ -14,5 +14,3 @@ export function* map<T, U>(iterable: Iterable<T>, fn: (element: T, index: number
     }
   }
 }
-
-// export const pipeMap = <T, U>(fn: (element: T, index: number) => U) => (iterable: Iterable<T>) => map(iterable, fn)
