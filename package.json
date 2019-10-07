@@ -1,6 +1,6 @@
 {
   "name": "iterable-operator",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "description": "Minimalist utility for JavaScript Iterable.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -8,7 +8,7 @@
   "author": "BlackGlory <woshenmedoubuzhidao@blackglory.me>",
   "license": "MIT",
   "scripts": {
-    "prepublishOnly": "yarn build",
+    "prepublishOnly": "yarn clean && yarn build",
     "test": "jest --coverage --config jest.config.json",
     "clean": "rm -rf lib",
     "build": "tsc --project tsconfig.build.json",

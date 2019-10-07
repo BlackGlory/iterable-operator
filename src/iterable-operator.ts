@@ -1,5 +1,5 @@
 import { range } from './pipe-head'
-import { chunk, concat, each, filter, flatten, head, map, repeat, slice, tail, uniqBy, uniq, zip } from './pipe'
+import { chunkBy, chunk, concat, each, filter, flatten, head, map, repeat, slice, tail, uniqBy, uniq, zip } from './pipe'
 import { done, every, find, has, includes, reduce, run, some } from './pipe-tail'
 
 type HeadlessTuple<T extends any[]> = ((...args: T) => any) extends (_: any, ...rest: infer R) => any ? R : []
@@ -31,6 +31,11 @@ export class IterableOperator<T> implements Iterable<T> {
   }
 
   // pipe
+
+  chunkBy(fn: (element: T, index: number) => boolean): IterableOperator<T[]>
+  chunkBy(...args: Partial<FillAny<HeadlessParameters<typeof chunk>>>) {
+    return new IterableOperator(chunkBy(this.subject, ...args))
+  }
 
   chunk(length: number): IterableOperator<T[]>
   chunk(...args: Partial<FillAny<HeadlessParameters<typeof chunk>>>) {

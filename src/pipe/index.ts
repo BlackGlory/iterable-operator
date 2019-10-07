@@ -1,3 +1,4 @@
+export * from './chunk-by'
 export * from './chunk'
 export * from './concat'
 export * from './each'

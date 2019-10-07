@@ -2,7 +2,7 @@
 
 import { IterableOperator } from '../src'
 import { range } from '../src/pipe-head'
-import { chunk, concat, each, filter, flatten, head, map, repeat, slice, tail, uniqBy, uniq, zip } from '../src/pipe'
+import { chunkBy, chunk, concat, each, filter, flatten, head, map, repeat, slice, tail, uniqBy, uniq, zip } from '../src/pipe'
 import { done, every, find, has, includes, reduce, run, some } from '../src/pipe-tail'
 
 // pipe head
@@ -16,6 +16,14 @@ test('IterableOperator.fromRange(end)', () => {
 })
 
 // pipe
+
+test('IterableOperator(iterable).chunkBy(fn)', () => {
+  const instance = new IterableOperator('123').chunkBy(x => x === '1')
+  const result = chunkBy('123', x => x === '1')
+
+  expect(instance).toBeInstanceOf(IterableOperator)
+  expect([...instance]).toEqual([...result])
+})
 
 test('IterableOperator(iterable).chunk(length)', () => {
   const instance = new IterableOperator('123').chunk(2)
