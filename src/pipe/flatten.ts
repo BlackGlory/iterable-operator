@@ -1,4 +1,4 @@
-import { flattenDeep } from './flatten-deep'
+import { flattenDeep, NestedIterable } from './flatten-deep'
 
 export function flatten<T, U = T>(iterable: NestedIterable<T>): Iterable<U>
 export function flatten<T, U = T>(iterable: NestedIterable<T>, exclude: (value: Iterable<unknown>) => boolean): Iterable<U>

@@ -1,3 +1,5 @@
+export type NestedIterable<T> = Iterable<NestedIterable<T> | T>
+
 function isChar(obj: unknown): boolean {
   return typeof obj === 'string' && obj.length === 1
 }
