@@ -1,16 +1,17 @@
-type NestedIterable<T> = Iterable<T> // TypeScript 3.7.0: Iterable<NestedIterable<T>>
+type NestedIterable<T> = Iterable<NestedIterable<T> | T>
 
 function isChar(obj: unknown): boolean {
   return typeof obj === 'string' && obj.length === 1
 }
 
-function isIterable(obj: any): boolean {
+function isIterable(obj: any): obj is Iterable<unknown> {
   return typeof obj[Symbol.iterator] === 'function'
 }
 
-// pipe
-export function flatten<TResult>(iterable: NestedIterable<unknown>): Iterable<TResult>
-export function flatten<TResult>(iterable: NestedIterable<unknown>, depth: number): Iterable<TResult>
+export function flatten<T>(iterable: NestedIterable<T>): Iterable<T>
+export function flatten<T>(iterable: NestedIterable<T>, depth: number): Iterable<T>
+export function flatten<T, U>(iterable: NestedIterable<T>): Iterable<U>
+export function flatten<T, U>(iterable: NestedIterable<T>, depth: number): Iterable<U>
 export function flatten(iterable: NestedIterable<any>, depth: number = Infinity) {
   if (depth < 0) throw new RangeError('Invalid depth value')
   return (function* () {

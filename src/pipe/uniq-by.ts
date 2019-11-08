@@ -1,7 +1,5 @@
 import { BreakFlag, ContinueFlag } from '../$'
 
-// pipe
-// $
 export function* uniqBy<T, U>(iterable: Iterable<T>, fn: (element: T, index: number) => U): Iterable<T> {
   const bucket = new Map<U, T>()
   let index = 0

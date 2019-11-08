@@ -1,4 +1,3 @@
-// pipe
 export function slice<T>(iterable: Iterable<T>): Iterable<T>
 export function slice<T>(iterable: Iterable<T>, start: number): Iterable<T>
 export function slice<T>(iterable: Iterable<T>, start: number, end: number): Iterable<T>

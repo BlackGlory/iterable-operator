@@ -1,7 +1,5 @@
 import { BreakFlag, ContinueFlag } from '../$'
 
-// pipe end
-// $
 export function every<T>(iterator: Iterable<T>, fn: (element: T, index: number) => boolean): boolean {
   let index = 0
   for (const element of iterator) {

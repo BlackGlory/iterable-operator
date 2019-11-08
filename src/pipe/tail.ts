@@ -1,4 +1,3 @@
-// pipe
 export function tail<T>(iterable: Iterable<T>): Iterable<T>
 export function tail<T>(iterable: Iterable<T>, count: number): Iterable<T>
 export function tail<T>(iterable: Iterable<T>, count: number = 1): Iterable<T> {

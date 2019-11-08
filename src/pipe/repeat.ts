@@ -1,4 +1,3 @@
-// pipe
 export function repeat<T>(iterable: Iterable<T>): Iterable<T>
 export function repeat<T>(iterable: Iterable<T>, times: number): Iterable<T>
 export function repeat<T>(iterable: Iterable<T>, times: number = Infinity) {

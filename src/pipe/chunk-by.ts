@@ -1,4 +1,3 @@
-// pipe
 export function* chunkBy<T>(iterable: Iterable<T>, fn: (element: T, index: number) => boolean): Iterable<T[]> {
   let buffer: T[] = []
     , index = 0

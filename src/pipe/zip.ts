@@ -1,4 +1,3 @@
-// pipe
 export function  zip<T>(iterable: Iterable<T>): Iterable<T[]>
 export function  zip<T1, T2>(iterable1: Iterable<T1>, iterable2: Iterable<T2>): Iterable<Array<T1 | T2>>
 export function  zip<T1, T2, T3>(iterable1: Iterable<T1>, iterable2: Iterable<T2>, iterable3: Iterable<T3>): Iterable<Array<T1 | T2 | T3>>

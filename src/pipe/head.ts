@@ -1,4 +1,3 @@
-// pipe
 export function head<T>(iterable: Iterable<T>): Iterable<T>
 export function head<T>(iterable: Iterable<T>, count: number): Iterable<T>
 export function head<T>(iterable: Iterable<T>, count: number = 1) {

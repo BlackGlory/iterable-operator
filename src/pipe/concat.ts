@@ -1,4 +1,3 @@
-// pipe
 export function concat(): never
 export function concat<T>(iterable: Iterable<T>): never
 export function concat<T1, T2>(iterable1: Iterable<T1>, iterable2: Iterable<T2>): Iterable<T1 | T2>

@@ -6,7 +6,6 @@ function* rangeUnsignedStep(start: number, end: number, step: number): Iterable<
   }
 }
 
-// pipe start
 export function range(end: number): Iterable<number>
 export function range(start: number, end: number): Iterable<number>
 export function range(start: number, end: number, unsignedStep: number): Iterable<number>

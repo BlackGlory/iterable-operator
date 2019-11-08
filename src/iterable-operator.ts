@@ -66,7 +66,9 @@ export class IterableOperator<T> implements Iterable<T> {
   }
 
   flatten(): IterableOperator<T>
+  flatten<U>(): IterableOperator<U>
   flatten(depth: number): IterableOperator<T>
+  flatten<U>(depth: number): IterableOperator<U>
   flatten(...args: Partial<FillAny<HeadlessParameters<typeof flatten>>>) {
     return new IterableOperator(flatten(this.subject, ...args))
   }

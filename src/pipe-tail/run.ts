@@ -1,4 +1,3 @@
-// pipe end
 export function run(iterable: Iterable<unknown>): void
 export function run<T>(iterable: Iterable<T>, fn: (element: T, index: number) => void): void
 export function run<T>(iterable: Iterable<T>, fn?: (element: T, index: number) => void): void {

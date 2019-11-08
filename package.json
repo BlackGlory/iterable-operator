@@ -1,6 +1,6 @@
 {
   "name": "iterable-operator",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Minimalist utility for JavaScript Iterable.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -15,13 +15,13 @@
     "lint": "tslint -t codeFrame 'src/**/*.ts' 'test/**/*.ts'"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.18",
-    "@types/node": "^12.7.5",
-    "husky": "^3.0.5",
+    "@types/jest": "^24.0.22",
+    "@types/node": "^12.12.6",
+    "husky": "^3.0.9",
     "jest": "^24.9.0",
     "ts-jest": "^24.1.0",
-    "tslint": "^5.20.0",
-    "typescript": "^3.6.3"
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.2"
   },
   "husky": {
     "hooks": {

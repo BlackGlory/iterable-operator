@@ -1,7 +1,5 @@
 import { BreakFlag, ContinueFlag } from '../$'
 
-// pipe end
-// $
 export function reduce<T>(iterable: Iterable<T>, fn: (previousValue: T | undefined, currentValue: T, currentIndex: number) => T): T
 export function reduce<T>(iterable: Iterable<T>, fn: (previousValue: T, currentValue: T, currentIndex: number) => T, initialValue: T): T
 export function reduce<T, U>(iterable: Iterable<T>, fn: (previousValue: U, currentValue: T, currentIndex: number) => U, initialValue: U): U
