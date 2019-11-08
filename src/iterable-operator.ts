@@ -33,6 +33,7 @@ export class IterableOperator<T> implements Iterable<T> {
   // pipe
 
   chunkBy(fn: (element: T, index: number) => boolean): IterableOperator<T[]>
+  chunkBy(fn: (element: T, index: number) => boolean, drop: boolean): IterableOperator<T[]>
   chunkBy(...args: Partial<FillAny<HeadlessParameters<typeof chunk>>>) {
     return new IterableOperator(chunkBy(this.subject, ...args))
   }

@@ -5,3 +5,9 @@ test('chunkBy(iterable, fn)', () => {
 
   expect([...result]).toEqual([[1, 2], [3]])
 })
+
+test('chunkBy(iterable, fn, drop = true)', () => {
+  const result = chunkBy([1, 0, 2], x => x === 0, true)
+
+  expect([...result]).toEqual([[1], [2]])
+})
