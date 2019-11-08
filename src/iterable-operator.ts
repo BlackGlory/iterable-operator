@@ -1,5 +1,5 @@
 import { range } from './pipe-head'
-import { chunkBy, chunk, concat, each, filter, flatten, head, map, repeat, slice, tail, uniqBy, uniq, zip } from './pipe'
+import { chunkBy, chunk, concat, each, filter, flatten, flattenDeep, head, map, repeat, slice, tail, uniqBy, uniq, zip } from './pipe'
 import { done, every, find, has, includes, reduce, run, some } from './pipe-tail'
 
 type HeadlessTuple<T extends any[]> = ((...args: T) => any) extends (_: any, ...rest: infer R) => any ? R : []
@@ -65,12 +65,17 @@ export class IterableOperator<T> implements Iterable<T> {
     return new IterableOperator(filter(this.subject, ...args))
   }
 
-  flatten(): IterableOperator<T>
-  flatten<U>(): IterableOperator<U>
-  flatten(depth: number): IterableOperator<T>
-  flatten<U>(depth: number): IterableOperator<U>
+  flatten<U = T>(): IterableOperator<U>
+  flatten<U = T>(exclude: (value: Iterable<unknown>) => boolean): IterableOperator<U>
   flatten(...args: Partial<FillAny<HeadlessParameters<typeof flatten>>>) {
     return new IterableOperator(flatten(this.subject, ...args))
+  }
+
+  flattenDeep<U = T>(): IterableOperator<U>
+  flattenDeep<U = T>(depth: number): IterableOperator<U>
+  flattenDeep<U = T>(depth: number, exclude: (value: Iterable<unknown>) => boolean): IterableOperator<U>
+  flattenDeep(...args: Partial<FillAny<HeadlessParameters<typeof flattenDeep>>>) {
+    return new IterableOperator(flattenDeep(this.subject, ...args))
   }
 
   head(): Iterable<T>
