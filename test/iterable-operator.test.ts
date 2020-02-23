@@ -3,7 +3,7 @@
 import { IterableOperator } from '../src'
 import { range } from '../src/pipe-head'
 import { chunkBy, chunk, concat, each, filter, flatten, flattenDeep, head, map, repeat, slice, tail, uniqBy, uniq, zip } from '../src/pipe'
-import { done, every, find, has, includes, reduce, run, some } from '../src/pipe-tail'
+import { consume, done, every, find, has, includes, reduce, some, toArray, toSet } from '../src/pipe-tail'
 
 // pipe head
 
@@ -139,9 +139,16 @@ test('IterableOperator(iterable).zip(iterable)', () => {
 
 // pipe tail
 
-test('IterableOperator(iterable).done(factory)', () => {
-  const instanceResult = new IterableOperator('123').done(x => [...x])
-  const result = done('123', x => [...x])
+test('IterableOperator(iterable).consume(consumer)', () => {
+  const instanceResult = new IterableOperator('123').consume(x => [...x])
+  const result = consume('123', x => [...x])
+
+  expect(instanceResult).toEqual(result)
+})
+
+test('IterableOperator(iterable).done()', () => {
+  const instanceResult = new IterableOperator('123').done()
+  const result = done('123')
 
   expect(instanceResult).toEqual(result)
 })
@@ -181,19 +188,23 @@ test('IterableOperator(iterable).reduce(fn)', () => {
   expect(instanceResult).toEqual(result)
 })
 
-test('IterableOperator(iterable).run()', () => {
-  const instanceArray: string[] = []
-  const resultArray: string[] = []
-  const instanceResult = new IterableOperator('123').run(x => instanceArray.push(x))
-  const result = run('123', x => resultArray.push(x))
-
-  expect(instanceResult).toEqual(result)
-  expect(instanceArray).toEqual(resultArray)
-})
-
 test('IterableOperator(iterable).some(fn)', () => {
   const instanceResult = new IterableOperator('123').some(x => x === '2')
   const result = some('123', x => x === '2')
+
+  expect(instanceResult).toEqual(result)
+})
+
+test('IterableOperator(iterable).toArray()', () => {
+  const instanceResult = new IterableOperator('123').toArray()
+  const result = toArray('123')
+
+  expect(instanceResult).toEqual(result)
+})
+
+test('IterableOperator(iterable).toSet()', () => {
+  const instanceResult = new IterableOperator('123').toSet()
+  const result = toSet('123')
 
   expect(instanceResult).toEqual(result)
 })

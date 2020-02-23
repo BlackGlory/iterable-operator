@@ -65,3 +65,4 @@ jest.config.json
 tsconfig.*
 tslint.json
 yarn.lock
+.github
