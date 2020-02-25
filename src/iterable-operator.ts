@@ -1,6 +1,6 @@
 import { range } from './pipe-head'
-import { chunkBy, chunk, concat, each, filter, flatten, flattenDeep, head, map, repeat, slice, tail, uniqBy, uniq, zip } from './pipe'
-import { consume, done, every, find, has, includes, reduce, some, toArray, toSet } from './pipe-tail'
+import { chunkBy, chunk, concat, filter, flatten, flattenDeep, head, map, repeat, slice, tail, tap, uniqBy, uniq, zip } from './pipe'
+import { consume, done, each, every, find, has, includes, reduce, some, toArray, toSet } from './pipe-tail'
 
 type HeadlessTuple<T extends any[]> = ((...args: T) => any) extends (_: any, ...rest: infer R) => any ? R : []
 
@@ -59,11 +59,6 @@ export class IterableOperator<T> implements Iterable<T> {
     return new IterableOperator(concat(this.subject, ...args))
   }
 
-  each(fn: (element: T, index: number) => void): IterableOperator<T>
-  each(...args: HeadlessArgs<typeof each>) {
-    return new IterableOperator(each(this.subject, ...args))
-  }
-
   filter(fn: (element: T, index: number) => boolean): IterableOperator<T>
   filter(...args: HeadlessArgs<typeof filter>) {
     return new IterableOperator(filter(this.subject, ...args))
@@ -112,6 +107,11 @@ export class IterableOperator<T> implements Iterable<T> {
     return new IterableOperator(tail(this.subject, ...args))
   }
 
+  tap(fn: (element: T, index: number) => void): IterableOperator<T>
+  tap(...args: HeadlessArgs<typeof tap>) {
+    return new IterableOperator(tap(this.subject, ...args))
+  }
+
   uniqBy<U>(fn: (element: T, index: number) => U): IterableOperator<T>
   uniqBy(...args: HeadlessArgs<typeof uniqBy>) {
     return new IterableOperator(uniqBy(this.subject, ...args))
@@ -145,6 +145,11 @@ export class IterableOperator<T> implements Iterable<T> {
   done(): T
   done(...args: HeadlessArgs<typeof done>) {
     return done(this.subject, ...args)
+  }
+
+  each(fn: (element: T, index: number) => void): void
+  each(...args: HeadlessArgs<typeof each>) {
+    return each(this.subject, ...args)
   }
 
   every(fn: (element: T, index: number) => boolean): boolean

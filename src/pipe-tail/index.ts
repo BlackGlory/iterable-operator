@@ -1,5 +1,6 @@
 export * from './consume'
 export * from './done'
+export * from './each'
 export * from './every'
 export * from './find'
 export * from './has'

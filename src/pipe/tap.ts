@@ -1,6 +1,6 @@
 import { BreakFlag, ContinueFlag } from '../$'
 
-export function* each<T>(iterable: Iterable<T>, fn: (element: T, index: number) => void): Iterable<T> {
+export function* tap<T>(iterable: Iterable<T>, fn: (element: T, index: number) => void): Iterable<T> {
   let index = 0
   for (const element of iterable) {
     try {

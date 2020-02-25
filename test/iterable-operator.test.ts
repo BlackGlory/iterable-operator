@@ -2,8 +2,8 @@
 
 import { IterableOperator } from '../src'
 import { range } from '../src/pipe-head'
-import { chunkBy, chunk, concat, each, filter, flatten, flattenDeep, head, map, repeat, slice, tail, uniqBy, uniq, zip } from '../src/pipe'
-import { consume, done, every, find, has, includes, reduce, some, toArray, toSet } from '../src/pipe-tail'
+import { chunkBy, chunk, concat, filter, flatten, flattenDeep, head, map, repeat, slice, tail, tap, uniqBy, uniq, zip } from '../src/pipe'
+import { consume, done, each, every, find, has, includes, reduce, some, toArray, toSet } from '../src/pipe-tail'
 
 // pipe head
 
@@ -36,14 +36,6 @@ test('IterableOperator(iterable).chunk(length)', () => {
 test('IterableOperator(iterable).concat(iterable)', () => {
   const instance = new IterableOperator('123').concat('456')
   const result = concat('123', '456')
-
-  expect(instance).toBeInstanceOf(IterableOperator)
-  expect([...instance]).toEqual([...result])
-})
-
-test('IterableOperator(iterable).each(fn)', () => {
-  const instance = new IterableOperator('123').each(x => parseInt(x, 10))
-  const result = each('123', x => parseInt(x, 10))
 
   expect(instance).toBeInstanceOf(IterableOperator)
   expect([...instance]).toEqual([...result])
@@ -113,6 +105,14 @@ test('IterableOperator(iterable).tail(count)', () => {
   expect([...instance]).toEqual([...result])
 })
 
+test('IterableOperator(iterable).tap(fn)', () => {
+  const instance = new IterableOperator('123').tap(x => parseInt(x, 10))
+  const result = tap('123', x => parseInt(x, 10))
+
+  expect(instance).toBeInstanceOf(IterableOperator)
+  expect([...instance]).toEqual([...result])
+})
+
 test('IterableOperator(iterable).uniqBy(fn)', () => {
   const instance = new IterableOperator([1, 2, 3]).uniqBy(x => x % 2)
   const result = uniqBy([1, 2, 3], x => x % 2)
@@ -149,6 +149,13 @@ test('IterableOperator(iterable).consume(consumer)', () => {
 test('IterableOperator(iterable).done()', () => {
   const instanceResult = new IterableOperator('123').done()
   const result = done('123')
+
+  expect(instanceResult).toEqual(result)
+})
+
+test('IterableOperator(iterable).each(fn)', () => {
+  const instanceResult = new IterableOperator('123').each(x => parseInt(x, 10))
+  const result = each('123', x => parseInt(x, 10))
 
   expect(instanceResult).toEqual(result)
 })

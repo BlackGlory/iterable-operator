@@ -1,6 +1,6 @@
 {
   "name": "iterable-operator",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Minimalist utility for JavaScript Iterable.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
