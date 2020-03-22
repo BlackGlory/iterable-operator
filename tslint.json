@@ -23,6 +23,7 @@
   , "no-empty": false
   , "no-conditional-assignment": false
   , "member-ordering": false
+  , "ban-types": false
   }
 , "rulesDirectory": []
 }

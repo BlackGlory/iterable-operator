@@ -1,5 +1,2 @@
-export * from './$'
-export * from './pipe-head'
-export * from './pipe'
-export * from './pipe-tail'
-export * from './iterable-operator'
+export * from './body'
+export * from './tail'

@@ -1,7 +1,17 @@
 {
   "compilerOptions": {
-    "target": "esnext"
+    "target": "ESNext"
   , "module": "CommonJS"
   , "strict": true
+  , "baseUrl": "."
+  , "paths": {
+      "@head/*": ["src/head/*"]
+    , "@body/*": ["src/body/*"]
+    , "@tail/*": ["src/tail/*"]
+    , "@style/*": ["src/style/*"]
+    , "@exception": ["src/exception.ts"]
+    , "@error": ["src/error.ts"]
+    , "@test/*": ["__tests__/*"]
+    }
   }
 }

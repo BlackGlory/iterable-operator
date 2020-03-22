@@ -1,31 +1,47 @@
 {
   "name": "iterable-operator",
-  "version": "0.5.0",
-  "description": "Minimalist utility for JavaScript Iterable.",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "version": "0.6.0",
+  "description": "Utility for JavaScript Iterable and AsyncIterable",
+  "files": [
+    "lib",
+    "dist"
+  ],
+  "main": "lib/es2018/index.js",
+  "types": "lib/es2018/index.d.ts",
+  "module": "dist/es2018/index.mjs",
+  "browser": "dist/es2018/index.umd.js",
   "repository": "git@github.com:BlackGlory/iterable-operator.git",
   "author": "BlackGlory <woshenmedoubuzhidao@blackglory.me>",
   "license": "MIT",
   "scripts": {
-    "prepublishOnly": "yarn clean && yarn build",
-    "test": "jest --coverage --config jest.config.json",
-    "clean": "rm -rf lib",
-    "build": "tsc --project tsconfig.build.json",
-    "lint": "tslint -t codeFrame 'src/**/*.ts' 'test/**/*.ts'"
-  },
-  "devDependencies": {
-    "@types/jest": "^24.0.22",
-    "@types/node": "^12.12.6",
-    "husky": "^3.0.9",
-    "jest": "^24.9.0",
-    "ts-jest": "^24.1.0",
-    "tslint": "^5.20.1",
-    "typescript": "^3.7.2"
+    "lint": "tslint -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
+    "test": "jest --config jest.config.js",
+    "coverage": "jest --coverage --config jest.config.js",
+    "prepublishOnly": "yarn clean && yarn build && yarn bundle",
+    "clean": "yarn clean:build && yarn clean:bundle",
+    "clean:build": "rm -rf lib",
+    "clean:bundle": "rm -rf dist",
+    "build": "yarn build:es2015 && yarn build:es2018",
+    "build:es2015": "tsc --project tsconfig.build.json --module commonjs --target es2015 --outDir lib/es2015",
+    "build:es2018": "tsc --project tsconfig.build.json --module commonjs --target es2018 --outDir lib/es2018",
+    "bundle": "rollup --config rollup.config.js"
   },
   "husky": {
     "hooks": {
       "pre-commit": "yarn lint && yarn test"
     }
-  }
+  },
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^4.0.0",
+    "@types/jest": "^25.2.1",
+    "@types/node": "^13.11.0",
+    "extra-promise": "^0.5.0",
+    "husky": "^4.2.3",
+    "jest": "^25.2.7",
+    "rollup": "^2.3.2",
+    "ts-jest": "^25.3.1",
+    "tslint": "^6.1.1",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {}
 }
