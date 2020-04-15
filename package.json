@@ -1,6 +1,6 @@
 {
   "name": "iterable-operator",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Utility for JavaScript Iterable and AsyncIterable",
   "files": [
     "lib",
@@ -22,8 +22,8 @@
     "clean:build": "rm -rf lib",
     "clean:bundle": "rm -rf dist",
     "build": "yarn build:es2015 && yarn build:es2018",
-    "build:es2015": "tsc --project tsconfig.build.json --module commonjs --target es2015 --outDir lib/es2015",
-    "build:es2018": "tsc --project tsconfig.build.json --module commonjs --target es2018 --outDir lib/es2018",
+    "build:es2015": "tsc --project tsconfig.build.json --module commonjs --target es2015 --outDir lib/es2015 && tscpaths -p tsconfig.build.json -s ./src -o ./lib/es2015",
+    "build:es2018": "tsc --project tsconfig.build.json --module commonjs --target es2018 --outDir lib/es2018 && tscpaths -p tsconfig.build.json -s ./src -o ./lib/es2018",
     "bundle": "rollup --config rollup.config.js"
   },
   "husky": {
@@ -40,6 +40,7 @@
     "jest": "^25.2.7",
     "rollup": "^2.3.2",
     "ts-jest": "^25.3.1",
+    "tscpaths": "^0.0.9",
     "tslint": "^6.1.1",
     "typescript": "^3.8.3"
   },

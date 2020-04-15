@@ -1,4 +1,4 @@
-import { InvalidArgumentsLengthError } from '@error'
+import { InvalidArgumentsLengthError } from '@src/error'
 import { isAsyncIterable } from '../utils'
 export { InvalidArgumentsLengthError }
 

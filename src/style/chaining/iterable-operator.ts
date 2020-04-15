@@ -60,7 +60,7 @@ export {
   InvalidArgumentError
 , InvalidArgumentsLengthError
 , RuntimeError
-} from '@error'
+} from '@src/error'
 
 export class IterableOperator<T> extends IterableOperatorBase<T> {}
 

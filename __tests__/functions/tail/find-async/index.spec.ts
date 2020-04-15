@@ -1,6 +1,6 @@
 import { getAsyncError } from '@test/return-style'
 import { isPromise } from 'extra-promise'
-import { RuntimeError } from '@error'
+import { RuntimeError } from '@src/error'
 import { testFunction, testAsyncFunction, testIterable, testAsyncIterable, testCall, testPipe, testBind } from '@test/test-fixtures'
 import { findAsync as call } from '@tail/find-async'
 import { findAsync as pipe } from '@style/pipeline/tail/find-async'

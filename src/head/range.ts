@@ -1,4 +1,4 @@
-import { InvalidArgumentError } from '@error'
+import { InvalidArgumentError } from '@src/error'
 export { InvalidArgumentError }
 
 export function range(start: number, end: number, step: number = 1): Iterable<number> {

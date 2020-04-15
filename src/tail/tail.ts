@@ -1,4 +1,4 @@
-import { RuntimeError } from '@error'
+import { RuntimeError } from '@src/error'
 export { RuntimeError }
 
 export function tail<T>(iterable: Iterable<T>): T {

@@ -1,5 +1,5 @@
 import { isAsyncIterable } from '../utils'
-import { RuntimeError } from '@error'
+import { RuntimeError } from '@src/error'
 export { RuntimeError }
 
 export function findAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => boolean | PromiseLike<boolean>): Promise<T> {

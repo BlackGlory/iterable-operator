@@ -1,4 +1,4 @@
-import { InvalidArgumentError } from '@error'
+import { InvalidArgumentError } from '@src/error'
 import { toAsyncIterable, isAsyncIterable, toArrayAsync } from '@test/utils'
 import { testCall, testPipe, testBind, testAsyncIterableChain } from '@test/test-fixtures'
 import { getSyncError } from '@test/return-style'

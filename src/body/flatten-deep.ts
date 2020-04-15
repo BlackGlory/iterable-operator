@@ -1,5 +1,5 @@
 import { flattenBy } from './flatten-by'
-import { InvalidArgumentError } from '@error'
+import { InvalidArgumentError } from '@src/error'
 export { InvalidArgumentError }
 
 export function flattenDeep<T>(iterable: Iterable<unknown>): Iterable<T>

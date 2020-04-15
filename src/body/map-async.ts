@@ -1,6 +1,6 @@
 import { isAsyncIterable } from '../utils'
 
-export function mapAsync<T, U>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => U): AsyncIterable<U> {
+export function mapAsync<T, U>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => U | PromiseLike<U>): AsyncIterable<U> {
   if (isAsyncIterable(iterable)) {
     return mapAsyncIterable(iterable)
   } else {

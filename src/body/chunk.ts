@@ -1,4 +1,4 @@
-import { InvalidArgumentError } from '@error'
+import { InvalidArgumentError } from '@src/error'
 export { InvalidArgumentError }
 
 export function chunk<T>(iterable: Iterable<T>, size: number): Iterable<T[]> {

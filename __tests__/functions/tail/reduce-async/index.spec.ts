@@ -1,6 +1,6 @@
 import { getAsyncError } from '@test/return-style'
 import { isPromise } from 'extra-promise'
-import { RuntimeError } from '@error'
+import { RuntimeError } from '@src/error'
 import { testIterable, testAsyncIterable, testFunction, testAsyncFunction, testCall, testPipe, testBind } from '@test/test-fixtures'
 import { reduceAsync as call } from '@tail/reduce-async'
 import { reduceAsync as pipe } from '@style/pipeline/tail/reduce-async'

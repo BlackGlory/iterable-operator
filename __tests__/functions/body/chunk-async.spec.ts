@@ -4,7 +4,7 @@ import { chunkAsync as call } from '@body/chunk-async'
 import { chunkAsync as pipe } from '@style/pipeline/body/chunk-async'
 import { chunkAsync as bind } from '@style/binding/body/chunk-async'
 import { ChunkAsyncOperator } from '@style/chaining/body/chunk-async'
-import { InvalidArgumentError } from '@error'
+import { InvalidArgumentError } from '@src/error'
 import { testCall, testPipe, testBind, testAsyncIterableChain } from '@test/test-fixtures'
 
 describe('chunkAsync', () => {

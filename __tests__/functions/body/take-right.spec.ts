@@ -1,4 +1,4 @@
-import { InvalidArgumentError } from '@error'
+import { InvalidArgumentError } from '@src/error'
 import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
 import { isIterable, toArray } from '@test/utils'
 import { getSyncError } from '@test/return-style'

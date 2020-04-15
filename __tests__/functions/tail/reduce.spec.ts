@@ -1,4 +1,4 @@
-import { RuntimeError } from '@error'
+import { RuntimeError } from '@src/error'
 import { testCall, testPipe, testBind, testMethod } from '@test/test-fixtures'
 import { getSyncError } from '@test/return-style'
 import { reduce as call } from '@tail/reduce'

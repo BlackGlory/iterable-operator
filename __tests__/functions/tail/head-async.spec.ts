@@ -1,5 +1,5 @@
 import { getAsyncError } from '@test/return-style'
-import { RuntimeError } from '@error'
+import { RuntimeError } from '@src/error'
 import { isPromise } from 'extra-promise'
 import { toAsyncIterable } from '@test/utils'
 import { testCall, testPipe, testBind, testAsyncMethod } from '@test/test-fixtures'

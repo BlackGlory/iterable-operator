@@ -1,5 +1,5 @@
 import { getSyncError } from '@test/return-style'
-import { InvalidArgumentsLengthError } from '@error'
+import { InvalidArgumentsLengthError } from '@src/error'
 import { isAsyncIterable, toArrayAsync, toIterable, toAsyncIterable } from '@test/utils'
 import { IterableOperator } from '@style/chaining/iterable-operator'
 import { iterableChainAsync } from '@test/style-helpers'

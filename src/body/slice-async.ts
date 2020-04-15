@@ -1,4 +1,4 @@
-import { InvalidArgumentError } from '@error'
+import { InvalidArgumentError } from '@src/error'
 export { InvalidArgumentError }
 
 export function sliceAsync<T>(iterable: AsyncIterable<T>, start: number): AsyncIterable<T>

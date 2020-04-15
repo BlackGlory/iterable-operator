@@ -1,4 +1,4 @@
-import { InvalidArgumentError } from '@error'
+import { InvalidArgumentError } from '@src/error'
 import { copyAsyncIterable } from '../utils'
 export { InvalidArgumentError }
 

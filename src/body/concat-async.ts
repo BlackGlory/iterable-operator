@@ -1,5 +1,5 @@
 import { isAsyncIterable } from '../utils'
-import { InvalidArgumentsLengthError } from '@error'
+import { InvalidArgumentsLengthError } from '@src/error'
 export { InvalidArgumentsLengthError }
 
 export function concatAsync<T1, T2>(

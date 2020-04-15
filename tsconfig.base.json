@@ -9,9 +9,9 @@
     , "@body/*": ["src/body/*"]
     , "@tail/*": ["src/tail/*"]
     , "@style/*": ["src/style/*"]
-    , "@exception": ["src/exception.ts"]
-    , "@error": ["src/error.ts"]
+    , "@src/*": ["src/*"]
     , "@test/*": ["__tests__/*"]
     }
+  , "plugins": [{ "transform": "typescript-transform-paths" }]
   }
 }

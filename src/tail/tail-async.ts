@@ -1,4 +1,4 @@
-import { RuntimeError } from '@error'
+import { RuntimeError } from '@src/error'
 export { RuntimeError }
 
 export async function tailAsync<T>(iterable: AsyncIterable<T>): Promise<T> {

@@ -1,6 +1,6 @@
 import { getAsyncError } from '@test/return-style'
 import { isPromise } from 'extra-promise'
-import { RuntimeError } from '@error'
+import { RuntimeError } from '@src/error'
 import { testFunction, testAsyncFunction } from '@test/test-fixtures'
 import { toIterable } from '@test/utils'
 import { method } from '@test/style-helpers'

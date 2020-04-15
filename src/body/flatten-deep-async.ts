@@ -1,5 +1,5 @@
 import { flattenByAsync } from './flatten-by-async'
-import { InvalidArgumentError } from '@error'
+import { InvalidArgumentError } from '@src/error'
 export { InvalidArgumentError }
 
 export function flattenDeepAsync<T>(iterable: AsyncIterable<unknown>): AsyncIterable<T>

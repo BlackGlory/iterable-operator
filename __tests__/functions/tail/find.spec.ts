@@ -1,5 +1,5 @@
 import { getSyncError } from '@test/return-style'
-import { RuntimeError } from '@error'
+import { RuntimeError } from '@src/error'
 import { testCall, testPipe, testBind, testMethod } from '@test/test-fixtures'
 import { find as call } from '@tail/find'
 import { find as pipe } from '@style/pipeline/tail/find'

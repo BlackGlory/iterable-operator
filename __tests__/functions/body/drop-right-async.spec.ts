@@ -5,7 +5,7 @@ import { dropRightAsync as call } from '@body/drop-right-async'
 import { dropRightAsync as pipe } from '@style/pipeline/body/drop-right-async'
 import { dropRightAsync as bind } from '@style/binding/body/drop-right-async'
 import { DropRightAsyncOperator } from '@style/chaining/body/drop-right-async'
-import { InvalidArgumentError } from '@error'
+import { InvalidArgumentError } from '@src/error'
 
 describe('dropRightAsync', () => {
   describe.each([

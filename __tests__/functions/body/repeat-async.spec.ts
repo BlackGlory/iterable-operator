@@ -1,7 +1,7 @@
 import { getSyncError } from '@test/return-style'
 import { toArrayAsync, isAsyncIterable, toAsyncIterable } from '@test/utils'
 import { testCall, testPipe, testBind, testAsyncIterableChain } from '@test/test-fixtures'
-import { InvalidArgumentError } from '@error'
+import { InvalidArgumentError } from '@src/error'
 import { repeatAsync as call } from '@body/repeat-async'
 import { repeatAsync as pipe } from '@style/pipeline/body/repeat-async'
 import { repeatAsync as bind } from '@style/binding/body/repeat-async'

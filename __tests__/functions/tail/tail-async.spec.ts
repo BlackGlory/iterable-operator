@@ -1,4 +1,4 @@
-import { RuntimeError } from '@error'
+import { RuntimeError } from '@src/error'
 import { isPromise } from 'extra-promise'
 import { getAsyncError } from '@test/return-style'
 import { toAsyncIterable } from '@test/utils'

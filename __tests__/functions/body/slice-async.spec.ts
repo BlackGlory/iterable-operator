@@ -1,5 +1,5 @@
 import { getSyncError } from '@test/return-style'
-import { InvalidArgumentError } from '@error'
+import { InvalidArgumentError } from '@src/error'
 import { toAsyncIterable, isAsyncIterable, toArrayAsync } from '@test/utils'
 import { testCall, testPipe, testBind, testAsyncIterableChain } from '@test/test-fixtures'
 import { sliceAsync as call } from '@body/slice-async'

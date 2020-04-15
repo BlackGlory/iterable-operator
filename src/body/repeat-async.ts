@@ -1,4 +1,4 @@
-import { InvalidArgumentError } from '@error'
+import { InvalidArgumentError } from '@src/error'
 export { InvalidArgumentError }
 
 export function repeatAsync<T>(iterable: AsyncIterable<T>, times: number): AsyncIterable<T> {

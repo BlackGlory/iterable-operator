@@ -1,7 +1,7 @@
 import { getPipelineProxy } from '@style/utils'
 import { mapAsync as target } from '@body/map-async'
 
-export function mapAsync<T, U>(fn: (element: T, index: number) => U): (iterable: Iterable<T> | AsyncIterable<T>) => AsyncIterable<U>
+export function mapAsync<T, U>(fn: (element: T, index: number) => U | PromiseLike<U>): (iterable: Iterable<T> | AsyncIterable<T>) => AsyncIterable<U>
 export function mapAsync(...args: unknown[]) {
   return getPipelineProxy(target, args)
 }

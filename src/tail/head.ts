@@ -1,4 +1,4 @@
-import { RuntimeError } from '@error'
+import { RuntimeError } from '@src/error'
 export { RuntimeError }
 
 export function head<T>(iterable: Iterable<T>): T {

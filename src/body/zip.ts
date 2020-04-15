@@ -1,4 +1,4 @@
-import { InvalidArgumentsLengthError } from '@error'
+import { InvalidArgumentsLengthError } from '@src/error'
 export { InvalidArgumentsLengthError }
 
 export function zip<T1, T2>(

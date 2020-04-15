@@ -1,4 +1,4 @@
-import { InvalidArgumentsLengthError } from '@error'
+import { InvalidArgumentsLengthError } from '@src/error'
 export { InvalidArgumentsLengthError }
 
 export function concat<T1, T2>(

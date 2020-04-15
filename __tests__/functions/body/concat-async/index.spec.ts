@@ -1,7 +1,7 @@
 import { getSyncError } from '@test/return-style'
 import { isAsyncIterable, toArrayAsync, toIterable, toAsyncIterable } from '@test/utils'
 import { testCall, testPipe, testBind, testIterable, testAsyncIterable } from '@test/test-fixtures'
-import { InvalidArgumentsLengthError } from '@error'
+import { InvalidArgumentsLengthError } from '@src/error'
 import { concatAsync as call } from '@body/concat-async'
 import { concatAsync as pipe } from '@style/pipeline/body/concat-async'
 import { concatAsync as bind } from '@style/binding/body/concat-async'

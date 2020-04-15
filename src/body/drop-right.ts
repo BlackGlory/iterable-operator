@@ -1,5 +1,5 @@
 import { copyIterable } from '../utils'
-import { InvalidArgumentError } from '@error'
+import { InvalidArgumentError } from '@src/error'
 export { InvalidArgumentError }
 
 export function dropRight<T>(iterable: Iterable<T>, count: number): Iterable<T> {

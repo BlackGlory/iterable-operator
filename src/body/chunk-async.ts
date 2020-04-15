@@ -1,4 +1,4 @@
-import { InvalidArgumentError } from '@error'
+import { InvalidArgumentError } from '@src/error'
 export { InvalidArgumentError }
 
 export function chunkAsync<T>(iterable: AsyncIterable<T>, size: number): AsyncIterable<T[]> {

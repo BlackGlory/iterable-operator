@@ -1,5 +1,5 @@
 import { copyAsyncIterable } from '../utils'
-import { InvalidArgumentError } from '@error'
+import { InvalidArgumentError } from '@src/error'
 export { InvalidArgumentError }
 
 export function dropAsync<T>(iterable: AsyncIterable<T>, count: number): AsyncIterable<T> {

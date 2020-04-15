@@ -1,5 +1,5 @@
 import { getSyncError } from '@test/return-style'
-import { InvalidArgumentsLengthError } from '@error'
+import { InvalidArgumentsLengthError } from '@src/error'
 import { testIterable, testAsyncIterable, testCall, testPipe, testBind } from '@test/test-fixtures'
 import { isAsyncIterable, toArrayAsync, toIterable, toAsyncIterable } from '@test/utils'
 import { zipAsync as call } from '@body/zip-async'

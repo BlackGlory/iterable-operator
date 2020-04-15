@@ -41,7 +41,7 @@ export {
   InvalidArgumentError
 , InvalidArgumentsLengthError
 , RuntimeError
-} from '@error'
+} from '@src/error'
 
 export class AsyncIterableOperator<T> extends AsyncIterableOperatorBase<T> {}
 
