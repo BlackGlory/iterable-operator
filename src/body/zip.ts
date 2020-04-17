@@ -53,12 +53,9 @@ function* zipWithSize<T>(iterables: Iterable<any>[], size: number): Iterable<T[]
   const iterators = iterables.map(iterable => iterable[Symbol.iterator]())
   while (true) {
     const result = new Array<T>(size)
-    for (let i = 0, dones = 0; i < size; i++) {
+    for (let i = 0; i < size; i++) {
       const { value, done } = iterators[i].next()
-      if (done) {
-        dones++
-        if (dones === size) return
-      }
+      if (done) return
       result[i] = value
     }
     yield result

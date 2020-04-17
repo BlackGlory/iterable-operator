@@ -37,7 +37,7 @@ describe('IterableOperator::zipAsync', () => {
         })
 
         describe('iterables dont have same size', () => {
-          it('return zipped iterable by the biggest iterable size', async () => {
+          it('return zipped iterable by the shortest iterable', async () => {
             const iter1 = getIter([1, 2, 3])
             const iter2 = getIter(['a', 'b'])
 
@@ -46,7 +46,7 @@ describe('IterableOperator::zipAsync', () => {
             const arrResult = await toArrayAsync(result)
 
             expect(isIter).toBe(true)
-            expect(arrResult).toEqual([[1, 'a'], [2, 'b'], [3, undefined]])
+            expect(arrResult).toEqual([[1, 'a'], [2, 'b']])
           })
         })
       })

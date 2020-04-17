@@ -60,7 +60,7 @@ async function* zipWithSize<T>(iterables: Array<Iterable<any> | AsyncIterable<an
   })
   while (true) {
     const result = new Array<T>(size)
-    for (let i = 0, dones = 0; i < size; i++) {
+    for (let i = 0; i < size; i++) {
       const [type, iterator] = iterators[i]
       let temp: IteratorResult<T>
       if (type === Symbol.asyncIterator) {
@@ -68,10 +68,7 @@ async function* zipWithSize<T>(iterables: Array<Iterable<any> | AsyncIterable<an
       } else {
         temp = (iterator as Iterator<T>).next()
       }
-      if (temp.done) {
-        dones++
-        if (dones === size) return
-      }
+      if (temp.done) return
       result[i] = temp.value
     }
     yield result

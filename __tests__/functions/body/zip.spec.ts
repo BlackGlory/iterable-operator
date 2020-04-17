@@ -41,7 +41,7 @@ describe('zip', () => {
       })
 
       describe('iterables have not same size', () => {
-        it('return zipped iterable by the biggest iterable size', () => {
+        it('return zipped iterable by the shortest iterable', () => {
           const iter1 = [1, 2, 3]
           const iter2 = ['a', 'b']
 
@@ -50,7 +50,7 @@ describe('zip', () => {
           const arrResult = toArray(result)
 
           expect(isIter).toBe(true)
-          expect(arrResult).toEqual([[1, 'a'], [2, 'b'], [3, undefined]])
+          expect(arrResult).toEqual([[1, 'a'], [2, 'b']])
         })
       })
     })
