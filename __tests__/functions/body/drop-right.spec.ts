@@ -5,14 +5,14 @@ import { isIterable, toArray } from '@test/utils'
 import { dropRight as call } from '@body/drop-right'
 import { dropRight as pipe } from '@style/pipeline/body/drop-right'
 import { dropRight as bind} from '@style/binding/body/drop-right'
-import { DropRightOperator } from '@style/chaining/body/drop-right'
+import { IterableOperator } from '@style/chaining/iterable-operator'
 
 describe('dropRight', () => {
   describe.each([
     testCall('(iterable: Iterable<T>, count: number) -> Iterable<T>', call)
   , testPipe('(count: number) -> (iterable: Iterable<T>) -> Iterable<T>', pipe)
   , testBind('(this: Iterable<T>, count: number) -> Iterable<T>', bind)
-  , testIterableChain('Operator<T>::(count: number) -> Operator<T>', DropRightOperator.prototype.dropRight)
+  , testIterableChain('Operator<T>::(count: number) -> Operator<T>', IterableOperator.prototype.dropRight)
   ])('%s', (_, dropRight) => {
     describe('count > 0', () => {
       describe('count > size(iterable)', () => {

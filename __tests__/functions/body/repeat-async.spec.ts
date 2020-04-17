@@ -5,14 +5,14 @@ import { InvalidArgumentError } from '@src/error'
 import { repeatAsync as call } from '@body/repeat-async'
 import { repeatAsync as pipe } from '@style/pipeline/body/repeat-async'
 import { repeatAsync as bind } from '@style/binding/body/repeat-async'
-import { RepeatAsyncOperator } from '@style/chaining/body/repeat-async'
+import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
 
 describe('repeatAsync', () => {
   describe.each([
     testCall('(iterable: AsyncIterable<T>, times: number) -> AsyncIterable<T>', call)
   , testPipe('(times: number) -> (iterable: AsyncIterable<T>) -> AsyncIterable<T>', pipe)
   , testBind('(this: AsyncIterable<T>, times: number) -> AsyncIterable<T>', bind)
-  , testAsyncIterableChain('AsyncIterableOperator::repeatAsync(times: number) -> AsyncIterableOperaotr<T>', RepeatAsyncOperator.prototype.repeatAsync)
+  , testAsyncIterableChain('AsyncIterableOperator::repeatAsync(times: number) -> AsyncIterableOperaotr<T>', AsyncIterableOperator.prototype.repeatAsync)
   ])('%s', (_, repeatAsync) => {
     describe('times > 0', () => {
       it('return repeated iterable', async () => {

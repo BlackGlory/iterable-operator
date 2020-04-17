@@ -5,14 +5,14 @@ import { isIterable, toArray } from '@test/utils'
 import { chunk as call } from '@body/chunk'
 import { chunk as pipe } from '@style/pipeline/body/chunk'
 import { chunk as bind } from '@style/binding/body/chunk'
-import { ChunkOperator } from '@style/chaining/body/chunk'
+import { IterableOperator } from '@style/chaining/iterable-operator'
 
 describe('chunk', () => {
   describe.each([
     testCall('(iterable: Iterable<T>, size: number) -> Iterable<T[]>', call)
   , testPipe('(size: number) -> (iterable: Iterable<T>) -> Iterable<T[]>', pipe)
   , testBind('(this: Iterable<T>, size: number) -> Iterable<T[]>', bind)
-  , testIterableChain('Operator<T>::(size: number) -> Operator<T[]>', ChunkOperator.prototype.chunk)
+  , testIterableChain('Operator<T>::(size: number) -> Operator<T[]>', IterableOperator.prototype.chunk)
   ])('%s', (_, chunk) => {
     describe('size > 0', () => {
       it('return chunked iterable', () => {

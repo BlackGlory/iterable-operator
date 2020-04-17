@@ -4,14 +4,14 @@ import { getSyncError } from '@test/return-style'
 import { reduce as call } from '@tail/reduce'
 import { reduce as pipe } from '@style/pipeline/tail/reduce'
 import { reduce as bind } from '@style/binding/tail/reduce'
-import { ReduceOperator } from '@style/chaining/tail/reduce'
+import { IterableOperator } from '@style/chaining/iterable-operator'
 
 describe('reduce', () => {
   describe.each([
     testCall('(iterable: Iterable<T>, fn: (accumulator: T, currentValue: T, index: number) -> T)) -> T', call)
   , testPipe('(fn: (accumulator: T, currentValue: T, index: number) -> T) -> (iterable: Iterable<T>) -> T', pipe)
   , testBind('(this: Iterable<T>, fn: (accumulator: T, currentValue: T, index: number) -> T)) -> T', bind)
-  , testMethod('Operator<T>::(fn: (accumulator: T, currentValue: T, index: number) -> T) -> T', ReduceOperator.prototype.reduce)
+  , testMethod('Operator<T>::(fn: (accumulator: T, currentValue: T, index: number) -> T) -> T', IterableOperator.prototype.reduce)
   ])('%s', (_, reduce) => {
     describe('fn is called', () => {
       it('called with [accumulator,currentValue,index]', () => {
@@ -86,7 +86,7 @@ describe('reduce', () => {
     testCall('(iterable: Iterable<T>, fn: (accumulator: U, currentValue: T, index: number) -> U, initalValue: U) -> U', call)
   , testPipe('(fn: (accumulator: U, currentValue: T, index: number) -> U, initalValue: U) -> (iterable: Iterable<T>) -> U', pipe)
   , testBind('(this: Iterable<T>, fn: (accumulator: U, currentValue: T, index: number) -> U, initalValue: U)) -> U', bind)
-  , testMethod('Operator<T>::(fn: (accumulator: U, currentValue: T, index: number) -> U, initalValue: U) -> U', ReduceOperator.prototype.reduce)
+  , testMethod('Operator<T>::(fn: (accumulator: U, currentValue: T, index: number) -> U, initalValue: U) -> U', IterableOperator.prototype.reduce)
   ])('%s', (_, reduce) => {
     describe('fn is called', () => {
       it('called with [accumulator,currentValue,index]', () => {

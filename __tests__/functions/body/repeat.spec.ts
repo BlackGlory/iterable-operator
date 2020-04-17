@@ -5,14 +5,14 @@ import { getSyncError } from '@test/return-style'
 import { repeat as call } from '@body/repeat'
 import { repeat as pipe } from '@style/pipeline/body/repeat'
 import { repeat as bind } from '@style/binding/body/repeat'
-import { RepeatOperator } from '@style/chaining/body/repeat'
+import { IterableOperator } from '@style/chaining/iterable-operator'
 
 describe('repeat', () => {
   describe.each([
     testCall('(iterable: Iterable<T>, times: number) -> Iterable<T>', call)
   , testPipe('(times: number) -> (iterable: Iterable<T>) -> Iterable<T>', pipe)
   , testBind('(this: Iterable<T>, times: number) -> Iterable<T>', bind)
-  , testIterableChain('Operator<T>::(times: number) -> Operator<T>', RepeatOperator.prototype.repeat)
+  , testIterableChain('Operator<T>::(times: number) -> Operator<T>', IterableOperator.prototype.repeat)
   ])('%s', (_, repeat) => {
     describe('times > 0', () => {
       it('return repeated iterable', () => {

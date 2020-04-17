@@ -5,14 +5,14 @@ import { isIterable, toArray } from '@test/utils'
 import { zip as call } from '@body/zip'
 import { zip as pipe } from '@style/pipeline/body/zip'
 import { zip as bind } from '@style/binding/body/zip'
-import { ZipOperator } from '@style/chaining/body/zip'
+import { IterableOperator } from '@style/chaining/iterable-operator'
 
 describe('zip', () => {
   describe.each([
     testCall('(...iterables: Iterable[]) -> Iterable', call)
   , testPipe('(...iterables: Iterable[]) -> (iterable: Iterable) -> Iterable', pipe)
   , testBind('(this: Iterable, iterables: Iterable[]) -> Iterable', bind)
-  , testIterableChain('Operator::(...iterables: Iterable[]) -> Operator', ZipOperator.prototype.zip)
+  , testIterableChain('Operator::(...iterables: Iterable[]) -> Operator', IterableOperator.prototype.zip)
   ])('%s', (_, zip) => {
     describe('size(iterables) < 2', () => {
       it('throw InvalidArgumentsLengthError', () => {

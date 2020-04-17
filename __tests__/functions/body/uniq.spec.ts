@@ -3,14 +3,14 @@ import { isIterable, toArray } from '@test/utils'
 import { uniq as call } from '@body/uniq'
 import { uniq as pipe } from '@style/pipeline/body/uniq'
 import { uniq as bind } from '@style/binding/body/uniq'
-import { UniqOperator } from '@style/chaining/body/uniq'
+import { IterableOperator } from '@style/chaining/iterable-operator'
 
 describe('uniq', () => {
   describe.each([
     testCall('(iterable: Iterable<T>) -> Iterable<T>', call)
   , testPipe('() -> (iterable: Iterable<T>) -> Iterable<T>', pipe)
   , testBind('(this: Iterable<T>) -> Iterable<T>', bind)
-  , testIterableChain('Operator<T>::() -> Operator<T>', UniqOperator.prototype.uniq)
+  , testIterableChain('Operator<T>::() -> Operator<T>', IterableOperator.prototype.uniq)
   ])('%s', (_, uniq) => {
     describe('call', () => {
       it('return unique iterable', () => {

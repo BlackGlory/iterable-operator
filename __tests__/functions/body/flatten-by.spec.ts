@@ -3,7 +3,7 @@ import { isIterable, toArray, getCalledTimes, consume } from '@test/utils'
 import { flattenBy as call } from '@body/flatten-by'
 import { flattenBy as pipe } from '@style/pipeline/body/flatten-by'
 import { flattenBy as bind } from '@style/binding/body/flatten-by'
-import { FlattenByOperator } from '@style/chaining/body/flatten-by'
+import { IterableOperator } from '@style/chaining/iterable-operator'
 import { getSyncError } from '@test/return-style'
 
 describe('flattenBy', () => {
@@ -11,7 +11,7 @@ describe('flattenBy', () => {
     testCall('(iterable: Iterable<unknown>, fn: (element: unknown, level: number) -> boolean) -> Iterable<T>', call)
   , testPipe('(fn: (element: unknown, level: number) -> boolean) -> (iterable: Iterable<unknown>) -> Iterable<T>', pipe)
   , testBind('(this: Iterable<unknown>, fn: (element: unknown, level: number) -> boolean) -> Iterable<T>', bind)
-  , testIterableChain('Operator<unknown>::(fn: (element: unknown, level: number) -> boolean) -> Operator<T>', FlattenByOperator.prototype.flattenBy)
+  , testIterableChain('Operator<unknown>::(fn: (element: unknown, level: number) -> boolean) -> Operator<T>', IterableOperator.prototype.flattenBy)
   ])('%s', (_, flattenBy) => {
     describe('fn is called', () => {
       it('called with [element,level]', () => {

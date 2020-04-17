@@ -28,12 +28,12 @@ import { ConsumeAsyncOperator } from './tail/consume-async'
 import { EachAsyncOperator } from './tail/each-async'
 import { EveryAsyncOperator } from './tail/every-async'
 import { FindAsyncOperator } from './tail/find-async'
-import { HeadAsyncOperator } from './tail/head-async'
+import { FirstAsyncOperator } from './tail/first-async'
 import { IncludesAsyncOperator } from './tail/includes-async'
 import { MatchAsyncOperator } from './tail/match-async'
 import { ReduceAsyncOperator } from './tail/reduce-async'
 import { SomeAsyncOperator } from './tail/some-async'
-import { TailAsyncOperator } from './tail/tail-async'
+import { LastAsyncOperator } from './tail/last-async'
 import { ToArrayAsyncOperator } from './tail/to-array-async'
 import { ToSetAsyncOperator } from './tail/to-set-async'
 
@@ -73,12 +73,12 @@ export interface AsyncIterableOperator<T> extends
 , EachAsyncOperator<T, AsyncIterable<T>>
 , EveryAsyncOperator<T, AsyncIterable<T>>
 , FindAsyncOperator<T, AsyncIterable<T>>
-, HeadAsyncOperator<T>
+, FirstAsyncOperator<T>
 , IncludesAsyncOperator<T>
 , MatchAsyncOperator<T>
 , ReduceAsyncOperator<T, AsyncIterable<T>>
 , SomeAsyncOperator<T, AsyncIterable<T>>
-, TailAsyncOperator<T>
+, LastAsyncOperator<T>
 , ToArrayAsyncOperator<T>
 , ToSetAsyncOperator<T>
 {}
@@ -111,12 +111,12 @@ mixinDecorators(AsyncIterableOperator, [
 , EachAsyncOperator
 , EveryAsyncOperator
 , FindAsyncOperator
-, HeadAsyncOperator
+, FirstAsyncOperator
 , IncludesAsyncOperator
 , MatchAsyncOperator
 , ReduceAsyncOperator
 , SomeAsyncOperator
-, TailAsyncOperator
+, LastAsyncOperator
 , ToArrayAsyncOperator
 , ToSetAsyncOperator
 ])

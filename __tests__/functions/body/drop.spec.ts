@@ -5,14 +5,14 @@ import { isIterable, toArray } from '@test/utils'
 import { drop as call } from '@body/drop'
 import { drop as pipe } from '@style/pipeline/body/drop'
 import { drop as bind } from '@style/binding/body/drop'
-import { DropOperator } from '@style/chaining/body/drop'
+import { IterableOperator } from '@style/chaining/iterable-operator'
 
 describe('drop', () => {
   describe.each([
     testCall('(iterable: Iterable<T>, count: number) -> Iterable<T>', call)
   , testPipe('(count: number) -> (iterable: Iterable<T>) -> Iterable<T>', pipe)
   , testBind('(this: Iterable<T>, count: number) -> Iterable<T>', bind)
-  , testIterableChain('Operator<T>::(count: number) -> Operator<T>', DropOperator.prototype.drop)
+  , testIterableChain('Operator<T>::(count: number) -> Operator<T>', IterableOperator.prototype.drop)
   ])('%s', (_, drop) => {
     describe('count > 0', () => {
       it('return iterable that dropped the first count elements', () => {

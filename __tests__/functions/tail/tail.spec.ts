@@ -1,23 +1,23 @@
 import { RuntimeError } from '@src/error'
 import { testCall, testPipe, testBind, testMethod } from '@test/test-fixtures'
 import { getSyncError } from '@test/return-style'
-import { tail as call } from '@tail/tail'
-import { tail as pipe } from '@style/pipeline/tail/tail'
-import { tail as bind } from '@style/binding/tail/tail'
-import { TailOperator } from '@style/chaining/tail/tail'
+import { last as call } from '@tail/last'
+import { last as pipe } from '@style/pipeline/tail/last'
+import { last as bind } from '@style/binding/tail/last'
+import { IterableOperator } from '@style/chaining/iterable-operator'
 
-describe('tail', () => {
+describe('last', () => {
   describe.each([
     testCall('(iterable: Iterable<T>) -> T', call)
   , testPipe('() -> (iterable: Iterable<T>) -> T', pipe)
   , testBind('(this: Iterable<T>) -> T', bind)
-  , testMethod('Operator<T>::() -> T', TailOperator.prototype.tail)
-  ])('%s', (_, tail) => {
+  , testMethod('Operator<T>::() -> T', IterableOperator.prototype.last)
+  ])('%s', (_, last) => {
     describe('iterable is empty', () => {
       it('throw RuntimeError', () => {
         const iter: number[] = []
 
-        const err = getSyncError<RuntimeError>(() => tail(iter))
+        const err = getSyncError<RuntimeError>(() => last(iter))
 
         expect(err).toBeInstanceOf(RuntimeError)
       })
@@ -27,7 +27,7 @@ describe('tail', () => {
       it('return the last element in the iterable', () => {
         const iter = [1, 2, 3]
 
-        const result = tail(iter)
+        const result = last(iter)
 
         expect(result).toBe(3)
       })

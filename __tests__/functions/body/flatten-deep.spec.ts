@@ -5,14 +5,14 @@ import { isIterable, toArray } from '@test/utils'
 import { flattenDeep as call } from '@body/flatten-deep'
 import { flattenDeep as pipe } from '@style/pipeline/body/flatten-deep'
 import { flattenDeep as bind } from '@style/binding/body/flatten-deep'
-import { FlattenDeepOperator } from '@style/chaining/body/flatten-deep'
+import { IterableOperator } from '@style/chaining/iterable-operator'
 
 describe('flattenDeep', () => {
   describe.each([
     testCall('(iterable: Iterable<unknown>, depth: number) -> Iterable<T>', call)
   , testPipe('(depth: number) -> (iterable: Iterable<unknown>) -> Iterable<T>', pipe)
   , testBind('(this: Iterable<unknown>, depth: number) -> Iterable<T>', bind)
-  , testIterableChain('Operator<unknown>::(depth: number) -> Operator<T>', FlattenDeepOperator.prototype.flattenDeep)
+  , testIterableChain('Operator<unknown>::(depth: number) -> Operator<T>', IterableOperator.prototype.flattenDeep)
   ])('%s', (_, flattenDeep) => {
     describe('iterable is empty', () => {
       it('return empty iterable', () => {

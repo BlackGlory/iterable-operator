@@ -4,14 +4,14 @@ import { testCall, testPipe, testBind, testAsyncMethod } from '@test/test-fixtur
 import { includesAsync as call } from '@tail/includes-async'
 import { includesAsync as pipe } from '@style/pipeline/tail/includes-async'
 import { includesAsync as bind } from '@style/binding/tail/includes-async'
-import { IncludesAsyncOperator } from '@style/chaining/tail/includes-async'
+import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
 
 describe('includesAsync', () => {
   describe.each([
     testCall('(iterable: AsyncIterable<T>, value: T) -> Promise<boolean>', call)
   , testPipe('(value: T) -> (iterable: AsyncIterable<T>) -> Promise<boolean>', pipe)
   , testBind('(this: AsyncIterable<T>, value: T) -> Promise<boolean>', bind)
-  , testAsyncMethod('AsyncIterableOperator::includesAsync(value: T) -> Promise<boolean>', IncludesAsyncOperator.prototype.includesAsync)
+  , testAsyncMethod('AsyncIterableOperator::includesAsync(value: T) -> Promise<boolean>', AsyncIterableOperator.prototype.includesAsync)
   ])('%s', (_, includesAsync) => {
     describe('value is included in the iterable', () => {
       it('return true', async () => {

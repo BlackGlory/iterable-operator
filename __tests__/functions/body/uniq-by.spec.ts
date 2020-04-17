@@ -4,14 +4,14 @@ import { isIterable, toArray, getCalledTimes, consume } from '@test/utils'
 import { uniqBy as call } from '@body/uniq-by'
 import { uniqBy as pipe } from '@style/pipeline/body/uniq-by'
 import { uniqBy as bind } from '@style/binding/body/uniq-by'
-import { UniqByOperator } from '@style/chaining/body/uniq-by'
+import { IterableOperator } from '@style/chaining/iterable-operator'
 
 describe('uniqBy', () => {
   describe.each([
     testCall('(iterable: Iterable<T>, fn: (element: T, index: number) -> U) -> Iterable<T>', call)
   , testPipe('(fn: (element: T, index: number) -> U) -> (iterable: Iterable<T>) -> Iterable<T>', pipe)
   , testBind('(this: Iterable<T>, fn: (element: T, index: number) -> U) -> Iterable<T>', bind)
-  , testIterableChain('Operator<T>::(fn: (element: T, index: number) -> U) -> Operator<T>', UniqByOperator.prototype.uniqBy)
+  , testIterableChain('Operator<T>::(fn: (element: T, index: number) -> U) -> Operator<T>', IterableOperator.prototype.uniqBy)
   ])('%s', (_, uniqBy) => {
     describe('fn called', () => {
       it('called with [element,index]', () => {

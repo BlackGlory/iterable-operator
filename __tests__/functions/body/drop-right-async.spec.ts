@@ -4,7 +4,7 @@ import { testCall, testPipe, testBind, testAsyncIterableChain } from '@test/test
 import { dropRightAsync as call } from '@body/drop-right-async'
 import { dropRightAsync as pipe } from '@style/pipeline/body/drop-right-async'
 import { dropRightAsync as bind } from '@style/binding/body/drop-right-async'
-import { DropRightAsyncOperator } from '@style/chaining/body/drop-right-async'
+import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
 import { InvalidArgumentError } from '@src/error'
 
 describe('dropRightAsync', () => {
@@ -12,7 +12,7 @@ describe('dropRightAsync', () => {
     testCall('(iterable: AsyncIterable<T>, count: number) -> AsyncIterable<T>', call)
   , testPipe('(count: number) -> (iterable: AsyncIterable<T>) -> AsyncIterable<T>', pipe)
   , testBind('(this: AsyncIterable<T>, count: number) -> AsyncIterable<T>', bind)
-  , testAsyncIterableChain('AsyncIterableOperator::dropRightAsync(count: number) -> AsyncIterableOperator<T>', DropRightAsyncOperator.prototype.dropRightAsync)
+  , testAsyncIterableChain('AsyncIterableOperator::dropRightAsync(count: number) -> AsyncIterableOperator<T>', AsyncIterableOperator.prototype.dropRightAsync)
   ])('%s', (_, dropRightAsync) => {
     describe('count > 0', () => {
       describe('count > size(iterable)', () => {

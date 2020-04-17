@@ -5,14 +5,14 @@ import { isIterable, toArray } from '@test/utils'
 import { slice as call } from '@body/slice'
 import { slice as pipe } from '@style/pipeline/body/slice'
 import { slice as bind } from '@style/binding/body/slice'
-import { SliceOperator } from '@style/chaining/body/slice'
+import { IterableOperator } from '@style/chaining/iterable-operator'
 
 describe('slice', () => {
   describe.each([
     testCall('(iterable: Iterable<T>, start: number, end: number) -> Iterable<T>', call)
   , testPipe('(start: number, end: number) -> (iterable: Iterable<T>) -> Iterable<T>', pipe)
   , testBind('(this: Iterable<T>, start: number, end: number) -> Iterable<T>', bind)
-  , testIterableChain('Opeator<T>::(start: number, end: number) -> Operator<T>', SliceOperator.prototype.slice)
+  , testIterableChain('Opeator<T>::(start: number, end: number) -> Operator<T>', IterableOperator.prototype.slice)
   ])('%s', (_, slice) => {
     describe('start < 0', () => {
       it('throw InvalidArgumentError', () => {

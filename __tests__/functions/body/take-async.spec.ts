@@ -5,14 +5,14 @@ import { InvalidArgumentError } from '@src/error'
 import { takeAsync as call } from '@body/take-async'
 import { takeAsync as pipe } from '@style/pipeline/body/take-async'
 import { takeAsync as bind } from '@style/binding/body/take-async'
-import { TakeAsyncOperator } from '@style/chaining/body/take-async'
+import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
 
 describe('takeAsync', () => {
   describe.each([
     testCall('(iterable: AsyncIterable<T>, count: number) -> AsyncIterable<T>', call)
   , testPipe('(count: number) -> (iterable: AsyncIterable<T>) -> AsyncIterable<T>', pipe)
   , testBind('(this: AsyncIterable<T>, count: number) -> AsyncIterable<T>', bind)
-  , testAsyncIterableChain('AsyncIterableOperator::takeAsync(count: number) -> AsyncIterableOperator<T>', TakeAsyncOperator.prototype.takeAsync)
+  , testAsyncIterableChain('AsyncIterableOperator::takeAsync(count: number) -> AsyncIterableOperator<T>', AsyncIterableOperator.prototype.takeAsync)
   ])('%s', (_, takeAsync) => {
     describe('count > size(iterable)', () => {
       it('return iterable copy', async () => {

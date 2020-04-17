@@ -5,14 +5,14 @@ import { testCall, testPipe, testBind, testAsyncIterableChain } from '@test/test
 import { sliceAsync as call } from '@body/slice-async'
 import { sliceAsync as pipe } from '@style/pipeline/body/slice-async'
 import { sliceAsync as bind } from '@style/binding/body/slice-async'
-import { SliceAsyncOperator } from '@style/chaining/body/slice-async'
+import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
 
 describe('sliceAsync', () => {
   describe.each([
     testCall('(iterable: AsyncIterable<T>, start: number, end: number) -> AsyncIterable<T>', call)
   , testPipe('(start: number, end: number) -> (iterable: AsyncIterable<T>) -> AsyncIterable<T>', pipe)
   , testBind('(this: AsyncIterable<T>, start: number, end: number) -> AsyncIterable<T>', bind)
-  , testAsyncIterableChain('AsyncIterableOperator::sliceAsync(start: number, end: number) -> AsyncIterableOperator<T>', SliceAsyncOperator.prototype.sliceAsync)
+  , testAsyncIterableChain('AsyncIterableOperator::sliceAsync(start: number, end: number) -> AsyncIterableOperator<T>', AsyncIterableOperator.prototype.sliceAsync)
   ])('%s', (_, sliceAsync) => {
     describe('start < 0', () => {
       it('throw InvalidArgumentError', () => {

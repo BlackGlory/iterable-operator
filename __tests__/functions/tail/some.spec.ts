@@ -3,14 +3,14 @@ import { getSyncError } from '@test/return-style'
 import { some as call } from '@tail/some'
 import { some as pipe } from '@style/pipeline/tail/some'
 import { some as bind } from '@style/binding/tail/some'
-import { SomeOperator } from '@style/chaining/tail/some'
+import { IterableOperator } from '@style/chaining/iterable-operator'
 
 describe('some', () => {
   describe.each([
     testCall('(iterable: Iterable<T>, fn: (element: T, index: number) -> boolean) -> boolean', call)
   , testPipe('(fn: (element: T, index: number) -> boolean) -> (iterable: Iterable<T>) -> boolean', pipe)
   , testBind('(this: Iterable<T>, fn: (element: T, index: number) -> boolean) -> boolean', bind)
-  , testMethod('Operator<T>::(fn: (element: T, index: nubmer) -> boolean) -> boolean', SomeOperator.prototype.some)
+  , testMethod('Operator<T>::(fn: (element: T, index: nubmer) -> boolean) -> boolean', IterableOperator.prototype.some)
   ])('%s', (_, some) => {
     describe('fn is called', () => {
       it('called with [element,index]', () => {

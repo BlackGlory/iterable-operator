@@ -4,14 +4,14 @@ import { isIterable, toArray, getCalledTimes, consume } from '@test/utils'
 import { filter as call } from '@body/filter'
 import { filter as pipe } from '@style/pipeline/body/filter'
 import { filter as bind } from '@style/binding/body/filter'
-import { FilterOperator } from '@style/chaining/body/filter'
+import { IterableOperator } from '@style/chaining/iterable-operator'
 
 describe('filter', () => {
   describe.each([
     testCall('(iterable: Iterable<T>, fn: (element: T, index: number) -> boolean) -> Iterable<T>', call)
   , testPipe('(fn: (element: T, index: number) -> boolean) -> (iterable: Iterable<T>) -> Iterable<T>', pipe)
   , testBind('(this: Iterable<T>, fn: (element: T, index: number) -> boolean) -> Iterable<T>', bind)
-  , testIterableChain('Operator<T>::(fn: (element: T, index: number) -> boolean) -> Operator<T>', FilterOperator.prototype.filter)
+  , testIterableChain('Operator<T>::(fn: (element: T, index: number) -> boolean) -> Operator<T>', IterableOperator.prototype.filter)
   ])('%s', (_, filter) => {
     describe('fn is called', () => {
       it('called with [element,index]', () => {

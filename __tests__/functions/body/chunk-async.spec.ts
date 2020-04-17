@@ -3,7 +3,7 @@ import { toAsyncIterable, isAsyncIterable, toArrayAsync } from '@test/utils'
 import { chunkAsync as call } from '@body/chunk-async'
 import { chunkAsync as pipe } from '@style/pipeline/body/chunk-async'
 import { chunkAsync as bind } from '@style/binding/body/chunk-async'
-import { ChunkAsyncOperator } from '@style/chaining/body/chunk-async'
+import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
 import { InvalidArgumentError } from '@src/error'
 import { testCall, testPipe, testBind, testAsyncIterableChain } from '@test/test-fixtures'
 
@@ -12,7 +12,7 @@ describe('chunkAsync', () => {
     testCall('(iterable: AsyncIterable<T>, size: number) -> AsyncIterable<T[]>', call)
   , testPipe('(size: number) -> (iterable: AsyncIterable<T>) -> AsyncIterable<T[]>', pipe)
   , testBind('(this: AsyncIterable<T>, size: number) -> AsyncIterable<T[]>', bind)
-  , testAsyncIterableChain('AsyncIterableOperator::chunkAsync(size: number) -> AsyncIterableOperator<T[]>', ChunkAsyncOperator.prototype.chunkAsync)
+  , testAsyncIterableChain('AsyncIterableOperator::chunkAsync(size: number) -> AsyncIterableOperator<T[]>', AsyncIterableOperator.prototype.chunkAsync)
   ])('%s', (_, chunkAsync) => {
     describe('size > 0', () => {
       it('return chunked iterable', async () => {

@@ -5,14 +5,14 @@ import { InvalidArgumentError } from '@src/error'
 import { dropAsync as call } from '@body/drop-async'
 import { dropAsync as pipe } from '@style/pipeline/body/drop-async'
 import { dropAsync as bind } from '@style/binding/body/drop-async'
-import { DropAsyncOperator } from '@style/chaining/body/drop-async'
+import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
 
 describe('dropAsync', () => {
   describe.each([
     testCall('(iterable: AsyncIterable<T>, count: number) -> AsyncIterable<T>', call)
   , testPipe('(count: number) -> (iterable: AsyncIterable<T>) -> AsyncIterable<T>', pipe)
   , testBind('(this: AsyncIterable<T>, count: number) -> AsyncIterable<T>', bind)
-  , testAsyncIterableChain('AsyncIterableOperator::dropAsync(count: number) -> AsyncIterableOperator<T>', DropAsyncOperator.prototype.dropAsync)
+  , testAsyncIterableChain('AsyncIterableOperator::dropAsync(count: number) -> AsyncIterableOperator<T>', AsyncIterableOperator.prototype.dropAsync)
   ])('%s', (_, dropAsync) => {
     describe('count > 0', () => {
       it('return iterable that dropped the first count elements', async () => {

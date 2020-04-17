@@ -5,14 +5,14 @@ import { getSyncError } from '@test/return-style'
 import { take as call } from '@body/take'
 import { take as pipe } from '@style/pipeline/body/take'
 import { take as bind } from '@style/binding/body/take'
-import { TakeOperator } from '@style/chaining/body/take'
+import { IterableOperator } from '@style/chaining/iterable-operator'
 
 describe('take', () => {
   describe.each([
     testCall('(iterable: Iterable<T>, count: number) -> Iterable<T>', call)
   , testPipe('(count: number) -> (iterable: Iterable<T>) -> Iterable<T>', pipe)
   , testBind('(iterable: Iterable<T>, count: number) -> Iterable<T>', bind)
-  , testIterableChain('Operator<T>::(count: number) -> Operator<T>', TakeOperator.prototype.take)
+  , testIterableChain('Operator<T>::(count: number) -> Operator<T>', IterableOperator.prototype.take)
   ])('%s', (_, take) => {
     describe('count > size(iterable)', () => {
       it('return iterable copy', () => {

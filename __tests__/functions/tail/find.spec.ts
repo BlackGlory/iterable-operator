@@ -4,14 +4,14 @@ import { testCall, testPipe, testBind, testMethod } from '@test/test-fixtures'
 import { find as call } from '@tail/find'
 import { find as pipe } from '@style/pipeline/tail/find'
 import { find as bind } from '@style/binding/tail/find'
-import { FindOperator } from '@style/chaining/tail/find'
+import { IterableOperator } from '@style/chaining/iterable-operator'
 
 describe('find', () => {
   describe.each([
     testCall('(iterable: Iterable<T>, fn: (element: T, index: number) -> boolean) -> T', call)
   , testPipe('(fn: (element: T, index: number) -> boolean) -> (iterable: Iterable<T>) -> T', pipe)
   , testBind('(this: Iterable<T>, fn: (element: T, index: number) -> boolean) -> T', bind)
-  , testMethod('Operator<T>::(fn: (element: T, index: number) -> boolean) -> T', FindOperator.prototype.find)
+  , testMethod('Operator<T>::(fn: (element: T, index: number) -> boolean) -> T', IterableOperator.prototype.find)
   ])('%s', (_, find) => {
     describe('fn is called', () => {
       it('called with [element,index]', () => {

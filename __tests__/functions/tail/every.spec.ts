@@ -3,14 +3,14 @@ import { testCall, testPipe, testBind, testMethod } from '@test/test-fixtures'
 import { every as call } from '@tail/every'
 import { every as pipe } from '@style/pipeline/tail/every'
 import { every as bind } from '@style/binding/tail/every'
-import { EveryOperator } from '@style/chaining/tail/every'
+import { IterableOperator } from '@style/chaining/iterable-operator'
 
 describe('every', () => {
   describe.each([
     testCall('(itearble: Iterable<T>, fn: (element: T, index: number) -> boolean) -> boolean', call)
   , testPipe('(fn: (element: T, index: number) -> boolean) -> (iterable: Iterable<T>) -> boolean', pipe)
   , testBind('(this: Iterable<T>, fn: (element: T, index: number) -> boolean) -> boolean', bind)
-  , testMethod('Operator<T>::(fn: (element: T, index: number) -> boolean) -> boolean', EveryOperator.prototype.every)
+  , testMethod('Operator<T>::(fn: (element: T, index: number) -> boolean) -> boolean', IterableOperator.prototype.every)
   ])('%s', (_, every) => {
     describe('fn is called', () => {
       describe('fn return false on first element', () => {

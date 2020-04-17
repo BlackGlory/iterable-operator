@@ -1,10 +1,10 @@
 import { applyBinding } from '@style/utils'
-import { tail as target } from '@tail/tail'
+import { first as target } from '@tail/first'
 import { IterableOperatorBase } from '../iterable-operator-base'
 
-export class TailOperator<T> extends IterableOperatorBase<T> {
-  tail(): T
-  tail(...args: unknown[]) {
+export class FirstOperator<T> extends IterableOperatorBase<T> {
+  first(): T
+  first(...args: unknown[]) {
     return applyBinding(this, target, args)
   }
 }

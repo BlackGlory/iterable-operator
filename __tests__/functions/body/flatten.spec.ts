@@ -3,14 +3,14 @@ import { isIterable, toArray } from '@test/utils'
 import { flatten as call } from '@body/flatten'
 import { flatten as pipe } from '@style/pipeline/body/flatten'
 import { flatten as bind } from '@style/binding/body/flatten'
-import { FlattenOperator } from '@style/chaining/body/flatten'
+import { IterableOperator } from '@style/chaining/iterable-operator'
 
 describe('flatten', () => {
   describe.each([
     testCall('(iterable: Iterable<T>) -> Iterable<U>', call)
   , testPipe('() -> (iterable: Iterable<T>) -> Iterable<U>', pipe)
   , testBind('(this: Iterable<T>) -> Iterable<U>', bind)
-  , testIterableChain('Operator<T>::() -> Operator<U>', FlattenOperator.prototype.flatten)
+  , testIterableChain('Operator<T>::() -> Operator<U>', IterableOperator.prototype.flatten)
   ])('%s', (_, flatten) => {
     describe('iterable is empty', () => {
       it('return empty iterable', () => {

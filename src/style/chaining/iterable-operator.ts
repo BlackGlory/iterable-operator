@@ -41,12 +41,12 @@ import { ConsumeOperator } from './tail/consume'
 import { EachOperator } from './tail/each'
 import { EveryOperator } from './tail/every'
 import { FindOperator } from './tail/find'
-import { HeadOperator } from './tail/head'
+import { FirstOperator } from './tail/first'
 import { IncludesOperator } from './tail/includes'
 import { MatchOperator } from './tail/match'
 import { ReduceOperator } from './tail/reduce'
 import { SomeOperator } from './tail/some'
-import { TailOperator } from './tail/tail'
+import { LastOperator } from './tail/last'
 import { ToArrayOperator } from './tail/to-array'
 import { ToSetOperator } from './tail/to-set'
 
@@ -105,12 +105,12 @@ export interface IterableOperator<T> extends
 , EachOperator<T>
 , EveryOperator<T>
 , FindOperator<T>
-, HeadOperator<T>
+, FirstOperator<T>
 , IncludesOperator<T>
 , MatchOperator<T>
 , ReduceOperator<T>
 , SomeOperator<T>
-, TailOperator<T>
+, LastOperator<T>
 , ToArrayOperator<T>
 , ToSetOperator<T>
 
@@ -162,12 +162,12 @@ mixinDecorators(IterableOperator, [
 , EachOperator
 , EveryOperator
 , FindOperator
-, HeadOperator
+, FirstOperator
 , IncludesOperator
 , MatchOperator
 , ReduceOperator
 , SomeOperator
-, TailOperator
+, LastOperator
 , ToArrayOperator
 , ToSetOperator
 

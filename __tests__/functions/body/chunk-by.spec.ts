@@ -3,7 +3,7 @@ import { isIterable, toArray, getCalledTimes, consume } from '@test/utils'
 import { chunkBy as call } from '@body/chunk-by'
 import { chunkBy as pipe } from '@style/pipeline/body/chunk-by'
 import { chunkBy as bind } from '@style/binding/body/chunk-by'
-import { ChunkByOperator } from '@style/chaining/body/chunk-by'
+import { IterableOperator } from '@style/chaining/iterable-operator'
 import { getSyncError } from '@test/return-style'
 
 describe('chunkBy', () => {
@@ -11,7 +11,7 @@ describe('chunkBy', () => {
     testCall('(iterable: Iterable<T>, fn: (element: T, index: number) -> boolean) -> Iterable<T[]>', call)
   , testPipe('(fn: (element: T, index: number) -> boolean) -> (iterable: Iterable<T>) -> Iterable<T[]>', pipe)
   , testBind('(this: Iterable<T>, fn: (element: T, index: number) -> boolean) -> Iterable<T[]>', bind)
-  , testIterableChain('Operator<T>::(fn: (element: T, index: number) -> booolean) -> Operator<T[]>', ChunkByOperator.prototype.chunkBy)
+  , testIterableChain('Operator<T>::(fn: (element: T, index: number) -> booolean) -> Operator<T[]>', IterableOperator.prototype.chunkBy)
   ])('%s', (_, chunkBy) => {
     describe('fn is called', () => {
       it('called with [element,index]', () => {

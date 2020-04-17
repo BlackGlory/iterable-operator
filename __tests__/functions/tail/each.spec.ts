@@ -3,14 +3,14 @@ import { testCall, testPipe, testBind, testMethod } from '@test/test-fixtures'
 import { each as call } from '@tail/each'
 import { each as pipe } from '@style/pipeline/tail/each'
 import { each as bind } from '@style/binding/tail/each'
-import { EachOperator } from '@style/chaining/tail/each'
+import { IterableOperator } from '@style/chaining/iterable-operator'
 
 describe('each', () => {
   describe.each([
     testCall('(iterable: Iterable<T>, fn: (element: T, index: number) -> unknown) -> void', call)
   , testPipe('(fn: (element: T, index: number) -> unknown) -> (iterable: Iterable<T>) -> void', pipe)
   , testBind('(this: Iterable<T>, fn: (element: T, index: number) -> unknown) -> void', bind)
-  , testMethod('Operator<T>::(fn: (element: T, index: number) -> unknown) -> void', EachOperator.prototype.each)
+  , testMethod('Operator<T>::(fn: (element: T, index: number) -> unknown) -> void', IterableOperator.prototype.each)
   ])('%s', (_, each) => {
     describe('fn is called', () => {
       it('called with [element,index]', () => {

@@ -3,7 +3,7 @@ import { isIterable, toArray, getCalledTimes, consume } from '@test/utils'
 import { splitBy as call } from '@body/split-by'
 import { splitBy as pipe } from '@style/pipeline/body/split-by'
 import { splitBy as bind } from '@style/binding/body/split-by'
-import { SplitByOperator } from '@style/chaining/body/split-by'
+import { IterableOperator } from '@style/chaining/iterable-operator'
 import { getSyncError } from '@test/return-style'
 
 describe('splitBy', () => {
@@ -11,7 +11,7 @@ describe('splitBy', () => {
     testCall('(iterable: Iterable<T>, fn: (element: T, index: number) -> boolean) -> Iterable<T[]>', call)
   , testPipe('(fn: (element: T, index: number) -> boolean) -> (iterable: Iterable<T>) -> Iterable<T[]>', pipe)
   , testBind('(this: Iterable<T>, fn: (element: T, index: number) -> boolean) -> Iterable<T[]>', bind)
-  , testIterableChain('Operator<T>::(fn: (element: T, index: number) -> boolean) -> Operator<T[]>', SplitByOperator.prototype.splitBy)
+  , testIterableChain('Operator<T>::(fn: (element: T, index: number) -> boolean) -> Operator<T[]>', IterableOperator.prototype.splitBy)
   ])('%s', (_, splitBy) => {
     describe('fn is called', () => {
       it('called with [element,index]', () => {

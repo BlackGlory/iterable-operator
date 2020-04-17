@@ -3,14 +3,14 @@ import { testCall, testPipe, testBind, testIterableChainAsync } from '@test/test
 import { toAsyncIterable as call } from '@body/to-async-iterable'
 import { toAsyncIterable as pipe } from '@style/pipeline/body/to-async-iterable'
 import { toAsyncIterable as bind } from '@style/binding/body/to-async-iterable'
-import { ToAsyncIterableOperator } from '@style/chaining/body/to-async-iterable'
+import { IterableOperator } from '@style/chaining/iterable-operator'
 
 describe('toAsyncIterable', () => {
   describe.each([
     testCall('(iterable: Iterable<T>) -> AsyncIterable<T>', call)
   , testPipe('() -> (iterable: Iterable<T>) -> AsyncIterable<T>', pipe)
   , testBind('(this: Iterable<T>) -> AsyncIterable<T>', bind)
-  , testIterableChainAsync('AsyncIterableOperator::toAscynIterable() -> AsyncIterable<T>', ToAsyncIterableOperator.prototype.toAsyncIterable)
+  , testIterableChainAsync('AsyncIterableOperator::toAscynIterable() -> AsyncIterable<T>', IterableOperator.prototype.toAsyncIterable)
   ])('%s', (_, toAsyncIterable) => {
     describe('(iterable: Iterable<T>) -> AsyncIterable<T>', () => {
       describe('call', () => {

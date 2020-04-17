@@ -3,7 +3,7 @@ import { isIterable, toArray, getCalledTimes, consume } from '@test/utils'
 import { dropUntil as call } from '@body/drop-until'
 import { dropUntil as pipe } from '@style/pipeline/body/drop-until'
 import { dropUntil as bind } from '@style/binding/body/drop-until'
-import { DropUntilOperator } from '@style/chaining/body/drop-until'
+import { IterableOperator } from '@style/chaining/iterable-operator'
 import { getSyncError } from '@test/return-style'
 
 describe('dropUntil', () => {
@@ -11,7 +11,7 @@ describe('dropUntil', () => {
     testCall('(iterable: Iterable<T>, fn: (element: T, index: number) -> boolean) -> Iterable<T>', call)
   , testPipe('(fn: (element: T, index: number) -> boolean) -> (iterable: Iterable<T>) -> Iterable<T>', pipe)
   , testBind('(this: Iterable<T>, fn: (element: T, index: number) -> boolean) -> Iterable<T>', bind)
-  , testIterableChain('Operator<T>::(fn: (element: T, index: number) -> boolean) -> Operator<T>', DropUntilOperator.prototype.dropUntil)
+  , testIterableChain('Operator<T>::(fn: (element: T, index: number) -> boolean) -> Operator<T>', IterableOperator.prototype.dropUntil)
   ])('%s', (_, dropUntil) => {
     describe('fn is called', () => {
       it('called with [element,index]', () => {

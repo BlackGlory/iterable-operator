@@ -5,14 +5,14 @@ import { getAsyncError } from '@test/return-style'
 import { consumeAsync as call } from '@tail/consume-async'
 import { consumeAsync as pipe } from '@style/pipeline/tail/consume-async'
 import { consumeAsync as bind } from '@style/binding/tail/consume-async'
-import { ConsumeAsyncOperator } from '@style/chaining/tail/consume-async'
+import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
 
 describe('consumeAsync', () => {
   describe.each([
     testCall('(iterable: AsyncIterable<T>, consumer: (iterable: AsyncIterable<T>) -> PromiseLike<U>) -> Promise<U>', call)
   , testPipe('(consumer: (iterable: AsyncIterable<T>) -> PromiseLike<U>) -> Promise<U>', pipe)
   , testBind('(this: AsyncIterable<T>, consumer: (iterable: AsyncIterable<T>) -> PromiseLike<U>) -> Promise<U>', bind)
-  , testAsyncMethod('AsyncIterableOperator::consumeAsync(consumer: (iterable: AsyncIterable<T>) -> PromiseLike<U>) -> Promise<U>', ConsumeAsyncOperator.prototype.consumeAsync)
+  , testAsyncMethod('AsyncIterableOperator::consumeAsync(consumer: (iterable: AsyncIterable<T>) -> PromiseLike<U>) -> Promise<U>', AsyncIterableOperator.prototype.consumeAsync)
   ])('%s', (_, consumeAsync) => {
     describe('call', () => {
       it('return result from consumer', async () => {

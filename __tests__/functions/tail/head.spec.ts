@@ -1,23 +1,23 @@
 import { getSyncError } from '@test/return-style'
 import { RuntimeError } from '@src/error'
 import { testCall, testPipe, testBind, testMethod } from '@test/test-fixtures'
-import { head as call } from '@tail/head'
-import { head as pipe } from '@style/pipeline/tail/head'
-import { head as bind } from '@style/binding/tail/head'
-import { HeadOperator } from '@style/chaining/tail/head'
+import { first as call } from '@tail/first'
+import { first as pipe } from '@style/pipeline/tail/first'
+import { first as bind } from '@style/binding/tail/first'
+import { IterableOperator } from '@style/chaining/iterable-operator'
 
-describe('head', () => {
+describe('first', () => {
   describe.each([
     testCall('(iterable: Iterable<T>) -> T', call)
   , testPipe('() -> (iterable: Iterable<T>) -> T', pipe)
   , testBind('(this: Iterable<T>) -> T', bind)
-  , testMethod('Operator<T>::() -> T', HeadOperator.prototype.head)
-  ])('%s', (_, head) => {
+  , testMethod('Operator<T>::() -> T', IterableOperator.prototype.first)
+  ])('%s', (_, first) => {
     describe('iterable is empty', () => {
       it('throw RuntimeError', () => {
         const iter: number[] = []
 
-        const err = getSyncError<RuntimeError>(() => head(iter))
+        const err = getSyncError<RuntimeError>(() => first(iter))
 
         expect(err).toBeInstanceOf(RuntimeError)
       })
@@ -27,7 +27,7 @@ describe('head', () => {
       it('return the first element in the iterable', () => {
         const iter = [1, 2, 3]
 
-        const result = head(iter)
+        const result = first(iter)
 
         expect(result).toBe(1)
       })

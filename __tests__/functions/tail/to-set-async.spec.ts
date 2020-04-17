@@ -4,14 +4,14 @@ import { testCall, testPipe, testBind, testAsyncMethod } from '@test/test-fixtur
 import { toSetAsync as call } from '@tail/to-set-async'
 import { toSetAsync as pipe } from '@style/pipeline/tail/to-set-async'
 import { toSetAsync as bind } from '@style/binding/tail/to-set-async'
-import { ToSetAsyncOperator } from '@style/chaining/tail/to-set-async'
+import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
 
 describe('toSetAsync', () => {
   describe.each([
     testCall('(iterable: AsyncIterable<T>) -> Promise<Set<T>>', call)
   , testPipe('() -> (iterable: AsyncIterable<T>) -> Promise<Set<T>>', pipe)
   , testBind('(this: AsyncIterable<T>) -> Promise<Set<T>>', bind)
-  , testAsyncMethod('AsyncIterableOperator::toSetAsync() -> Promise<Set<T>>', ToSetAsyncOperator.prototype.toSetAsync)
+  , testAsyncMethod('AsyncIterableOperator::toSetAsync() -> Promise<Set<T>>', AsyncIterableOperator.prototype.toSetAsync)
   ])('%s', (_, toSetAsync) => {
     describe('call', () => {
       it('return Set from iterable', async () => {

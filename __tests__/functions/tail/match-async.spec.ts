@@ -4,14 +4,14 @@ import { isPromise } from 'extra-promise'
 import { matchAsync as call } from '@tail/match-async'
 import { matchAsync as pipe } from '@style/pipeline/tail/match-async'
 import { matchAsync as bind } from '@style/binding/tail/match-async'
-import { MatchAsyncOperator } from '@style/chaining/tail/match-async'
+import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
 
 describe('matchAsync', () => {
   describe.each([
     testCall('(iterable: AsyncItreable<T>, sequence: ArrayLike<T>) -> Promise<boolean>', call)
   , testPipe('(sequence: ArrayLike<T>) -> (iterable: AsyncIterable<T>) -> Promise<boolean>', pipe)
   , testBind('(this: AsyncIterable<T>, sequence: ArrayLike<T>) -> Promise<boolean>', bind)
-  , testAsyncMethod('AsyncIterableOperator::matchAsync(sequence: ArrayLike<T>) -> Promise<boolean>', MatchAsyncOperator.prototype.matchAsync)
+  , testAsyncMethod('AsyncIterableOperator::matchAsync(sequence: ArrayLike<T>) -> Promise<boolean>', AsyncIterableOperator.prototype.matchAsync)
   ])('%s', (_, matchAsync) => {
     describe('sequence isnt empty', () => {
       describe('sequence is matched', () => {

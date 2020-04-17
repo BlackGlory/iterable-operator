@@ -3,7 +3,7 @@ import { isIterable, toArray, getCalledTimes, consume } from '@test/utils'
 import { takeUntil as call } from '@body/take-until'
 import { takeUntil as pipe } from '@style/pipeline/body/take-until'
 import { takeUntil as bind } from '@style/binding/body/take-until'
-import { TakeUntilOperator } from '@style/chaining/body/take-until'
+import { IterableOperator } from '@style/chaining/iterable-operator'
 import { getSyncError } from '@test/return-style'
 
 describe('takeUntil', () => {
@@ -11,7 +11,7 @@ describe('takeUntil', () => {
     testCall('(iterable: Iterable<T>, fn: (element: T, index: number) -> boolean) -> Iterable<T>', call)
   , testPipe('(fn: (element: T, index: number) -> boolean) -> (iterable: Iterable<T>) -> Iterable<T>', pipe)
   , testBind('(this: Iterable<T>, fn: (element: T, index: number) -> boolean) -> Iterable<T>', bind)
-  , testIterableChain('Operator<T>::(fn: (element: T, index: number) -> boolean) -> Operator<T>', TakeUntilOperator.prototype.takeUntil)
+  , testIterableChain('Operator<T>::(fn: (element: T, index: number) -> boolean) -> Operator<T>', IterableOperator.prototype.takeUntil)
   ])('%s', (_, takeUntil) => {
     describe('fn is called', () => {
       it('called with [element,index]', () => {

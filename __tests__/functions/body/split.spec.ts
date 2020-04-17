@@ -3,14 +3,14 @@ import { isIterable, toArray } from '@test/utils'
 import { split as call } from '@body/split'
 import { split as pipe } from '@style/pipeline/body/split'
 import { split as bind } from '@style/binding/body/split'
-import { SplitOperator } from '@style/chaining/body/split'
+import { IterableOperator } from '@style/chaining/iterable-operator'
 
 describe('split', () => {
   describe.each([
     testCall('(iterable: Iterable<T>, separator: T) -> Iterable<T[]>', call)
   , testPipe('(separator: T) -> (iterable: Iterable<T>) -> Iterable<T[]>', pipe)
   , testBind('(this: Iterable<T>, separator: T) -> Iterable<T[]>', bind)
-  , testIterableChain('Operator<T>::(separator: T) -> Operator<T[]>', SplitOperator.prototype.split)
+  , testIterableChain('Operator<T>::(separator: T) -> Operator<T[]>', IterableOperator.prototype.split)
   ])('%s', (_, split) => {
     describe('call', () => {
       it('return splited iterable', () => {

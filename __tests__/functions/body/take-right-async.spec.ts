@@ -5,14 +5,14 @@ import { getSyncError } from '@test/return-style'
 import { takeRightAsync as call } from '@body/take-right-async'
 import { takeRightAsync as pipe } from '@style/pipeline/body/take-right-async'
 import { takeRightAsync as bind } from '@style/binding/body/take-right-async'
-import { TakeRightAsyncOperator } from '@style/chaining/body/take-right-async'
+import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
 
 describe('takeRightAsync', () => {
   describe.each([
     testCall('(iterable: AsyncIterable<T>, count: number) -> AsyncIterable<T>', call)
   , testPipe('(count: number) -> (iterable: AsyncIterable<T>) -> AsyncIterable<T>', pipe)
   , testBind('(this: AsyncIterable<T>, count: number) -> AsyncIterable<T>', bind)
-  , testAsyncIterableChain('AsyncIterableOperator::takeRightAsync(count: number) -> AsyncIterableOperator<T>', TakeRightAsyncOperator.prototype.takeRightAsync)
+  , testAsyncIterableChain('AsyncIterableOperator::takeRightAsync(count: number) -> AsyncIterableOperator<T>', AsyncIterableOperator.prototype.takeRightAsync)
   ])('%s', (_, takeRightAsync) => {
     describe('count > size(iterable)', () => {
       it('return iterable copy', async () => {

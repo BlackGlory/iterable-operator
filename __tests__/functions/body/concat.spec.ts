@@ -5,14 +5,14 @@ import { isIterable, toArray } from '@test/utils'
 import { concat as call } from '@body/concat'
 import { concat as pipe } from '@style/pipeline/body/concat'
 import { concat as bind } from '@style/binding/body/concat'
-import { ConcatOperator } from '@style/chaining/body/concat'
+import { IterableOperator } from '@style/chaining/iterable-operator'
 
 describe('concat', () => {
   describe.each([
     testCall('(...iterables: Iterable[]) -> Iterable', call)
   , testPipe('(...iterables: Iterable[]) -> (iterable: Iterable) -> Iterable', pipe)
   , testBind('(this: Iterable, ...iterables: Iterable[]) -> Iterable', bind)
-  , testIterableChain('Operator::(...iterables: Iterable[]) -> Iterable', ConcatOperator.prototype.concat)
+  , testIterableChain('Operator::(...iterables: Iterable[]) -> Iterable', IterableOperator.prototype.concat)
   ])('%s', (_, concat) => {
     describe('size(iterables) < 2', () => {
       it('throw InvalidArgumentsLengthError', () => {

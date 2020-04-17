@@ -4,14 +4,14 @@ import { isIterable, toArray, getCalledTimes, consume } from '@test/utils'
 import { map as call } from '@body/map'
 import { map as pipe } from '@style/pipeline/body/map'
 import { map as bind } from '@style/binding/body/map'
-import { MapOperator } from '@style/chaining/body/map'
+import { IterableOperator } from '@style/chaining/iterable-operator'
 
 describe('map', () => {
   describe.each([
     testCall('(iterable: Iterable<T>, fn: (element: T, index: number) -> U) -> Iterable<U>', call)
   , testPipe('(fn: (element: T, index: number) -> U) -> (iterable: Iterable<T>) -> Iterable<U>', pipe)
   , testBind('(this: Iterable<T>, fn: (element: T, index: number) -> U) -> Iterable<U>', bind)
-  , testIterableChain('Operator<T>::(fn: (element: T, index: number) -> U) -> Operator<T>', MapOperator.prototype.map)
+  , testIterableChain('Operator<T>::(fn: (element: T, index: number) -> U) -> Operator<T>', IterableOperator.prototype.map)
   ])('%s', (_, map) => {
     describe('fn called', () => {
       it('called with [element,index]', () => {

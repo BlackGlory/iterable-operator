@@ -5,14 +5,14 @@ import { getSyncError } from '@test/return-style'
 import { flattenDeepAsync as call } from '@body/flatten-deep-async'
 import { flattenDeepAsync as pipe } from '@style/pipeline/body/flatten-deep-async'
 import { flattenDeepAsync as bind } from '@style/binding/body/flatten-deep-async'
-import { FlattenDeepAsyncOperator } from '@style/chaining/body/flatten-deep-async'
+import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
 
 describe('flattenDeepAsync', () => {
   describe.each([
     testCall('(iterable: AsyncIterable<unknown>, depth: number) -> AsyncIterable<T>', call)
   , testPipe('(depth: number) -> (iterable: AsyncIterable<unknown>) -> AsyncIterable<T>', pipe)
   , testBind('(this: AsyncIterable<unknown>, depth: number) -> AsyncIterable<T>', bind)
-  , testAsyncIterableChain('AsyncIterableOperator::flattenDeepAsync<T>(depth: number) -> AsyncIterableOperator<T>', FlattenDeepAsyncOperator.prototype.flattenDeepAsync)
+  , testAsyncIterableChain('AsyncIterableOperator::flattenDeepAsync<T>(depth: number) -> AsyncIterableOperator<T>', AsyncIterableOperator.prototype.flattenDeepAsync)
   ])('%s', (_, flattenDeepAsync) => {
     describe('(iterable: AsyncIterable<unknown>, depth: number) -> AsyncIterable<T>', () => {
       describe('iterable is empty', () => {
