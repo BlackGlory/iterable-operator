@@ -12,6 +12,5 @@
     , "@src/*": ["src/*"]
     , "@test/*": ["__tests__/*"]
     }
-  , "plugins": [{ "transform": "typescript-transform-paths" }]
   }
 }
