@@ -1,6 +1,6 @@
 import { isAsyncIterable } from '../utils'
 
-export function filterAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => boolean | PromiseLike<boolean>): AsyncIterable<T> {
+export function filterAsync<T, U extends T = T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => boolean | PromiseLike<boolean>): AsyncIterable<U> {
   if (isAsyncIterable(iterable)) {
     return filterAsyncIterable(iterable)
   } else {
@@ -10,7 +10,7 @@ export function filterAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (el
   async function* filterAsyncIterable(iterable: AsyncIterable<T>) {
     let index = 0
     for await (const element of iterable) {
-      if (await fn(element, index)) yield element
+      if (await fn(element, index)) yield element as U
       index++
     }
   }
@@ -18,7 +18,7 @@ export function filterAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (el
   async function* filterIterable(iterable: Iterable<T>) {
     let index = 0
     for (const element of iterable) {
-      if (await fn(element, index)) yield element
+      if (await fn(element, index)) yield element as U
       index++
     }
   }
