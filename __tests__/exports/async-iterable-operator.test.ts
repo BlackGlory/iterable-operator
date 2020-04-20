@@ -23,6 +23,7 @@ test('AsyncIterableOperator', () => {
   , 'takeRightAsync'
   , 'takeUntilAsync'
   , 'tapAsync'
+  , 'transformAsync'
   , 'uniqAsync'
   , 'uniqByAsync'
   , 'zipAsync'

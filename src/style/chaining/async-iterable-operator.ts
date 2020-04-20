@@ -20,6 +20,7 @@ import { TakeAsyncOperator } from './body/take-async'
 import { TakeRightAsyncOperator } from './body/take-right-async'
 import { TakeUntilAsyncOperator } from './body/take-until-async'
 import { TapAsyncOperator } from './body/tap-async'
+import { TransformAsyncOperator } from './body/transform-async'
 import { UniqAsyncOperator } from './body/uniq-async'
 import { UniqByAsyncOperator } from './body/uniq-by-async'
 import { ZipAsyncOperator } from './body/zip-async'
@@ -65,6 +66,7 @@ export interface AsyncIterableOperator<T> extends
 , TakeRightAsyncOperator<T>
 , TakeUntilAsyncOperator<T, AsyncIterable<T>>
 , TapAsyncOperator<T, AsyncIterable<T>>
+, TransformAsyncOperator<T, AsyncIterable<T>>
 , UniqAsyncOperator<T>
 , UniqByAsyncOperator<T, AsyncIterable<T>>
 , ZipAsyncOperator<T, AsyncIterable<T>>
@@ -103,6 +105,7 @@ mixinDecorators(AsyncIterableOperator, [
 , TakeRightAsyncOperator
 , TakeUntilAsyncOperator
 , TapAsyncOperator
+, TransformAsyncOperator
 , UniqAsyncOperator
 , UniqByAsyncOperator
 , ZipAsyncOperator

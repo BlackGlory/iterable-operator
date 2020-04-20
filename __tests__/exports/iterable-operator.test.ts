@@ -13,6 +13,7 @@ test('IterableOperator', () => {
   , 'splitByAsync'
   , 'takeUntilAsync'
   , 'tapAsync'
+  , 'transformAsync'
   , 'uniqByAsync'
   , 'zipAsync'
 
@@ -36,6 +37,7 @@ test('IterableOperator', () => {
   , 'take'
   , 'tap'
   , 'toAsyncIterable'
+  , 'transform'
   , 'uniqBy'
   , 'uniq'
   , 'zip'

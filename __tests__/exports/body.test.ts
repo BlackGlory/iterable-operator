@@ -47,6 +47,8 @@ test.each([
   , 'tapAsync'
   , 'tap'
   , 'toAsyncIterable'
+  , 'transformAsync'
+  , 'transform'
   , 'uniqAsync'
   , 'uniqByAsync'
   , 'uniqBy'

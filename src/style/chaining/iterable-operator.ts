@@ -21,6 +21,8 @@ import { TakeUntilOperator } from './body/take-until'
 import { TakeOperator } from './body/take'
 import { TapOperator } from './body/tap'
 import { ToAsyncIterableOperator } from './body/to-async-iterable'
+import { TransformAsyncOperator } from './body/transform-async'
+import { TransformOperator } from './body/transform'
 import { UniqByOperator } from './body/uniq-by'
 import { UniqOperator } from './body/uniq'
 import { ZipOperator } from './body/zip'
@@ -84,6 +86,7 @@ export interface IterableOperator<T> extends
 , TakeUntilOperator<T>
 , TakeOperator<T>
 , TapOperator<T>
+, TransformOperator<T>
 , UniqByOperator<T>
 , UniqOperator<T>
 , ZipOperator<T>
@@ -98,6 +101,7 @@ export interface IterableOperator<T> extends
 , TakeUntilAsyncOperator<T, Iterable<T>>
 , TapAsyncOperator<T, Iterable<T>>
 , ToAsyncIterableOperator<T>
+, TransformAsyncOperator<T, Iterable<T>>
 , UniqByAsyncOperator<T, Iterable<T>>
 , ZipAsyncOperator<T, Iterable<T>>
 
@@ -141,6 +145,7 @@ mixinDecorators(IterableOperator, [
 , TakeUntilOperator
 , TakeOperator
 , TapOperator
+, TransformOperator
 , UniqByOperator
 , UniqOperator
 , ZipOperator
@@ -155,6 +160,7 @@ mixinDecorators(IterableOperator, [
 , TakeUntilAsyncOperator
 , TapAsyncOperator
 , ToAsyncIterableOperator
+, TransformAsyncOperator
 , UniqByAsyncOperator
 , ZipAsyncOperator
 

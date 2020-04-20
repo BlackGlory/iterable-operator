@@ -1,6 +1,6 @@
 {
   "name": "iterable-operator",
-  "version": "0.8.2",
+  "version": "0.8.3",
   "description": "Utility for JavaScript Iterable and AsyncIterable",
   "files": [
     "lib",
@@ -16,6 +16,7 @@
   "scripts": {
     "lint": "tslint -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "test": "jest --config jest.config.js",
+    "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand",
     "coverage": "jest --coverage --config jest.config.js",
     "prepublishOnly": "yarn clean && yarn build && yarn bundle",
     "clean": "yarn clean:build && yarn clean:bundle",
@@ -32,14 +33,14 @@
     }
   },
   "devDependencies": {
-    "@rollup/plugin-typescript": "^4.0.0",
+    "@rollup/plugin-typescript": "^4.1.1",
     "@types/jest": "^25.2.1",
-    "@types/node": "^13.11.0",
+    "@types/node": "^13.13.1",
     "extra-promise": "^0.5.0",
-    "husky": "^4.2.3",
-    "jest": "^25.2.7",
-    "rollup": "^2.3.2",
-    "ts-jest": "^25.3.1",
+    "husky": "^4.2.5",
+    "jest": "^25.4.0",
+    "rollup": "^2.6.1",
+    "ts-jest": "^25.4.0",
     "tscpaths": "^0.0.9",
     "tslint": "^6.1.1",
     "typescript": "^3.8.3"
