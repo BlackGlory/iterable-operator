@@ -1,4 +1,4 @@
-import { isAsyncIterable, toArrayAsync } from '@test/utils'
+import { isAsyncIterable, toArrayAsync, MarkIterable } from '@test/utils'
 import { testCall, testPipe, testBind, testIterableChainAsync } from '@test/test-fixtures'
 import { toAsyncIterable as call } from '@body/to-async-iterable'
 import { toAsyncIterable as pipe } from '@style/pipeline/body/to-async-iterable'
@@ -23,6 +23,18 @@ describe('toAsyncIterable', () => {
 
           expect(isAsyncIter).toBe(true)
           expect(arrResult).toEqual([1, 2, 3])
+        })
+
+        it('lazy evaluation', async () => {
+          const iter = new MarkIterable()
+
+          const result = toAsyncIterable(iter)
+          const isEval1 = iter.isEvaluated()
+          await toArrayAsync(result)
+          const isEval2 = iter.isEvaluated()
+
+          expect(isEval1).toBe(false)
+          expect(isEval2).toBe(true)
         })
       })
     })

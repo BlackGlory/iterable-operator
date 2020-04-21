@@ -1,7 +1,7 @@
 import { InvalidArgumentError } from '@src/error'
 import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
 import { getSyncError } from '@test/return-style'
-import { isIterable, toArray } from '@test/utils'
+import { isIterable, toArray, MarkIterable } from '@test/utils'
 import { slice as call } from '@body/slice'
 import { slice as pipe } from '@style/pipeline/body/slice'
 import { slice as bind } from '@style/binding/body/slice'
@@ -14,6 +14,20 @@ describe('slice', () => {
   , testBind('(this: Iterable<T>, start: number, end: number) -> Iterable<T>', bind)
   , testIterableChain('Opeator<T>::(start: number, end: number) -> Operator<T>', IterableOperator.prototype.slice)
   ])('%s', (_, slice) => {
+    it('lazy evaluation', () => {
+      const iter = new MarkIterable()
+      const start = 0
+      const end = 10
+
+      const result = slice(iter, start, end)
+      const isEval1 = iter.isEvaluated()
+      toArray(result)
+      const isEval2 = iter.isEvaluated()
+
+      expect(isEval1).toBe(false)
+      expect(isEval2).toBe(true)
+    })
+
     describe('start < 0', () => {
       it('throw InvalidArgumentError', () => {
         const iter = [1, 2, 3]

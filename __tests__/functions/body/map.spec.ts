@@ -1,6 +1,6 @@
 import { getSyncError } from '@test/return-style'
 import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { isIterable, toArray, getCalledTimes, consume } from '@test/utils'
+import { isIterable, toArray, getCalledTimes, consume, MarkIterable } from '@test/utils'
 import { map as call } from '@body/map'
 import { map as pipe } from '@style/pipeline/body/map'
 import { map as bind } from '@style/binding/body/map'
@@ -42,6 +42,19 @@ describe('map', () => {
 
         expect(isIter).toBe(true)
         expect(arrResult).toEqual([2, 4, 6])
+      })
+
+      it('lazy evaluation', () => {
+        const iter = new MarkIterable()
+        const fn = jest.fn()
+
+        const result = map(iter, fn)
+        const isEval1 = iter.isEvaluated()
+        toArray(result)
+        const isEval2 = iter.isEvaluated()
+
+        expect(isEval1).toBe(false)
+        expect(isEval2).toBe(true)
       })
     })
 

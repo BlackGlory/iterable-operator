@@ -1,5 +1,5 @@
 import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { isIterable, toArray } from '@test/utils'
+import { isIterable, toArray, MarkIterable } from '@test/utils'
 import { split as call } from '@body/split'
 import { split as pipe } from '@style/pipeline/body/split'
 import { split as bind } from '@style/binding/body/split'
@@ -23,6 +23,19 @@ describe('split', () => {
 
         expect(isIter).toBe(true)
         expect(arrResult).toEqual([[1, 2], [4, 5]])
+      })
+
+      it('lazy evaluation', () => {
+        const iter = new MarkIterable()
+        const sep = 3
+
+        const result = split(iter, sep)
+        const isEval1 = iter.isEvaluated()
+        toArray(result)
+        const isEval2 = iter.isEvaluated()
+
+        expect(isEval1).toBe(false)
+        expect(isEval2).toBe(true)
       })
     })
   })

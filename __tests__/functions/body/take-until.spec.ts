@@ -1,5 +1,5 @@
 import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { isIterable, toArray, getCalledTimes, consume } from '@test/utils'
+import { isIterable, toArray, getCalledTimes, consume, MarkIterable } from '@test/utils'
 import { takeUntil as call } from '@body/take-until'
 import { takeUntil as pipe } from '@style/pipeline/body/take-until'
 import { takeUntil as bind } from '@style/binding/body/take-until'
@@ -57,6 +57,19 @@ describe('takeUntil', () => {
 
         expect(isIter).toBe(true)
         expect(arrResult).toEqual([1])
+      })
+
+      it('lazy evaluation', () => {
+        const iter = new MarkIterable()
+        const fn = jest.fn()
+
+        const result = takeUntil(iter, fn)
+        const isEval1 = iter.isEvaluated()
+        toArray(result)
+        const isEval2 = iter.isEvaluated()
+
+        expect(isEval1).toBe(false)
+        expect(isEval2).toBe(true)
       })
     })
 

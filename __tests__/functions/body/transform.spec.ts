@@ -1,5 +1,5 @@
 import { testCall, testPipe, testBind, testMethod } from '@test/test-fixtures'
-import { toArray, isIterable } from '@test/utils'
+import { toArray, isIterable, MarkIterable } from '@test/utils'
 import { transform as call } from '@body/transform'
 import { transform as pipe } from '@style/pipeline/body/transform'
 import { transform as bind } from '@style/binding/body/transform'
@@ -29,6 +29,21 @@ describe('transform', () => {
         expect(isIter).toBe(true)
         expect(arrResult).toEqual([2, 4, 6])
       })
+
+      it('lazy evaluation', () => {
+        const iter = new MarkIterable()
+        const fn = function* (iterable: Iterable<void>) {
+          yield* iterable
+        }
+
+        const result = transform(iter, fn)
+        const isEval1 = iter.isEvaluated()
+        toArray(result)
+        const isEval2 = iter.isEvaluated()
+
+        expect(isEval1).toBe(false)
+        expect(isEval2).toBe(true)
+      })
     })
 
     describe('transformer throw error', () => {
@@ -37,7 +52,8 @@ describe('transform', () => {
         const iter = [1, 2, 3]
         const fn = () => { throw customError }
 
-        const err = getSyncError(() => transform(iter, fn))
+        const result = transform(iter, fn)
+        const err = getSyncError(() => toArray(result))
 
         expect(err).toBe(customError)
       })

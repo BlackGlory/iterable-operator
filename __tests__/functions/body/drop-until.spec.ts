@@ -1,5 +1,5 @@
 import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { isIterable, toArray, getCalledTimes, consume } from '@test/utils'
+import { isIterable, toArray, getCalledTimes, consume, MarkIterable } from '@test/utils'
 import { dropUntil as call } from '@body/drop-until'
 import { dropUntil as pipe } from '@style/pipeline/body/drop-until'
 import { dropUntil as bind } from '@style/binding/body/drop-until'
@@ -57,6 +57,19 @@ describe('dropUntil', () => {
 
         expect(isIter).toBe(true)
         expect(arrResult).toEqual([2, 3])
+      })
+
+      it('lazy evaluation', () => {
+        const iter = new MarkIterable()
+        const fn = jest.fn()
+
+        const result = dropUntil(iter, fn)
+        const isEval1 = iter.isEvaluated()
+        toArray(result)
+        const isEval2 = iter.isEvaluated()
+
+        expect(isEval1).toBe(false)
+        expect(isEval2).toBe(true)
       })
     })
 

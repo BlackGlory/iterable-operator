@@ -1,7 +1,7 @@
 import { getSyncError } from '@test/return-style'
 import { InvalidArgumentError } from '@src/error'
 import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { isIterable, toArray } from '@test/utils'
+import { isIterable, toArray, MarkIterable } from '@test/utils'
 import { flattenDeep as call } from '@body/flatten-deep'
 import { flattenDeep as pipe } from '@style/pipeline/body/flatten-deep'
 import { flattenDeep as bind } from '@style/binding/body/flatten-deep'
@@ -14,6 +14,19 @@ describe('flattenDeep', () => {
   , testBind('(this: Iterable<unknown>, depth: number) -> Iterable<T>', bind)
   , testIterableChain('Operator<unknown>::(depth: number) -> Operator<T>', IterableOperator.prototype.flattenDeep)
   ])('%s', (_, flattenDeep) => {
+    it('lazy evaluation', () => {
+      const iter = new MarkIterable()
+      const depth = Infinity
+
+      const result = flattenDeep(iter, depth)
+      const isEval1 = iter.isEvaluated()
+      toArray(result)
+      const isEval2 = iter.isEvaluated()
+
+      expect(isEval1).toBe(false)
+      expect(isEval2).toBe(true)
+    })
+
     describe('iterable is empty', () => {
       it('return empty iterable', () => {
         const iter: number[] = []

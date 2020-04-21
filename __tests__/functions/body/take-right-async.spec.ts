@@ -1,4 +1,4 @@
-import { toAsyncIterable, isAsyncIterable, toArrayAsync } from '@test/utils'
+import { toAsyncIterable, isAsyncIterable, toArrayAsync, MarkAsyncIterable } from '@test/utils'
 import { testCall, testPipe, testBind, testAsyncIterableChain } from '@test/test-fixtures'
 import { InvalidArgumentError } from '@src/error'
 import { getSyncError } from '@test/return-style'
@@ -14,6 +14,19 @@ describe('takeRightAsync', () => {
   , testBind('(this: AsyncIterable<T>, count: number) -> AsyncIterable<T>', bind)
   , testAsyncIterableChain('AsyncIterableOperator::takeRightAsync(count: number) -> AsyncIterableOperator<T>', AsyncIterableOperator.prototype.takeRightAsync)
   ])('%s', (_, takeRightAsync) => {
+    it('lazy evaluation', async () => {
+      const iter = new MarkAsyncIterable()
+      const count = 5
+
+      const result = takeRightAsync(iter, count)
+      const isEval1 = iter.isEvaluated()
+      await toArrayAsync(result)
+      const isEval2 = iter.isEvaluated()
+
+      expect(isEval1).toBe(false)
+      expect(isEval2).toBe(true)
+    })
+
     describe('count > size(iterable)', () => {
       it('return iterable copy', async () => {
         const iter = toAsyncIterable([1, 2, 3])

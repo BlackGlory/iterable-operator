@@ -2,7 +2,7 @@ import { getAsyncError } from '@test/return-style'
 import { isPromise } from 'extra-promise'
 import { RuntimeError } from '@src/error'
 import { testFunction, testAsyncFunction } from '@test/test-fixtures'
-import { toAsyncIterable } from '@test/utils'
+import { toAsyncIterable, getCalledTimes } from '@test/utils'
 import { asyncMethod } from '@test/style-helpers'
 import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
 
@@ -53,7 +53,8 @@ describe('AsyncIterableOperator::reduceAsync', () => {
             const isPro = isPromise(result)
             const proResult = await result
 
-            expect(fn.mock.calls.length).toBe(0) // skip
+            expect(isPro).toBe(true)
+            expect(getCalledTimes(fn)).toBe(0) // skip
             expect(proResult).toBe(1)
           })
         })

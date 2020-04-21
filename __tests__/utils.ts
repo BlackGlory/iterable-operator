@@ -38,14 +38,18 @@ export function getCalledTimes(fn: jest.Mock) {
   return fn.mock.calls.length
 }
 
-export function* toIterable<T>(arr: T[]): Iterable<T> {
-  for (const element of arr) {
+export function isCalled(fn: jest.Mock) {
+  return fn.mock.calls.length > 0
+}
+
+export function* toIterable<T>(iterable: Iterable<T>): Iterable<T> {
+  for (const element of iterable) {
     yield element
   }
 }
 
-export async function* toAsyncIterable<T>(arr: T[]): AsyncIterable<T> {
-  for (const element of arr) {
+export async function* toAsyncIterable<T>(iterable: Iterable<T>): AsyncIterable<T> {
+  for (const element of iterable) {
     yield element
   }
 }
@@ -56,4 +60,28 @@ export function toAsyncFunction<T extends unknown[], U>(fn: (...args: T) => U): 
 
 export function toFunction<T extends unknown[], U>(fn: (...args: T) => U): (...args: T) => U {
   return (...args: T) => fn(...args)
+}
+
+export class MarkIterable implements Iterable<void> {
+  #evaluated = false
+
+  ;* [Symbol.iterator]() {
+    this.#evaluated = true
+  }
+
+  isEvaluated() {
+    return this.#evaluated
+  }
+}
+
+export class MarkAsyncIterable implements AsyncIterable<void> {
+  #evaluated = false
+
+  async * [Symbol.asyncIterator]() {
+    this.#evaluated = true
+  }
+
+  isEvaluated() {
+    return this.#evaluated
+  }
 }

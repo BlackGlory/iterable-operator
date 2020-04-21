@@ -1,5 +1,5 @@
 import { testIterable, testAsyncIterable, testAsyncFunction, testFunction, testCall, testPipe, testBind } from '@test/test-fixtures'
-import { getCalledTimes, consumeAsync, isAsyncIterable, toArrayAsync } from '@test/utils'
+import { getCalledTimes, consumeAsync, isAsyncIterable, toArrayAsync, MarkIterable } from '@test/utils'
 import { getAsyncError } from '@test/return-style'
 import { takeUntilAsync as call } from '@body/take-until-async'
 import { takeUntilAsync as pipe } from '@style/pipeline/body/take-until-async'
@@ -68,6 +68,20 @@ describe('takeUntilAsync', () => {
       , testAsyncFunction('fn return promise')
       ])('%s', (_, getFn) => {
         describe('call', () => {
+          it('lazy evaluation', async () => {
+            const mark = new MarkIterable()
+            const iter = getIter(mark)
+            const fn = getFn(jest.fn())
+
+            const result = takeUntilAsync(iter, fn)
+            const isEval1 = mark.isEvaluated()
+            await toArrayAsync(result)
+            const isEval2 = mark.isEvaluated()
+
+            expect(isEval1).toBe(false)
+            expect(isEval2).toBe(true)
+          })
+
           it('return itreable take elements until fn return true', async () => {
             const iter = getIter([1, 2, 3])
             const atTwo = getFn((x: number) => x === 2)

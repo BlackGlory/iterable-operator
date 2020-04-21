@@ -1,5 +1,5 @@
 import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { isIterable, toArray } from '@test/utils'
+import { isIterable, toArray, MarkIterable } from '@test/utils'
 import { flatten as call } from '@body/flatten'
 import { flatten as pipe } from '@style/pipeline/body/flatten'
 import { flatten as bind } from '@style/binding/body/flatten'
@@ -12,6 +12,18 @@ describe('flatten', () => {
   , testBind('(this: Iterable<T>) -> Iterable<U>', bind)
   , testIterableChain('Operator<T>::() -> Operator<U>', IterableOperator.prototype.flatten)
   ])('%s', (_, flatten) => {
+    it('lazy evaluation', () => {
+      const iter = new MarkIterable()
+
+      const result = flatten(iter)
+      const isEval1 = iter.isEvaluated()
+      toArray(result)
+      const isEval2 = iter.isEvaluated()
+
+      expect(isEval1).toBe(false)
+      expect(isEval2).toBe(true)
+    })
+
     describe('iterable is empty', () => {
       it('return empty iterable', () => {
         const iter: number[] = []

@@ -3,7 +3,7 @@ import { pipe, bind, iterableChain, iterableChainAsync, asyncIterableChain, meth
 
 type AnyFunction = (...args: any[]) => any
 
-type ToAwaitable<T> = (arr: T[]) => Iterable<T> | AsyncIterable<T>
+type ToAwaitable<T> = (iterable: Iterable<T>) => Iterable<T> | AsyncIterable<T>
 
 export function testCall(signature: string, target: AnyFunction): [string, AnyFunction] {
   return [signature, target]

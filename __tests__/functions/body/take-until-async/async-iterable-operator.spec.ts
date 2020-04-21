@@ -1,5 +1,5 @@
 import { testAsyncFunction, testFunction } from '@test/test-fixtures'
-import { toAsyncIterable, getCalledTimes, consumeAsync, isAsyncIterable, toArrayAsync } from '@test/utils'
+import { toAsyncIterable, getCalledTimes, consumeAsync, isAsyncIterable, toArrayAsync, MarkIterable } from '@test/utils'
 import { getAsyncError } from '@test/return-style'
 import { asyncIterableChain } from '@test/style-helpers'
 import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
@@ -47,6 +47,20 @@ describe('AsyncIterableOperator::takeUntilAsync', () => {
     , testAsyncFunction('fn return promise')
     ])('%s', (_, getFn) => {
       describe('call', () => {
+        it('lazy evaluation', async () => {
+          const mark = new MarkIterable()
+          const iter = getIter(mark)
+          const fn = getFn(jest.fn())
+
+          const result = takeUntilAsync(iter, fn)
+          const isEval1 = mark.isEvaluated()
+          await toArrayAsync(result)
+          const isEval2 = mark.isEvaluated()
+
+          expect(isEval1).toBe(false)
+          expect(isEval2).toBe(true)
+        })
+
         it('return itreable take elements until fn return true', async () => {
           const iter = getIter([1, 2, 3])
           const atTwo = getFn((x: number) => x === 2)

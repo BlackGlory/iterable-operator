@@ -1,5 +1,5 @@
 import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { isIterable, toArray, getCalledTimes, consume } from '@test/utils'
+import { isIterable, toArray, getCalledTimes, consume, MarkIterable } from '@test/utils'
 import { splitBy as call } from '@body/split-by'
 import { splitBy as pipe } from '@style/pipeline/body/split-by'
 import { splitBy as bind } from '@style/binding/body/split-by'
@@ -42,6 +42,19 @@ describe('splitBy', () => {
 
         expect(isIter).toBe(true)
         expect(arrResult).toEqual([[1, 2], [4, 5]])
+      })
+
+      it('lazy evaluation', () => {
+        const iter = new MarkIterable()
+        const fn = jest.fn()
+
+        const result = splitBy(iter, fn)
+        const isEval1 = iter.isEvaluated()
+        toArray(result)
+        const isEval2 = iter.isEvaluated()
+
+        expect(isEval1).toBe(false)
+        expect(isEval2).toBe(true)
       })
     })
 

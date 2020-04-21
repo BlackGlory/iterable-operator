@@ -1,6 +1,6 @@
 import { getAsyncError } from '@test/return-style'
 import { testCall, testPipe, testBind, testIterable, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures'
-import { toArrayAsync, isAsyncIterable, consumeAsync, getCalledTimes } from '@test/utils'
+import { toArrayAsync, isAsyncIterable, consumeAsync, getCalledTimes, MarkIterable } from '@test/utils'
 import { filterAsync as call } from '@body/filter-async'
 import { filterAsync as pipe } from '@style/pipeline/body/filter-async'
 import { filterAsync as bind } from '@style/binding/body/filter-async'
@@ -53,6 +53,20 @@ describe('filterAsync', () => {
       , testAsyncFunction('fn return promise')
       ])('%s', (_, getFn) => {
         describe('call', () => {
+          it('lazy evaluation', async () => {
+            const mark = new MarkIterable()
+            const iter = getIter(mark)
+            const fn = getFn(jest.fn())
+
+            const result = filterAsync(iter, fn)
+            const isEval1 = mark.isEvaluated()
+            await toArrayAsync(result)
+            const isEval2 = mark.isEvaluated()
+
+            expect(isEval1).toBe(false)
+            expect(isEval2).toBe(true)
+          })
+
           it('return filtered iterable', async () => {
             const iter = getIter([1, 2, 3])
             const odd = getFn((x: number) => x % 2 === 1)

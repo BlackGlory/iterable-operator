@@ -1,6 +1,6 @@
 import { InvalidArgumentError } from '@src/error'
 import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { isIterable, toArray } from '@test/utils'
+import { isIterable, toArray, MarkIterable } from '@test/utils'
 import { getSyncError } from '@test/return-style'
 import { repeat as call } from '@body/repeat'
 import { repeat as pipe } from '@style/pipeline/body/repeat'
@@ -14,6 +14,19 @@ describe('repeat', () => {
   , testBind('(this: Iterable<T>, times: number) -> Iterable<T>', bind)
   , testIterableChain('Operator<T>::(times: number) -> Operator<T>', IterableOperator.prototype.repeat)
   ])('%s', (_, repeat) => {
+    it('lazy evaluation', () => {
+      const iter = new MarkIterable()
+      const times = 2
+
+      const result = repeat(iter, times)
+      const isEval1 = iter.isEvaluated()
+      toArray(result)
+      const isEval2 = iter.isEvaluated()
+
+      expect(isEval1).toBe(false)
+      expect(isEval2).toBe(true)
+    })
+
     describe('times > 0', () => {
       it('return repeated iterable', () => {
         const iter = [1, 2, 3]

@@ -1,4 +1,4 @@
-import { toIterable, isAsyncIterable, toArrayAsync } from '@test/utils'
+import { toIterable, isAsyncIterable, toArrayAsync, MarkIterable } from '@test/utils'
 import { IterableOperator } from '@style/chaining/iterable-operator'
 import { iterableChainAsync } from '@test/style-helpers'
 import { getAsyncError } from '@test/return-style'
@@ -23,6 +23,22 @@ describe('AsyncIterableOperator::transform', () => {
 
         expect(isIter).toBe(true)
         expect(arrResult).toEqual([2, 4, 6])
+      })
+
+      it('lazy evaluation', async () => {
+        const mark = new MarkIterable()
+        const iter = getIter(mark)
+        const fn = async function* (iterable: Iterable<void> | AsyncIterable<void>) {
+          yield* iterable
+        }
+
+        const result = transformAsync(iter, fn)
+        const isEval1 = mark.isEvaluated()
+        await toArrayAsync(result)
+        const isEval2 = mark.isEvaluated()
+
+        expect(isEval1).toBe(false)
+        expect(isEval2).toBe(true)
       })
     })
 

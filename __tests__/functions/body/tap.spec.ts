@@ -1,6 +1,6 @@
 import { getSyncError } from '@test/return-style'
 import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { isIterable, toArray, getCalledTimes, consume } from '@test/utils'
+import { isIterable, toArray, getCalledTimes, consume, MarkIterable } from '@test/utils'
 import { tap as call } from '@body/tap'
 import { tap as pipe } from '@style/pipeline/body/tap'
 import { tap as bind } from '@style/binding/body/tap'
@@ -46,6 +46,19 @@ describe('tap', () => {
         expect(isSideResultEmptyInStage1).toBe(true)
         expect(arrResult).toEqual([1, 2, 3])
         expect(sideResult).toEqual([[1, 0], [2, 1], [3, 2]])
+      })
+
+      it('lazy evaluation', () => {
+        const iter = new MarkIterable()
+        const fn = jest.fn()
+
+        const result = tap(iter, fn)
+        const isEval1 = iter.isEvaluated()
+        toArray(result)
+        const isEval2 = iter.isEvaluated()
+
+        expect(isEval1).toBe(false)
+        expect(isEval2).toBe(true)
       })
     })
 

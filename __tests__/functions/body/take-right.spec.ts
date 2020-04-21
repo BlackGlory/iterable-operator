@@ -1,6 +1,6 @@
 import { InvalidArgumentError } from '@src/error'
 import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { isIterable, toArray } from '@test/utils'
+import { isIterable, toArray, MarkIterable } from '@test/utils'
 import { getSyncError } from '@test/return-style'
 import { takeRight as call } from '@body/take-right'
 import { takeRight as pipe } from '@style/pipeline/body/take-right'
@@ -14,6 +14,19 @@ describe('takeRight', () => {
   , testBind('(this: Iterable<T>, count: number) -> Iterable<T>', bind)
   , testIterableChain('Operator<T>::(count: number) -> Operator<T>', IterableOperator.prototype.takeRight)
   ])('%s', (_, takeRight) => {
+    it('lazy evaluation', () => {
+      const iter = new MarkIterable()
+      const count = 5
+
+      const result = takeRight(iter, count)
+      const isEval1 = iter.isEvaluated()
+      toArray(result)
+      const isEval2 = iter.isEvaluated()
+
+      expect(isEval1).toBe(false)
+      expect(isEval2).toBe(true)
+    })
+
     describe('count > size(iterable)', () => {
       it('return iterable copy', () => {
         const iter = [1, 2, 3]

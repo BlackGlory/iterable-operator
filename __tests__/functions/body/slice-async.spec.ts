@@ -1,6 +1,6 @@
 import { getSyncError } from '@test/return-style'
 import { InvalidArgumentError } from '@src/error'
-import { toAsyncIterable, isAsyncIterable, toArrayAsync } from '@test/utils'
+import { toAsyncIterable, isAsyncIterable, toArrayAsync, MarkAsyncIterable } from '@test/utils'
 import { testCall, testPipe, testBind, testAsyncIterableChain } from '@test/test-fixtures'
 import { sliceAsync as call } from '@body/slice-async'
 import { sliceAsync as pipe } from '@style/pipeline/body/slice-async'
@@ -14,6 +14,20 @@ describe('sliceAsync', () => {
   , testBind('(this: AsyncIterable<T>, start: number, end: number) -> AsyncIterable<T>', bind)
   , testAsyncIterableChain('AsyncIterableOperator::sliceAsync(start: number, end: number) -> AsyncIterableOperator<T>', AsyncIterableOperator.prototype.sliceAsync)
   ])('%s', (_, sliceAsync) => {
+    it('lazy evaluation', async () => {
+      const iter = new MarkAsyncIterable()
+      const start = 0
+      const end = 10
+
+      const result = sliceAsync(iter, start, end)
+      const isEval1 = iter.isEvaluated()
+      await toArrayAsync(result)
+      const isEval2 = iter.isEvaluated()
+
+      expect(isEval1).toBe(false)
+      expect(isEval2).toBe(true)
+    })
+
     describe('start < 0', () => {
       it('throw InvalidArgumentError', () => {
         const iter = toAsyncIterable([1, 2, 3])

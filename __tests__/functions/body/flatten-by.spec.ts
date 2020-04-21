@@ -1,5 +1,5 @@
 import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { isIterable, toArray, getCalledTimes, consume } from '@test/utils'
+import { isIterable, toArray, getCalledTimes, consume, MarkIterable } from '@test/utils'
 import { flattenBy as call } from '@body/flatten-by'
 import { flattenBy as pipe } from '@style/pipeline/body/flatten-by'
 import { flattenBy as bind } from '@style/binding/body/flatten-by'
@@ -46,6 +46,19 @@ describe('flattenBy', () => {
           'one', 'two'
         , 0, 1
         ])
+      })
+
+      it('lazy evaluation', () => {
+        const iter = new MarkIterable()
+        const fn = jest.fn()
+
+        const result = flattenBy(iter, fn)
+        const isEval1 = iter.isEvaluated()
+        toArray(result)
+        const isEval2 = iter.isEvaluated()
+
+        expect(isEval1).toBe(false)
+        expect(isEval2).toBe(true)
       })
     })
 
@@ -96,8 +109,4 @@ describe('flattenBy', () => {
 
 function isString(val: unknown): val is string {
   return typeof val === 'string'
-}
-
-function getFirstCall(fn: jest.Mock) {
-  return fn.mock.calls[0]
 }

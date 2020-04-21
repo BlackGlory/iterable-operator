@@ -1,5 +1,5 @@
 import { testFunction, testAsyncFunction } from '@test/test-fixtures'
-import { toAsyncIterable, getCalledTimes, consumeAsync, isAsyncIterable, toArrayAsync } from '@test/utils'
+import { toAsyncIterable, getCalledTimes, consumeAsync, isAsyncIterable, toArrayAsync, MarkIterable } from '@test/utils'
 import { getAsyncError } from '@test/return-style'
 import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
 import { asyncIterableChain } from '@test/style-helpers'
@@ -42,6 +42,20 @@ describe('IterableOperator::uniqByAsync', () => {
 
           expect(isIter).toBe(true)
           expect(arrResult).toEqual([1, 2])
+        })
+
+        it('lazy evaluation', async () => {
+          const mark = new MarkIterable()
+          const iter = getIter(mark)
+          const fn = getFn(jest.fn())
+
+          const result = uniqByAsync(iter, fn)
+          const isEval1 = mark.isEvaluated()
+          await toArrayAsync(result)
+          const isEval2 = mark.isEvaluated()
+
+          expect(isEval1).toBe(false)
+          expect(isEval2).toBe(true)
         })
       })
 

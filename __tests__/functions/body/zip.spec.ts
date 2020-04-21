@@ -1,7 +1,7 @@
 import { getSyncError } from '@test/return-style'
 import { InvalidArgumentsLengthError } from '@src/error'
 import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { isIterable, toArray } from '@test/utils'
+import { isIterable, toArray, MarkIterable } from '@test/utils'
 import { zip as call } from '@body/zip'
 import { zip as pipe } from '@style/pipeline/body/zip'
 import { zip as bind } from '@style/binding/body/zip'
@@ -26,6 +26,19 @@ describe('zip', () => {
     })
 
     describe('size(iterables) >= 2', () => {
+      it('lazy evaluation', () => {
+        const iter1 = new MarkIterable()
+        const iter2: unknown[] = []
+
+        const result = zip(iter1, iter2)
+        const isEval1 = iter1.isEvaluated()
+        toArray(result)
+        const isEval2 = iter1.isEvaluated()
+
+        expect(isEval1).toBe(false)
+        expect(isEval2).toBe(true)
+      })
+
       describe('iterables have same size', () => {
         it('return zipped iterable', () => {
           const iter1 = [1, 2, 3]

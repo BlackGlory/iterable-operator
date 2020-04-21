@@ -1,5 +1,5 @@
 import { testCall, testBind, testPipe, testIterable, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures'
-import { getCalledTimes, consumeAsync, isAsyncIterable, toArrayAsync } from '@test/utils'
+import { getCalledTimes, consumeAsync, isAsyncIterable, toArrayAsync, MarkIterable } from '@test/utils'
 import { chunkByAsync as call } from '@body/chunk-by-async'
 import { chunkByAsync as pipe } from '@style/pipeline/body/chunk-by-async'
 import { chunkByAsync as bind } from '@style/binding/body/chunk-by-async'
@@ -53,6 +53,20 @@ describe('chunkByAsync', () => {
       , testAsyncFunction('fn return promiselike')
       ])('%s', (_, getFn) => {
         describe('call', () => {
+          it('lazy evaluation', async () => {
+            const mark = new MarkIterable()
+            const iter = getIter(mark)
+            const fn = getFn(jest.fn())
+
+            const result = chunkByAsync(iter, fn)
+            const isEval1 = mark.isEvaluated()
+            await toArrayAsync(result)
+            const isEval2 = mark.isEvaluated()
+
+            expect(isEval1).toBe(false)
+            expect(isEval2).toBe(true)
+          })
+
           it('return chunked iterable', async () => {
             const iter = getIter([1, 2, 3])
             const atTwo = getFn((x: number) =>  x === 2)

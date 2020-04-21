@@ -1,5 +1,5 @@
 import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { isIterable, toArray } from '@test/utils'
+import { isIterable, toArray, MarkIterable } from '@test/utils'
 import { uniq as call } from '@body/uniq'
 import { uniq as pipe } from '@style/pipeline/body/uniq'
 import { uniq as bind } from '@style/binding/body/uniq'
@@ -22,6 +22,18 @@ describe('uniq', () => {
 
         expect(isIter).toBe(true)
         expect(arrResult).toEqual([1, 2, 3])
+      })
+
+      it('lazy evalutation', () => {
+        const iter = new MarkIterable()
+
+        const result = uniq(iter)
+        const isEval1 = iter.isEvaluated()
+        toArray(result)
+        const isEval2 = iter.isEvaluated()
+
+        expect(isEval1).toBe(false)
+        expect(isEval2).toBe(true)
       })
     })
   })

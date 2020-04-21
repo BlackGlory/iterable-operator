@@ -1,5 +1,5 @@
 import { getSyncError } from '@test/return-style'
-import { toAsyncIterable, isAsyncIterable, toArrayAsync } from '@test/utils'
+import { toAsyncIterable, isAsyncIterable, toArrayAsync, MarkAsyncIterable } from '@test/utils'
 import { chunkAsync as call } from '@body/chunk-async'
 import { chunkAsync as pipe } from '@style/pipeline/body/chunk-async'
 import { chunkAsync as bind } from '@style/binding/body/chunk-async'
@@ -14,6 +14,19 @@ describe('chunkAsync', () => {
   , testBind('(this: AsyncIterable<T>, size: number) -> AsyncIterable<T[]>', bind)
   , testAsyncIterableChain('AsyncIterableOperator::chunkAsync(size: number) -> AsyncIterableOperator<T[]>', AsyncIterableOperator.prototype.chunkAsync)
   ])('%s', (_, chunkAsync) => {
+    it('lazy evaluation', async () => {
+      const iter = new MarkAsyncIterable()
+      const size = 2
+
+      const result = chunkAsync(iter, size)
+      const isEval1 = iter.isEvaluated()
+      await toArrayAsync(result)
+      const isEval2 = iter.isEvaluated()
+
+      expect(isEval1).toBe(false)
+      expect(isEval2).toBe(true)
+    })
+
     describe('size > 0', () => {
       it('return chunked iterable', async () => {
         const iter = toAsyncIterable([1, 2, 3])

@@ -1,4 +1,4 @@
-import { getCalledTimes, consumeAsync, isAsyncIterable, toArrayAsync } from '@test/utils'
+import { getCalledTimes, consumeAsync, isAsyncIterable, toArrayAsync, MarkIterable } from '@test/utils'
 import { testIterable, testAsyncIterable, testFunction, testAsyncFunction, testCall, testPipe, testBind } from '@test/test-fixtures'
 import { getAsyncError } from '@test/return-style'
 import { flattenByAsync as call } from '@body/flatten-by-async'
@@ -36,6 +36,20 @@ describe('flattenByAsync', () => {
       , testAsyncFunction('fn return promiselike')
       ])('%s', (_, getFn) => {
         describe('call', () => {
+          it('lazy evaluation', async () => {
+            const mark = new MarkIterable()
+            const iter = getIter(mark)
+            const fn = getFn(jest.fn())
+
+            const result = flattenByAsync(iter, fn)
+            const isEval1 = mark.isEvaluated()
+            await toArrayAsync(result)
+            const isEval2 = mark.isEvaluated()
+
+            expect(isEval1).toBe(false)
+            expect(isEval2).toBe(true)
+          })
+
           it('return flat iterable', async () => {
             const iter = getIter([
               'one', ['two']
@@ -119,8 +133,4 @@ describe('flattenByAsync', () => {
 
 function isString(val: unknown): val is string {
   return typeof val === 'string'
-}
-
-function getFirstCall(fn: jest.Mock) {
-  return fn.mock.calls[0]
 }

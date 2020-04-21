@@ -1,4 +1,4 @@
-import { toArrayAsync, isAsyncIterable, consumeAsync, getCalledTimes } from '@test/utils'
+import { toArrayAsync, isAsyncIterable, consumeAsync, getCalledTimes, MarkIterable } from '@test/utils'
 import { getAsyncError } from '@test/return-style'
 import { testFunction, testAsyncFunction, testIterable, testAsyncIterable, testCall, testPipe, testBind } from '@test/test-fixtures'
 import { tapAsync as call } from '@body/tap-async'
@@ -53,6 +53,20 @@ describe('tapAsync', () => {
       , testAsyncFunction('fn return promise')
       ])('%s', (_, getFn) => {
         describe('call', () => {
+          it('lazy evaluation', async () => {
+            const mark = new MarkIterable()
+            const iter = getIter(mark)
+            const fn = getFn(jest.fn())
+
+            const result = tapAsync(iter, fn)
+            const isEval1 = mark.isEvaluated()
+            await toArrayAsync(result)
+            const isEval2 = mark.isEvaluated()
+
+            expect(isEval1).toBe(false)
+            expect(isEval2).toBe(true)
+          })
+
           it('call fn and return iterable', async () => {
             const iter = getIter([1, 2, 3])
             const sideResult: Array<[number, number]> = []

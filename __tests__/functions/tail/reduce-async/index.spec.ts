@@ -5,6 +5,7 @@ import { testIterable, testAsyncIterable, testFunction, testAsyncFunction, testC
 import { reduceAsync as call } from '@tail/reduce-async'
 import { reduceAsync as pipe } from '@style/pipeline/tail/reduce-async'
 import { reduceAsync as bind } from '@style/binding/tail/reduce-async'
+import { getCalledTimes } from '@test/utils'
 
 describe('reduceAsync', () => {
   describe.each([
@@ -58,7 +59,8 @@ describe('reduceAsync', () => {
               const isPro = isPromise(result)
               const proResult = await result
 
-              expect(fn.mock.calls.length).toBe(0) // skip
+              expect(isPro).toBe(true)
+              expect(getCalledTimes(fn)).toBe(0) // skip
               expect(proResult).toBe(1)
             })
           })

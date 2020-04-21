@@ -1,5 +1,5 @@
 import { getSyncError } from '@test/return-style'
-import { toArrayAsync, isAsyncIterable, toAsyncIterable } from '@test/utils'
+import { toArrayAsync, isAsyncIterable, toAsyncIterable, MarkAsyncIterable } from '@test/utils'
 import { testCall, testPipe, testBind, testAsyncIterableChain } from '@test/test-fixtures'
 import { InvalidArgumentError } from '@src/error'
 import { repeatAsync as call } from '@body/repeat-async'
@@ -14,6 +14,19 @@ describe('repeatAsync', () => {
   , testBind('(this: AsyncIterable<T>, times: number) -> AsyncIterable<T>', bind)
   , testAsyncIterableChain('AsyncIterableOperator::repeatAsync(times: number) -> AsyncIterableOperaotr<T>', AsyncIterableOperator.prototype.repeatAsync)
   ])('%s', (_, repeatAsync) => {
+    it('lazy evaluation', async () => {
+      const iter = new MarkAsyncIterable()
+      const times = 2
+
+      const result = repeatAsync(iter, times)
+      const isEval1 = iter.isEvaluated()
+      await toArrayAsync(result)
+      const isEval2 = iter.isEvaluated()
+
+      expect(isEval1).toBe(false)
+      expect(isEval2).toBe(true)
+    })
+
     describe('times > 0', () => {
       it('return repeated iterable', async () => {
         const iter = toAsyncIterable([1, 2, 3])

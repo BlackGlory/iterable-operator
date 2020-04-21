@@ -1,7 +1,7 @@
 import { getSyncError } from '@test/return-style'
 import { InvalidArgumentsLengthError } from '@src/error'
 import { testIterable, testAsyncIterable, testCall, testPipe, testBind } from '@test/test-fixtures'
-import { isAsyncIterable, toArrayAsync, toIterable, toAsyncIterable } from '@test/utils'
+import { isAsyncIterable, toArrayAsync, toIterable, toAsyncIterable, MarkIterable } from '@test/utils'
 import { zipAsync as call } from '@body/zip-async'
 import { zipAsync as pipe } from '@style/pipeline/body/zip-async'
 import { zipAsync as bind } from '@style/binding/body/zip-async'
@@ -43,6 +43,20 @@ describe('zipAsync', () => {
           testIterable('(...iterables: Iterable[]) -> AsyncIterable')
         , testAsyncIterable('(...iterables: AsyncIterable[]) -> AsyncIterable')
         ])('%s', (_, getIter) => {
+          it('lazy evaluation', async () => {
+            const mark = new MarkIterable()
+            const iter1 = getIter(mark)
+            const iter2 = getIter([])
+
+            const result = zipAsync(iter1, iter2)
+            const isEval1 = mark.isEvaluated()
+            await toArrayAsync(result)
+            const isEval2 = mark.isEvaluated()
+
+            expect(isEval1).toBe(false)
+            expect(isEval2).toBe(true)
+          })
+
           describe('iterables have same size', () => {
             it('return zipped iterable', async () => {
               const iter1 = getIter([1, 2, 3])

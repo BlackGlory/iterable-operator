@@ -1,6 +1,6 @@
 import { getAsyncError } from '@test/return-style'
 import { testIterable, testAsyncIterable, testFunction, testAsyncFunction, testCall, testPipe, testBind } from '@test/test-fixtures'
-import { getCalledTimes, consumeAsync, isAsyncIterable, toArrayAsync } from '@test/utils'
+import { getCalledTimes, consumeAsync, isAsyncIterable, toArrayAsync, MarkIterable } from '@test/utils'
 import { mapAsync as call } from '@body/map-async'
 import { mapAsync as pipe } from '@style/pipeline/body/map-async'
 import { mapAsync as bind } from '@style/binding/body/map-async'
@@ -53,6 +53,20 @@ describe('mapAsync', () => {
       , testAsyncFunction('fn return promise')
       ])('%s', (_, getFn) => {
         describe('call', () => {
+          it('lazy evaluation', async () => {
+            const mark = new MarkIterable()
+            const iter = getIter(mark)
+            const fn = getFn(jest.fn())
+
+            const result = mapAsync(iter, fn)
+            const isEval1 = mark.isEvaluated()
+            await toArrayAsync(result)
+            const isEval2 = mark.isEvaluated()
+
+            expect(isEval1).toBe(false)
+            expect(isEval2).toBe(true)
+          })
+
           it('return mapped iterable', async () => {
             const iter = getIter([1, 2, 3])
             const double = getFn((x: number) => x * 2)

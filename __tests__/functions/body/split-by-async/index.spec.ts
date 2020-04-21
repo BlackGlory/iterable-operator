@@ -1,4 +1,4 @@
-import { getCalledTimes, consumeAsync, isAsyncIterable, toArrayAsync } from '@test/utils'
+import { getCalledTimes, consumeAsync, isAsyncIterable, toArrayAsync, MarkIterable } from '@test/utils'
 import { testIterable, testAsyncIterable, testAsyncFunction, testFunction, testCall, testPipe, testBind } from '@test/test-fixtures'
 import { getAsyncError } from '@test/return-style'
 import { splitByAsync as call } from '@body/split-by-async'
@@ -53,6 +53,20 @@ describe('splitByAsync', () => {
         })
 
         describe('call', () => {
+          it('lazy evaluation', async () => {
+            const mark = new MarkIterable()
+            const iter = getIter(mark)
+            const fn = getFn(jest.fn())
+
+            const result = splitByAsync(iter, fn)
+            const isEval1 = mark.isEvaluated()
+            await toArrayAsync(result)
+            const isEval2 = mark.isEvaluated()
+
+            expect(isEval1).toBe(false)
+            expect(isEval2).toBe(true)
+          })
+
           it('return splited iterable', async () => {
             const iter = getIter([1, 2, 3, 4, 5])
             const atThree = getFn((x: number) =>  x === 3)

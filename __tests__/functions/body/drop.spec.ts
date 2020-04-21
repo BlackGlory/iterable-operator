@@ -1,7 +1,7 @@
 import { getSyncError } from '@test/return-style'
 import { InvalidArgumentError } from '@src/error'
 import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { isIterable, toArray } from '@test/utils'
+import { isIterable, toArray, MarkIterable } from '@test/utils'
 import { drop as call } from '@body/drop'
 import { drop as pipe } from '@style/pipeline/body/drop'
 import { drop as bind } from '@style/binding/body/drop'
@@ -14,6 +14,19 @@ describe('drop', () => {
   , testBind('(this: Iterable<T>, count: number) -> Iterable<T>', bind)
   , testIterableChain('Operator<T>::(count: number) -> Operator<T>', IterableOperator.prototype.drop)
   ])('%s', (_, drop) => {
+    it('lazy evaluation', () => {
+      const iter = new MarkIterable()
+      const count = 2
+
+      const result = drop(iter, count)
+      const isEval1 = iter.isEvaluated()
+      toArray(result)
+      const isEval2 = iter.isEvaluated()
+
+      expect(isEval1).toBe(false)
+      expect(isEval2).toBe(true)
+    })
+
     describe('count > 0', () => {
       it('return iterable that dropped the first count elements', () => {
         const iter = [1, 2, 3]

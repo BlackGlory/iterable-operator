@@ -1,5 +1,5 @@
 import { testIterable, testAsyncIterable, testFunction, testAsyncFunction, testCall, testPipe, testBind } from '@test/test-fixtures'
-import { getCalledTimes, consumeAsync, isAsyncIterable, toArrayAsync } from '@test/utils'
+import { getCalledTimes, consumeAsync, isAsyncIterable, toArrayAsync, MarkIterable } from '@test/utils'
 import { getAsyncError } from '@test/return-style'
 import { uniqByAsync as call } from '@body/uniq-by-async'
 import { uniqByAsync as pipe } from '@style/pipeline/body/uniq-by-async'
@@ -63,6 +63,20 @@ describe('uniqByAsync', () => {
 
             expect(isIter).toBe(true)
             expect(arrResult).toEqual([1, 2])
+          })
+
+          it('lazy evaluation', async () => {
+            const mark = new MarkIterable()
+            const iter = getIter(mark)
+            const fn = getFn(jest.fn())
+
+            const result = uniqByAsync(iter, fn)
+            const isEval1 = mark.isEvaluated()
+            await toArrayAsync(result)
+            const isEval2 = mark.isEvaluated()
+
+            expect(isEval1).toBe(false)
+            expect(isEval2).toBe(true)
           })
         })
 

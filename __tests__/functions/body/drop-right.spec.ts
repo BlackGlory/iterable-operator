@@ -1,7 +1,7 @@
 import { getSyncError } from '@test/return-style'
 import { InvalidArgumentError } from '@src/error'
 import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { isIterable, toArray } from '@test/utils'
+import { isIterable, toArray, MarkIterable } from '@test/utils'
 import { dropRight as call } from '@body/drop-right'
 import { dropRight as pipe } from '@style/pipeline/body/drop-right'
 import { dropRight as bind} from '@style/binding/body/drop-right'
@@ -14,6 +14,19 @@ describe('dropRight', () => {
   , testBind('(this: Iterable<T>, count: number) -> Iterable<T>', bind)
   , testIterableChain('Operator<T>::(count: number) -> Operator<T>', IterableOperator.prototype.dropRight)
   ])('%s', (_, dropRight) => {
+    it('lazy evaluation', () => {
+      const iter = new MarkIterable()
+      const count = 5
+
+      const result = dropRight(iter, count)
+      const isEval1 = iter.isEvaluated()
+      toArray(result)
+      const isEval2 = iter.isEvaluated()
+
+      expect(isEval1).toBe(false)
+      expect(isEval2).toBe(true)
+    })
+
     describe('count > 0', () => {
       describe('count > size(iterable)', () => {
         it('return empty iterable', () => {

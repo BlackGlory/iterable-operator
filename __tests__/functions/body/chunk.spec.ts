@@ -1,7 +1,7 @@
 import { getSyncError } from '@test/return-style'
 import { InvalidArgumentError } from '@src/error'
 import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { isIterable, toArray } from '@test/utils'
+import { isIterable, toArray, MarkIterable } from '@test/utils'
 import { chunk as call } from '@body/chunk'
 import { chunk as pipe } from '@style/pipeline/body/chunk'
 import { chunk as bind } from '@style/binding/body/chunk'
@@ -14,6 +14,19 @@ describe('chunk', () => {
   , testBind('(this: Iterable<T>, size: number) -> Iterable<T[]>', bind)
   , testIterableChain('Operator<T>::(size: number) -> Operator<T[]>', IterableOperator.prototype.chunk)
   ])('%s', (_, chunk) => {
+    it('lazy evaluation', () => {
+      const iter = new MarkIterable()
+      const size = 2
+
+      const result = chunk(iter, size)
+      const isEval1 = iter.isEvaluated()
+      toArray(result)
+      const isEval2 = iter.isEvaluated()
+
+      expect(isEval1).toBe(false)
+      expect(isEval2).toBe(true)
+    })
+
     describe('size > 0', () => {
       it('return chunked iterable', () => {
         const iter = [1, 2, 3]

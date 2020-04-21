@@ -1,5 +1,5 @@
 import { testCall, testPipe, testBind, testIterable, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures'
-import { isAsyncIterable, toArrayAsync, getCalledTimes, consumeAsync } from '@test/utils'
+import { isAsyncIterable, toArrayAsync, getCalledTimes, consumeAsync, MarkIterable } from '@test/utils'
 import { dropUntilAsync as call } from '@body/drop-until-async'
 import { dropUntilAsync as pipe } from '@style/pipeline/body/drop-until-async'
 import { dropUntilAsync as bind } from '@style/binding/body/drop-until-async'
@@ -68,6 +68,20 @@ describe('dropUntilAsync', () => {
       , testAsyncFunction('fn return promise')
       ])('%s', (_, getFn) => {
         describe('call', () => {
+          it('lazy evaluation', async () => {
+            const mark = new MarkIterable()
+            const iter = getIter(mark)
+            const fn = getFn(jest.fn())
+
+            const result = dropUntilAsync(iter, fn)
+            const isEval1 = mark.isEvaluated()
+            await toArrayAsync(result)
+            const isEval2 = mark.isEvaluated()
+
+            expect(isEval1).toBe(false)
+            expect(isEval2).toBe(true)
+          })
+
           it('return itreable that drop elements until fn return true', async () => {
             const iter = getIter([1, 2, 3])
             const atTwo = getFn((x: number) => x === 2)

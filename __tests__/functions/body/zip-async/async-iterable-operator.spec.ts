@@ -1,6 +1,6 @@
 import { getSyncError } from '@test/return-style'
 import { InvalidArgumentsLengthError } from '@src/error'
-import { isAsyncIterable, toArrayAsync, toIterable, toAsyncIterable } from '@test/utils'
+import { isAsyncIterable, toArrayAsync, toIterable, toAsyncIterable, MarkIterable } from '@test/utils'
 import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
 import { asyncIterableChain } from '@test/style-helpers'
 
@@ -22,6 +22,20 @@ describe('IterableOperator::zipAsync', () => {
       })
 
       describe('size(iterables) >= 2', () => {
+        it('lazy evaluation', async () => {
+          const mark = new MarkIterable()
+          const iter1 = getIter(mark)
+          const iter2 = getIter([])
+
+          const result = zipAsync(iter1, iter2)
+          const isEval1 = mark.isEvaluated()
+          await toArrayAsync(result)
+          const isEval2 = mark.isEvaluated()
+
+          expect(isEval1).toBe(false)
+          expect(isEval2).toBe(true)
+        })
+
         describe('iterables have same size', () => {
           it('return zipped iterable', async () => {
             const iter1 = getIter([1, 2, 3])

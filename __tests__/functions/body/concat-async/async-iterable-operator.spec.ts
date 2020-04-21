@@ -1,5 +1,5 @@
 import { getSyncError } from '@test/return-style'
-import { isAsyncIterable, toArrayAsync, toIterable, toAsyncIterable } from '@test/utils'
+import { isAsyncIterable, toArrayAsync, toIterable, toAsyncIterable, MarkIterable } from '@test/utils'
 import { InvalidArgumentsLengthError } from '@src/error'
 import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
 import { asyncIterableChain } from '@test/style-helpers'
@@ -23,6 +23,20 @@ describe('AsyncIterableOperator::concatAsync', () => {
 
       describe('size(iterables) >= 2', () => {
         describe('call', () => {
+          it('lazy evaluation', async () => {
+            const mark = new MarkIterable()
+            const iter1 = getIter(mark)
+            const iter2 = getIter([])
+
+            const result = concatAsync(iter1, iter2)
+            const isEval1 = mark.isEvaluated()
+            await toArrayAsync(result)
+            const isEval2 = mark.isEvaluated()
+
+            expect(isEval1).toBe(false)
+            expect(isEval2).toBe(true)
+          })
+
           it('return concated iterable', async () => {
             const iter1 = getIter([1, 2, 3])
             const iter2 = toIterable(['a', 'b', 'c'])

@@ -1,4 +1,4 @@
-import { toAsyncIterable, isAsyncIterable, toArrayAsync } from '@test/utils'
+import { toAsyncIterable, isAsyncIterable, toArrayAsync, MarkAsyncIterable } from '@test/utils'
 import { testCall, testPipe, testBind, testAsyncIterableChain } from '@test/test-fixtures'
 import { splitAsync as call } from '@body/split-async'
 import { splitAsync as pipe } from '@style/pipeline/body/split-async'
@@ -23,6 +23,19 @@ describe('splitAsync', () => {
 
         expect(isIter).toBe(true)
         expect(arrResult).toEqual([[1, 2], [4, 5]])
+      })
+
+      it('lazy evaluation', async () => {
+        const iter = new MarkAsyncIterable()
+        const sep = 3
+
+        const result = splitAsync(iter, sep)
+        const isEval1 = iter.isEvaluated()
+        await toArrayAsync(result)
+        const isEval2 = iter.isEvaluated()
+
+        expect(isEval1).toBe(false)
+        expect(isEval2).toBe(true)
       })
     })
   })
