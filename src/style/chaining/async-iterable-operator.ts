@@ -25,7 +25,7 @@ import { UniqAsyncOperator } from './body/uniq-async'
 import { UniqByAsyncOperator } from './body/uniq-by-async'
 import { ZipAsyncOperator } from './body/zip-async'
 
-import { ConsumeAsyncOperator } from './tail/consume-async'
+import { ConsumeOperator } from './tail/consume'
 import { EachAsyncOperator } from './tail/each-async'
 import { EveryAsyncOperator } from './tail/every-async'
 import { FindAsyncOperator } from './tail/find-async'
@@ -71,7 +71,7 @@ export interface AsyncIterableOperator<T> extends
 , UniqByAsyncOperator<T, AsyncIterable<T>>
 , ZipAsyncOperator<T, AsyncIterable<T>>
 
-, ConsumeAsyncOperator<T>
+, ConsumeOperator<T, AsyncIterable<T>>
 , EachAsyncOperator<T, AsyncIterable<T>>
 , EveryAsyncOperator<T, AsyncIterable<T>>
 , FindAsyncOperator<T, AsyncIterable<T>>
@@ -110,7 +110,7 @@ mixinDecorators(AsyncIterableOperator, [
 , UniqByAsyncOperator
 , ZipAsyncOperator
 
-, ConsumeAsyncOperator
+, ConsumeOperator
 , EachAsyncOperator
 , EveryAsyncOperator
 , FindAsyncOperator

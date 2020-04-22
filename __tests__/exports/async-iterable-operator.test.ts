@@ -28,7 +28,7 @@ test('AsyncIterableOperator', () => {
   , 'uniqByAsync'
   , 'zipAsync'
 
-  , 'consumeAsync'
+  , 'consume'
   , 'eachAsync'
   , 'everyAsync'
   , 'findAsync'

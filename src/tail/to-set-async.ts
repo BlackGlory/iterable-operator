@@ -1,7 +1,7 @@
-import { consumeAsync } from './consume-async'
+import { consume } from './consume'
 
 export function toSetAsync<T>(iterable: AsyncIterable<T>): Promise<Set<T>> {
-  return consumeAsync(iterable, async iterable => {
+  return consume(iterable, async iterable => {
     const result = new Set<T>()
     for await (const element of iterable) {
       result.add(element)

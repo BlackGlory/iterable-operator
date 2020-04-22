@@ -1,4 +1,3 @@
-export * from './consume-async'
 export * from './consume'
 export * from './each-async'
 export * from './each'

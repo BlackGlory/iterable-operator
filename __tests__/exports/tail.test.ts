@@ -8,8 +8,7 @@ test.each([
 , ['@style/binding/tail', BindTail]
 ])('%s', (_, target) => {
   const expectedExports: string[] = [
-    'consumeAsync'
-  , 'consume'
+    'consume'
   , 'eachAsync'
   , 'each'
   , 'everyAsync'

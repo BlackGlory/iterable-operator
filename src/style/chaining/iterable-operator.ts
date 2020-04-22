@@ -105,7 +105,7 @@ export interface IterableOperator<T> extends
 , UniqByAsyncOperator<T, Iterable<T>>
 , ZipAsyncOperator<T, Iterable<T>>
 
-, ConsumeOperator<T>
+, ConsumeOperator<T, Iterable<T>>
 , EachOperator<T>
 , EveryOperator<T>
 , FindOperator<T>

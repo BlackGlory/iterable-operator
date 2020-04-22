@@ -7,9 +7,9 @@ import { getAsyncError } from '@test/return-style'
 
 describe('transformAsync', () => {
   describe.each([
-    testCall('((iterable: Iterable<T>, transformer: (iterable: Iterable<T>) -> AsyncIterable<U>) | ((iterable: AsyncIterable<T>, transform: (iterable: AsyncIterable<T>) -> AsyncIterable<U>)', call)
-  , testPipe('((transformer: (iterable: Iterable<T>) -> AsyncIterable<U>) -> (iterable: Iterable<T>) -> AsyncIterable<U>) | ((transformer: (iterable: AsyncIterable<T>) -> AsyncIterable<U>) -> (iterable: AsyncIterable<T>) -> AsyncIterable<U>)', pipe)
-  , testBind('((this: Iterable<T>, transformer: (iterable: Iterable<T>) -> AsyncIterable<U>) -> AsyncIterable<U>) | ((this: AsyncIterable<T>, transformer: (iterable: AsyncIterable<T>) -> AsyncIterable<U>) -> AsyncIterable<U>', bind)
+    testCall('(iterable: Iterable<T>, transformer: (iterable: Iterable<T> | AsyncIterable<T>) -> AsyncIterable<U>', call)
+  , testPipe('(transformer: (iterable: Iterable<T> | AsyncIterable<T>) -> AsyncIterable<U>) -> (iterable: Iterable<T> | AsyncIterable<T>) -> AsyncIterable<U>', pipe)
+  , testBind('(this: Iterable<T> | AsyncIterable<T>, transformer: (iterable: Iterable<T> | AsyncIterable<T>) -> AsyncIterable<U>) -> AsyncIterable<U>', bind)
   ])('%s', (_, transformAsync) => {
     describe.each([
       testIterable('(iterable: Iterable<T>, transformer: (iterable: Iterable<T>) -> AsyncIterable<U>) -> AsyncIterable<U>')
