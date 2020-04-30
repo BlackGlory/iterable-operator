@@ -25,7 +25,7 @@ describe.each([
 
     describe('size(iterables) >= 2', () => {
       describe('zipAsync<PromiseLike<T>>(...iterables: Array<Iterable<PromiseLike<T>>>): AsyncIterable<Array<PromiseLike<T>>>', () => {
-        it('return AsyncIterable', async () => {
+        it('return AsyncIterable<Array<PromiseLike<T>>>', async () => {
           const iter1 = [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)]
           const iter2 = [Promise.resolve('a'), Promise.resolve('b'), Promise.resolve('c')]
 

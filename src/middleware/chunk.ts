@@ -13,6 +13,6 @@ export function chunk<T>(iterable: Iterable<T>, size: number): Iterable<T[]> {
         buffer = []
       }
     }
-    yield buffer
+    if (buffer.length) yield buffer
   })()
 }

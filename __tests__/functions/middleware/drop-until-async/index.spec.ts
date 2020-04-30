@@ -10,7 +10,7 @@ describe.each([
 , testPipe('dropUntilAsync<T>(fn: (element: T, index: number) => boolean | PromiseLike<boolean>): (iterable: Iterable<T> | AsyncIterable<T>) => AsyncIterable<T>', pipe)
 , testBind('dropUntilAsync<T>(this: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => boolean | PromiseLike<boolean>): AsyncIterable<T>', bind)
 ])('%s', (_, dropUntilAsync) => {
-  describe('dropUntilAsync<PromiseLike<T>>(iterable: Iterable<PromiseLike<T>>, fn: (element: PromiseLike<T>, index: number) => boolean | PromiseLike<boolean>): AsyncIterable<PromiseLike<T>>', () => {
+  describe('dropUntilAsync<PromiseLike<T>>(iterable: Iterable<PromiseLike<T>>, fn: (element: PromiseLike<T>, index: number) => boolean | PromiseLike<boolean>): AsyncIterable<T>', () => {
     it('called with [element(promise),index]', async () => {
       const iter = [Promise.resolve(), Promise.resolve(), Promise.resolve()]
       const fn = jest.fn().mockReturnValue(false)

@@ -22,7 +22,7 @@ describe('IterableOperator<unknown>::zipAsync<T>(...iterables: Array<Iterable<un
 
     describe('size(iterables) >= 2', () => {
       describe('IterableOperator<PromiseLike<unknown>>::zipAsync<T>(...iterables: Array<Iterable<PromiseLike<unknown>>>): AsyncIterableOperator<Array<PromiseLike<T>>>', () => {
-        it('return AsyncIterable', async () => {
+        it('return AsyncIterable<Array<PromiseLike<T>>>', async () => {
           const iter1 = [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)]
           const iter2 = [Promise.resolve('a'), Promise.resolve('b'), Promise.resolve('c')]
 

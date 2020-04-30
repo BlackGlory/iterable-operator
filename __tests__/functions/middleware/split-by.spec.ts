@@ -30,31 +30,75 @@ describe.each([
     })
   })
 
-  describe('call', () => {
+  describe('fn return true', () => {
+    describe('separator is first', () => {
+      it('return splited iterable', () => {
+        const iter = [1, 2, 3, 4, 5]
+        const atThree = (x: number) => x === 1
+
+        const result = splitBy(iter, atThree)
+        const isIter = isIterable(result)
+        const arrResult = toArray(result)
+
+        expect(isIter).toBe(true)
+        expect(arrResult).toEqual([[], [2, 3, 4, 5]])
+      })
+    })
+
+    describe('separator is middle', () => {
+      it('return splited iterable', () => {
+        const iter = [1, 2, 3, 4, 5]
+        const atThree = (x: number) => x === 3
+
+        const result = splitBy(iter, atThree)
+        const isIter = isIterable(result)
+        const arrResult = toArray(result)
+
+        expect(isIter).toBe(true)
+        expect(arrResult).toEqual([[1, 2], [4, 5]])
+      })
+    })
+
+    describe('separator is last', () => {
+      it('return splited iterable', () => {
+        const iter = [1, 2, 3, 4, 5]
+        const atThree = (x: number) => x === 5
+
+        const result = splitBy(iter, atThree)
+        const isIter = isIterable(result)
+        const arrResult = toArray(result)
+
+        expect(isIter).toBe(true)
+        expect(arrResult).toEqual([[1, 2, 3, 4], []])
+      })
+    })
+  })
+
+  describe('fn always return false', () => {
     it('return splited iterable', () => {
       const iter = [1, 2, 3, 4, 5]
-      const atThree = (x: number) =>  x === 3
+      const alwaysFalse = () => false
 
-      const result = splitBy(iter, atThree)
+      const result = splitBy(iter, alwaysFalse)
       const isIter = isIterable(result)
       const arrResult = toArray(result)
 
       expect(isIter).toBe(true)
-      expect(arrResult).toEqual([[1, 2], [4, 5]])
+      expect(arrResult).toEqual([[1, 2, 3, 4, 5]])
     })
+  })
 
-    it('lazy evaluation', () => {
-      const iter = new MarkIterable()
-      const fn = jest.fn()
+  it('lazy evaluation', () => {
+    const iter = new MarkIterable()
+    const fn = jest.fn()
 
-      const result = splitBy(iter, fn)
-      const isEval1 = iter.isEvaluated()
-      toArray(result)
-      const isEval2 = iter.isEvaluated()
+    const result = splitBy(iter, fn)
+    const isEval1 = iter.isEvaluated()
+    toArray(result)
+    const isEval2 = iter.isEvaluated()
 
-      expect(isEval1).toBe(false)
-      expect(isEval2).toBe(true)
-    })
+    expect(isEval1).toBe(false)
+    expect(isEval2).toBe(true)
   })
 
   describe('fn throw error', () => {

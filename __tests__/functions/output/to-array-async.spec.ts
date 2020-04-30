@@ -9,7 +9,7 @@ describe.each([
   testCall('toArrayAsync<T>(iterable: AsyncIterable<T>): Promise<T[]>', call)
 , testPipe('toArrayAsync<T>() => (iterable: AsyncIterable<T>): Promise<T[]>', pipe)
 , testBind('toArrayAsync<T>(this: AsyncIterable<T>): Promise<T[]>', bind)
-, testAsyncMethod('AsyncIterableOperator::toArrayAsync(): Promise<T[]>', AsyncIterableOperator.prototype.toArrayAsync)
+, testAsyncMethod('AsyncIterableOperator<T>::toArrayAsync(): Promise<T[]>', AsyncIterableOperator.prototype.toArrayAsync)
 ])('%s', (_, toArrayAsync) => {
   describe('call', () => {
     it('return array from iterable', async () => {

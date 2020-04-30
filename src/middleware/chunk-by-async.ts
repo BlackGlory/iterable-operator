@@ -18,7 +18,7 @@ export function chunkByAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (e
       }
       index++
     }
-    yield buffer
+    if (buffer.length) yield buffer
   }
 
   async function* chunkByIterable(iterable: Iterable<T>) {
@@ -32,6 +32,6 @@ export function chunkByAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (e
       }
       index++
     }
-    yield buffer
+    if (buffer.length) yield buffer
   }
 }

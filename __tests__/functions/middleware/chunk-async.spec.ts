@@ -27,16 +27,46 @@ describe.each([
   })
 
   describe('size > 0', () => {
-    it('return chunked iterable', async () => {
-      const iter = toAsyncIterable([1, 2, 3])
-      const size = 2
+    describe('size = size(iterable)', () => {
+      it('return chunked iterable', async () => {
+        const iter = toAsyncIterable([1, 2, 3])
+        const size = 3
 
-      const result = chunkAsync(iter, size)
-      const isIter = isAsyncIterable(result)
-      const arrResult = await toArrayAsync(result)
+        const result = chunkAsync(iter, size)
+        const isIter = isAsyncIterable(result)
+        const arrResult = await toArrayAsync(result)
 
-      expect(isIter).toBe(true)
-      expect(arrResult).toEqual([[1, 2], [3]])
+        expect(isIter).toBe(true)
+        expect(arrResult).toEqual([[1, 2, 3]])
+      })
+    })
+
+    describe('size < size(iterable)', () => {
+      it('return chunked iterable', async () => {
+        const iter = toAsyncIterable([1, 2, 3])
+        const size = 2
+
+        const result = chunkAsync(iter, size)
+        const isIter = isAsyncIterable(result)
+        const arrResult = await toArrayAsync(result)
+
+        expect(isIter).toBe(true)
+        expect(arrResult).toEqual([[1, 2], [3]])
+      })
+    })
+
+    describe('size > size(iterable)', () => {
+      it('return chunked iterable', async () => {
+        const iter = toAsyncIterable([1, 2, 3])
+        const size = 5
+
+        const result = chunkAsync(iter, size)
+        const isIter = isAsyncIterable(result)
+        const arrResult = await toArrayAsync(result)
+
+        expect(isIter).toBe(true)
+        expect(arrResult).toEqual([[1, 2, 3]])
+      })
     })
   })
 

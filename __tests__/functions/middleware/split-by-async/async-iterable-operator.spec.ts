@@ -30,32 +30,76 @@ describe('AsyncIterableOperator<T>::splitByAsync(fn: (element: T, index: number)
       })
     })
 
-    describe('call', () => {
-      it('lazy evaluation', async () => {
-        const mark = new MarkIterable()
-        const iter = getIter(mark)
-        const fn = getFn(jest.fn())
+    describe('fn return true', () => {
+      describe('separator is first', () => {
+        it('return splited iterable', async () => {
+          const iter = getIter([1, 2, 3, 4, 5])
+          const atThree = getFn((x: number) => x === 1)
 
-        const result = splitByAsync(iter, fn)
-        const isEval1 = mark.isEvaluated()
-        await toArrayAsync(result)
-        const isEval2 = mark.isEvaluated()
+          const result = splitByAsync(iter, atThree)
+          const isIter = isAsyncIterable(result)
+          const arrResult = await toArrayAsync(result)
 
-        expect(isEval1).toBe(false)
-        expect(isEval2).toBe(true)
+          expect(isIter).toBe(true)
+          expect(arrResult).toEqual([[], [2, 3, 4, 5]])
+        })
       })
 
+      describe('separator is middle', () => {
+        it('return splited iterable', async () => {
+          const iter = getIter([1, 2, 3, 4, 5])
+          const atThree = getFn((x: number) => x === 3)
+
+          const result = splitByAsync(iter, atThree)
+          const isIter = isAsyncIterable(result)
+          const arrResult = await toArrayAsync(result)
+
+          expect(isIter).toBe(true)
+          expect(arrResult).toEqual([[1, 2], [4, 5]])
+        })
+      })
+
+      describe('separator is last', () => {
+        it('return splited iterable', async () => {
+          const iter = getIter([1, 2, 3, 4, 5])
+          const atThree = getFn((x: number) => x === 5)
+
+          const result = splitByAsync(iter, atThree)
+          const isIter = isAsyncIterable(result)
+          const arrResult = await toArrayAsync(result)
+
+          expect(isIter).toBe(true)
+          expect(arrResult).toEqual([[1, 2, 3, 4], []])
+        })
+      })
+    })
+
+    describe('fn always return false', () => {
       it('return splited iterable', async () => {
         const iter = getIter([1, 2, 3, 4, 5])
-        const atThree = getFn((x: number) =>  x === 3)
+        const alwaysFalse = getFn(() => false)
 
-        const result = splitByAsync(iter, atThree)
+        const result = splitByAsync(iter, alwaysFalse)
         const isIter = isAsyncIterable(result)
         const arrResult = await toArrayAsync(result)
 
         expect(isIter).toBe(true)
-        expect(arrResult).toEqual([[1, 2], [4, 5]])
+        expect(arrResult).toEqual([[1, 2, 3, 4, 5]])
       })
+    })
+
+    it('lazy evaluation', async () => {
+      const mark = new MarkIterable()
+      const iter = getIter(mark)
+      const fn = getFn(jest.fn())
+
+      const result = splitByAsync(iter, fn)
+      const isEval1 = mark.isEvaluated()
+      await toArrayAsync(result)
+      const isEval2 = mark.isEvaluated()
+
+      expect(isEval1).toBe(false)
+      expect(isEval2).toBe(true)
     })
 
     describe('fn throw error', () => {

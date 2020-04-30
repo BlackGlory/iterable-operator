@@ -13,6 +13,6 @@ export function chunkAsync<T>(iterable: AsyncIterable<T>, size: number): AsyncIt
         buffer = []
       }
     }
-    yield buffer
+    if (buffer.length) yield buffer
   })()
 }

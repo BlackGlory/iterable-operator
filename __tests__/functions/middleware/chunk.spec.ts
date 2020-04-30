@@ -27,16 +27,46 @@ describe.each([
   })
 
   describe('size > 0', () => {
-    it('return chunked iterable', () => {
-      const iter = [1, 2, 3]
-      const size = 2
+    describe('size = size(iterable)', () => {
+      it('return chunked iterable', () => {
+        const iter = [1, 2, 3]
+        const size = 3
 
-      const result = chunk(iter, size)
-      const isIter = isIterable(result)
-      const arrResult = toArray(result)
+        const result = chunk(iter, size)
+        const isIter = isIterable(result)
+        const arrResult = toArray(result)
 
-      expect(isIter).toBe(true)
-      expect(arrResult).toEqual([[1, 2], [3]])
+        expect(isIter).toBe(true)
+        expect(arrResult).toEqual([[1, 2, 3]])
+      })
+    })
+
+    describe('size < size(iterable)', () => {
+      it('return chunked iterable', () => {
+        const iter = [1, 2, 3]
+        const size = 2
+
+        const result = chunk(iter, size)
+        const isIter = isIterable(result)
+        const arrResult = toArray(result)
+
+        expect(isIter).toBe(true)
+        expect(arrResult).toEqual([[1, 2], [3]])
+      })
+    })
+
+    describe('size > size(iterable)', () => {
+      it('return chunked iterable', () => {
+        const iter = [1, 2, 3]
+        const size = 5
+
+        const result = chunk(iter, size)
+        const isIter = isIterable(result)
+        const arrResult = toArray(result)
+
+        expect(isIter).toBe(true)
+        expect(arrResult).toEqual([[1, 2, 3]])
+      })
     })
   })
 

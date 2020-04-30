@@ -115,6 +115,8 @@ function chunkAsync<T>(iterable: AsyncIterable<T>, size: number): AsyncIterable<
 
 ```js
 chunk([1, 2, 3], 2) // [[1, 2], [3]]
+chunk([1, 2, 3], 3) // [[1, 2, 3]]
+chunk([1, 2, 3], 5) // [[1, 2, 3]]
 chunk([1, 2, 3], 0) // throw InvalidArgumentError
 chunk([1, 2, 3], -1) // throw InvalidArgumentError
 ```
@@ -128,6 +130,8 @@ function chunkByAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element:
 
 ```js
 chunkBy([1, 2, 3], x => x === 2) // [[1, 2], [3]]
+chunkBy([1, 2, 3], x => x === 3) // [[1, 2, 3]]
+chunkBy([1, 2, 3], x => x === 5) // [[1, 2, 3]]
 ```
 
 #### concat, concatAsync
@@ -288,6 +292,9 @@ function splitAsync<T>(iterable: AsyncIterable<T>, separator: T): AsyncIterable<
 
 ```js
 split([1, 2, 3, 4, 5], 3) // [[1, 2], [4, 5]]
+split([1, 2, 3, 4, 5], 1) // [[], [2, 3, 4, 5]]
+split([1, 2, 3, 4, 5], 5) // [[1, 2, 3, 4], []]
+split([1, 2, 3, 4, 5], 0) // [[1, 2, 3, 4, 5]]
 ```
 
 #### splitBy, splitByAsync
@@ -299,6 +306,9 @@ function splitByAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element:
 
 ```js
 splitBy([1, 2, 3, 4, 5], x => x === 3) // [[1, 2], [4, 5]]
+splitBy([1, 2, 3, 4, 5], x => x === 1) // [[], [2, 3, 4, 5]]
+splitBy([1, 2, 3, 4, 5], x => x === 5) // [[1, 2, 3, 4], []]
+splitBy([1, 2, 3, 4, 5], x => x === 0) // [[1, 2, 3, 4, 5]]
 ```
 
 #### take, takeAsync

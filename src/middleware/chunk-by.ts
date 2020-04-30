@@ -9,5 +9,5 @@ export function* chunkBy<T>(iterable: Iterable<T>, fn: (element: T, index: numbe
     }
     index++
   }
-  yield buffer
+  if (buffer.length) yield buffer
 }

@@ -30,31 +30,61 @@ describe.each([
     })
   })
 
-  describe('call', () => {
+  describe('fn return true', () => {
+    describe('chunk at middle', () => {
+      it('return chunked iterable', () => {
+        const iter = [1, 2, 3]
+        const atTwo = (x: number) => x === 2
+
+        const result = chunkBy(iter, atTwo)
+        const isIter = isIterable(result)
+        const arrResult = toArray(result)
+
+        expect(isIter).toBe(true)
+        expect(arrResult).toEqual([[1, 2], [3]])
+      })
+    })
+
+    describe('chunk at last', () => {
+      it('return chunked iterable', () => {
+        const iter = [1, 2, 3]
+        const atThree = (x: number) => x === 3
+
+        const result = chunkBy(iter, atThree)
+        const isIter = isIterable(result)
+        const arrResult = toArray(result)
+
+        expect(isIter).toBe(true)
+        expect(arrResult).toEqual([[1, 2, 3]])
+      })
+    })
+  })
+
+  describe('fn always return false', () => {
     it('return chunked iterable', () => {
       const iter = [1, 2, 3]
-      const atTwo = (x: number) =>  x === 2
+      const alwaysFalse = () => false
 
-      const result = chunkBy(iter, atTwo)
+      const result = chunkBy(iter, alwaysFalse)
       const isIter = isIterable(result)
       const arrResult = toArray(result)
 
       expect(isIter).toBe(true)
-      expect(arrResult).toEqual([[1, 2], [3]])
+      expect(arrResult).toEqual([[1, 2, 3]])
     })
+  })
 
-    it('lazy evaluation', () => {
-      const iter = new MarkIterable()
-      const fn = jest.fn()
+  it('lazy evaluation', () => {
+    const iter = new MarkIterable()
+    const fn = jest.fn()
 
-      const result = chunkBy(iter, fn)
-      const isEval1 = iter.isEvaluated()
-      toArray(result)
-      const isEval2 = iter.isEvaluated()
+    const result = chunkBy(iter, fn)
+    const isEval1 = iter.isEvaluated()
+    toArray(result)
+    const isEval2 = iter.isEvaluated()
 
-      expect(isEval1).toBe(false)
-      expect(isEval2).toBe(true)
-    })
+    expect(isEval1).toBe(false)
+    expect(isEval2).toBe(true)
   })
 
   describe('fn throw error', () => {

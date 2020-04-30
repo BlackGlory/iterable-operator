@@ -23,6 +23,16 @@ describe.each([
       expect(fn).nthCalledWith(2, iter[1], 1)
       expect(fn).nthCalledWith(3, iter[2], 2)
     })
+
+    it('return AsyncIterable<Array<PromiseLike<T>>>', async () => {
+      const iter = [Promise.resolve(), Promise.resolve(), Promise.resolve()]
+      const fn = jest.fn().mockReturnValue(false)
+
+      const result = chunkByAsync(iter, fn)
+      const arrResult = await toArrayAsync(result)
+
+      expect(arrResult).toEqual([iter])
+    })
   })
 
   describe.each([
@@ -51,32 +61,62 @@ describe.each([
       testFunction('fn return non-promise')
     , testAsyncFunction('fn return promiselike')
     ])('%s', (_, getFn) => {
-      describe('call', () => {
-        it('lazy evaluation', async () => {
-          const mark = new MarkIterable()
-          const iter = getIter(mark)
-          const fn = getFn(jest.fn())
+      describe('fn return true', () => {
+        describe('chunk at middle', () => {
+          it('return chunked iterable', async () => {
+            const iter = getIter([1, 2, 3])
+            const atTwo = getFn((x: number) => x === 2)
 
-          const result = chunkByAsync(iter, fn)
-          const isEval1 = mark.isEvaluated()
-          await toArrayAsync(result)
-          const isEval2 = mark.isEvaluated()
+            const result = chunkByAsync(iter, atTwo)
+            const isIter = isAsyncIterable(result)
+            const arrResult = await toArrayAsync(result)
 
-          expect(isEval1).toBe(false)
-          expect(isEval2).toBe(true)
+            expect(isIter).toBe(true)
+            expect(arrResult).toEqual([[1, 2], [3]])
+          })
         })
 
+        describe('chunk at last', () => {
+          it('return chunked iterable', async () => {
+            const iter = getIter([1, 2, 3])
+            const atThree = getFn((x: number) => x === 3)
+
+            const result = chunkByAsync(iter, atThree)
+            const isIter = isAsyncIterable(result)
+            const arrResult = await toArrayAsync(result)
+
+            expect(isIter).toBe(true)
+            expect(arrResult).toEqual([[1, 2, 3]])
+          })
+        })
+      })
+
+      describe('fn always return false', () => {
         it('return chunked iterable', async () => {
           const iter = getIter([1, 2, 3])
-          const atTwo = getFn((x: number) =>  x === 2)
+          const alwaysFalse = getFn(() => false)
 
-          const result = chunkByAsync(iter, atTwo)
+          const result = chunkByAsync(iter, alwaysFalse)
           const isIter = isAsyncIterable(result)
           const arrResult = await toArrayAsync(result)
 
           expect(isIter).toBe(true)
-          expect(arrResult).toEqual([[1, 2], [3]])
+          expect(arrResult).toEqual([[1, 2, 3]])
         })
+      })
+
+      it('lazy evaluation', async () => {
+        const mark = new MarkIterable()
+        const iter = getIter(mark)
+        const fn = getFn(jest.fn())
+
+        const result = chunkByAsync(iter, fn)
+        const isEval1 = mark.isEvaluated()
+        await toArrayAsync(result)
+        const isEval2 = mark.isEvaluated()
+
+        expect(isEval1).toBe(false)
+        expect(isEval2).toBe(true)
       })
 
       describe('fn throw error', () => {
