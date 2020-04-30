@@ -4,36 +4,38 @@ function createOptions({ directory, target }) {
   return [
     {
       input: 'src/index.ts'
-    , output: createOutput(directory, 'index')
+    , output: createOutput('index')
     , plugins: createPlugins(target)
     }
   , {
       input: 'src/style/pipeline/index.ts'
-    , output: createOutput(directory, 'pipeline')
+    , output: createOutput('pipeline')
     , plugins: createPlugins(target)
     }
   , {
       input: 'src/style/binding/index.ts'
-    , output: createOutput(directory, 'binding')
+    , output: createOutput('binding')
     , plugins: createPlugins(target)
     }
   , {
       input: 'src/style/chaining/index.ts'
-    , output: createOutput(directory, 'chaining')
+    , output: createOutput('chaining')
     , plugins: createPlugins(target)
     }
   ]
 
-  function createOutput(directory, name) {
+  function createOutput(name) {
     return [
       {
         file: `dist/${directory}/${name}.mjs`
       , format: 'es'
+      , sourcemap: true
       }
     , {
         file: `dist/${directory}/${name}.umd.js`
       , format: 'umd'
       , name: 'IterableOperator'
+      , sourcemap: true
       }
     ]
   }
