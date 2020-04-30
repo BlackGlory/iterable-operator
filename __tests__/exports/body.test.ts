@@ -1,11 +1,11 @@
-import * as Body from '@body/index'
-import * as PipeBody from '@style/pipeline/body'
-import * as BindBody from '@style/binding/body'
+import * as Body from '@middleware/index'
+import * as PipeBody from '@style/pipeline/middleware'
+import * as BindBody from '@style/binding/middleware'
 
 test.each([
-  ['@body/index', Body]
-, ['@style/pipeline/body', PipeBody]
-, ['@style/binding/body', BindBody]
+  ['@middleware/index', Body]
+, ['@style/pipeline/middleware', PipeBody]
+, ['@style/binding/middleware', BindBody]
 ])('%s', (_, target) => {
   const expectedExports: string[] = [
     'chunkAsync'

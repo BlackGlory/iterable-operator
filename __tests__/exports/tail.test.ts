@@ -1,11 +1,11 @@
-import * as Tail from '@tail/index'
-import * as PipeTail from '@style/pipeline/tail'
-import * as BindTail from '@style/binding/tail'
+import * as Tail from '@output/index'
+import * as PipeTail from '@style/pipeline/output'
+import * as BindTail from '@style/binding/output'
 
 test.each([
-  ['@tail/index', Tail]
-, ['@style/pipeline/tail', PipeTail]
-, ['@style/binding/tail', BindTail]
+  ['@output/index', Tail]
+, ['@style/pipeline/output', PipeTail]
+, ['@style/binding/output', BindTail]
 ])('%s', (_, target) => {
   const expectedExports: string[] = [
     'consume'
