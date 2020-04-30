@@ -32,7 +32,7 @@ const result = new IterableOperator([1, 2, 3])
 
 ### Binding
 
-This is to prepare for [bind-operator](https://github.com/tc39/proposal-bind-operator).
+It is prepared for [bind-operator](https://github.com/tc39/proposal-bind-operator).
 
 ```js
 import { map, toArray } from 'iterable-operator/lib/es2018/style/binding'
@@ -44,9 +44,8 @@ const result = [1, 2, 3]
 
 ### Pipeline
 
-This is to prepare for [pipeline-operator](https://github.com/tc39/proposal-pipeline-operator).
+It is prepared for [pipeline-operator](https://github.com/tc39/proposal-pipeline-operator).
 
-Example:
 ```js
 import { map, toArray } from 'iterable-operator/lib/es2018/style/pipeline'
 
@@ -59,7 +58,7 @@ const result = [1, 2, 3]
 
 There are three types of operators:
 * Input: Lazy evaluation, the return value is Iterable
-* Middleware: Lazy evaluation, the first parameter is Iterable, return value is Iterable
+* Middleware: Lazy evaluation, the first parameter is Iterable, the return value is Iterable
 * Output: The first parameter is Iterable
 
 ### Input
@@ -124,7 +123,7 @@ chunk([1, 2, 3], -1) // throw InvalidArgumentError
 
 ```ts
 function chunkBy<T>(iterable: Iterable<T>, fn: (element: T, index: number) => boolean): Iterable<T[]>
-function chunkByAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => boolean | Promise<boolean>): AsyncIterable<T[]>
+function chunkByAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => boolean | PromiseLike<boolean>): AsyncIterable<T[]>
 ```
 
 ```js
@@ -179,7 +178,7 @@ dropRight([1, 2, 3], -1) // throw InvalidArgumentError
 
 ```ts
 function dropUntil<T>(iterable: Iterable<T>, fn: (element: T, index: number) => boolean): Iterable<T>
-function dropUntilAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => boolean | Promise<boolean>): AsyncIterable<T>
+function dropUntilAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => boolean | PromiseLike<boolean>): AsyncIterable<T>
 ```
 
 ```js
@@ -544,7 +543,7 @@ reduce([1, 2, 3], (acc, cur, index) => {
 
 ```ts
 function some<T>(iterable: Iterable<T>, fn: (element: T, index: number) => boolean): boolean
-function someAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => boolean | Promise<boolean>): Promise<boolean>
+function someAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => boolean | PromiseLike<boolean>): Promise<boolean>
 ```
 
 ```js

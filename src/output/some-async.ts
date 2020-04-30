@@ -1,6 +1,6 @@
 import { isAsyncIterable } from '../utils'
 
-export function someAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => boolean | Promise<boolean>): Promise<boolean> {
+export function someAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => boolean | PromiseLike<boolean>): Promise<boolean> {
   if (isAsyncIterable(iterable)) {
     return someAsyncIterable(iterable)
   } else {

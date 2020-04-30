@@ -1,6 +1,6 @@
 {
   "name": "iterable-operator",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "description": "Utility for JavaScript Iterable and AsyncIterable",
   "files": [
     "lib",

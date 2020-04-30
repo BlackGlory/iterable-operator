@@ -1,6 +1,6 @@
 import { isAsyncIterable } from '../utils'
 
-export function chunkByAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => boolean | Promise<boolean>): AsyncIterable<T[]> {
+export function chunkByAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => boolean | PromiseLike<boolean>): AsyncIterable<T[]> {
   if (isAsyncIterable(iterable)) {
     return chunkByAsyncIterable(iterable)
   } else {
