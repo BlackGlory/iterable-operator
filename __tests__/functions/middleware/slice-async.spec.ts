@@ -1,11 +1,12 @@
 import { getError } from 'return-style'
 import { InvalidArgumentError } from '@src/error'
-import { toAsyncIterable, isAsyncIterable, toArrayAsync, MarkAsyncIterable } from '@test/utils'
+import { toAsyncIterable, toArrayAsync, MarkAsyncIterable } from '@test/utils'
 import { testCall, testPipe, testBind, testAsyncIterableChain } from '@test/test-fixtures'
 import { sliceAsync as call } from '@middleware/slice-async'
 import { sliceAsync as pipe } from '@style/pipeline/middleware/slice-async'
 import { sliceAsync as bind } from '@style/binding/middleware/slice-async'
 import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
+import '@test/matchers'
 
 describe.each([
   testCall('sliceAsync<T>(iterable: AsyncIterable<T>, start: number, end: number): AsyncIterable<T>', call)
@@ -48,10 +49,9 @@ describe.each([
         const end = 5
 
         const result = sliceAsync(iter, start, end)
-        const isIter = isAsyncIterable(result)
         const arrResult = await toArrayAsync(result)
 
-        expect(isIter).toBe(true)
+        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([])
       })
     })
@@ -64,10 +64,9 @@ describe.each([
           const end = 2
 
           const result = sliceAsync(iter, start, end)
-          const isIter = isAsyncIterable(result)
           const arrResult = await toArrayAsync(result)
 
-          expect(isIter).toBe(true)
+          expect(result).toBeAsyncIterable()
           expect(arrResult).toEqual([2])
         })
       })
@@ -79,10 +78,9 @@ describe.each([
           const end = 1
 
           const result = sliceAsync(iter, start, end)
-          const isIter = isAsyncIterable(result)
           const arrResult = await toArrayAsync(result)
 
-          expect(isIter).toBe(true)
+          expect(result).toBeAsyncIterable()
           expect(arrResult).toEqual([])
         })
       })

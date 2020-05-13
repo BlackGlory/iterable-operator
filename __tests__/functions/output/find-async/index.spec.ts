@@ -4,6 +4,7 @@ import { testFunction, testAsyncFunction, testIterable, testAsyncIterable, testC
 import { findAsync as call } from '@output/find-async'
 import { findAsync as pipe } from '@style/pipeline/output/find-async'
 import { findAsync as bind } from '@style/binding/output/find-async'
+import '@test/matchers'
 
 describe.each([
   testCall('findAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => boolean | PromiseLike<boolean>): Promise<T>', call)
@@ -71,7 +72,7 @@ describe.each([
           const result = findAsync(iter, isTwo)
           const proResult = await result
 
-          expect(result).toBeInstanceOf(Promise)
+          expect(result).toBePromise()
           expect(proResult).toBe(2)
         })
       })

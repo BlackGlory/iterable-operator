@@ -1,8 +1,9 @@
-import { toIterable, getCalledTimes, consumeAsync, isAsyncIterable, toArrayAsync, MarkIterable } from '@test/utils'
+import { toIterable, getCalledTimes, consumeAsync, toArrayAsync, MarkIterable } from '@test/utils'
 import { testFunction, testAsyncFunction } from '@test/test-fixtures'
 import { getErrorAsync } from 'return-style'
 import { IterableOperator } from '@style/chaining/iterable-operator'
 import { iterableChainAsync } from '@test/style-helpers'
+import '@test/matchers'
 
 const flattenByAsync = iterableChainAsync(IterableOperator.prototype.flattenByAsync)
 const getIter = toIterable
@@ -51,10 +52,9 @@ describe('IterableOperator<unknown>::flattenByAsync<T>(fn: (element: unknown, le
         const exceptString = getFn((x: unknown) => !isString(x))
 
         const result = flattenByAsync(iter, exceptString)
-        const isIter = isAsyncIterable(result)
         const arrResult = await toArrayAsync(result)
 
-        expect(isIter).toBe(true)
+        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([
           'one', 'two'
         , 0, 1
@@ -68,10 +68,9 @@ describe('IterableOperator<unknown>::flattenByAsync<T>(fn: (element: unknown, le
         const alwaysFalse = getFn(() => false)
 
         const result = flattenByAsync(iter, alwaysFalse)
-        const isIter = isAsyncIterable(result)
         const arrResult = await toArrayAsync(result)
 
-        expect(isIter).toBe(true)
+        expect(result).toBeAsyncIterable()
         expect(result).not.toBe(iter)
         expect(arrResult).toEqual([0, [1]])
       })
@@ -83,10 +82,9 @@ describe('IterableOperator<unknown>::flattenByAsync<T>(fn: (element: unknown, le
         const fn = getFn(() => true)
 
         const result = flattenByAsync(iter, fn)
-        const isIter = isAsyncIterable(result)
         const arrResult = await toArrayAsync(result)
 
-        expect(isIter).toBe(true)
+        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([])
       })
     })
@@ -97,10 +95,9 @@ describe('IterableOperator<unknown>::flattenByAsync<T>(fn: (element: unknown, le
         const fn = getFn(() => true)
 
         const result = flattenByAsync(iter, fn)
-        const isIter = isAsyncIterable(result)
         const arrResult = await toArrayAsync(result)
 
-        expect(isIter).toBe(true)
+        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual(['1', '2', '3'])
       })
     })
@@ -112,10 +109,9 @@ describe('IterableOperator<unknown>::flattenByAsync<T>(fn: (element: unknown, le
         const fn = getFn(() => { throw customError })
 
         const result = flattenByAsync(iter, fn)
-        const isIter = isAsyncIterable(result)
         const err = await getErrorAsync(toArrayAsync(result))
 
-        expect(isIter).toBe(true)
+        expect(result).toBeAsyncIterable()
         expect(err).toBe(customError)
       })
     })

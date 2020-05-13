@@ -1,9 +1,10 @@
 import { testIterable, testAsyncIterable, testFunction, testAsyncFunction, testCall, testPipe, testBind } from '@test/test-fixtures'
-import { getCalledTimes, consumeAsync, isAsyncIterable, toArrayAsync, MarkIterable } from '@test/utils'
+import { getCalledTimes, consumeAsync, toArrayAsync, MarkIterable } from '@test/utils'
 import { getErrorAsync } from 'return-style'
 import { uniqByAsync as call } from '@middleware/uniq-by-async'
 import { uniqByAsync as pipe } from '@style/pipeline/middleware/uniq-by-async'
 import { uniqByAsync as bind } from '@style/binding/middleware/uniq-by-async'
+import '@test/matchers'
 
 describe.each([
   testCall('uniqByAsync<T, U>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => U | PromiseLike<U>): AsyncIterable<T>', call)
@@ -57,10 +58,9 @@ describe.each([
           const modTwo = getFn((x: number) => x % 2)
 
           const result = uniqByAsync(iter, modTwo)
-          const isIter = isAsyncIterable(result)
           const arrResult = await toArrayAsync(result)
 
-          expect(isIter).toBe(true)
+          expect(result).toBeAsyncIterable()
           expect(arrResult).toEqual([1, 2])
         })
 
@@ -86,10 +86,9 @@ describe.each([
           const fn = getFn(() => { throw customError })
 
           const result = uniqByAsync(iter, fn)
-          const isIter = isAsyncIterable(result)
           const err = await getErrorAsync(toArrayAsync(result))
 
-          expect(isIter).toBe(true)
+          expect(result).toBeAsyncIterable()
           expect(err).toBe(customError)
         })
       })

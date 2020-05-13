@@ -1,8 +1,9 @@
 import { getError } from 'return-style'
-import { isAsyncIterable, toArrayAsync, toIterable, toAsyncIterable, MarkIterable } from '@test/utils'
+import { toArrayAsync, toIterable, toAsyncIterable, MarkIterable } from '@test/utils'
 import { InvalidArgumentsLengthError } from '@src/error'
 import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
 import { asyncIterableChain } from '@test/style-helpers'
+import '@test/matchers'
 
 const concatAsync = asyncIterableChain(AsyncIterableOperator.prototype.concatAsync)
 const getIter = toAsyncIterable
@@ -41,10 +42,9 @@ describe('AsyncIterableOperator<unknown>::concatAsync<T>(...iterables: Array<Ite
         const iter3 = toAsyncIterable(['d', 'e', 'f'])
 
         const result = concatAsync(iter1, iter2, iter3)
-        const isIter = isAsyncIterable(result)
         const arrResult = await toArrayAsync(result)
 
-        expect(isIter).toBe(true)
+        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([1, 2, 3, 'a', 'b', 'c', 'd', 'e', 'f'])
       })
     })

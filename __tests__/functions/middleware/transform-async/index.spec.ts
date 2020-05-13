@@ -1,9 +1,10 @@
-import { isAsyncIterable, toArrayAsync, MarkIterable } from '@test/utils'
+import { toArrayAsync, MarkIterable } from '@test/utils'
 import { testIterable, testAsyncIterable, testCall, testPipe, testBind } from '@test/test-fixtures'
 import { transformAsync as call } from '@middleware/transform-async'
 import { transformAsync as pipe } from '@style/pipeline/middleware/transform-async'
 import { transformAsync as bind } from '@style/binding/middleware/transform-async'
 import { getErrorAsync } from 'return-style'
+import '@test/matchers'
 
 describe.each([
   testCall('transformAsync<T, U>(iterable: Iterable<T>, transformer: (iterable: Iterable<T> | AsyncIterable<T>): AsyncIterable<U>', call)
@@ -24,10 +25,9 @@ describe.each([
         }
 
         const result = transformAsync(iter, double)
-        const isIter = isAsyncIterable(result)
         const arrResult = await toArrayAsync(result)
 
-        expect(isIter).toBe(true)
+        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([2, 4, 6])
       })
 
@@ -55,10 +55,9 @@ describe.each([
         const fn = async function* () { throw customError }
 
         const result = transformAsync(iter, fn)
-        const isIter = isAsyncIterable(result)
         const err = await getErrorAsync(toArrayAsync(result))
 
-        expect(isIter).toBe(true)
+        expect(result).toBeAsyncIterable()
         expect(err).toBe(customError)
       })
     })

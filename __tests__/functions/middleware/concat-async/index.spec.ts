@@ -1,10 +1,11 @@
 import { getError } from 'return-style'
-import { isAsyncIterable, toArrayAsync, toIterable, toAsyncIterable, MarkIterable } from '@test/utils'
+import { toArrayAsync, toIterable, toAsyncIterable, MarkIterable } from '@test/utils'
 import { testCall, testPipe, testBind, testIterable, testAsyncIterable } from '@test/test-fixtures'
 import { InvalidArgumentsLengthError } from '@src/error'
 import { concatAsync as call } from '@middleware/concat-async'
 import { concatAsync as pipe } from '@style/pipeline/middleware/concat-async'
 import { concatAsync as bind } from '@style/binding/middleware/concat-async'
+import '@test/matchers'
 
 describe.each([
   testCall('concatAsync<T>(...iterables: Array<Iterable<unknown> | AsyncIterable<unknown>>): AsyncIterable<T>', call)
@@ -30,10 +31,9 @@ describe.each([
           const iter2 = [Promise.resolve('a'), Promise.resolve('b'), Promise.resolve('c')]
 
           const result = concatAsync(iter1, iter2)
-          const isIter = isAsyncIterable(result)
           const arrResult = await toArrayAsync(result)
 
-          expect(isIter).toBe(true)
+          expect(result).toBeAsyncIterable()
           expect(arrResult).toEqual([1, 2, 3, 'a', 'b', 'c'])
         })
       })
@@ -64,10 +64,9 @@ describe.each([
           const iter3 = toAsyncIterable(['d', 'e', 'f'])
 
           const result = concatAsync(iter1, iter2, iter3)
-          const isIter = isAsyncIterable(result)
           const arrResult = await toArrayAsync(result)
 
-          expect(isIter).toBe(true)
+          expect(result).toBeAsyncIterable()
           expect(arrResult).toEqual([1, 2, 3, 'a', 'b', 'c', 'd', 'e', 'f'])
         })
       })

@@ -1,8 +1,9 @@
-import { toAsyncIterable, getCalledTimes, consumeAsync, isAsyncIterable, toArrayAsync, MarkIterable } from '@test/utils'
+import { toAsyncIterable, getCalledTimes, consumeAsync, toArrayAsync, MarkIterable } from '@test/utils'
 import { testAsyncFunction, testFunction } from '@test/test-fixtures'
 import { getErrorAsync } from 'return-style'
 import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
 import { asyncIterableChain } from '@test/style-helpers'
+import '@test/matchers'
 
 const splitByAsync = asyncIterableChain(AsyncIterableOperator.prototype.splitByAsync)
 const getIter = toAsyncIterable
@@ -37,10 +38,9 @@ describe('AsyncIterableOperator<T>::splitByAsync(fn: (element: T, index: number)
           const atThree = getFn((x: number) => x === 1)
 
           const result = splitByAsync(iter, atThree)
-          const isIter = isAsyncIterable(result)
           const arrResult = await toArrayAsync(result)
 
-          expect(isIter).toBe(true)
+          expect(result).toBeAsyncIterable()
           expect(arrResult).toEqual([[], [2, 3, 4, 5]])
         })
       })
@@ -51,10 +51,9 @@ describe('AsyncIterableOperator<T>::splitByAsync(fn: (element: T, index: number)
           const atThree = getFn((x: number) => x === 3)
 
           const result = splitByAsync(iter, atThree)
-          const isIter = isAsyncIterable(result)
           const arrResult = await toArrayAsync(result)
 
-          expect(isIter).toBe(true)
+          expect(result).toBeAsyncIterable()
           expect(arrResult).toEqual([[1, 2], [4, 5]])
         })
       })
@@ -65,10 +64,9 @@ describe('AsyncIterableOperator<T>::splitByAsync(fn: (element: T, index: number)
           const atThree = getFn((x: number) => x === 5)
 
           const result = splitByAsync(iter, atThree)
-          const isIter = isAsyncIterable(result)
           const arrResult = await toArrayAsync(result)
 
-          expect(isIter).toBe(true)
+          expect(result).toBeAsyncIterable()
           expect(arrResult).toEqual([[1, 2, 3, 4], []])
         })
       })
@@ -80,10 +78,9 @@ describe('AsyncIterableOperator<T>::splitByAsync(fn: (element: T, index: number)
         const alwaysFalse = getFn(() => false)
 
         const result = splitByAsync(iter, alwaysFalse)
-        const isIter = isAsyncIterable(result)
         const arrResult = await toArrayAsync(result)
 
-        expect(isIter).toBe(true)
+        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([[1, 2, 3, 4, 5]])
       })
     })
@@ -109,10 +106,9 @@ describe('AsyncIterableOperator<T>::splitByAsync(fn: (element: T, index: number)
         const fn = () => { throw customError }
 
         const result = splitByAsync(iter, fn)
-        const isIter = isAsyncIterable(result)
         const err = await getErrorAsync(toArrayAsync(result))
 
-        expect(isIter).toBe(true)
+        expect(result).toBeAsyncIterable()
         expect(err).toBe(customError)
       })
     })

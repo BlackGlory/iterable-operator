@@ -1,10 +1,11 @@
 import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { isIterable, toArray, getCalledTimes, consume, MarkIterable } from '@test/utils'
+import { toArray, getCalledTimes, consume, MarkIterable } from '@test/utils'
 import { flattenBy as call } from '@middleware/flatten-by'
 import { flattenBy as pipe } from '@style/pipeline/middleware/flatten-by'
 import { flattenBy as bind } from '@style/binding/middleware/flatten-by'
 import { IterableOperator } from '@style/chaining/iterable-operator'
 import { getError } from 'return-style'
+import '@test/matchers'
 
 describe.each([
   testCall('flattenBy<T>(iterable: Iterable<unknown>, fn: (element: unknown, level: number) => boolean): Iterable<T>', call)
@@ -37,10 +38,9 @@ describe.each([
       const exceptString = (x: unknown) => !isString(x)
 
       const result = flattenBy(iter, exceptString)
-      const isIter = isIterable(result)
       const arrResult = toArray(result)
 
-      expect(isIter).toBe(true)
+      expect(result).toBeIterable()
       expect(arrResult).toEqual([
         'one', 'two'
       , 0, 1
@@ -67,10 +67,9 @@ describe.each([
       const fn = () => true
 
       const result = flattenBy(iter, fn)
-      const isIter = isIterable(result)
       const arrResult = toArray(result)
 
-      expect(isIter).toBe(true)
+      expect(result).toBeIterable()
       expect(arrResult).toEqual([])
     })
   })
@@ -81,10 +80,9 @@ describe.each([
       const fn = () => true
 
       const result = flattenBy(iter, fn)
-      const isIter = isIterable(result)
       const arrResult = toArray(result)
 
-      expect(isIter).toBe(true)
+      expect(result).toBeIterable()
       expect(arrResult).toEqual(['1', '2', '3'])
     })
   })
@@ -96,10 +94,9 @@ describe.each([
       const fn = () => { throw customError }
 
       const result = flattenBy(iter, fn)
-      const isIter = isIterable(result)
       const err = getError(() => toArray(result))
 
-      expect(isIter).toBe(true)
+      expect(result).toBeIterable()
       expect(err).toBe(customError)
     })
   })

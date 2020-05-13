@@ -1,11 +1,12 @@
 import { getError } from 'return-style'
-import { toAsyncIterable, isAsyncIterable, toArrayAsync, MarkAsyncIterable } from '@test/utils'
+import { toAsyncIterable, toArrayAsync, MarkAsyncIterable } from '@test/utils'
 import { testCall, testPipe, testBind, testAsyncIterableChain } from '@test/test-fixtures'
 import { dropRightAsync as call } from '@middleware/drop-right-async'
 import { dropRightAsync as pipe } from '@style/pipeline/middleware/drop-right-async'
 import { dropRightAsync as bind } from '@style/binding/middleware/drop-right-async'
 import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
 import { InvalidArgumentError } from '@src/error'
+import '@test/matchers'
 
 describe.each([
   testCall('dropRightAsync<T>(iterable: AsyncIterable<T>, count: number): AsyncIterable<T>', call)
@@ -33,10 +34,9 @@ describe.each([
         const count = 5
 
         const result = dropRightAsync(iter, count)
-        const isIter = isAsyncIterable(result)
         const arrResult = await toArrayAsync(result)
 
-        expect(isIter).toBe(true)
+        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([])
       })
     })
@@ -47,10 +47,9 @@ describe.each([
         const count = 3
 
         const result = dropRightAsync(iter, count)
-        const isIter = isAsyncIterable(result)
         const arrResult = await toArrayAsync(result)
 
-        expect(isIter).toBe(true)
+        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([])
       })
     })
@@ -61,10 +60,9 @@ describe.each([
         const count = 2
 
         const result = dropRightAsync(iter, count)
-        const isIter = isAsyncIterable(result)
         const arrResult = await toArrayAsync(result)
 
-        expect(isIter).toBe(true)
+        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([1])
       })
     })
@@ -76,10 +74,9 @@ describe.each([
       const count = 0
 
       const result = dropRightAsync(iter, count)
-      const isIter = isAsyncIterable(result)
       const arrResult = await toArrayAsync(result)
 
-      expect(isIter).toBe(true)
+      expect(result).toBeAsyncIterable()
       expect(result).not.toBe(iter)
       expect(arrResult).toEqual([1, 2, 3])
     })

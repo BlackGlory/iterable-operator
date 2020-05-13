@@ -1,9 +1,10 @@
-import { toAsyncIterable, isAsyncIterable, toArrayAsync, MarkAsyncIterable } from '@test/utils'
+import { toAsyncIterable, toArrayAsync, MarkAsyncIterable } from '@test/utils'
 import { testCall, testPipe, testBind, testAsyncIterableChain } from '@test/test-fixtures'
 import { uniqAsync as call } from '@middleware/uniq-async'
 import { uniqAsync as pipe } from '@style/pipeline/middleware/uniq-async'
 import { uniqAsync as bind } from '@style/binding/middleware/uniq-async'
 import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
+import '@test/matchers'
 
 describe.each([
   testCall('uniqAsync<T>(iterable: AsyncIterable<T>): AsyncIterable<T>', call)
@@ -16,10 +17,9 @@ describe.each([
       const iter = toAsyncIterable([1, 1, 2, 2, 3, 3])
 
       const result = uniqAsync(iter)
-      const isIter = isAsyncIterable(result)
       const arrResult = await toArrayAsync(result)
 
-      expect(isIter).toBe(true)
+        expect(result).toBeAsyncIterable()
       expect(arrResult).toEqual([1, 2, 3])
     })
 

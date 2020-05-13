@@ -1,11 +1,12 @@
 import { getError } from 'return-style'
-import { toAsyncIterable, isAsyncIterable, toArrayAsync, MarkAsyncIterable } from '@test/utils'
+import { toAsyncIterable, toArrayAsync, MarkAsyncIterable } from '@test/utils'
 import { chunkAsync as call } from '@middleware/chunk-async'
 import { chunkAsync as pipe } from '@style/pipeline/middleware/chunk-async'
 import { chunkAsync as bind } from '@style/binding/middleware/chunk-async'
 import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
 import { InvalidArgumentError } from '@src/error'
 import { testCall, testPipe, testBind, testAsyncIterableChain } from '@test/test-fixtures'
+import '@test/matchers'
 
 describe.each([
   testCall('chunkAsync<T>(iterable: AsyncIterable<T>, size: number): AsyncIterable<T[]>', call)
@@ -33,10 +34,9 @@ describe.each([
         const size = 3
 
         const result = chunkAsync(iter, size)
-        const isIter = isAsyncIterable(result)
         const arrResult = await toArrayAsync(result)
 
-        expect(isIter).toBe(true)
+        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([[1, 2, 3]])
       })
     })
@@ -47,10 +47,9 @@ describe.each([
         const size = 2
 
         const result = chunkAsync(iter, size)
-        const isIter = isAsyncIterable(result)
         const arrResult = await toArrayAsync(result)
 
-        expect(isIter).toBe(true)
+        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([[1, 2], [3]])
       })
     })
@@ -61,10 +60,9 @@ describe.each([
         const size = 5
 
         const result = chunkAsync(iter, size)
-        const isIter = isAsyncIterable(result)
         const arrResult = await toArrayAsync(result)
 
-        expect(isIter).toBe(true)
+        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([[1, 2, 3]])
       })
     })

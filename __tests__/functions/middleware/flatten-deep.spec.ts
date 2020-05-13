@@ -1,11 +1,12 @@
 import { getError } from 'return-style'
 import { InvalidArgumentError } from '@src/error'
 import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { isIterable, toArray, MarkIterable } from '@test/utils'
+import { toArray, MarkIterable } from '@test/utils'
 import { flattenDeep as call } from '@middleware/flatten-deep'
 import { flattenDeep as pipe } from '@style/pipeline/middleware/flatten-deep'
 import { flattenDeep as bind } from '@style/binding/middleware/flatten-deep'
 import { IterableOperator } from '@style/chaining/iterable-operator'
+import '@test/matchers'
 
 describe.each([
   testCall('flattenDeep<T>(iterable: Iterable<unknown>, depth: number): Iterable<T>', call)
@@ -32,10 +33,9 @@ describe.each([
       const depth = Infinity
 
       const result = flattenDeep(iter, depth)
-      const isIter = isIterable(result)
       const arrResult = toArray(result)
 
-      expect(isIter).toBe(true)
+      expect(result).toBeIterable()
       expect(arrResult).toEqual([])
     })
   })
@@ -47,10 +47,9 @@ describe.each([
         const depth = Infinity
 
         const result = flattenDeep(iter, depth)
-        const isIter = isIterable(result)
         const arrResult = toArray(result)
 
-        expect(isIter).toBe(true)
+        expect(result).toBeIterable()
         expect(arrResult).toEqual(['1', '2', '3'])
       })
     })
@@ -74,10 +73,9 @@ describe.each([
           const depth = 0
 
           const result = flattenDeep(iter, depth)
-          const isIter = isIterable(result)
           const arrResult = toArray(result)
 
-          expect(isIter).toBe(true)
+          expect(result).toBeIterable()
           expect(result).not.toBe(iter)
           expect(arrResult).toEqual([0, [1]])
         })
@@ -92,10 +90,9 @@ describe.each([
           const depth = 2
 
           const result = flattenDeep(iter, depth)
-          const isIter = isIterable(result)
           const arrResult = toArray(result)
 
-          expect(isIter).toBe(true)
+          expect(result).toBeIterable()
           expect(arrResult).toEqual([
             'o','n','e', 't','w','o', 'three'
           , 0, 1, 2, [3]

@@ -3,6 +3,7 @@ import { testFunction, testAsyncFunction, testIterable, testAsyncIterable, testC
 import { everyAsync as call } from '@output/every-async'
 import { everyAsync as pipe } from '@style/pipeline/output/every-async'
 import { everyAsync as bind } from '@style/binding/output/every-async'
+import '@test/matchers'
 
 describe.each([
   testCall('everyAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => boolean | PromiseLike<boolean>): Promise<boolean>', call)
@@ -66,7 +67,7 @@ describe.each([
           const result = everyAsync(iter, isNumber)
           const proResult = await result
 
-          expect(result).toBeInstanceOf(Promise)
+          expect(result).toBePromise()
           expect(proResult).toBe(true)
         })
       })
@@ -79,7 +80,7 @@ describe.each([
           const result = everyAsync(iter, fn)
           const proResult = await result
 
-          expect(result).toBeInstanceOf(Promise)
+          expect(result).toBePromise()
           expect(proResult).toBe(false)
         })
       })

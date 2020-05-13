@@ -1,9 +1,10 @@
 import { getErrorAsync } from 'return-style'
 import { testCall, testPipe, testBind, testIterable, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures'
-import { toArrayAsync, isAsyncIterable, consumeAsync, getCalledTimes, MarkIterable } from '@test/utils'
+import { toArrayAsync, consumeAsync, getCalledTimes, MarkIterable } from '@test/utils'
 import { filterAsync as call } from '@middleware/filter-async'
 import { filterAsync as pipe } from '@style/pipeline/middleware/filter-async'
 import { filterAsync as bind } from '@style/binding/middleware/filter-async'
+import '@test/matchers'
 
 describe.each([
   testCall('filterAsync<T, U extends T = T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => boolean | PromiseLike<boolean>): AsyncIterable<U>', call)
@@ -71,10 +72,9 @@ describe.each([
           const odd = getFn((x: number) => x % 2 === 1)
 
           const result = filterAsync(iter, odd)
-          const isIter = isAsyncIterable(result)
           const arrResult = await toArrayAsync(result)
 
-          expect(isIter).toBe(true)
+          expect(result).toBeAsyncIterable()
           expect(arrResult).toEqual([1, 3])
         })
       })
@@ -86,10 +86,9 @@ describe.each([
           const fn = getFn(() => { throw customError })
 
           const result = filterAsync(iter, fn)
-          const isIter = isAsyncIterable(result)
           const err = await getErrorAsync(toArrayAsync(result))
 
-          expect(isIter).toBe(true)
+          expect(result).toBeAsyncIterable()
           expect(err).toBe(customError)
         })
       })

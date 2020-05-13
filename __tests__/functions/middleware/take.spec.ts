@@ -1,11 +1,12 @@
 import { InvalidArgumentError } from '@src/error'
 import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { isIterable, toArray, MarkIterable } from '@test/utils'
+import { toArray, MarkIterable } from '@test/utils'
 import { getError } from 'return-style'
 import { take as call } from '@middleware/take'
 import { take as pipe } from '@style/pipeline/middleware/take'
 import { take as bind } from '@style/binding/middleware/take'
 import { IterableOperator } from '@style/chaining/iterable-operator'
+import '@test/matchers'
 
 describe.each([
   testCall('take<T>(iterable: Iterable<T>, count: number): Iterable<T>', call)
@@ -32,10 +33,9 @@ describe.each([
       const count = 5
 
       const result = take(iter, count)
-      const isIter = isIterable(result)
       const arrResult = toArray(result)
 
-      expect(isIter).toBe(true)
+      expect(result).toBeIterable()
       expect(arrResult).toEqual([1, 2, 3])
     })
   })
@@ -46,10 +46,9 @@ describe.each([
       const count = 2
 
       const result = take(iter, count)
-      const isIter = isIterable(result)
       const arrResult = toArray(result)
 
-      expect(isIter).toBe(true)
+      expect(result).toBeIterable()
       expect(arrResult).toEqual([1, 2])
     })
   })
@@ -60,10 +59,9 @@ describe.each([
       const count = 0
 
       const result = take(iter, count)
-      const isIter = isIterable(result)
       const arrResult = toArray(result)
 
-      expect(isIter).toBe(true)
+      expect(result).toBeIterable()
       expect(arrResult).toEqual([])
     })
   })

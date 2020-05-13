@@ -1,7 +1,8 @@
-import { toIterable, isAsyncIterable, toArrayAsync, MarkIterable } from '@test/utils'
+import { toIterable, toArrayAsync, MarkIterable } from '@test/utils'
 import { IterableOperator } from '@style/chaining/iterable-operator'
 import { iterableChainAsync } from '@test/style-helpers'
 import { getErrorAsync } from 'return-style'
+import '@test/matchers'
 
 const transformAsync = iterableChainAsync(IterableOperator.prototype.transformAsync)
 const getIter = toIterable
@@ -17,10 +18,9 @@ describe('AsyncIterableOperator<T>::transform<U>(transformer: (iterable: AsyncIt
       }
 
       const result = transformAsync(iter, double)
-      const isIter = isAsyncIterable(result)
       const arrResult = await toArrayAsync(result)
 
-      expect(isIter).toBe(true)
+      expect(result).toBeAsyncIterable()
       expect(arrResult).toEqual([2, 4, 6])
     })
 
@@ -48,10 +48,9 @@ describe('AsyncIterableOperator<T>::transform<U>(transformer: (iterable: AsyncIt
       const fn = async function* () { throw customError }
 
       const result = transformAsync(iter, fn)
-      const isIter = isAsyncIterable(result)
       const err = await getErrorAsync(toArrayAsync(result))
 
-      expect(isIter).toBe(true)
+      expect(result).toBeAsyncIterable()
       expect(err).toBe(customError)
     })
   })

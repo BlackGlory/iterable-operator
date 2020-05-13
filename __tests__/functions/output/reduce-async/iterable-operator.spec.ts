@@ -4,6 +4,7 @@ import { testFunction, testAsyncFunction } from '@test/test-fixtures'
 import { toIterable, getCalledTimes } from '@test/utils'
 import { method } from '@test/style-helpers'
 import { IterableOperator } from '@style/chaining/iterable-operator'
+import '@test/matchers'
 
 const reduceAsync = method(IterableOperator.prototype.reduceAsync)
 const getIter = toIterable
@@ -50,7 +51,7 @@ describe('IterableOperator<T>::reduceAsync(fn: (accumulator: T, currentValue: T,
           const result = reduceAsync(iter, fn)
           const proResult = await result
 
-          expect(result).toBeInstanceOf(Promise)
+          expect(result).toBePromise()
           expect(getCalledTimes(fn)).toBe(0) // skip
           expect(proResult).toBe(1)
         })
@@ -66,7 +67,7 @@ describe('IterableOperator<T>::reduceAsync(fn: (accumulator: T, currentValue: T,
           const result = reduceAsync(iter, fn)
           const proResult = await result
 
-          expect(result).toBeInstanceOf(Promise)
+          expect(result).toBePromise()
           expect(proResult).toBe(6)
         })
       })
@@ -137,7 +138,7 @@ describe('reduceAsync<T, U>(fn: (accumulator: U, currentValue: T, index: number)
         const result = reduceAsync(iter, pushToAcc, initalValue)
         const proResult = await result
 
-        expect(result).toBeInstanceOf(Promise)
+        expect(result).toBePromise()
         expect(proResult).toEqual([[1, 0], [2, 1], [3, 2]])
       })
     })

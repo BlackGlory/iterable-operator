@@ -5,6 +5,7 @@ import { reduceAsync as call } from '@output/reduce-async'
 import { reduceAsync as pipe } from '@style/pipeline/output/reduce-async'
 import { reduceAsync as bind } from '@style/binding/output/reduce-async'
 import { getCalledTimes } from '@test/utils'
+import '@test/matchers'
 
 describe.each([
   testCall('reduceAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (accumulator: T, currentValue: T, index: number) => T | PromiseLike<T>): Promise<T>', call)
@@ -56,7 +57,7 @@ describe.each([
             const result = reduceAsync(iter, fn)
             const proResult = await result
 
-            expect(result).toBeInstanceOf(Promise)
+            expect(result).toBePromise()
             expect(getCalledTimes(fn)).toBe(0) // skip
             expect(proResult).toBe(1)
           })
@@ -72,7 +73,7 @@ describe.each([
             const result = reduceAsync(iter, fn)
             const proResult = await result
 
-            expect(result).toBeInstanceOf(Promise)
+            expect(result).toBePromise()
             expect(proResult).toBe(6)
           })
         })
@@ -152,7 +153,7 @@ describe.each([
           const result = reduceAsync(iter, pushToAcc, initalValue)
           const proResult = await result
 
-          expect(result).toBeInstanceOf(Promise)
+          expect(result).toBePromise()
           expect(proResult).toEqual([[1, 0], [2, 1], [3, 2]])
         })
       })

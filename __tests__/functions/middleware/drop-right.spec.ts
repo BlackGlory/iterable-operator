@@ -1,11 +1,12 @@
 import { getError } from 'return-style'
 import { InvalidArgumentError } from '@src/error'
 import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { isIterable, toArray, MarkIterable } from '@test/utils'
+import { toArray, MarkIterable } from '@test/utils'
 import { dropRight as call } from '@middleware/drop-right'
 import { dropRight as pipe } from '@style/pipeline/middleware/drop-right'
 import { dropRight as bind} from '@style/binding/middleware/drop-right'
 import { IterableOperator } from '@style/chaining/iterable-operator'
+import '@test/matchers'
 
 describe.each([
   testCall('dropRight<T>(iterable: Iterable<T>, count: number): Iterable<T>', call)
@@ -33,10 +34,9 @@ describe.each([
         const count = 5
 
         const result = dropRight(iter, count)
-        const isIter = isIterable(result)
         const arrResult = toArray(result)
 
-        expect(isIter).toBe(true)
+        expect(result).toBeIterable()
         expect(arrResult).toEqual([])
       })
     })
@@ -47,10 +47,9 @@ describe.each([
         const count = 3
 
         const result = dropRight(iter, count)
-        const isIter = isIterable(result)
         const arrResult = toArray(result)
 
-        expect(isIter).toBe(true)
+        expect(result).toBeIterable()
         expect(arrResult).toEqual([])
       })
     })
@@ -61,10 +60,9 @@ describe.each([
         const count = 2
 
         const result = dropRight(iter, count)
-        const isIter = isIterable(result)
         const arrResult = toArray(result)
 
-        expect(isIter).toBe(true)
+        expect(result).toBeIterable()
         expect(arrResult).toEqual([1])
       })
     })
@@ -76,10 +74,9 @@ describe.each([
       const count = 0
 
       const result = dropRight(iter, count)
-      const isIter = isIterable(result)
       const arrResult = toArray(result)
 
-      expect(isIter).toBe(true)
+        expect(result).toBeIterable()
       expect(result).not.toBe(iter)
       expect(arrResult).toEqual([1, 2, 3])
     })

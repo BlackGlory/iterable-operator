@@ -6,6 +6,7 @@ import { lastAsync as call } from '@output/last-async'
 import { lastAsync as pipe } from '@style/pipeline/output/last-async'
 import { lastAsync as bind } from '@style/binding/output/last-async'
 import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
+import '@test/matchers'
 
 describe.each([
   testCall('lastAsync<T>(iterable: AsyncIterable<T>): Promise<T>', call)
@@ -30,7 +31,7 @@ describe.each([
       const result = lastAsync(iter)
       const proResult = await result
 
-      expect(result).toBeInstanceOf(Promise)
+      expect(result).toBePromise()
       expect(proResult).toBe(3)
     })
   })

@@ -1,8 +1,9 @@
 import { testFunction, testAsyncFunction } from '@test/test-fixtures'
-import { isAsyncIterable, toArrayAsync, getCalledTimes, consumeAsync, toIterable, MarkIterable } from '@test/utils'
+import { toArrayAsync, getCalledTimes, consumeAsync, toIterable, MarkIterable } from '@test/utils'
 import { IterableOperator } from '@style/chaining/iterable-operator'
 import { getErrorAsync } from 'return-style'
 import { iterableChainAsync } from '@test/style-helpers'
+import '@test/matchers'
 
 const dropUntilAsync = iterableChainAsync(IterableOperator.prototype.dropUntilAsync)
 const getIter = toIterable
@@ -80,10 +81,9 @@ describe('IterableOperator<T>::dropUntilAsync(fn: (element: T, index: number) =>
         const atTwo = getFn((x: number) => x === 2)
 
         const result = dropUntilAsync(iter, atTwo)
-        const isIter = isAsyncIterable(result)
         const arrResult = await toArrayAsync(result)
 
-        expect(isIter).toBe(true)
+        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([2, 3])
       })
     })
@@ -95,10 +95,9 @@ describe('IterableOperator<T>::dropUntilAsync(fn: (element: T, index: number) =>
         const fn = () => { throw customError }
 
         const result = dropUntilAsync(iter, fn)
-        const isIter = isAsyncIterable(result)
         const err = await getErrorAsync(toArrayAsync(result))
 
-        expect(isIter).toBe(true)
+        expect(result).toBeAsyncIterable()
         expect(err).toBe(customError)
       })
     })

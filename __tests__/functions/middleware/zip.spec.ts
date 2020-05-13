@@ -1,11 +1,12 @@
 import { getError } from 'return-style'
 import { InvalidArgumentsLengthError } from '@src/error'
 import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { isIterable, toArray, MarkIterable } from '@test/utils'
+import { toArray, MarkIterable } from '@test/utils'
 import { zip as call } from '@middleware/zip'
 import { zip as pipe } from '@style/pipeline/middleware/zip'
 import { zip as bind } from '@style/binding/middleware/zip'
 import { IterableOperator } from '@style/chaining/iterable-operator'
+import '@test/matchers'
 
 describe.each([
   testCall('zip<T>(...iterables: Array<Iterable<unknown>>): Iterable<T>', call)
@@ -44,10 +45,9 @@ describe.each([
         const iter2 = ['a', 'b', 'c']
 
         const result = zip(iter1, iter2)
-        const isIter = isIterable(result)
         const arrResult = toArray(result)
 
-        expect(isIter).toBe(true)
+        expect(result).toBeIterable()
         expect(arrResult).toEqual([[1, 'a'], [2, 'b'], [3, 'c']])
       })
     })
@@ -58,10 +58,9 @@ describe.each([
         const iter2 = ['a', 'b']
 
         const result = zip(iter1, iter2)
-        const isIter = isIterable(result)
         const arrResult = toArray(result)
 
-        expect(isIter).toBe(true)
+        expect(result).toBeIterable()
         expect(arrResult).toEqual([[1, 'a'], [2, 'b']])
       })
     })

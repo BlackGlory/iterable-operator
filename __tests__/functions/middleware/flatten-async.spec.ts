@@ -1,9 +1,10 @@
 import { testCall, testPipe, testBind, testAsyncIterableChain } from '@test/test-fixtures'
-import { toAsyncIterable, isAsyncIterable, toArrayAsync, MarkAsyncIterable } from '@test/utils'
+import { toAsyncIterable, toArrayAsync, MarkAsyncIterable } from '@test/utils'
 import { flattenAsync as call } from '@middleware/flatten-async'
 import { flattenAsync as pipe } from '@style/pipeline/middleware/flatten-async'
 import { flattenAsync as bind } from '@style/binding/middleware/flatten-async'
 import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
+import '@test/matchers'
 
 describe.each([
   testCall('flattenAsync<T, U>(iterable: AsyncIterable<T>): AsyncIterable<U>', call)
@@ -28,10 +29,9 @@ describe.each([
       const iter = toAsyncIterable([])
 
       const result = flattenAsync(iter)
-      const isIter = isAsyncIterable(result)
       const arrResult = await toArrayAsync(result)
 
-      expect(isIter).toBe(true)
+      expect(result).toBeAsyncIterable()
       expect(arrResult).toEqual([])
     })
   })
@@ -44,10 +44,9 @@ describe.each([
       ])
 
       const result = flattenAsync(iter)
-      const isIter = isAsyncIterable(result)
       const arrResult = await toArrayAsync(result)
 
-      expect(isIter).toBe(true)
+      expect(result).toBeAsyncIterable()
       expect(arrResult).toEqual([
         'o','n','e', 'two'
       , 0, 1, [2]

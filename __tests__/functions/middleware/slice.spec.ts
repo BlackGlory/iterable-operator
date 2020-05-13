@@ -1,11 +1,12 @@
 import { InvalidArgumentError } from '@src/error'
 import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
 import { getError } from 'return-style'
-import { isIterable, toArray, MarkIterable } from '@test/utils'
+import { toArray, MarkIterable } from '@test/utils'
 import { slice as call } from '@middleware/slice'
 import { slice as pipe } from '@style/pipeline/middleware/slice'
 import { slice as bind } from '@style/binding/middleware/slice'
 import { IterableOperator } from '@style/chaining/iterable-operator'
+import '@test/matchers'
 
 describe.each([
   testCall('slice<T>(iterable: Iterable<T>, start: number, end: number): Iterable<T>', call)
@@ -48,10 +49,9 @@ describe.each([
         const end = 5
 
         const result = slice(iter, start, end)
-        const isIter = isIterable(result)
         const arrResult = toArray(result)
 
-        expect(isIter).toBe(true)
+        expect(result).toBeIterable()
         expect(arrResult).toEqual([])
       })
     })
@@ -64,10 +64,9 @@ describe.each([
           const end = 2
 
           const result = slice(iter, start, end)
-          const isIter = isIterable(result)
           const arrResult = toArray(result)
 
-          expect(isIter).toBe(true)
+          expect(result).toBeIterable()
           expect(arrResult).toEqual([2])
         })
       })
@@ -79,10 +78,9 @@ describe.each([
           const end = 1
 
           const result = slice(iter, start, end)
-          const isIter = isIterable(result)
           const arrResult = toArray(result)
 
-          expect(isIter).toBe(true)
+          expect(result).toBeIterable()
           expect(arrResult).toEqual([])
         })
       })

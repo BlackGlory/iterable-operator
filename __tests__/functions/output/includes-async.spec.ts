@@ -4,6 +4,7 @@ import { includesAsync as call } from '@output/includes-async'
 import { includesAsync as pipe } from '@style/pipeline/output/includes-async'
 import { includesAsync as bind } from '@style/binding/output/includes-async'
 import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
+import '@test/matchers'
 
 describe.each([
   testCall('includesAsync<T>(iterable: AsyncIterable<T>, value: T): Promise<boolean>', call)
@@ -18,7 +19,7 @@ describe.each([
       const result = includesAsync(iter, 2)
       const proResult = await result
 
-      expect(result).toBeInstanceOf(Promise)
+      expect(result).toBePromise()
       expect(proResult).toBe(true)
     })
   })
@@ -30,7 +31,7 @@ describe.each([
       const result = includesAsync(iter, 4)
       const proResult = await result
 
-      expect(result).toBeInstanceOf(Promise)
+      expect(result).toBePromise()
       expect(proResult).toBe(false)
     })
   })

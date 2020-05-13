@@ -1,10 +1,11 @@
 import { getError } from 'return-style'
 import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { isIterable, toArray, getCalledTimes, consume, MarkIterable } from '@test/utils'
+import { toArray, getCalledTimes, consume, MarkIterable } from '@test/utils'
 import { map as call } from '@middleware/map'
 import { map as pipe } from '@style/pipeline/middleware/map'
 import { map as bind } from '@style/binding/middleware/map'
 import { IterableOperator } from '@style/chaining/iterable-operator'
+import '@test/matchers'
 
 describe.each([
   testCall('map<T, U>(iterable: Iterable<T>, fn: (element: T, index: number) => U): Iterable<U>', call)
@@ -36,10 +37,9 @@ describe.each([
       const double = (x: number) => x * 2
 
       const result = map(iter, double)
-      const isIter = isIterable(result)
       const arrResult = toArray(result)
 
-      expect(isIter).toBe(true)
+      expect(result).toBeIterable()
       expect(arrResult).toEqual([2, 4, 6])
     })
 
@@ -63,10 +63,9 @@ describe.each([
       const fn = () => { throw new Error('CustomError') }
 
       const result = map(iter, fn)
-      const isIter = isIterable(result)
       const err = getError(() => toArray(result))
 
-      expect(isIter).toBe(true)
+      expect(result).toBeIterable()
       expect(err).toBeInstanceOf(Error)
       expect(err!.message).toMatch('CustomError')
     })

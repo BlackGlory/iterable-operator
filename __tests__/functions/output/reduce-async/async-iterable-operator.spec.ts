@@ -4,6 +4,7 @@ import { testFunction, testAsyncFunction } from '@test/test-fixtures'
 import { toAsyncIterable, getCalledTimes } from '@test/utils'
 import { asyncMethod } from '@test/style-helpers'
 import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
+import '@test/matchers'
 
 const reduceAsync = asyncMethod(AsyncIterableOperator.prototype.reduceAsync)
 const getIter = toAsyncIterable
@@ -50,7 +51,7 @@ describe('AsyncIterableOperator<T>::reduceAsync(fn: (accumulator: T, currentValu
           const result = reduceAsync(iter, fn)
           const proResult = await result
 
-          expect(result).toBeInstanceOf(Promise)
+          expect(result).toBePromise()
           expect(getCalledTimes(fn)).toBe(0) // skip
           expect(proResult).toBe(1)
         })
@@ -66,7 +67,7 @@ describe('AsyncIterableOperator<T>::reduceAsync(fn: (accumulator: T, currentValu
           const result = reduceAsync(iter, fn)
           const proResult = await result
 
-          expect(result).toBeInstanceOf(Promise)
+          expect(result).toBePromise()
           expect(proResult).toBe(6)
         })
       })
@@ -121,7 +122,7 @@ describe('AsyncIterableOperator<T>::reduceAsync<U>(fn: (accumulator: U, currentV
         const result = reduceAsync(iter, pushToAcc, initalValue)
         const proResult = await result
 
-        expect(result).toBeInstanceOf(Promise)
+        expect(result).toBePromise()
         expect(proResult).toEqual([[1, 0], [2, 1], [3, 2]])
       })
     })

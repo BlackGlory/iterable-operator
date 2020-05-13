@@ -1,11 +1,12 @@
 import { InvalidArgumentError } from '@src/error'
 import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { isIterable, toArray, MarkIterable } from '@test/utils'
+import { toArray, MarkIterable } from '@test/utils'
 import { getError } from 'return-style'
 import { repeat as call } from '@middleware/repeat'
 import { repeat as pipe } from '@style/pipeline/middleware/repeat'
 import { repeat as bind } from '@style/binding/middleware/repeat'
 import { IterableOperator } from '@style/chaining/iterable-operator'
+import '@test/matchers'
 
 describe.each([
   testCall('repeat<T>(iterable: Iterable<T>, times: number): Iterable<T>', call)
@@ -32,10 +33,9 @@ describe.each([
       const times = 2
 
       const result = repeat(iter, times)
-      const isIter = isIterable(result)
       const arrResult = toArray(result)
 
-      expect(isIter).toBe(true)
+      expect(result).toBeIterable()
       expect(arrResult).toEqual([1, 2, 3, 1, 2, 3])
     })
   })
@@ -46,10 +46,9 @@ describe.each([
       const times = 0
 
       const result = repeat(iter, times)
-      const isIter = isIterable(result)
       const arrResult = toArray(result)
 
-      expect(isIter).toBe(true)
+      expect(result).toBeIterable()
       expect(arrResult).toEqual([])
     })
   })
@@ -74,14 +73,15 @@ describe.each([
         const spy = jest.spyOn(console, 'warn').mockImplementation()
         const iter: number[] = [1, 2, 3]
 
-        const result = repeat(iter, Infinity)
-        const isIter = isIterable(result)
+        try {
+          const result = repeat(iter, Infinity)
 
-        expect(isIter).toBe(true)
-        expect(console.warn).toHaveBeenCalledTimes(0)
-
-        spy.mockRestore()
-        process.env.NODE_ENV = OLD_NODE_ENV
+          expect(result).toBeIterable()
+          expect(console.warn).toHaveBeenCalledTimes(0)
+        } finally {
+          spy.mockRestore()
+          process.env.NODE_ENV = OLD_NODE_ENV
+        }
       })
     })
 
@@ -92,14 +92,15 @@ describe.each([
         const spy = jest.spyOn(console, 'warn').mockImplementation()
         const iter: number[] = [1, 2, 3]
 
-        const result = repeat(iter, Infinity)
-        const isIter = isIterable(result)
+        try {
+          const result = repeat(iter, Infinity)
 
-        expect(isIter).toBe(true)
-        expect(console.warn).toHaveBeenCalledTimes(1)
-
-        spy.mockRestore()
-        process.env.NODE_ENV = OLD_NODE_ENV
+          expect(result).toBeIterable()
+          expect(console.warn).toHaveBeenCalledTimes(1)
+        } finally {
+          spy.mockRestore()
+          process.env.NODE_ENV = OLD_NODE_ENV
+        }
       })
     })
   })

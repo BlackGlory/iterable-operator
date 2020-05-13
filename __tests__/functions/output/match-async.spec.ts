@@ -4,6 +4,7 @@ import { matchAsync as call } from '@output/match-async'
 import { matchAsync as pipe } from '@style/pipeline/output/match-async'
 import { matchAsync as bind } from '@style/binding/output/match-async'
 import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
+import '@test/matchers'
 
 describe.each([
   testCall('matchAsync<T>(iterable: AsyncItreable<T>, sequence: ArrayLike<T>): Promise<boolean>', call)
@@ -20,7 +21,7 @@ describe.each([
         const result = matchAsync(iter, seq)
         const proResult = await result
 
-        expect(result).toBeInstanceOf(Promise)
+        expect(result).toBePromise()
         expect(proResult).toBe(true)
       })
     })
@@ -33,7 +34,7 @@ describe.each([
         const result = matchAsync(iter, seq)
         const proResult = await result
 
-        expect(result).toBeInstanceOf(Promise)
+        expect(result).toBePromise()
         expect(proResult).toBe(false)
       })
     })
@@ -47,7 +48,7 @@ describe.each([
       const result = matchAsync(iter, seq)
       const proResult = await result
 
-      expect(result).toBeInstanceOf(Promise)
+      expect(result).toBePromise()
       expect(proResult).toBe(true)
     })
   })

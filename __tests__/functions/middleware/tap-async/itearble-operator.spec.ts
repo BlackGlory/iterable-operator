@@ -1,8 +1,9 @@
-import { toIterable, toArrayAsync, isAsyncIterable, consumeAsync, getCalledTimes, MarkIterable } from '@test/utils'
+import { toIterable, toArrayAsync, consumeAsync, getCalledTimes, MarkIterable } from '@test/utils'
 import { getErrorAsync } from 'return-style'
 import { testFunction, testAsyncFunction } from '@test/test-fixtures'
 import { IterableOperator } from '@style/chaining/iterable-operator'
 import { iterableChainAsync } from '@test/style-helpers'
+import '@test/matchers'
 
 const tapAsync = iterableChainAsync(IterableOperator.prototype.tapAsync)
 const getIter = toIterable
@@ -66,11 +67,10 @@ describe('IterableOperator<T>::tapAsync(fn: (element: T, index: number) => unkno
         const pushToSideResult = getFn((x: number, i: number) => sideResult.push([x, i]))
 
         const result = tapAsync(iter, pushToSideResult)
-        const isIter = isAsyncIterable(result)
         const isSideResultEmptyInStage1 = !sideResult.length
         const arrResult = await toArrayAsync(result)
 
-        expect(isIter).toBe(true)
+        expect(result).toBeAsyncIterable()
         expect(isSideResultEmptyInStage1).toBe(true)
         expect(arrResult).toEqual([1, 2, 3])
         expect(sideResult).toEqual([[1, 0], [2, 1], [3, 2]])
@@ -84,10 +84,9 @@ describe('IterableOperator<T>::tapAsync(fn: (element: T, index: number) => unkno
         const justThrow = () => { throw customError }
 
         const result = tapAsync(iter, justThrow)
-        const isIter = isAsyncIterable(result)
         const err = await getErrorAsync(toArrayAsync(result))
 
-        expect(isIter).toBe(true)
+        expect(result).toBeAsyncIterable()
         expect(err).toBe(customError)
       })
     })

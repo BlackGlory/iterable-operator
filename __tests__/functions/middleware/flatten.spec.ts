@@ -1,9 +1,10 @@
 import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { isIterable, toArray, MarkIterable } from '@test/utils'
+import { toArray, MarkIterable } from '@test/utils'
 import { flatten as call } from '@middleware/flatten'
 import { flatten as pipe } from '@style/pipeline/middleware/flatten'
 import { flatten as bind } from '@style/binding/middleware/flatten'
 import { IterableOperator } from '@style/chaining/iterable-operator'
+import '@test/matchers'
 
 describe.each([
   testCall('flatten<T, U>(iterable: Iterable<T>): Iterable<U>', call)
@@ -28,10 +29,9 @@ describe.each([
       const iter: number[] = []
 
       const result = flatten(iter)
-      const isIter = isIterable(result)
       const arrResult = toArray(result)
 
-      expect(isIter).toBe(true)
+      expect(result).toBeIterable()
       expect(arrResult).toEqual([])
     })
   })
@@ -41,10 +41,9 @@ describe.each([
       const iter = '123'
 
       const result = flatten(iter)
-      const isIter = isIterable(result)
       const arrResult = toArray(result)
 
-      expect(isIter).toBe(true)
+      expect(result).toBeIterable()
       expect(arrResult).toEqual(['1', '2', '3'])
     })
   })
@@ -57,10 +56,9 @@ describe.each([
       ]
 
       const result = flatten(iter)
-      const isIter = isIterable(result)
       const arrResult = toArray(result)
 
-      expect(isIter).toBe(true)
+      expect(result).toBeIterable()
       expect(arrResult).toEqual([
         'o','n','e', 'two'
       , 0, 1, [2]

@@ -1,8 +1,9 @@
 import { testFunction, testAsyncFunction } from '@test/test-fixtures'
-import { toAsyncIterable, getCalledTimes, consumeAsync, isAsyncIterable, toArrayAsync, MarkIterable } from '@test/utils'
+import { toAsyncIterable, getCalledTimes, consumeAsync, toArrayAsync, MarkIterable } from '@test/utils'
 import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
 import { getErrorAsync } from 'return-style'
 import { asyncIterableChain } from '@test/style-helpers'
+import '@test/matchers'
 
 const chunkByAsync = asyncIterableChain(AsyncIterableOperator.prototype.chunkByAsync)
 const getIter = toAsyncIterable
@@ -37,10 +38,9 @@ describe('AsyncIterableOperator<T>::chunkByAsync(fn: (element: T, index: number)
           const atTwo = getFn((x: number) => x === 2)
 
           const result = chunkByAsync(iter, atTwo)
-          const isIter = isAsyncIterable(result)
           const arrResult = await toArrayAsync(result)
 
-          expect(isIter).toBe(true)
+          expect(result).toBeAsyncIterable()
           expect(arrResult).toEqual([[1, 2], [3]])
         })
       })
@@ -51,10 +51,9 @@ describe('AsyncIterableOperator<T>::chunkByAsync(fn: (element: T, index: number)
           const atThree = getFn((x: number) => x === 3)
 
           const result = chunkByAsync(iter, atThree)
-          const isIter = isAsyncIterable(result)
           const arrResult = await toArrayAsync(result)
 
-          expect(isIter).toBe(true)
+          expect(result).toBeAsyncIterable()
           expect(arrResult).toEqual([[1, 2, 3]])
         })
       })
@@ -66,10 +65,9 @@ describe('AsyncIterableOperator<T>::chunkByAsync(fn: (element: T, index: number)
         const alwaysFalse = getFn(() => false)
 
         const result = chunkByAsync(iter, alwaysFalse)
-        const isIter = isAsyncIterable(result)
         const arrResult = await toArrayAsync(result)
 
-        expect(isIter).toBe(true)
+        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([[1, 2, 3]])
       })
     })
@@ -95,10 +93,9 @@ describe('AsyncIterableOperator<T>::chunkByAsync(fn: (element: T, index: number)
         const fn = getFn(() => { throw customError })
 
         const result = chunkByAsync(iter, fn)
-        const isIter = isAsyncIterable(result)
         const err = await getErrorAsync(toArrayAsync(result))
 
-        expect(isIter).toBe(true)
+        expect(result).toBeAsyncIterable()
         expect(err).toBe(customError)
       })
     })

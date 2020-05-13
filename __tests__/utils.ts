@@ -1,11 +1,3 @@
-export function isIterable<T>(val: any): val is Iterable<T> {
-  return typeof val[Symbol.iterator] === 'function'
-}
-
-export function isAsyncIterable<T>(val: any): val is AsyncIterable<T> {
-  return typeof val[Symbol.asyncIterator] === 'function'
-}
-
 export function toArray<T>(iterable: Iterable<T>, count: number = Infinity) {
   const result: T[] =[]
   for (const value of iterable) {

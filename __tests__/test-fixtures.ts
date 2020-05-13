@@ -52,19 +52,3 @@ export function testFunction(name: string): [string, AnyFunction] {
 export function testAsyncFunction(name: string): [string, AnyFunction] {
   return [name, toAsyncFunction]
 }
-
-export function describeCompose(...cases: Array<[string, AnyFunction]>) {
-  return (fn: (...args: AnyFunction[]) => void) => {
-    createDescribe(cases, [])
-
-    function createDescribe(cases: Array<[string, AnyFunction]>, results: AnyFunction[]) {
-      if (cases.length > 0) {
-        describe.each([cases.shift()!])('%s', (_, result) => {
-          createDescribe(cases, [...results, result])
-        })
-      } else {
-        fn(...results)
-      }
-    }
-  }
-}

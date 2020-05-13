@@ -2,6 +2,7 @@ import { getError } from 'return-style'
 import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
 import { asyncMethod } from '@test/style-helpers'
 import { toAsyncIterable } from '@test/utils'
+import '@test/matchers'
 
 const consume = asyncMethod(AsyncIterableOperator.prototype.consume)
 const getIter = toAsyncIterable
@@ -21,7 +22,7 @@ describe('AsyncIterableOperator<T>::consume<U>(consumer: (iterable: Iterable<T>)
       const result = consume(iter, sum)
       const proResult = await result
 
-      expect(result).toBeInstanceOf(Promise)
+      expect(result).toBePromise()
       expect(proResult).toEqual(6)
     })
   })

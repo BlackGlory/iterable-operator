@@ -1,10 +1,11 @@
 import { getError } from 'return-style'
 import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { isIterable, toArray, getCalledTimes, consume, MarkIterable } from '@test/utils'
+import { toArray, getCalledTimes, consume, MarkIterable } from '@test/utils'
 import { uniqBy as call } from '@middleware/uniq-by'
 import { uniqBy as pipe } from '@style/pipeline/middleware/uniq-by'
 import { uniqBy as bind } from '@style/binding/middleware/uniq-by'
 import { IterableOperator } from '@style/chaining/iterable-operator'
+import '@test/matchers'
 
 describe.each([
   testCall('uniqBy<T, U>(iterable: Iterable<T>, fn: (element: T, index: number) => U): Iterable<T>', call)
@@ -36,10 +37,9 @@ describe.each([
       const modTwo = (x: number) => x % 2
 
       const result = uniqBy(iter, modTwo)
-      const isIter = isIterable(result)
       const arrResult = toArray(result)
 
-      expect(isIter).toBe(true)
+      expect(result).toBeIterable()
       expect(arrResult).toEqual([1, 2])
     })
 
@@ -63,10 +63,9 @@ describe.each([
       const fn = () => { throw new Error('CustomError') }
 
       const result = uniqBy(iter, fn)
-      const isIter = isIterable(result)
       const err = getError(() => toArray(result))
 
-      expect(isIter).toBe(true)
+      expect(result).toBeIterable()
       expect(err).toBeInstanceOf(Error)
       expect(err!.message).toMatch('CustomError')
     })

@@ -4,6 +4,7 @@ import { testFunction, testAsyncFunction } from '@test/test-fixtures'
 import { toIterable } from '@test/utils'
 import { IterableOperator } from '@style/chaining/iterable-operator'
 import { method } from '@test/style-helpers'
+import '@test/matchers'
 
 const findAsync = method(IterableOperator.prototype.findAsync)
 const getIter = toIterable
@@ -66,7 +67,7 @@ describe('IterableOperator<T>::findAsync(fn: (element: T, index: number) => bool
         const result = findAsync(iter, isTwo)
         const proResult = await result
 
-        expect(result).toBeInstanceOf(Promise)
+        expect(result).toBePromise()
         expect(proResult).toBe(2)
       })
     })

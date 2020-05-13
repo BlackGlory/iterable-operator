@@ -1,8 +1,9 @@
 import { getError } from 'return-style'
 import { InvalidArgumentsLengthError } from '@src/error'
-import { isAsyncIterable, toArrayAsync, toIterable, toAsyncIterable, MarkIterable } from '@test/utils'
+import { toArrayAsync, toIterable, toAsyncIterable, MarkIterable } from '@test/utils'
 import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
 import { asyncIterableChain } from '@test/style-helpers'
+import '@test/matchers'
 
 const zipAsync = asyncIterableChain(AsyncIterableOperator.prototype.zipAsync)
 const getIter = toAsyncIterable
@@ -41,10 +42,9 @@ describe('AsyncIterableOperator<unknown>::zipAsync<T>(...iterables: Array<Iterab
           const iter2 = getIter(['a', 'b', 'c'])
 
           const result = zipAsync(iter1, iter2)
-          const isIter = isAsyncIterable(result)
           const arrResult = await toArrayAsync(result)
 
-          expect(isIter).toBe(true)
+          expect(result).toBeAsyncIterable()
           expect(arrResult).toEqual([[1, 'a'], [2, 'b'], [3, 'c']])
         })
       })
@@ -55,10 +55,9 @@ describe('AsyncIterableOperator<unknown>::zipAsync<T>(...iterables: Array<Iterab
           const iter2 = getIter(['a', 'b'])
 
           const result = zipAsync(iter1, iter2)
-          const isIter = isAsyncIterable(result)
           const arrResult = await toArrayAsync(result)
 
-          expect(isIter).toBe(true)
+          expect(result).toBeAsyncIterable()
           expect(arrResult).toEqual([[1, 'a'], [2, 'b']])
         })
       })
@@ -71,10 +70,9 @@ describe('AsyncIterableOperator<unknown>::zipAsync<T>(...iterables: Array<Iterab
         const iter3 = toAsyncIterable(['d', 'e', 'f'])
 
         const result = zipAsync(iter1, iter2, iter3)
-        const isIter = isAsyncIterable(result)
         const arrResult = await toArrayAsync(result)
 
-        expect(isIter).toBe(true)
+        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([[1, 'a', 'd'], [2, 'b', 'e'], [3, 'c', 'f']])
       })
     })

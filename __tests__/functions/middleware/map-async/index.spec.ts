@@ -1,9 +1,10 @@
 import { getErrorAsync } from 'return-style'
 import { testIterable, testAsyncIterable, testFunction, testAsyncFunction, testCall, testPipe, testBind } from '@test/test-fixtures'
-import { getCalledTimes, consumeAsync, isAsyncIterable, toArrayAsync, MarkIterable } from '@test/utils'
+import { getCalledTimes, consumeAsync, toArrayAsync, MarkIterable } from '@test/utils'
 import { mapAsync as call } from '@middleware/map-async'
 import { mapAsync as pipe } from '@style/pipeline/middleware/map-async'
 import { mapAsync as bind } from '@style/binding/middleware/map-async'
+import '@test/matchers'
 
 describe.each([
   testCall('mapAsync<T, U>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => U | PromiseLike<U>): AsyncIterable<U>', call)
@@ -71,10 +72,9 @@ describe.each([
           const double = getFn((x: number) => x * 2)
 
           const result = mapAsync(iter, double)
-          const isIter = isAsyncIterable(result)
           const arrResult = await toArrayAsync(result)
 
-          expect(isIter).toBe(true)
+          expect(result).toBeAsyncIterable()
           expect(arrResult).toEqual([2, 4, 6])
         })
       })
@@ -86,10 +86,9 @@ describe.each([
           const fn = getFn(() => { throw customError })
 
           const result = mapAsync(iter, fn)
-          const isIter = isAsyncIterable(result)
           const err = await getErrorAsync(toArrayAsync(result))
 
-          expect(isIter).toBe(true)
+          expect(result).toBeAsyncIterable()
           expect(err).toBe(customError)
         })
       })

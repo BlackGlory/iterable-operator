@@ -1,11 +1,12 @@
 import { InvalidArgumentError } from '@src/error'
-import { toAsyncIterable, isAsyncIterable, toArrayAsync, MarkAsyncIterable } from '@test/utils'
+import { toAsyncIterable, toArrayAsync, MarkAsyncIterable } from '@test/utils'
 import { testCall, testPipe, testBind, testAsyncIterableChain } from '@test/test-fixtures'
 import { getError } from 'return-style'
 import { flattenDeepAsync as call } from '@middleware/flatten-deep-async'
 import { flattenDeepAsync as pipe } from '@style/pipeline/middleware/flatten-deep-async'
 import { flattenDeepAsync as bind } from '@style/binding/middleware/flatten-deep-async'
 import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
+import '@test/matchers'
 
 describe.each([
   testCall('flattenDeepAsync<T>(iterable: AsyncIterable<unknown>, depth: number): AsyncIterable<T>', call)
@@ -32,10 +33,9 @@ describe.each([
       const depth = Infinity
 
       const result = flattenDeepAsync(iter, depth)
-      const isIter = isAsyncIterable(result)
       const arrResult = await toArrayAsync(result)
 
-      expect(isIter).toBe(true)
+      expect(result).toBeAsyncIterable()
       expect(arrResult).toEqual([])
     })
   })
@@ -59,10 +59,9 @@ describe.each([
         const depth = 0
 
         const result = flattenDeepAsync(iter, depth)
-        const isIter = isAsyncIterable(result)
         const arrResult = await toArrayAsync(result)
 
-        expect(isIter).toBe(true)
+        expect(result).toBeAsyncIterable()
         expect(result).not.toBe(iter)
         expect(arrResult).toEqual([0, [1]])
       })
@@ -77,10 +76,9 @@ describe.each([
         const depth = 2
 
         const result = flattenDeepAsync(iter, depth)
-        const isIter = isAsyncIterable(result)
         const arrResult = await toArrayAsync(result)
 
-        expect(isIter).toBe(true)
+        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([
           'o','n','e', 't','w','o', 'three'
         , 0, 1, 2, [3]

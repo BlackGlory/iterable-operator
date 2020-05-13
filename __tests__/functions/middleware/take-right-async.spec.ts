@@ -1,4 +1,4 @@
-import { toAsyncIterable, isAsyncIterable, toArrayAsync, MarkAsyncIterable } from '@test/utils'
+import { toAsyncIterable, toArrayAsync, MarkAsyncIterable } from '@test/utils'
 import { testCall, testPipe, testBind, testAsyncIterableChain } from '@test/test-fixtures'
 import { InvalidArgumentError } from '@src/error'
 import { getError } from 'return-style'
@@ -6,6 +6,7 @@ import { takeRightAsync as call } from '@middleware/take-right-async'
 import { takeRightAsync as pipe } from '@style/pipeline/middleware/take-right-async'
 import { takeRightAsync as bind } from '@style/binding/middleware/take-right-async'
 import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
+import '@test/matchers'
 
 describe.each([
   testCall('takeRightAsync<T>(iterable: AsyncIterable<T>, count: number): AsyncIterable<T>', call)
@@ -32,10 +33,9 @@ describe.each([
       const count = 5
 
       const result = takeRightAsync(iter, count)
-      const isIter = isAsyncIterable(result)
       const arrResult = await toArrayAsync(result)
 
-      expect(isIter).toBe(true)
+      expect(result).toBeAsyncIterable()
       expect(result).not.toBe(iter)
       expect(arrResult).toEqual([1, 2, 3])
     })
@@ -47,10 +47,9 @@ describe.each([
       const count = 2
 
       const result = takeRightAsync(iter, count)
-      const isIter = isAsyncIterable(result)
       const arrResult = await toArrayAsync(result)
 
-      expect(isIter).toBe(true)
+      expect(result).toBeAsyncIterable()
       expect(arrResult).toEqual([2, 3])
     })
   })
@@ -61,10 +60,9 @@ describe.each([
       const count = 0
 
       const result = takeRightAsync(iter, count)
-      const isIter = isAsyncIterable(result)
       const arrResult = await toArrayAsync(result)
 
-      expect(isIter).toBe(true)
+      expect(result).toBeAsyncIterable()
       expect(arrResult).toEqual([])
     })
   })

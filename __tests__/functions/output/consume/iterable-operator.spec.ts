@@ -2,6 +2,7 @@ import { getError } from 'return-style'
 import { IterableOperator } from '@style/chaining/iterable-operator'
 import { method } from '@test/style-helpers'
 import { toIterable } from '@test/utils'
+import '@test/matchers'
 
 const consume = method(IterableOperator.prototype.consume)
 const getIter = toIterable
@@ -21,7 +22,7 @@ describe('IterableOperator<T>::consume<U>(consumer: (iterable: Iterable<T>) => U
       const result = consume(iter, sum)
       const proResult = await result
 
-      expect(result).toBeInstanceOf(Promise)
+      expect(result).toBePromise()
       expect(proResult).toEqual(6)
     })
   })

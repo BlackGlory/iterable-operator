@@ -1,10 +1,11 @@
 import { getError } from 'return-style'
 import { InvalidArgumentsLengthError } from '@src/error'
 import { testIterable, testAsyncIterable, testCall, testPipe, testBind } from '@test/test-fixtures'
-import { isAsyncIterable, toArrayAsync, toIterable, toAsyncIterable, MarkIterable } from '@test/utils'
+import { toArrayAsync, toIterable, toAsyncIterable, MarkIterable } from '@test/utils'
 import { zipAsync as call } from '@middleware/zip-async'
 import { zipAsync as pipe } from '@style/pipeline/middleware/zip-async'
 import { zipAsync as bind } from '@style/binding/middleware/zip-async'
+import '@test/matchers'
 
 describe.each([
   testCall('zipAsync<T>(...iterables: Array<Iterable<unknown> | AsyncIterable<unknown>>): AsyncIterable<T>', call)
@@ -30,10 +31,9 @@ describe.each([
           const iter2 = [Promise.resolve('a'), Promise.resolve('b'), Promise.resolve('c')]
 
           const result = zipAsync(iter1, iter2)
-          const isIter = isAsyncIterable(result)
           const arrResult = await toArrayAsync(result)
 
-          expect(isIter).toBe(true)
+          expect(result).toBeAsyncIterable()
           expect(arrResult).toEqual([[iter1[0], iter2[0]], [iter1[1], iter2[1]], [iter1[2], iter2[2]]])
         })
       })
@@ -62,10 +62,9 @@ describe.each([
             const iter2 = getIter(['a', 'b', 'c'])
 
             const result = zipAsync(iter1, iter2)
-            const isIter = isAsyncIterable(result)
             const arrResult = await toArrayAsync(result)
 
-            expect(isIter).toBe(true)
+            expect(result).toBeAsyncIterable()
             expect(arrResult).toEqual([[1, 'a'], [2, 'b'], [3, 'c']])
           })
         })
@@ -76,10 +75,9 @@ describe.each([
             const iter2 = getIter(['a', 'b'])
 
             const result = zipAsync(iter1, iter2)
-            const isIter = isAsyncIterable(result)
             const arrResult = await toArrayAsync(result)
 
-            expect(isIter).toBe(true)
+            expect(result).toBeAsyncIterable()
             expect(arrResult).toEqual([[1, 'a'], [2, 'b']])
           })
         })
@@ -92,10 +90,9 @@ describe.each([
         const iter2 = toAsyncIterable(['a', 'b', 'c'])
 
         const result = zipAsync(iter1, iter2)
-        const isIter = isAsyncIterable(result)
         const arrResult = await toArrayAsync(result)
 
-        expect(isIter).toBe(true)
+        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([[1, 'a'], [2, 'b'], [3, 'c']])
       })
     })

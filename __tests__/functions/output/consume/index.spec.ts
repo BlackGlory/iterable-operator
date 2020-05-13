@@ -3,6 +3,7 @@ import { consume as call } from '@output/consume'
 import { consume as pipe } from '@style/pipeline/output/consume'
 import { consume as bind } from '@style/binding/output/consume'
 import { getError } from 'return-style'
+import '@test/matchers'
 
 describe.each([
   testCall('consume<T, U>(iterable: Iterable<T> | AsyncIterable<T>, consumer: (iterable: Iterable<T> | AsyncIterable<T>) => U): U', call)
@@ -27,7 +28,7 @@ describe.each([
         const result = consume(iter, sum)
         const proResult = await result
 
-        expect(result).toBeInstanceOf(Promise)
+        expect(result).toBePromise()
         expect(proResult).toEqual(6)
       })
     })

@@ -1,10 +1,11 @@
 import { getError } from 'return-style'
 import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { isIterable, toArray, getCalledTimes, consume, MarkIterable } from '@test/utils'
+import { toArray, getCalledTimes, consume, MarkIterable } from '@test/utils'
 import { tap as call } from '@middleware/tap'
 import { tap as pipe } from '@style/pipeline/middleware/tap'
 import { tap as bind } from '@style/binding/middleware/tap'
 import { IterableOperator } from '@style/chaining/iterable-operator'
+import '@test/matchers'
 
 describe.each([
   testCall('tap<T>(iterable: Iterable<T>, fn: (element: T, index: number) => unknown): Iterable<T>', call)
@@ -37,11 +38,10 @@ describe.each([
       const pushToSideResult = (x: number, i: number) => sideResult.push([x, i])
 
       const result = tap(iter, pushToSideResult)
-      const isIter = isIterable(result)
       const isSideResultEmptyInStage1 = !sideResult.length
       const arrResult = toArray(result)
 
-      expect(isIter).toBe(true)
+      expect(result).toBeIterable()
       expect(isSideResultEmptyInStage1).toBe(true)
       expect(arrResult).toEqual([1, 2, 3])
       expect(sideResult).toEqual([[1, 0], [2, 1], [3, 2]])
@@ -67,10 +67,9 @@ describe.each([
       const justThrow = () => { throw new Error('CustomError') }
 
       const result = tap(iter, justThrow)
-      const isIter = isIterable(result)
       const err = getError(() => toArray(result))
 
-      expect(isIter).toBe(true)
+      expect(result).toBeIterable()
       expect(err).toBeInstanceOf(Error)
       expect(err!.message).toMatch('CustomError')
     })

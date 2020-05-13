@@ -1,9 +1,10 @@
-import { toAsyncIterable, isAsyncIterable, toArrayAsync, MarkAsyncIterable } from '@test/utils'
+import { toAsyncIterable, toArrayAsync, MarkAsyncIterable } from '@test/utils'
 import { testCall, testPipe, testBind, testAsyncIterableChain } from '@test/test-fixtures'
 import { splitAsync as call } from '@middleware/split-async'
 import { splitAsync as pipe } from '@style/pipeline/middleware/split-async'
 import { splitAsync as bind } from '@style/binding/middleware/split-async'
 import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
+import '@test/matchers'
 
 describe.each([
   testCall('splitAsync<T>(iterable: AsyncIterable<T>, separator: T): AsyncIterable<T[]>', call)
@@ -18,10 +19,9 @@ describe.each([
         const sep = 1
 
         const result = splitAsync(iter, sep)
-        const isIter = isAsyncIterable(result)
         const arrResult = await toArrayAsync(result)
 
-        expect(isIter).toBe(true)
+        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([[], [2, 3, 4, 5]])
       })
     })
@@ -32,10 +32,9 @@ describe.each([
         const sep = 3
 
         const result = splitAsync(iter, sep)
-        const isIter = isAsyncIterable(result)
         const arrResult = await toArrayAsync(result)
 
-        expect(isIter).toBe(true)
+        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([[1, 2], [4, 5]])
       })
     })
@@ -46,10 +45,9 @@ describe.each([
         const sep = 5
 
         const result = splitAsync(iter, sep)
-        const isIter = isAsyncIterable(result)
         const arrResult = await toArrayAsync(result)
 
-        expect(isIter).toBe(true)
+        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([[1, 2, 3, 4], []])
       })
     })
@@ -61,10 +59,9 @@ describe.each([
       const sep = 0
 
       const result = splitAsync(iter, sep)
-      const isIter = isAsyncIterable(result)
       const arrResult = await toArrayAsync(result)
 
-      expect(isIter).toBe(true)
+      expect(result).toBeAsyncIterable()
       expect(arrResult).toEqual([[1, 2, 3, 4, 5]])
     })
   })

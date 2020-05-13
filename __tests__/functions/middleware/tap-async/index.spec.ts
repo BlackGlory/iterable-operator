@@ -1,9 +1,10 @@
-import { toArrayAsync, isAsyncIterable, consumeAsync, getCalledTimes, MarkIterable } from '@test/utils'
+import { toArrayAsync, consumeAsync, getCalledTimes, MarkIterable } from '@test/utils'
 import { getErrorAsync } from 'return-style'
 import { testFunction, testAsyncFunction, testIterable, testAsyncIterable, testCall, testPipe, testBind } from '@test/test-fixtures'
 import { tapAsync as call } from '@middleware/tap-async'
 import { tapAsync as pipe } from '@style/pipeline/middleware/tap-async'
 import { tapAsync as bind } from '@style/binding/middleware/tap-async'
+import '@test/matchers'
 
 describe.each([
   testCall('tapAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => unknown | PromiseLike<unknown>): AsyncIterable<T>', call)
@@ -72,11 +73,10 @@ describe.each([
           const pushToSideResult = getFn((x: number, i: number) => sideResult.push([x, i]))
 
           const result = tapAsync(iter, pushToSideResult)
-          const isIter = isAsyncIterable(result)
           const isSideResultEmptyInStage1 = !sideResult.length
           const arrResult = await toArrayAsync(result)
 
-          expect(isIter).toBe(true)
+          expect(result).toBeAsyncIterable()
           expect(isSideResultEmptyInStage1).toBe(true)
           expect(arrResult).toEqual([1, 2, 3])
           expect(sideResult).toEqual([[1, 0], [2, 1], [3, 2]])
@@ -90,10 +90,9 @@ describe.each([
           const justThrow = () => { throw customError }
 
           const result = tapAsync(iter, justThrow)
-          const isIter = isAsyncIterable(result)
           const err = await getErrorAsync(toArrayAsync(result))
 
-          expect(isIter).toBe(true)
+          expect(result).toBeAsyncIterable()
           expect(err).toBe(customError)
         })
       })

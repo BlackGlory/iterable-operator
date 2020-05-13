@@ -1,10 +1,11 @@
 import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { isIterable, toArray, getCalledTimes, consume, MarkIterable } from '@test/utils'
+import { toArray, getCalledTimes, consume, MarkIterable } from '@test/utils'
 import { takeUntil as call } from '@middleware/take-until'
 import { takeUntil as pipe } from '@style/pipeline/middleware/take-until'
 import { takeUntil as bind } from '@style/binding/middleware/take-until'
 import { IterableOperator } from '@style/chaining/iterable-operator'
 import { getError } from 'return-style'
+import '@test/matchers'
 
 describe.each([
   testCall('takeUntil<T>(iterable: Iterable<T>, fn: (element: T, index: number) => boolean): Iterable<T>', call)
@@ -51,10 +52,9 @@ describe.each([
       const atTwo = (x: number) => x === 2
 
       const result = takeUntil(iter, atTwo)
-      const isIter = isIterable(result)
       const arrResult = toArray(result)
 
-      expect(isIter).toBe(true)
+      expect(result).toBeIterable()
       expect(arrResult).toEqual([1])
     })
 
@@ -79,10 +79,9 @@ describe.each([
       const fn = () => { throw customError }
 
       const result = takeUntil(iter, fn)
-      const isIter = isIterable(result)
       const err = getError(() => toArray(result))
 
-      expect(isIter).toBe(true)
+      expect(result).toBeIterable()
       expect(err).toBe(customError)
     })
   })

@@ -4,6 +4,7 @@ import { toSetAsync as call } from '@output/to-set-async'
 import { toSetAsync as pipe } from '@style/pipeline/output/to-set-async'
 import { toSetAsync as bind } from '@style/binding/output/to-set-async'
 import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
+import '@test/matchers'
 
 describe.each([
   testCall('toSetAsync<T>(iterable: AsyncIterable<T>): Promise<Set<T>>', call)
@@ -19,7 +20,7 @@ describe.each([
       const proResult = await result
       const arrResult = toArray(proResult)
 
-      expect(result).toBeInstanceOf(Promise)
+      expect(result).toBePromise()
       expect(proResult).toBeInstanceOf(Set)
       expect(arrResult).toEqual([1, 2, 3])
     })

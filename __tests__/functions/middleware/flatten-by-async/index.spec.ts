@@ -1,9 +1,10 @@
-import { getCalledTimes, consumeAsync, isAsyncIterable, toArrayAsync, MarkIterable } from '@test/utils'
+import { getCalledTimes, consumeAsync, toArrayAsync, MarkIterable } from '@test/utils'
 import { testIterable, testAsyncIterable, testFunction, testAsyncFunction, testCall, testPipe, testBind } from '@test/test-fixtures'
 import { getErrorAsync } from 'return-style'
 import { flattenByAsync as call } from '@middleware/flatten-by-async'
 import { flattenByAsync as pipe } from '@style/pipeline/middleware/flatten-by-async'
 import { flattenByAsync as bind } from '@style/binding/middleware/flatten-by-async'
+import '@test/matchers'
 
 describe.each([
   testCall('flattenByAsync<T>(iterable: Iterable<unknown> | AsyncIterable<unknown>, fn: (element: unknown, level: number) => boolean | PromiseLike<boolean>): AsyncIterable<T>', call)
@@ -57,10 +58,9 @@ describe.each([
           const exceptString = getFn((x: unknown) => !isString(x))
 
           const result = flattenByAsync(iter, exceptString)
-          const isIter = isAsyncIterable(result)
           const arrResult = await toArrayAsync(result)
 
-          expect(isIter).toBe(true)
+          expect(result).toBeAsyncIterable()
           expect(arrResult).toEqual([
             'one', 'two'
           , 0, 1
@@ -74,10 +74,9 @@ describe.each([
           const alwaysFalse = getFn(() => false)
 
           const result = flattenByAsync(iter, alwaysFalse)
-          const isIter = isAsyncIterable(result)
           const arrResult = await toArrayAsync(result)
 
-          expect(isIter).toBe(true)
+          expect(result).toBeAsyncIterable()
           expect(result).not.toBe(iter)
           expect(arrResult).toEqual([0, [1]])
         })
@@ -89,10 +88,9 @@ describe.each([
           const fn = getFn(() => true)
 
           const result = flattenByAsync(iter, fn)
-          const isIter = isAsyncIterable(result)
           const arrResult = await toArrayAsync(result)
 
-          expect(isIter).toBe(true)
+          expect(result).toBeAsyncIterable()
           expect(arrResult).toEqual([])
         })
       })
@@ -103,10 +101,9 @@ describe.each([
           const fn = getFn(() => true)
 
           const result = flattenByAsync(iter, fn)
-          const isIter = isAsyncIterable(result)
           const arrResult = await toArrayAsync(result)
 
-          expect(isIter).toBe(true)
+          expect(result).toBeAsyncIterable()
           expect(arrResult).toEqual(['1', '2', '3'])
         })
       })
@@ -118,10 +115,9 @@ describe.each([
           const fn = getFn(() => { throw customError })
 
           const result = flattenByAsync(iter, fn)
-          const isIter = isAsyncIterable(result)
           const err = await getErrorAsync(toArrayAsync(result))
 
-          expect(isIter).toBe(true)
+          expect(result).toBeAsyncIterable()
           expect(err).toBe(customError)
         })
       })

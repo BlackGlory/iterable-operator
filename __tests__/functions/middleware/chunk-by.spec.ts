@@ -1,10 +1,11 @@
 import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { isIterable, toArray, getCalledTimes, consume, MarkIterable } from '@test/utils'
+import { toArray, getCalledTimes, consume, MarkIterable } from '@test/utils'
 import { chunkBy as call } from '@middleware/chunk-by'
 import { chunkBy as pipe } from '@style/pipeline/middleware/chunk-by'
 import { chunkBy as bind } from '@style/binding/middleware/chunk-by'
 import { IterableOperator } from '@style/chaining/iterable-operator'
 import { getError } from 'return-style'
+import '@test/matchers'
 
 describe.each([
   testCall('chunkBy<T>(iterable: Iterable<T>, fn: (element: T, index: number) => boolean): Iterable<T[]>', call)
@@ -37,10 +38,9 @@ describe.each([
         const atTwo = (x: number) => x === 2
 
         const result = chunkBy(iter, atTwo)
-        const isIter = isIterable(result)
         const arrResult = toArray(result)
 
-        expect(isIter).toBe(true)
+        expect(result).toBeIterable()
         expect(arrResult).toEqual([[1, 2], [3]])
       })
     })
@@ -51,10 +51,9 @@ describe.each([
         const atThree = (x: number) => x === 3
 
         const result = chunkBy(iter, atThree)
-        const isIter = isIterable(result)
         const arrResult = toArray(result)
 
-        expect(isIter).toBe(true)
+        expect(result).toBeIterable()
         expect(arrResult).toEqual([[1, 2, 3]])
       })
     })
@@ -66,10 +65,9 @@ describe.each([
       const alwaysFalse = () => false
 
       const result = chunkBy(iter, alwaysFalse)
-      const isIter = isIterable(result)
       const arrResult = toArray(result)
 
-      expect(isIter).toBe(true)
+      expect(result).toBeIterable()
       expect(arrResult).toEqual([[1, 2, 3]])
     })
   })
@@ -94,10 +92,9 @@ describe.each([
       const fn = () => { throw customError }
 
       const result = chunkBy(iter, fn)
-      const isIter = isIterable(result)
       const err = getError(() => toArray(result))
 
-      expect(isIter).toBe(true)
+      expect(result).toBeIterable()
       expect(err).toBe(customError)
     })
   })

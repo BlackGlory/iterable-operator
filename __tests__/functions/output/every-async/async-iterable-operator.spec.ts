@@ -3,6 +3,7 @@ import { testFunction, testAsyncFunction } from '@test/test-fixtures'
 import { toAsyncIterable } from '@test/utils'
 import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
 import { asyncMethod } from '@test/style-helpers'
+import '@test/matchers'
 
 const everyAsync = asyncMethod(AsyncIterableOperator.prototype.everyAsync)
 const getIter = toAsyncIterable
@@ -45,7 +46,7 @@ describe('AsyncIterableOperator<T>::everyAsync(fn: (element: T, index: number) =
         const result = everyAsync(iter, isNumber)
         const proResult = await result
 
-        expect(result).toBeInstanceOf(Promise)
+        expect(result).toBePromise()
         expect(proResult).toBe(true)
       })
     })
@@ -58,7 +59,7 @@ describe('AsyncIterableOperator<T>::everyAsync(fn: (element: T, index: number) =
         const result = everyAsync(iter, fn)
         const proResult = await result
 
-        expect(result).toBeInstanceOf(Promise)
+        expect(result).toBePromise()
         expect(proResult).toBe(false)
       })
     })

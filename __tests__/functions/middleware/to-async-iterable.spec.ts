@@ -1,9 +1,10 @@
-import { isAsyncIterable, toArrayAsync, MarkIterable } from '@test/utils'
+import { toArrayAsync, MarkIterable } from '@test/utils'
 import { testCall, testPipe, testBind, testIterableChainAsync } from '@test/test-fixtures'
 import { toAsyncIterable as call } from '@middleware/to-async-iterable'
 import { toAsyncIterable as pipe } from '@style/pipeline/middleware/to-async-iterable'
 import { toAsyncIterable as bind } from '@style/binding/middleware/to-async-iterable'
 import { IterableOperator } from '@style/chaining/iterable-operator'
+import '@test/matchers'
 
 describe.each([
   testCall('toAsyncIterable<T>(iterable: Iterable<T>): AsyncIterable<T>', call)
@@ -17,10 +18,9 @@ describe.each([
         const iter = [1, 2, 3]
 
         const result = toAsyncIterable(iter)
-        const isAsyncIter = isAsyncIterable(result)
         const arrResult = await toArrayAsync(result)
 
-        expect(isAsyncIter).toBe(true)
+        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([1, 2, 3])
       })
 
@@ -44,10 +44,9 @@ describe.each([
         const iter = [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)]
 
         const result = toAsyncIterable(iter)
-        const isAsyncIter = isAsyncIterable(result)
         const arrResult = await toArrayAsync(result)
 
-        expect(isAsyncIter).toBe(true)
+        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([1, 2, 3])
       })
     })

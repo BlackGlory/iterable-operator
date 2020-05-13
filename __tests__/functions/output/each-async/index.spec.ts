@@ -3,6 +3,7 @@ import { testFunction, testAsyncFunction, testIterable, testAsyncIterable, testC
 import { eachAsync as call } from '@output/each-async'
 import { eachAsync as pipe } from '@style/pipeline/output/each-async'
 import { eachAsync as bind } from '@style/binding/output/each-async'
+import '@test/matchers'
 
 describe.each([
   testCall('eachAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => unknown | PromiseLike<unknown>): Promise<void>', call)
@@ -56,7 +57,7 @@ describe.each([
           const result = eachAsync(iter, pushToSideResult)
           const proResult = await result
 
-          expect(result).toBeInstanceOf(Promise)
+          expect(result).toBePromise()
           expect(proResult).toBeUndefined()
           expect(sideResult).toEqual([[1, 0], [2, 1], [3, 2]])
         })

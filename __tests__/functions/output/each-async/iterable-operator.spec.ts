@@ -3,6 +3,7 @@ import { toIterable } from '@test/utils'
 import { testFunction, testAsyncFunction } from '@test/test-fixtures'
 import { method } from '@test/style-helpers'
 import { IterableOperator } from '@style/chaining/iterable-operator'
+import '@test/matchers'
 
 const eachAsync = method(IterableOperator.prototype.eachAsync)
 const getIter = toIterable
@@ -51,7 +52,7 @@ describe('IterableOperator<T>::eachAsync(fn: (element: T, index: number) => unkn
         const result = eachAsync(iter, pushToSideResult)
         const proResult = await result
 
-        expect(result).toBeInstanceOf(Promise)
+        expect(result).toBePromise()
         expect(proResult).toBeUndefined()
         expect(sideResult).toEqual([[1, 0], [2, 1], [3, 2]])
       })

@@ -1,9 +1,10 @@
 import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { isIterable, toArray, MarkIterable } from '@test/utils'
+import { toArray, MarkIterable } from '@test/utils'
 import { uniq as call } from '@middleware/uniq'
 import { uniq as pipe } from '@style/pipeline/middleware/uniq'
 import { uniq as bind } from '@style/binding/middleware/uniq'
 import { IterableOperator } from '@style/chaining/iterable-operator'
+import '@test/matchers'
 
 describe.each([
   testCall('uniq<T>(iterable: Iterable<T>): Iterable<T>', call)
@@ -16,10 +17,9 @@ describe.each([
       const iter = [1, 1, 2, 2, 3, 3]
 
       const result = uniq(iter)
-      const isIter = isIterable(result)
       const arrResult = toArray(result)
 
-      expect(isIter).toBe(true)
+      expect(result).toBeIterable()
       expect(arrResult).toEqual([1, 2, 3])
     })
 

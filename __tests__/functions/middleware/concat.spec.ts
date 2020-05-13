@@ -1,11 +1,12 @@
 import { getError } from 'return-style'
 import { InvalidArgumentsLengthError } from '@src/error'
 import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { isIterable, toArray, MarkIterable } from '@test/utils'
+import { toArray, MarkIterable } from '@test/utils'
 import { concat as call } from '@middleware/concat'
 import { concat as pipe } from '@style/pipeline/middleware/concat'
 import { concat as bind } from '@style/binding/middleware/concat'
 import { IterableOperator } from '@style/chaining/iterable-operator'
+import '@test/matchers'
 
 describe.each([
   testCall('concat<T>(...iterables: Array<Iterable<unknown>>): Iterable<T>', call)
@@ -43,10 +44,9 @@ describe.each([
       const iter2 = ['a', 'b', 'c']
 
       const result = concat(iter1, iter2)
-      const isIter = isIterable(result)
       const arrResult = toArray(result)
 
-      expect(isIter).toBe(true)
+      expect(result).toBeIterable()
       expect(arrResult).toEqual([1, 2, 3, 'a', 'b', 'c'])
     })
   })

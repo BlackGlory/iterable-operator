@@ -1,9 +1,10 @@
 import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { isIterable, toArray, MarkIterable } from '@test/utils'
+import { toArray, MarkIterable } from '@test/utils'
 import { split as call } from '@middleware/split'
 import { split as pipe } from '@style/pipeline/middleware/split'
 import { split as bind } from '@style/binding/middleware/split'
 import { IterableOperator } from '@style/chaining/iterable-operator'
+import '@test/matchers'
 
 describe.each([
   testCall('split<T>(iterable: Iterable<T>, separator: T): Iterable<T[]>', call)
@@ -18,10 +19,9 @@ describe.each([
         const sep = 1
 
         const result = split(iter, sep)
-        const isIter = isIterable(result)
         const arrResult = toArray(result)
 
-        expect(isIter).toBe(true)
+        expect(result).toBeIterable()
         expect(arrResult).toEqual([[], [2, 3, 4, 5]])
       })
     })
@@ -32,10 +32,9 @@ describe.each([
         const sep = 3
 
         const result = split(iter, sep)
-        const isIter = isIterable(result)
         const arrResult = toArray(result)
 
-        expect(isIter).toBe(true)
+        expect(result).toBeIterable()
         expect(arrResult).toEqual([[1, 2], [4, 5]])
       })
     })
@@ -46,10 +45,9 @@ describe.each([
         const sep = 5
 
         const result = split(iter, sep)
-        const isIter = isIterable(result)
         const arrResult = toArray(result)
 
-        expect(isIter).toBe(true)
+        expect(result).toBeIterable()
         expect(arrResult).toEqual([[1, 2, 3, 4], []])
       })
     })
@@ -61,10 +59,9 @@ describe.each([
       const sep = 0
 
       const result = split(iter, sep)
-      const isIter = isIterable(result)
       const arrResult = toArray(result)
 
-      expect(isIter).toBe(true)
+      expect(result).toBeIterable()
       expect(arrResult).toEqual([[1, 2, 3, 4, 5]])
     })
   })

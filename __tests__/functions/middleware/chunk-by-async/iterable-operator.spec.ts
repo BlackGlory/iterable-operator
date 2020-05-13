@@ -1,8 +1,9 @@
 import { testFunction, testAsyncFunction } from '@test/test-fixtures'
-import { toIterable, getCalledTimes, consumeAsync, isAsyncIterable, toArrayAsync, MarkIterable } from '@test/utils'
+import { toIterable, getCalledTimes, consumeAsync, toArrayAsync, MarkIterable } from '@test/utils'
 import { IterableOperator } from '@style/chaining/iterable-operator'
 import { getErrorAsync } from 'return-style'
 import { iterableChainAsync } from '@test/style-helpers'
+import '@test/matchers'
 
 const chunkByAsync = iterableChainAsync(IterableOperator.prototype.chunkByAsync)
 const getIter = toIterable
@@ -62,10 +63,9 @@ describe('IterableOperator<T>::chunkByAsync(fn: (element: T, index: number) => b
           const atTwo = getFn((x: number) =>  x === 2)
 
           const result = chunkByAsync(iter, atTwo)
-          const isIter = isAsyncIterable(result)
           const arrResult = await toArrayAsync(result)
 
-          expect(isIter).toBe(true)
+          expect(result).toBeAsyncIterable()
           expect(arrResult).toEqual([[1, 2], [3]])
         })
       })
@@ -76,10 +76,9 @@ describe('IterableOperator<T>::chunkByAsync(fn: (element: T, index: number) => b
           const atThree = getFn((x: number) =>  x === 3)
 
           const result = chunkByAsync(iter, atThree)
-          const isIter = isAsyncIterable(result)
           const arrResult = await toArrayAsync(result)
 
-          expect(isIter).toBe(true)
+          expect(result).toBeAsyncIterable()
           expect(arrResult).toEqual([[1, 2, 3]])
         })
       })
@@ -91,10 +90,9 @@ describe('IterableOperator<T>::chunkByAsync(fn: (element: T, index: number) => b
         const alwaysFalse = getFn(() => false)
 
         const result = chunkByAsync(iter, alwaysFalse)
-        const isIter = isAsyncIterable(result)
         const arrResult = await toArrayAsync(result)
 
-        expect(isIter).toBe(true)
+        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([[1, 2, 3]])
       })
     })
@@ -120,10 +118,9 @@ describe('IterableOperator<T>::chunkByAsync(fn: (element: T, index: number) => b
         const fn = getFn(() => { throw customError })
 
         const result = chunkByAsync(iter, fn)
-        const isIter = isAsyncIterable(result)
         const err = await getErrorAsync(toArrayAsync(result))
 
-        expect(isIter).toBe(true)
+        expect(result).toBeAsyncIterable()
         expect(err).toBe(customError)
       })
     })

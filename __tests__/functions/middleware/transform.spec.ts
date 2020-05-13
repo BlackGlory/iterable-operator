@@ -1,10 +1,11 @@
 import { testCall, testPipe, testBind, testMethod } from '@test/test-fixtures'
-import { toArray, isIterable, MarkIterable } from '@test/utils'
+import { toArray, MarkIterable } from '@test/utils'
 import { transform as call } from '@middleware/transform'
 import { transform as pipe } from '@style/pipeline/middleware/transform'
 import { transform as bind } from '@style/binding/middleware/transform'
 import { IterableOperator } from '@style/chaining/iterable-operator'
 import { getError } from 'return-style'
+import '@test/matchers'
 
 describe.each([
   testCall('transform<T, U>(iterable: Iterable<T>, transformer: (iterable: Iterable<T>) => Iterable<U>): Iterable<U>', call)
@@ -22,10 +23,9 @@ describe.each([
       }
 
       const result = transform(iter, double)
-      const isIter = isIterable(result)
       const arrResult = toArray(result)
 
-      expect(isIter).toBe(true)
+      expect(result).toBeIterable()
       expect(arrResult).toEqual([2, 4, 6])
     })
 
