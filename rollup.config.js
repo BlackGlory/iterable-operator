@@ -1,26 +1,68 @@
 import typescript from '@rollup/plugin-typescript'
+import { terser } from 'rollup-plugin-terser'
 
 function createOptions({ directory, target }) {
   return [
     {
       input: 'src/index.ts'
     , output: createOutput('index')
-    , plugins: createPlugins(target)
+    , plugins: [
+        typescript({ target })
+      ]
     }
   , {
       input: 'src/style/pipeline/index.ts'
     , output: createOutput('pipeline')
-    , plugins: createPlugins(target)
+    , plugins: [
+        typescript({ target })
+      ]
     }
   , {
       input: 'src/style/binding/index.ts'
     , output: createOutput('binding')
-    , plugins: createPlugins(target)
+    , plugins: [
+        typescript({ target })
+      ]
     }
   , {
       input: 'src/style/chaining/index.ts'
     , output: createOutput('chaining')
-    , plugins: createPlugins(target)
+    , plugins: [
+        typescript({ target })
+      ]
+    }
+
+  , {
+      input: 'src/index.ts'
+    , output: createMinification('index')
+    , plugins: [
+        typescript({ target })
+      , terser()
+      ]
+    }
+  , {
+      input: 'src/style/pipeline/index.ts'
+    , output: createMinification('pipeline')
+    , plugins: [
+        typescript({ target })
+      , terser()
+      ]
+    }
+  , {
+      input: 'src/style/binding/index.ts'
+    , output: createMinification('binding')
+    , plugins: [
+        typescript({ target })
+      , terser()
+      ]
+    }
+  , {
+      input: 'src/style/chaining/index.ts'
+    , output: createMinification('chaining')
+    , plugins: [
+        typescript({ target })
+      , terser()
+      ]
     }
   ]
 
@@ -40,9 +82,19 @@ function createOptions({ directory, target }) {
     ]
   }
 
-  function createPlugins(target) {
+  function createMinification(name) {
     return [
-      typescript({ target })
+      {
+        file: `dist/${directory}/${name}.min.mjs`
+      , format: 'es'
+      , sourcemap: true
+      }
+    , {
+        file: `dist/${directory}/${name}.umd.min.js`
+      , format: 'umd'
+      , name: 'IterableOperator'
+      , sourcemap: true
+      }
     ]
   }
 }
