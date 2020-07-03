@@ -1,10 +1,10 @@
 import { isAsyncIterable } from '../utils'
 
-export function flattenByAsync(iterable: Iterable<unknown> | AsyncIterable<unknown>, fn: (element: unknown, level: number) => boolean | PromiseLike<unknown>): AsyncIterable<any> {
+export function flattenByAsync<T>(iterable: Iterable<unknown> | AsyncIterable<unknown>, fn: (element: unknown, level: number) => boolean | PromiseLike<unknown>): AsyncIterable<T> {
   if (isAsyncIterable(iterable)) {
-    return flattenByAsyncIterable(iterable)
+    return flattenByAsyncIterable(iterable) as AsyncIterable<T>
   } else {
-    return flattenByIterable(iterable)
+    return flattenByIterable(iterable) as AsyncIterable<T>
   }
 
   async function* flattenByAsyncIterable(iterable: AsyncIterable<unknown>) {

@@ -7,6 +7,6 @@ export class SliceOperator<T> extends IterableOperatorBase<T> {
   slice(start: number): IterableOperator<T>
   slice(start: number, end: number): IterableOperator<T>
   slice(...args: unknown[]) {
-    return applyChaining(this, target, args)
+    return applyChaining(this.subject, target, args)
   }
 }

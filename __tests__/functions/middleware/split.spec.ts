@@ -1,17 +1,8 @@
-import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { toArray, MarkIterable } from '@test/utils'
-import { split as call } from '@middleware/split'
-import { split as pipe } from '@style/pipeline/middleware/split'
-import { split as bind } from '@style/binding/middleware/split'
-import { IterableOperator } from '@style/chaining/iterable-operator'
+import { toArray, MockIterable, take } from '@test/utils'
+import { split } from '@middleware/split'
 import '@test/matchers'
 
-describe.each([
-  testCall('split<T>(iterable: Iterable<T>, separator: T): Iterable<T[]>', call)
-, testPipe('split<T>(separator: T): (iterable: Iterable<T>) => Iterable<T[]>', pipe)
-, testBind('split<T>(this: Iterable<T>, separator: T): Iterable<T[]>', bind)
-, testIterableChain('IterableOperator<T>::split(separator: T): IterableOperator<T[]>', IterableOperator.prototype.split)
-])('%s', (_, split) => {
+describe('split<T>(iterable: Iterable<T>, separator: T): Iterable<T[]>', () => {
   describe('separator in iterable', () => {
     describe('separator is first', () => {
       it('return splited iterable', () => {
@@ -66,16 +57,16 @@ describe.each([
     })
   })
 
-  it('lazy evaluation', () => {
-    const iter = new MarkIterable()
-    const sep = 3
+  it('lazy and partial evaluation', () => {
+    const iter = new MockIterable([1, 2, 3])
+    const sep = 1
 
     const result = split(iter, sep)
-    const isEval1 = iter.isEvaluated()
-    toArray(result)
-    const isEval2 = iter.isEvaluated()
+    const isLazy = iter.nextIndex === 0
+    toArray(take(result, 1))
+    const isPartial = iter.nextIndex === 1
 
-    expect(isEval1).toBe(false)
-    expect(isEval2).toBe(true)
+    expect(isLazy).toBe(true)
+    expect(isPartial).toBe(true)
   })
 })

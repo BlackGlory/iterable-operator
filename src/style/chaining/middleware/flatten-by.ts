@@ -4,8 +4,8 @@ import { IterableOperatorBase } from '../iterable-operator-base'
 import { IterableOperator } from '../iterable-operator'
 
 export class FlattenByOperator<T> extends IterableOperatorBase<T> {
-  flattenBy<U>(fn: (element: unknown, level: number) => boolean): IterableOperator<U>
+  flattenBy<T>(fn: (element: unknown, level: number) => boolean): IterableOperator<T>
   flattenBy(...args: unknown[]) {
-    return applyChaining(this, target, args)
+    return applyChaining(this.subject, target, args)
   }
 }

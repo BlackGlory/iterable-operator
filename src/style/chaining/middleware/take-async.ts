@@ -6,6 +6,6 @@ import { takeAsync as target } from '@middleware/take-async'
 export class TakeAsyncOperator<T> extends AsyncIterableOperatorBase<T> {
   takeAsync(count: number): AsyncIterableOperator<T>
   takeAsync(...args: unknown[]) {
-    return applyChainingAsync(this, target, args)
+    return applyChainingAsync(this.subject, target, args)
   }
 }

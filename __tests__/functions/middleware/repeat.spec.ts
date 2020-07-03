@@ -1,30 +1,21 @@
 import { InvalidArgumentError } from '@src/error'
-import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { toArray, MarkIterable } from '@test/utils'
+import { toArray, MockIterable, take } from '@test/utils'
 import { getError } from 'return-style'
-import { repeat as call } from '@middleware/repeat'
-import { repeat as pipe } from '@style/pipeline/middleware/repeat'
-import { repeat as bind } from '@style/binding/middleware/repeat'
-import { IterableOperator } from '@style/chaining/iterable-operator'
+import { repeat } from '@middleware/repeat'
 import '@test/matchers'
 
-describe.each([
-  testCall('repeat<T>(iterable: Iterable<T>, times: number): Iterable<T>', call)
-, testPipe('repeat<T>(times: number): (iterable: Iterable<T>) => Iterable<T>', pipe)
-, testBind('repeat<T>(this: Iterable<T>, times: number): Iterable<T>', bind)
-, testIterableChain('IterableOperator<T>::repeat(times: number) => IterableOperator<T>', IterableOperator.prototype.repeat)
-])('%s', (_, repeat) => {
-  it('lazy evaluation', () => {
-    const iter = new MarkIterable()
+describe('repeat<T>(iterable: Iterable<T>, times: number): Iterable<T>', () => {
+  it('lazy and partial evaluation', () => {
+    const iter = new MockIterable([1, 2, 3])
     const times = 2
 
     const result = repeat(iter, times)
-    const isEval1 = iter.isEvaluated()
-    toArray(result)
-    const isEval2 = iter.isEvaluated()
+    const isLazy = iter.nextIndex === 0
+    toArray(take(result, 1))
+    const isPartial = iter.nextIndex === 1
 
-    expect(isEval1).toBe(false)
-    expect(isEval2).toBe(true)
+    expect(isLazy).toBe(true)
+    expect(isPartial).toBe(true)
   })
 
   describe('times > 0', () => {

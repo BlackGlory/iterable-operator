@@ -5,10 +5,11 @@ export function takeAsync<T>(iterable: AsyncIterable<T>, count: number): AsyncIt
   if (count < 0) throw new InvalidArgumentError('count', '>= 0')
 
   return (async function* () {
+    if (count === 0) return
     for await (const element of iterable) {
-      if (count <= 0) break
       yield element
       count--
+      if (count === 0) break
     }
   })()
 }

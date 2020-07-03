@@ -1,18 +1,9 @@
 import { getError } from 'return-style'
-import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { toArray, getCalledTimes, consume, MarkIterable } from '@test/utils'
-import { uniqBy as call } from '@middleware/uniq-by'
-import { uniqBy as pipe } from '@style/pipeline/middleware/uniq-by'
-import { uniqBy as bind } from '@style/binding/middleware/uniq-by'
-import { IterableOperator } from '@style/chaining/iterable-operator'
+import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils'
+import { uniqBy } from '@middleware/uniq-by'
 import '@test/matchers'
 
-describe.each([
-  testCall('uniqBy<T, U>(iterable: Iterable<T>, fn: (element: T, index: number) => U): Iterable<T>', call)
-, testPipe('uniqBy<T, U>(fn: (element: T, index: number) => U): (iterable: Iterable<T>) => Iterable<T>', pipe)
-, testBind('uniqBy<T, U>(this: Iterable<T>, fn: (element: T, index: number) => U): Iterable<T>', bind)
-, testIterableChain('IterableOperator<T>::uniqBy<U>(fn: (element: T, index: number) => U): IterableOperator<T>', IterableOperator.prototype.uniqBy)
-])('%s', (_, uniqBy) => {
+describe('uniqBy<T, U>(iterable: Iterable<T>, fn: (element: T, index: number) => U): Iterable<T>', () => {
   describe('fn called', () => {
     it('called with [element,index]', () => {
       const iter = [1, 2, 3]
@@ -43,17 +34,17 @@ describe.each([
       expect(arrResult).toEqual([1, 2])
     })
 
-    it('lazy evaluation', () => {
-      const iter = new MarkIterable()
-      const fn = jest.fn()
+    it('lazy and partial evaluation', () => {
+      const iter = new MockIterable([1, 2, 3])
+      const fn = () => true
 
       const result = uniqBy(iter, fn)
-      const isEval1 = iter.isEvaluated()
-      toArray(result)
-      const isEval2 = iter.isEvaluated()
+      const isLazy = iter.nextIndex === 0
+      toArray(take(result, 1))
+      const isPartial = iter.nextIndex === 1
 
-      expect(isEval1).toBe(false)
-      expect(isEval2).toBe(true)
+      expect(isLazy).toBe(true)
+      expect(isPartial).toBe(true)
     })
   })
 

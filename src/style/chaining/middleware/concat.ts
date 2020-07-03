@@ -46,6 +46,6 @@ export class ConcatOperator<T> extends IterableOperatorBase<T> {
   ): IterableOperator<T | T1 | T2 | T3 | T4 | T5 | T6 | T7>
   concat<TResult>(...iterables: Iterable<unknown>[]): IterableOperator<TResult>
   concat(...args: unknown[]) {
-    return applyChaining(this, target, args)
+    return applyChaining(this.subject, target, args)
   }
 }

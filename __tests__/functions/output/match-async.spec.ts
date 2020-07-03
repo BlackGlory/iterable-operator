@@ -1,17 +1,8 @@
 import { toAsyncIterable } from '@test/utils'
-import { testCall, testPipe, testBind, testAsyncMethod } from '@test/test-fixtures'
-import { matchAsync as call } from '@output/match-async'
-import { matchAsync as pipe } from '@style/pipeline/output/match-async'
-import { matchAsync as bind } from '@style/binding/output/match-async'
-import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
+import { matchAsync } from '@output/match-async'
 import '@test/matchers'
 
-describe.each([
-  testCall('matchAsync<T>(iterable: AsyncItreable<T>, sequence: ArrayLike<T>): Promise<boolean>', call)
-, testPipe('matchAsync<T>(sequence: ArrayLike<T>): (iterable: AsyncIterable<T>) => Promise<boolean>', pipe)
-, testBind('matchAsync<T>(this: AsyncIterable<T>, sequence: ArrayLike<T>): Promise<boolean>', bind)
-, testAsyncMethod('AsyncIterableOperator<T>::matchAsync(sequence: ArrayLike<T>): Promise<boolean>', AsyncIterableOperator.prototype.matchAsync)
-])('%s', (_, matchAsync) => {
+describe('matchAsync<T>(iterable: AsyncItreable<T>, sequence: ArrayLike<T>): Promise<boolean>', () => {
   describe('sequence isnt empty', () => {
     describe('sequence is matched', () => {
       it('return true', async () => {

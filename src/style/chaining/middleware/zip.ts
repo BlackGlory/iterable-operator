@@ -46,6 +46,6 @@ export class ZipOperator<T> extends IterableOperatorBase<T> {
   ): IterableOperator<Array<T | T1 | T2 | T3 | T4 | T5 | T6 | T7>>
   zip<TResult>(...iterables: Iterable<unknown>[]): IterableOperator<TResult[]>
   zip(...args: unknown[]) {
-    return applyChaining(this, target, args)
+    return applyChaining(this.subject, target, args)
   }
 }

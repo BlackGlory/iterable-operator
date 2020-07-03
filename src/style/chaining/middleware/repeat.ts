@@ -6,6 +6,6 @@ import { IterableOperator } from '../iterable-operator'
 export class RepeatOperator<T> extends IterableOperatorBase<T> {
   repeat(times: number): IterableOperator<T>
   repeat(...args: unknown[]) {
-    return applyChaining(this, target, args)
+    return applyChaining(this.subject, target, args)
   }
 }

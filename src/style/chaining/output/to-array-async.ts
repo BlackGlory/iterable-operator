@@ -5,6 +5,6 @@ import { toArrayAsync as target } from '@output/to-array-async'
 export class ToArrayAsyncOperator<T> extends AsyncIterableOperatorBase<T> {
   toArrayAsync(): Promise<T[]>
   toArrayAsync(...args: unknown[]) {
-    return applyBinding(this, target, args)
+    return applyBinding(this.subject, target, args)
   }
 }

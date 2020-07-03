@@ -5,6 +5,6 @@ import { IterableOperatorBase } from '../iterable-operator-base'
 export class SomeOperator<T> extends IterableOperatorBase<T> {
   some(fn: (element: T, index: number) => boolean): boolean
   some(...args: unknown[]) {
-    return applyBinding(this, target, args)
+    return applyBinding(this.subject, target, args)
   }
 }

@@ -1,30 +1,21 @@
 import { getError } from 'return-style'
 import { InvalidArgumentError } from '@src/error'
-import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { toArray, MarkIterable } from '@test/utils'
-import { chunk as call } from '@middleware/chunk'
-import { chunk as pipe } from '@style/pipeline/middleware/chunk'
-import { chunk as bind } from '@style/binding/middleware/chunk'
-import { IterableOperator } from '@style/chaining/iterable-operator'
+import { toArray, MockIterable, take } from '@test/utils'
+import { chunk } from '@middleware/chunk'
 import '@test/matchers'
 
-describe.each([
-  testCall('chunk<T>(iterable: Iterable<T>, size: number): Iterable<T[]>', call)
-, testPipe('chunk<T>(size: number): (iterable: Iterable<T>) => Iterable<T[]>', pipe)
-, testBind('chunk<T>(this: Iterable<T>, size: number): Iterable<T[]>', bind)
-, testIterableChain('IterableOperator<T>::chunk(size: number): IterableOperator<T[]>', IterableOperator.prototype.chunk)
-])('%s', (_, chunk) => {
-  it('lazy evaluation', () => {
-    const iter = new MarkIterable()
-    const size = 2
+describe('chunk<T>(iterable: Iterable<T>, size: number): Iterable<T[]>', () => {
+  it('lazy and partial evaluation', () => {
+    const iter = new MockIterable([1, 2, 3])
+    const size = 1
 
     const result = chunk(iter, size)
-    const isEval1 = iter.isEvaluated()
-    toArray(result)
-    const isEval2 = iter.isEvaluated()
+    const isLazy = iter.nextIndex === 0
+    toArray(take(result, 1))
+    const isPartial = iter.nextIndex === 1
 
-    expect(isEval1).toBe(false)
-    expect(isEval2).toBe(true)
+    expect(isLazy).toBe(true)
+    expect(isPartial).toBe(true)
   })
 
   describe('size > 0', () => {

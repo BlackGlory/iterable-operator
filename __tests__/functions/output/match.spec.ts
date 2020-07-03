@@ -1,15 +1,6 @@
-import { testCall, testPipe, testBind, testMethod } from '@test/test-fixtures'
-import { match as call } from '@output/match'
-import { match as pipe } from '@style/pipeline/output/match'
-import { match as bind } from '@style/binding/output/match'
-import { IterableOperator } from '@style/chaining/iterable-operator'
+import { match } from '@output/match'
 
-describe.each([
-  testCall('match<T>(iterable: Iterable<T>, sequence: ArrayLike<T>): boolean', call)
-, testPipe('match<T>(sequence: ArrayLike<T>): (iterable: Iterable<T>) => boolean', pipe)
-, testBind('match<T>(this: Iterable<T>, sequence: ArrayLike<T>): boolean', bind)
-, testMethod('IterableOperator<T>::match(sequence: ArrayLike<T>): boolean', IterableOperator.prototype.match)
-])('%s', (_, match) => {
+describe('match<T>(iterable: Iterable<T>, sequence: ArrayLike<T>): boolean', () => {
   describe('sequence isnt empty', () => {
     describe('sequence is matched', () => {
       it('return true', () => {

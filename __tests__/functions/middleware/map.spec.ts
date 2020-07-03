@@ -1,18 +1,9 @@
 import { getError } from 'return-style'
-import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { toArray, getCalledTimes, consume, MarkIterable } from '@test/utils'
-import { map as call } from '@middleware/map'
-import { map as pipe } from '@style/pipeline/middleware/map'
-import { map as bind } from '@style/binding/middleware/map'
-import { IterableOperator } from '@style/chaining/iterable-operator'
+import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils'
+import { map } from '@middleware/map'
 import '@test/matchers'
 
-describe.each([
-  testCall('map<T, U>(iterable: Iterable<T>, fn: (element: T, index: number) => U): Iterable<U>', call)
-, testPipe('map<T, U>(fn: (element: T, index: number) => U): (iterable: Iterable<T>) => Iterable<U>', pipe)
-, testBind('map<T, U>(this: Iterable<T>, fn: (element: T, index: number) => U): Iterable<U>', bind)
-, testIterableChain('IterableOperator<T>::map<U>(fn: (element: T, index: number) => U): IterableOperator<U>', IterableOperator.prototype.map)
-])('%s', (_, map) => {
+describe('map<T, U>(iterable: Iterable<T>, fn: (element: T, index: number) => U): Iterable<U>', () => {
   describe('fn called', () => {
     it('called with [element,index]', () => {
       const iter = [1, 2, 3]
@@ -43,17 +34,17 @@ describe.each([
       expect(arrResult).toEqual([2, 4, 6])
     })
 
-    it('lazy evaluation', () => {
-      const iter = new MarkIterable()
+    it('lazy and partial evaluation', () => {
+      const iter = new MockIterable([1, 2, 3])
       const fn = jest.fn()
 
       const result = map(iter, fn)
-      const isEval1 = iter.isEvaluated()
-      toArray(result)
-      const isEval2 = iter.isEvaluated()
+      const isLazy = iter.nextIndex === 0
+      toArray(take(result, 1))
+      const isPartial = iter.nextIndex === 1
 
-      expect(isEval1).toBe(false)
-      expect(isEval2).toBe(true)
+      expect(isLazy).toBe(true)
+      expect(isPartial).toBe(true)
     })
   })
 

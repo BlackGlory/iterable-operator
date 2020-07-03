@@ -5,6 +5,6 @@ import { toSetAsync as target } from '@output/to-set-async'
 export class ToSetAsyncOperator<T> extends AsyncIterableOperatorBase<T> {
   toSetAsync(): Promise<Set<T>>
   toSetAsync(...args: unknown[]) {
-    return applyBinding(this, target, args)
+    return applyBinding(this.subject, target, args)
   }
 }

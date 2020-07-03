@@ -6,6 +6,6 @@ import { takeRightAsync as target } from '@middleware/take-right-async'
 export class TakeRightAsyncOperator<T> extends AsyncIterableOperatorBase<T> {
   takeRightAsync(count: number): AsyncIterableOperator<T>
   takeRightAsync(...args: unknown[]) {
-    return applyChainingAsync(this, target, args)
+    return applyChainingAsync(this.subject, target, args)
   }
 }

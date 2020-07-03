@@ -1,30 +1,21 @@
 import { getError } from 'return-style'
 import { InvalidArgumentError } from '@src/error'
-import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { toArray, MarkIterable } from '@test/utils'
-import { flattenDeep as call } from '@middleware/flatten-deep'
-import { flattenDeep as pipe } from '@style/pipeline/middleware/flatten-deep'
-import { flattenDeep as bind } from '@style/binding/middleware/flatten-deep'
-import { IterableOperator } from '@style/chaining/iterable-operator'
+import { toArray, MockIterable, take } from '@test/utils'
+import { flattenDeep } from '@middleware/flatten-deep'
 import '@test/matchers'
 
-describe.each([
-  testCall('flattenDeep<T>(iterable: Iterable<unknown>, depth: number): Iterable<T>', call)
-, testPipe('flattenDeep<T>(depth: number): (iterable: Iterable<unknown>) => Iterable<T>', pipe)
-, testBind('flattenDeep<T>(this: Iterable<unknown>, depth: number): Iterable<T>', bind)
-, testIterableChain('IterableOperator<unknown>::flattenDeep<T>(depth: number): IterableOperator<T>', IterableOperator.prototype.flattenDeep)
-])('%s', (_, flattenDeep) => {
-  it('lazy evaluation', () => {
-    const iter = new MarkIterable()
+describe('flattenDeep<T>(iterable: Iterable<unknown>, depth: number): Iterable<T>', () => {
+  it('lazy and partial evaluation', () => {
+    const iter = new MockIterable([1, 2, 3])
     const depth = Infinity
 
     const result = flattenDeep(iter, depth)
-    const isEval1 = iter.isEvaluated()
-    toArray(result)
-    const isEval2 = iter.isEvaluated()
+    const isLazy = iter.nextIndex === 0
+    toArray(take(result, 1))
+    const isPartial = iter.nextIndex === 1
 
-    expect(isEval1).toBe(false)
-    expect(isEval2).toBe(true)
+    expect(isLazy).toBe(true)
+    expect(isPartial).toBe(true)
   })
 
   describe('iterable is empty', () => {

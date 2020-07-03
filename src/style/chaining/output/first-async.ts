@@ -5,6 +5,6 @@ import { firstAsync as target } from '@output/first-async'
 export class FirstAsyncOperator<T> extends AsyncIterableOperatorBase<T> {
   firstAsync(): Promise<T>
   firstAsync(...args: unknown[]) {
-    return applyBinding(this, target, args)
+    return applyBinding(this.subject, target, args)
   }
 }

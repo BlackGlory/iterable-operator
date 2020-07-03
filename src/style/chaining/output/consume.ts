@@ -3,9 +3,8 @@ import { consume as target } from '@output/consume'
 import { Subject } from '../subject'
 
 export class ConsumeOperator<T, U extends Iterable<T> | AsyncIterable<T>> extends Subject<U> {
-  consume<V>(consumer: (iterable: U) => U): V
-  consume<V>(consumer: (iterable: U) => U): V
+  consume<T>(consumer: (iterable: U) => T): T
   consume(...args: unknown[]) {
-    return applyBinding(this, target, args)
+    return applyBinding(this.subject, target, args)
   }
 }

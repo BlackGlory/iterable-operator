@@ -6,6 +6,6 @@ import { chunkAsync as target } from '@middleware/chunk-async'
 export class ChunkAsyncOperator<T> extends AsyncIterableOperatorBase<T> {
   chunkAsync(size: number): AsyncIterableOperator<T[]>
   chunkAsync(...args: unknown[]) {
-    return applyChainingAsync(this, target, args)
+    return applyChainingAsync(this.subject, target, args)
   }
 }

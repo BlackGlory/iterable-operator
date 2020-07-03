@@ -1,3 +1,5 @@
+import 'jest-extended'
+
 expect.extend({
   toBeIterable(received: unknown) {
     if (isIterable(received)) {
@@ -38,6 +40,13 @@ expect.extend({
       }
     }
   }
+  // https://github.com/facebook/jest/issues/10241
+, toReturnWith(received: jest.MockInstance<unknown, unknown[]>, expected: unknown) {
+    return {
+      message: () => `expected ${received.mockName} to return with ${expected}`
+    , pass: received.mock.results.some(result => result.value === expected)
+    }
+  }
 })
 
 declare global {
@@ -61,5 +70,3 @@ function isPromise<T>(val: any): val is Promise<T> {
 function isIterable<T>(val: any): val is Iterable<T> {
   return val !== null && typeof val[Symbol.iterator] === 'function'
 }
-
-export {} // fuck tsc

@@ -1,0 +1,17 @@
+import * as middleware from '@middleware/split'
+import { split } from '@style/pipeline/middleware/split'
+import '@test/matchers'
+
+describe('split<T>(separator: T): (iterable: Iterable<T>) => Iterable<T[]>', () => {
+  it('is pipeline style', () => {
+    const spy = jest.spyOn(middleware, 'split')
+    const iter = [1, 2, 3]
+    const separator = 1
+
+    const result = split(separator)(iter)
+
+    expect(spy).toBeCalledWith(iter, separator)
+    expect(spy).toReturnWith(result)
+    spy.mockRestore()
+  })
+})

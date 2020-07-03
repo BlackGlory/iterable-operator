@@ -1,30 +1,19 @@
 import { getError } from 'return-style'
-import { toAsyncIterable, toArrayAsync, MarkAsyncIterable } from '@test/utils'
-import { testCall, testPipe, testBind, testAsyncIterableChain } from '@test/test-fixtures'
-import { dropRightAsync as call } from '@middleware/drop-right-async'
-import { dropRightAsync as pipe } from '@style/pipeline/middleware/drop-right-async'
-import { dropRightAsync as bind } from '@style/binding/middleware/drop-right-async'
-import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
+import { toAsyncIterable, toArrayAsync, MockAsyncIterable } from '@test/utils'
+import { dropRightAsync } from '@middleware/drop-right-async'
 import { InvalidArgumentError } from '@src/error'
 import '@test/matchers'
 
-describe.each([
-  testCall('dropRightAsync<T>(iterable: AsyncIterable<T>, count: number): AsyncIterable<T>', call)
-, testPipe('dropRightAsync<T>(count: number): (iterable: AsyncIterable<T>) => AsyncIterable<T>', pipe)
-, testBind('dropRightAsync<T>(this: AsyncIterable<T>, count: number): AsyncIterable<T>', bind)
-, testAsyncIterableChain('AsyncIterableOperator<T>::dropRightAsync(count: number): AsyncIterableOperator<T>', AsyncIterableOperator.prototype.dropRightAsync)
-])('%s', (_, dropRightAsync) => {
+describe('dropRightAsync<T>(iterable: AsyncIterable<T>, count: number): AsyncIterable<T>', () => {
   it('lazy evaluation', async () => {
-    const iter = new MarkAsyncIterable()
-    const count = 5
+    const iter = new MockAsyncIterable([1, 2, 3])
+    const count = 1
 
     const result = dropRightAsync(iter, count)
-    const isEval1 = iter.isEvaluated()
+    const isLazy = iter.nextIndex === 0
     await toArrayAsync(result)
-    const isEval2 = iter.isEvaluated()
 
-    expect(isEval1).toBe(false)
-    expect(isEval2).toBe(true)
+    expect(isLazy).toBe(true)
   })
 
   describe('count > 0', () => {

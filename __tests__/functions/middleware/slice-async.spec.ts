@@ -1,31 +1,22 @@
 import { getError } from 'return-style'
 import { InvalidArgumentError } from '@src/error'
-import { toAsyncIterable, toArrayAsync, MarkAsyncIterable } from '@test/utils'
-import { testCall, testPipe, testBind, testAsyncIterableChain } from '@test/test-fixtures'
-import { sliceAsync as call } from '@middleware/slice-async'
-import { sliceAsync as pipe } from '@style/pipeline/middleware/slice-async'
-import { sliceAsync as bind } from '@style/binding/middleware/slice-async'
-import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
+import { toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils'
+import { sliceAsync } from '@middleware/slice-async'
 import '@test/matchers'
 
-describe.each([
-  testCall('sliceAsync<T>(iterable: AsyncIterable<T>, start: number, end: number): AsyncIterable<T>', call)
-, testPipe('sliceAsync<T>(start: number, end: number): (iterable: AsyncIterable<T>) => AsyncIterable<T>', pipe)
-, testBind('sliceAsync<T>(this: AsyncIterable<T>, start: number, end: number): AsyncIterable<T>', bind)
-, testAsyncIterableChain('AsyncIterableOperator<T>::sliceAsync(start: number, end: number): AsyncIterableOperator<T>', AsyncIterableOperator.prototype.sliceAsync)
-])('%s', (_, sliceAsync) => {
-  it('lazy evaluation', async () => {
-    const iter = new MarkAsyncIterable()
+describe('sliceAsync<T>(iterable: AsyncIterable<T>, start: number, end: number): AsyncIterable<T>', () => {
+  it('lazy and partial evaluation', async () => {
+    const iter = new MockAsyncIterable([1, 2, 3])
     const start = 0
     const end = 10
 
     const result = sliceAsync(iter, start, end)
-    const isEval1 = iter.isEvaluated()
-    await toArrayAsync(result)
-    const isEval2 = iter.isEvaluated()
+    const isLazy = iter.nextIndex === 0
+    await toArrayAsync(takeAsync(result, 1))
+    const isPartial = iter.nextIndex === 1
 
-    expect(isEval1).toBe(false)
-    expect(isEval2).toBe(true)
+    expect(isLazy).toBe(true)
+    expect(isPartial).toBe(true)
   })
 
   describe('start < 0', () => {

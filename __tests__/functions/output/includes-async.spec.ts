@@ -1,17 +1,8 @@
 import { toAsyncIterable } from '@test/utils'
-import { testCall, testPipe, testBind, testAsyncMethod } from '@test/test-fixtures'
-import { includesAsync as call } from '@output/includes-async'
-import { includesAsync as pipe } from '@style/pipeline/output/includes-async'
-import { includesAsync as bind } from '@style/binding/output/includes-async'
-import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
+import { includesAsync } from '@output/includes-async'
 import '@test/matchers'
 
-describe.each([
-  testCall('includesAsync<T>(iterable: AsyncIterable<T>, value: T): Promise<boolean>', call)
-, testPipe('includesAsync<T>(value: T): (iterable: AsyncIterable<T>) => Promise<boolean>', pipe)
-, testBind('includesAsync<T>(this: AsyncIterable<T>, value: T): Promise<boolean>', bind)
-, testAsyncMethod('AsyncIterableOperator<T>::includesAsync(value: T): Promise<boolean>', AsyncIterableOperator.prototype.includesAsync)
-])('%s', (_, includesAsync) => {
+describe('includesAsync<T>(iterable: AsyncIterable<T>, value: T): Promise<boolean>', () => {
   describe('value is included in the iterable', () => {
     it('return true', async () => {
       const iter = toAsyncIterable([1, 2, 3])

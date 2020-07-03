@@ -1,30 +1,19 @@
 import { getError } from 'return-style'
 import { InvalidArgumentError } from '@src/error'
-import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { toArray, MarkIterable } from '@test/utils'
-import { dropRight as call } from '@middleware/drop-right'
-import { dropRight as pipe } from '@style/pipeline/middleware/drop-right'
-import { dropRight as bind} from '@style/binding/middleware/drop-right'
-import { IterableOperator } from '@style/chaining/iterable-operator'
+import { toArray, MockIterable } from '@test/utils'
+import { dropRight } from '@middleware/drop-right'
 import '@test/matchers'
 
-describe.each([
-  testCall('dropRight<T>(iterable: Iterable<T>, count: number): Iterable<T>', call)
-, testPipe('dropRight<T>(count: number): (iterable: Iterable<T>) => Iterable<T>', pipe)
-, testBind('dropRight<T>(this: Iterable<T>, count: number): Iterable<T>', bind)
-, testIterableChain('IterableOperator<T>::dropRight(count: number): IterableOperator<T>', IterableOperator.prototype.dropRight)
-])('%s', (_, dropRight) => {
+describe('dropRight<T>(iterable: Iterable<T>, count: number): Iterable<T>', () => {
   it('lazy evaluation', () => {
-    const iter = new MarkIterable()
-    const count = 5
+    const iter = new MockIterable([1, 2, 3])
+    const count = 1
 
     const result = dropRight(iter, count)
-    const isEval1 = iter.isEvaluated()
+    const isEval1 = iter.nextIndex === 0
     toArray(result)
-    const isEval2 = iter.isEvaluated()
 
-    expect(isEval1).toBe(false)
-    expect(isEval2).toBe(true)
+    expect(isEval1).toBe(true)
   })
 
   describe('count > 0', () => {

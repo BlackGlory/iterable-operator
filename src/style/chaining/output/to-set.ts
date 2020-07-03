@@ -5,6 +5,6 @@ import { IterableOperatorBase } from '../iterable-operator-base'
 export class ToSetOperator<T> extends IterableOperatorBase<T> {
   toSet(): Set<T>
   toSet(...args: unknown[]) {
-    return applyBinding(this, target, args)
+    return applyBinding(this.subject, target, args)
   }
 }

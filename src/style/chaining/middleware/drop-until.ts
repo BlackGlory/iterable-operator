@@ -6,6 +6,6 @@ import { IterableOperator } from '../iterable-operator'
 export class DropUntilOperator<T> extends IterableOperatorBase<T> {
   dropUntil(fn: (element: T, index: number) => boolean): IterableOperator<T>
   dropUntil(...args: unknown[]) {
-    return applyChaining(this, target, args)
+    return applyChaining(this.subject, target, args)
   }
 }

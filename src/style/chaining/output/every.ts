@@ -5,6 +5,6 @@ import { IterableOperatorBase } from '../iterable-operator-base'
 export class EveryOperator<T> extends IterableOperatorBase<T> {
   every(fn: (element: T, index: number) => boolean): boolean
   every(...args: unknown[]) {
-    return applyBinding(this, target, args)
+    return applyBinding(this.subject, target, args)
   }
 }

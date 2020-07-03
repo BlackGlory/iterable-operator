@@ -1,16 +1,8 @@
 import { RuntimeError } from '@src/error'
-import { testCall, testPipe, testBind, testMethod } from '@test/test-fixtures'
 import { getError } from 'return-style'
-import { last as call } from '@output/last'
-import { last as pipe } from '@style/pipeline/output/last'
-import { last as bind } from '@style/binding/output/last'
-import { IterableOperator } from '@style/chaining/iterable-operator'
-describe.each([
-  testCall('last<T>(iterable: Iterable<T>): T', call)
-, testPipe('last<T>(): (iterable: Iterable<T>) => T', pipe)
-, testBind('last<T>(this: Iterable<T>): T', bind)
-, testMethod('IterableOperator<T>::last(): T', IterableOperator.prototype.last)
-])('%s', (_, last) => {
+import { last } from '@output/last'
+
+describe('last<T>(iterable: Iterable<T>): T', () => {
   describe('iterable is empty', () => {
     it('throw RuntimeError', () => {
       const iter: number[] = []

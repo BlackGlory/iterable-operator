@@ -1,18 +1,9 @@
-import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { toArray, getCalledTimes, consume, MarkIterable } from '@test/utils'
-import { dropUntil as call } from '@middleware/drop-until'
-import { dropUntil as pipe } from '@style/pipeline/middleware/drop-until'
-import { dropUntil as bind } from '@style/binding/middleware/drop-until'
-import { IterableOperator } from '@style/chaining/iterable-operator'
+import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils'
+import { dropUntil } from '@middleware/drop-until'
 import { getError } from 'return-style'
 import '@test/matchers'
 
-describe.each([
-  testCall('dropUntil<T>(iterable: Iterable<T>, fn: (element: T, index: number) => boolean): Iterable<T>', call)
-, testPipe('dropUntil<T>(fn: (element: T, index: number) => boolean): (iterable: Iterable<T>) => Iterable<T>', pipe)
-, testBind('dropUntil<T>(this: Iterable<T>, fn: (element: T, index: number) => boolean): Iterable<T>', bind)
-, testIterableChain('IterableOperator<T>::dropUntil(fn: (element: T, index: number) => boolean): IterableOperator<T>', IterableOperator.prototype.dropUntil)
-])('%s', (_, dropUntil) => {
+describe('dropUntil<T>(iterable: Iterable<T>, fn: (element: T, index: number) => boolean): Iterable<T>', () => {
   describe('fn is called', () => {
     it('called with [element,index]', () => {
       const iter = [1, 2, 3]
@@ -58,17 +49,17 @@ describe.each([
       expect(arrResult).toEqual([2, 3])
     })
 
-    it('lazy evaluation', () => {
-      const iter = new MarkIterable()
-      const fn = jest.fn()
+    it('lazy and partial evaluation', () => {
+      const iter = new MockIterable([1, 2, 3])
+      const fn = (x: number) => x === 2
 
       const result = dropUntil(iter, fn)
-      const isEval1 = iter.isEvaluated()
-      toArray(result)
-      const isEval2 = iter.isEvaluated()
+      const isLazy = iter.nextIndex === 0
+      toArray(take(result, 1))
+      const isPartial = iter.nextIndex === 2
 
-      expect(isEval1).toBe(false)
-      expect(isEval2).toBe(true)
+      expect(isLazy).toBe(true)
+      expect(isPartial).toBe(true)
     })
   })
 

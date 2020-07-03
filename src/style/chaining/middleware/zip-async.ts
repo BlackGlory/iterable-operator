@@ -50,6 +50,6 @@ export class ZipAsyncOperator<T, U extends Iterable<T> | AsyncIterable<T>> exten
     ...iterables: Array<Iterable<unknown> | AsyncIterable<unknown>>
   ): AsyncIterableOperator<TResult[]>
   zipAsync(...args: unknown[]) {
-    return applyChainingAsync(this, target, args)
+    return applyChainingAsync(this.subject, target, args)
   }
 }

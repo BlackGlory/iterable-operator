@@ -6,6 +6,6 @@ import { IterableOperator } from '../iterable-operator'
 export class TakeOperator<T> extends IterableOperatorBase<T> {
   take(count: number): IterableOperator<T>
   take(...args: unknown[]) {
-    return applyChaining(this, target, args)
+    return applyChaining(this.subject, target, args)
   }
 }

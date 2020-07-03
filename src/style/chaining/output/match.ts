@@ -5,6 +5,6 @@ import { IterableOperatorBase } from '../iterable-operator-base'
 export class MatchOperator<T> extends IterableOperatorBase<T> {
   match(sequence: ArrayLike<T>): boolean
   match(...args: unknown[]) {
-    return applyBinding(this, target, args)
+    return applyBinding(this.subject, target, args)
   }
 }

@@ -1,17 +1,8 @@
 import { getError } from 'return-style'
 import { RuntimeError } from '@src/error'
-import { testCall, testPipe, testBind, testMethod } from '@test/test-fixtures'
-import { find as call } from '@output/find'
-import { find as pipe } from '@style/pipeline/output/find'
-import { find as bind } from '@style/binding/output/find'
-import { IterableOperator } from '@style/chaining/iterable-operator'
+import { find } from '@output/find'
 
-describe.each([
-  testCall('find<T>(iterable: Iterable<T>, fn: (element: T, index: number) => boolean): T', call)
-, testPipe('find<T>(fn: (element: T, index: number) => boolean): (iterable: Iterable<T>) => T', pipe)
-, testBind('find<T>(this: Iterable<T>, fn: (element: T, index: number) => boolean): T', bind)
-, testMethod('IterableOperator<T>::find(fn: (element: T, index: number) => boolean): T', IterableOperator.prototype.find)
-])('%s', (_, find) => {
+describe('find<T>(iterable: Iterable<T>, fn: (element: T, index: number) => boolean): T', () => {
   describe('fn is called', () => {
     it('called with [element,index]', () => {
       const iter = [1, 2, 3]

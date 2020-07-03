@@ -5,6 +5,6 @@ import { IterableOperatorBase } from '../iterable-operator-base'
 export class ToArrayOperator<T> extends IterableOperatorBase<T> {
   toArray(): T[]
   toArray(...args: unknown[]) {
-    return applyBinding(this, target, args)
+    return applyBinding(this.subject, target, args)
   }
 }

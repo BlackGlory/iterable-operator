@@ -6,6 +6,6 @@ import { IterableOperator } from '../iterable-operator'
 export class TakeRightOperator<T> extends IterableOperatorBase<T> {
   takeRight(count: number): IterableOperator<T>
   takeRight(...args: unknown[]) {
-    return applyChaining(this, target, args)
+    return applyChaining(this.subject, target, args)
   }
 }

@@ -6,6 +6,6 @@ import { IterableOperator } from '../iterable-operator'
 export class UniqByOperator<T> extends IterableOperatorBase<T> {
   uniqBy<U>(fn: (element: T, index: number) => U): IterableOperator<T>
   uniqBy(...args: unknown[]) {
-    return applyChaining(this, target, args)
+    return applyChaining(this.subject, target, args)
   }
 }

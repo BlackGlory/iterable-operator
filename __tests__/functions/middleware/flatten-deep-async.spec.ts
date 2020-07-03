@@ -1,30 +1,21 @@
 import { InvalidArgumentError } from '@src/error'
-import { toAsyncIterable, toArrayAsync, MarkAsyncIterable } from '@test/utils'
-import { testCall, testPipe, testBind, testAsyncIterableChain } from '@test/test-fixtures'
+import { toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils'
 import { getError } from 'return-style'
-import { flattenDeepAsync as call } from '@middleware/flatten-deep-async'
-import { flattenDeepAsync as pipe } from '@style/pipeline/middleware/flatten-deep-async'
-import { flattenDeepAsync as bind } from '@style/binding/middleware/flatten-deep-async'
-import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
+import { flattenDeepAsync } from '@middleware/flatten-deep-async'
 import '@test/matchers'
 
-describe.each([
-  testCall('flattenDeepAsync<T>(iterable: AsyncIterable<unknown>, depth: number): AsyncIterable<T>', call)
-, testPipe('flattenDeepAsync<T>(depth: number): (iterable: AsyncIterable<unknown>) => AsyncIterable<T>', pipe)
-, testBind('flattenDeepAsync<T>(this: AsyncIterable<unknown>, depth: number): AsyncIterable<T>', bind)
-, testAsyncIterableChain('AsyncIterableOperator<unknown>::flattenDeepAsync<T>(depth: number): AsyncIterableOperator<T>', AsyncIterableOperator.prototype.flattenDeepAsync)
-])('%s', (_, flattenDeepAsync) => {
-  it('lazy evaluation', async () => {
-    const iter = new MarkAsyncIterable()
+describe('flattenDeepAsync<T>(iterable: AsyncIterable<unknown>, depth: number): AsyncIterable<T>', () => {
+  it('lazy and partial evaluation', async () => {
+    const iter = new MockAsyncIterable([1, 2, 3])
     const depth = Infinity
 
     const result = flattenDeepAsync(iter, depth)
-    const isEval1 = iter.isEvaluated()
-    await toArrayAsync(result)
-    const isEval2 = iter.isEvaluated()
+    const isLazy = iter.nextIndex === 0
+    await toArrayAsync(takeAsync(result, 1))
+    const iaPartial = iter.nextIndex === 1
 
-    expect(isEval1).toBe(false)
-    expect(isEval2).toBe(true)
+    expect(isLazy).toBe(true)
+    expect(iaPartial).toBe(true)
   })
 
   describe('iterable is empty', () => {

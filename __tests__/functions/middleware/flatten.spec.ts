@@ -1,27 +1,18 @@
-import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { toArray, MarkIterable } from '@test/utils'
-import { flatten as call } from '@middleware/flatten'
-import { flatten as pipe } from '@style/pipeline/middleware/flatten'
-import { flatten as bind } from '@style/binding/middleware/flatten'
-import { IterableOperator } from '@style/chaining/iterable-operator'
+import { toArray, MockIterable, take } from '@test/utils'
+import { flatten } from '@middleware/flatten'
 import '@test/matchers'
 
-describe.each([
-  testCall('flatten<T, U>(iterable: Iterable<T>): Iterable<U>', call)
-, testPipe('flatten<T, U>(): (iterable: Iterable<T>) => Iterable<U>', pipe)
-, testBind('flatten<T, U>(this: Iterable<T>): Iterable<U>', bind)
-, testIterableChain('IterableOperator<T>::flatten<U>(): IterableOperator<U>', IterableOperator.prototype.flatten)
-])('%s', (_, flatten) => {
-  it('lazy evaluation', () => {
-    const iter = new MarkIterable()
+describe('flatten<T, U>(iterable: Iterable<T>): Iterable<U>', () => {
+  it('lazy and partial evaluation', () => {
+    const iter = new MockIterable([1, 2, 3])
 
     const result = flatten(iter)
-    const isEval1 = iter.isEvaluated()
-    toArray(result)
-    const isEval2 = iter.isEvaluated()
+    const isLazy = iter.nextIndex === 0
+    toArray(take(result, 1))
+    const isPartial = iter.nextIndex === 1
 
-    expect(isEval1).toBe(false)
-    expect(isEval2).toBe(true)
+    expect(isLazy).toBe(true)
+    expect(isPartial).toBe(true)
   })
 
   describe('iterable is empty', () => {

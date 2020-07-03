@@ -5,6 +5,6 @@ import { lastAsync as target } from '@output/last-async'
 export class LastAsyncOperator<T> extends AsyncIterableOperatorBase<T> {
   lastAsync(): Promise<T>
   lastAsync(...args: unknown[]) {
-    return applyBinding(this, target, args)
+    return applyBinding(this.subject, target, args)
   }
 }

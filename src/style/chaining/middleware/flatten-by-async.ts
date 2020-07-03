@@ -4,8 +4,8 @@ import { AsyncIterableOperator } from '../async-iterable-operator'
 import { flattenByAsync as target } from '@middleware/flatten-by-async'
 
 export class FlattenByAsync<T, U extends Iterable<T> | AsyncIterable<T>> extends Subject<U> {
-  flattenByAsync(fn: (element: unknown, level: number) => boolean | PromiseLike<unknown>): AsyncIterableOperator<any>
+  flattenByAsync<T>(fn: (element: unknown, level: number) => boolean | PromiseLike<unknown>): AsyncIterableOperator<T>
   flattenByAsync(...args: unknown[]) {
-    return applyChainingAsync(this, target, args)
+    return applyChainingAsync(this.subject, target, args)
   }
 }

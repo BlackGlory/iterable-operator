@@ -4,9 +4,9 @@ import { IterableOperatorBase } from '../iterable-operator-base'
 import { IterableOperator } from '../iterable-operator'
 
 export class FlattenDeepOperator<T> extends IterableOperatorBase<T> {
-  flattenDeep<U>(): IterableOperator<U>
-  flattenDeep<U>(depth: number): IterableOperator<U>
+  flattenDeep<T>(): IterableOperator<T>
+  flattenDeep<T>(depth: number): IterableOperator<T>
   flattenDeep(...args: unknown[]) {
-    return applyChaining(this, target, args)
+    return applyChaining(this.subject, target, args)
   }
 }

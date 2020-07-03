@@ -6,6 +6,6 @@ import { IterableOperator } from '../iterable-operator'
 export class TransformOperator<T> extends IterableOperatorBase<T> {
   transform<U>(transformer: (iterable: Iterable<T>) => Iterable<U>): IterableOperator<U>
   transform(...args: unknown[]) {
-    return applyChaining(this, target, args)
+    return applyChaining(this.subject, target, args)
   }
 }

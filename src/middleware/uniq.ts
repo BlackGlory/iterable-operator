@@ -1,3 +1,9 @@
 export function* uniq<T>(iterable: Iterable<T>): Iterable<T> {
-  yield* new Set(iterable)
+  const bucket = new Set<T>()
+  for (const element of iterable) {
+    if (!bucket.has(element)) {
+      yield element
+      bucket.add(element)
+    }
+  }
 }

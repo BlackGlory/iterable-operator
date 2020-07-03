@@ -1,16 +1,7 @@
 import { getError } from 'return-style'
-import { testCall, testPipe, testBind, testMethod } from '@test/test-fixtures'
-import { each as call } from '@output/each'
-import { each as pipe } from '@style/pipeline/output/each'
-import { each as bind } from '@style/binding/output/each'
-import { IterableOperator } from '@style/chaining/iterable-operator'
+import { each } from '@output/each'
 
-describe.each([
-  testCall('each<T>(iterable: Iterable<T>, fn: (element: T, index: number) => unknown): void', call)
-, testPipe('each<T>(fn: (element: T, index: number) => unknown): (iterable: Iterable<T>) => void', pipe)
-, testBind('each<T>(this: Iterable<T>, fn: (element: T, index: number) => unknown): void', bind)
-, testMethod('IterableOperator<T>::each(fn: (element: T, index: number) => unknown): void', IterableOperator.prototype.each)
-])('%s', (_, each) => {
+describe('each<T>(iterable: Iterable<T>, fn: (element: T, index: number) => unknown): void', () => {
   describe('fn is called', () => {
     it('called with [element,index]', () => {
       const iter = [1, 2, 3]

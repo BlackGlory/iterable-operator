@@ -6,6 +6,6 @@ import { dropAsync as target } from '@middleware/drop-async'
 export class DropAsyncOperator<T> extends AsyncIterableOperatorBase<T> {
   dropAsync(count: number): AsyncIterableOperator<T>
   dropAsync(...args: unknown[]) {
-    return applyChainingAsync(this, target, args)
+    return applyChainingAsync(this.subject, target, args)
   }
 }

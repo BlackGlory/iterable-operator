@@ -1,18 +1,9 @@
-import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { toArray, getCalledTimes, consume, MarkIterable } from '@test/utils'
-import { flattenBy as call } from '@middleware/flatten-by'
-import { flattenBy as pipe } from '@style/pipeline/middleware/flatten-by'
-import { flattenBy as bind } from '@style/binding/middleware/flatten-by'
-import { IterableOperator } from '@style/chaining/iterable-operator'
+import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils'
+import { flattenBy } from '@middleware/flatten-by'
 import { getError } from 'return-style'
 import '@test/matchers'
 
-describe.each([
-  testCall('flattenBy<T>(iterable: Iterable<unknown>, fn: (element: unknown, level: number) => boolean): Iterable<T>', call)
-, testPipe('flattenBy<T>(fn: (element: unknown, level: number) => boolean): (iterable: Iterable<unknown>) => Iterable<T>', pipe)
-, testBind('flattenBy<T>(this: Iterable<unknown>, fn: (element: unknown, level: number) => boolean): Iterable<T>', bind)
-, testIterableChain('IterableOperator<unknown>::flattenBy<T>(fn: (element: unknown, level: number) => boolean): IterableOperator<T>', IterableOperator.prototype.flattenBy)
-])('%s', (_, flattenBy) => {
+describe('flattenBy<T>(iterable: Iterable<unknown>, fn: (element: unknown, level: number) => boolean): Iterable<T>', () => {
   describe('fn is called', () => {
     it('called with [element,level]', () => {
       const iter = [0, [1]]
@@ -47,17 +38,17 @@ describe.each([
       ])
     })
 
-    it('lazy evaluation', () => {
-      const iter = new MarkIterable()
-      const fn = jest.fn()
+    it('lazy and partial evaluation', () => {
+      const iter = new MockIterable([1, 2, 3])
+      const fn = () => false
 
       const result = flattenBy(iter, fn)
-      const isEval1 = iter.isEvaluated()
-      toArray(result)
-      const isEval2 = iter.isEvaluated()
+      const isLazy = iter.nextIndex === 0
+      toArray(take(result, 1))
+      const isPartial = iter.nextIndex === 1
 
-      expect(isEval1).toBe(false)
-      expect(isEval2).toBe(true)
+      expect(isLazy).toBe(true)
+      expect(isPartial).toBe(true)
     })
   })
 

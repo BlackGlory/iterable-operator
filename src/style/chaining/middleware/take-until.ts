@@ -6,6 +6,6 @@ import { IterableOperator } from '../iterable-operator'
 export class TakeUntilOperator<T> extends IterableOperatorBase<T> {
   takeUntil(fn: (element: T, index: number) => boolean): IterableOperator<T>
   takeUntil(...args: unknown[]) {
-    return applyChaining(this, target, args)
+    return applyChaining(this.subject, target, args)
   }
 }

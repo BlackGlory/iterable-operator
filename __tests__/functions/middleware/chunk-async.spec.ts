@@ -1,30 +1,21 @@
 import { getError } from 'return-style'
-import { toAsyncIterable, toArrayAsync, MarkAsyncIterable } from '@test/utils'
-import { chunkAsync as call } from '@middleware/chunk-async'
-import { chunkAsync as pipe } from '@style/pipeline/middleware/chunk-async'
-import { chunkAsync as bind } from '@style/binding/middleware/chunk-async'
-import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
+import { toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils'
+import { chunkAsync } from '@middleware/chunk-async'
 import { InvalidArgumentError } from '@src/error'
-import { testCall, testPipe, testBind, testAsyncIterableChain } from '@test/test-fixtures'
 import '@test/matchers'
 
-describe.each([
-  testCall('chunkAsync<T>(iterable: AsyncIterable<T>, size: number): AsyncIterable<T[]>', call)
-, testPipe('chunkAsync<T>(size: number): (iterable: AsyncIterable<T>) => AsyncIterable<T[]>', pipe)
-, testBind('chunkAsync<T>(this: AsyncIterable<T>, size: number): AsyncIterable<T[]>', bind)
-, testAsyncIterableChain('AsyncIterableOperator<T>::chunkAsync(size: number): AsyncIterableOperator<T[]>', AsyncIterableOperator.prototype.chunkAsync)
-])('%s', (_, chunkAsync) => {
-  it('lazy evaluation', async () => {
-    const iter = new MarkAsyncIterable()
-    const size = 2
+describe('chunkAsync<T>(iterable: AsyncIterable<T>, size: number): AsyncIterable<T[]>', () => {
+  it('lazy and evaluation', async () => {
+    const iter = new MockAsyncIterable([1, 2, 3])
+    const size = 1
 
     const result = chunkAsync(iter, size)
-    const isEval1 = iter.isEvaluated()
-    await toArrayAsync(result)
-    const isEval2 = iter.isEvaluated()
+    const isLazy = iter.nextIndex === 0
+    await toArrayAsync(takeAsync(result, 1))
+    const isPartial = iter.nextIndex === 1
 
-    expect(isEval1).toBe(false)
-    expect(isEval2).toBe(true)
+    expect(isLazy).toBe(true)
+    expect(isPartial).toBe(true)
   })
 
   describe('size > 0', () => {

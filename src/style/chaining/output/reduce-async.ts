@@ -3,14 +3,14 @@ import { Subject } from '../subject'
 import { reduceAsync as target } from '@output/reduce-async'
 
 export class ReduceAsyncOperator<T, U extends Iterable<T> | AsyncIterable<T>> extends Subject<U> {
-  reduceAsync<T>(
+  reduceAsync(
     fn: (accumulator: T, currentValue: T, index: number) => T | PromiseLike<T>
   ): Promise<T>
-  reduceAsync<T, U>(
+  reduceAsync<U>(
     fn: (accumulator: U, currentValue: T, index: number) => U | PromiseLike<U>
   , initialValue: U
   ): Promise<U>
   reduceAsync(...args: unknown[]) {
-    return applyBinding(this, target, args)
+    return applyBinding(this.subject, target, args)
   }
 }

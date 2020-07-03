@@ -1,17 +1,8 @@
 import { RuntimeError } from '@src/error'
-import { testCall, testPipe, testBind, testMethod } from '@test/test-fixtures'
 import { getError } from 'return-style'
-import { reduce as call } from '@output/reduce'
-import { reduce as pipe } from '@style/pipeline/output/reduce'
-import { reduce as bind } from '@style/binding/output/reduce'
-import { IterableOperator } from '@style/chaining/iterable-operator'
+import { reduce } from '@output/reduce'
 
-describe.each([
-  testCall('reduce<T>(iterable: Iterable<T>, fn: (accumulator: T, currentValue: T, index: number) => T)): T', call)
-, testPipe('reduce<T>(fn: (accumulator: T, currentValue: T, index: number) => T): (iterable: Iterable<T>) => T', pipe)
-, testBind('reduce<T>(this: Iterable<T>, fn: (accumulator: T, currentValue: T, index: number) => T)): T', bind)
-, testMethod('IterableOperator<T>::reduce(fn: (accumulator: T, currentValue: T, index: number) => T): T', IterableOperator.prototype.reduce)
-])('%s', (_, reduce) => {
+describe('reduce<T>(iterable: Iterable<T>, fn: (accumulator: T, currentValue: T, index: number) => T)): T', () => {
   describe('fn is called', () => {
     it('called with [accumulator,currentValue,index]', () => {
       const iter = [1, 2, 3]
@@ -81,12 +72,7 @@ describe.each([
   })
 })
 
-describe.each([
-  testCall('(iterable: Iterable<T>, fn: (accumulator: U, currentValue: T, index: number) => U, initalValue: U) => U', call)
-, testPipe('(fn: (accumulator: U, currentValue: T, index: number) => U, initalValue: U) => (iterable: Iterable<T>) => U', pipe)
-, testBind('(this: Iterable<T>, fn: (accumulator: U, currentValue: T, index: number) => U, initalValue: U)) => U', bind)
-, testMethod('Operator<T>::(fn: (accumulator: U, currentValue: T, index: number) => U, initalValue: U) => U', IterableOperator.prototype.reduce)
-])('%s', (_, reduce) => {
+describe('(iterable: Iterable<T>, fn: (accumulator: U, currentValue: T, index: number) => U, initalValue: U) => U', () => {
   describe('fn is called', () => {
     it('called with [accumulator,currentValue,index]', () => {
       const iter = [1, 2, 3]

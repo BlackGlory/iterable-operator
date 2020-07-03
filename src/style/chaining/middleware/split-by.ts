@@ -6,6 +6,6 @@ import { IterableOperator } from '../iterable-operator'
 export class SplitByOperator<T> extends IterableOperatorBase<T> {
   splitBy(fn: (element: T, index: number) => boolean): IterableOperator<T[]>
   splitBy(...args: unknown[]) {
-    return applyChaining(this, target, args)
+    return applyChaining(this.subject, target, args)
   }
 }

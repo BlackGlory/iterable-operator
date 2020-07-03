@@ -1,30 +1,21 @@
-import { toArrayAsync, toAsyncIterable, MarkAsyncIterable } from '@test/utils'
-import { testCall, testPipe, testBind, testAsyncIterableChain } from '@test/test-fixtures'
+import { toArrayAsync, toAsyncIterable, MockAsyncIterable, takeAsync as testTakeAsync } from '@test/utils'
 import { getError } from 'return-style'
 import { InvalidArgumentError } from '@src/error'
-import { takeAsync as call } from '@middleware/take-async'
-import { takeAsync as pipe } from '@style/pipeline/middleware/take-async'
-import { takeAsync as bind } from '@style/binding/middleware/take-async'
-import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
+import { takeAsync } from '@middleware/take-async'
 import '@test/matchers'
 
-describe.each([
-  testCall('takeAsync<T>(iterable: AsyncIterable<T>, count: number): AsyncIterable<T>', call)
-, testPipe('takeAsync<T>(count: number): (iterable: AsyncIterable<T>) => AsyncIterable<T>', pipe)
-, testBind('takeAsync<T>(this: AsyncIterable<T>, count: number): AsyncIterable<T>', bind)
-, testAsyncIterableChain('AsyncIterableOperator<T>::takeAsync(count: number): AsyncIterableOperator<T>', AsyncIterableOperator.prototype.takeAsync)
-])('%s', (_, takeAsync) => {
-  it('lazy evaluation', async () => {
-    const iter = new MarkAsyncIterable()
-    const count = 5
+describe('takeAsync<T>(iterable: AsyncIterable<T>, count: number): AsyncIterable<T>', () => {
+  it('lazy and partial evaluation', async () => {
+    const iter = new MockAsyncIterable([1, 2, 3])
+    const count = 2
 
     const result = takeAsync(iter, count)
-    const isEval1 = iter.isEvaluated()
-    await toArrayAsync(result)
-    const isEval2 = iter.isEvaluated()
+    const isLazy = iter.nextIndex === 0
+    await toArrayAsync(testTakeAsync(result, 1))
+    const isPartial = iter.nextIndex === 1
 
-    expect(isEval1).toBe(false)
-    expect(isEval2).toBe(true)
+    expect(isLazy).toBe(true)
+    expect(isPartial).toBe(true)
   })
 
   describe('count > size(iterable)', () => {

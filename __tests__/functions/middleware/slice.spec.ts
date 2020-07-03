@@ -1,31 +1,22 @@
 import { InvalidArgumentError } from '@src/error'
-import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
 import { getError } from 'return-style'
-import { toArray, MarkIterable } from '@test/utils'
-import { slice as call } from '@middleware/slice'
-import { slice as pipe } from '@style/pipeline/middleware/slice'
-import { slice as bind } from '@style/binding/middleware/slice'
-import { IterableOperator } from '@style/chaining/iterable-operator'
+import { toArray, MockIterable, take } from '@test/utils'
+import { slice } from '@middleware/slice'
 import '@test/matchers'
 
-describe.each([
-  testCall('slice<T>(iterable: Iterable<T>, start: number, end: number): Iterable<T>', call)
-, testPipe('slice<T>(start: number, end: number): (iterable: Iterable<T>) => Iterable<T>', pipe)
-, testBind('slice<T>(this: Iterable<T>, start: number, end: number): Iterable<T>', bind)
-, testIterableChain('IterableOpeator<T>::slice(start: number, end: number): IterableOperator<T>', IterableOperator.prototype.slice)
-])('%s', (_, slice) => {
-  it('lazy evaluation', () => {
-    const iter = new MarkIterable()
+describe('slice<T>(iterable: Iterable<T>, start: number, end: number): Iterable<T>', () => {
+  it('lazy and partial evaluation', () => {
+    const iter = new MockIterable([1, 2, 3])
     const start = 0
     const end = 10
 
     const result = slice(iter, start, end)
-    const isEval1 = iter.isEvaluated()
-    toArray(result)
-    const isEval2 = iter.isEvaluated()
+    const isLazy = iter.nextIndex === 0
+    toArray(take(result, 1))
+    const isPartial = iter.nextIndex === 1
 
-    expect(isEval1).toBe(false)
-    expect(isEval2).toBe(true)
+    expect(isLazy).toBe(true)
+    expect(isPartial).toBe(true)
   })
 
   describe('start < 0', () => {

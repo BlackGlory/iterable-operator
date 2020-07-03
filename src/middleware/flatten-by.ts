@@ -1,4 +1,4 @@
-export function flattenBy(iterable: Iterable<unknown>, fn: (element: unknown, level: number) => boolean): Iterable<any> {
+export function flattenBy<T>(iterable: Iterable<unknown>, fn: (element: unknown, level: number) => boolean): Iterable<T> {
   return flatten(iterable, 1)
 
   function* flatten<T>(iterable: Iterable<unknown>, level: number): Iterable<T> {

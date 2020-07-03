@@ -7,6 +7,6 @@ export class FlattenDeepAsyncOperator<T> extends AsyncIterableOperatorBase<T> {
   flattenDeepAsync<T>(): AsyncIterableOperator<T>
   flattenDeepAsync<T>(depth: number): AsyncIterableOperator<T>
   flattenDeepAsync(...args: unknown[]) {
-    return applyChainingAsync(this, target, args)
+    return applyChainingAsync(this.subject, target, args)
   }
 }

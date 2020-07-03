@@ -1,30 +1,21 @@
 import { getError } from 'return-style'
 import { InvalidArgumentsLengthError } from '@src/error'
-import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { toArray, MarkIterable } from '@test/utils'
-import { concat as call } from '@middleware/concat'
-import { concat as pipe } from '@style/pipeline/middleware/concat'
-import { concat as bind } from '@style/binding/middleware/concat'
-import { IterableOperator } from '@style/chaining/iterable-operator'
+import { toArray, MockIterable, take } from '@test/utils'
+import { concat } from '@middleware/concat'
 import '@test/matchers'
 
-describe.each([
-  testCall('concat<T>(...iterables: Array<Iterable<unknown>>): Iterable<T>', call)
-, testPipe('concat<T>(...iterables: Array<Iterable<unknown>>): (iterable: Iterable<unknown>) => Iterable<T>', pipe)
-, testBind('concat<T>(this: Iterable, ...iterables: Array<Iterable<unknown>>): Iterable<T>', bind)
-, testIterableChain('IterableOperator<unknown>::concat<T>(...iterables: Array<Iterable<unknown>>): Iterable<T>', IterableOperator.prototype.concat)
-])('%s', (_, concat) => {
-  it('lazy evaluation', () => {
-    const iter1 = new MarkIterable()
-    const iter2: unknown[] = []
+describe('concat<T>(...iterables: Array<Iterable<unknown>>): Iterable<T>', () => {
+  it('lazy and partial evaluation', () => {
+    const iter1 = new MockIterable([1, 2, 3])
+    const iter2: number[] = []
 
     const result = concat(iter1, iter2)
-    const isEval1 = iter1.isEvaluated()
-    toArray(result)
-    const isEval2 = iter1.isEvaluated()
+    const isLazy = iter1.nextIndex === 0
+    toArray(take(result, 1))
+    const isPartial = iter1.nextIndex === 1
 
-    expect(isEval1).toBe(false)
-    expect(isEval2).toBe(true)
+    expect(isLazy).toBe(true)
+    expect(isPartial).toBe(true)
   })
 
   describe('size(iterables) < 2', () => {

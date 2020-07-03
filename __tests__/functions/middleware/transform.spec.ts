@@ -1,18 +1,9 @@
-import { testCall, testPipe, testBind, testMethod } from '@test/test-fixtures'
-import { toArray, MarkIterable } from '@test/utils'
-import { transform as call } from '@middleware/transform'
-import { transform as pipe } from '@style/pipeline/middleware/transform'
-import { transform as bind } from '@style/binding/middleware/transform'
-import { IterableOperator } from '@style/chaining/iterable-operator'
+import { toArray, MockIterable } from '@test/utils'
+import { transform } from '@middleware/transform'
 import { getError } from 'return-style'
 import '@test/matchers'
 
-describe.each([
-  testCall('transform<T, U>(iterable: Iterable<T>, transformer: (iterable: Iterable<T>) => Iterable<U>): Iterable<U>', call)
-, testPipe('transform<T, U>(transformer: (iterable: Iterable<T>) => Iterable<U>): (iterable: Iterable<T>) => Iterable<U>', pipe)
-, testBind('transform<T, U>(this: Iterable<T>, transformer: (iterable: Iterable<T>) => Iterable<U>): Iterable<U>', bind)
-, testMethod('IterableOperator<T>::transform<U>(transformer: (iterable: Iterable<T>) => Iterable<U>): IterableOperator<U>', IterableOperator.prototype.transform)
-])('%s', (_, transform) => {
+describe('transform<T, U>(iterable: Iterable<T>, transformer: (iterable: Iterable<T>) => Iterable<U>): Iterable<U>', () => {
   describe('call', () => {
     it('return result from transformer', () => {
       const iter = [1, 2, 3]
@@ -30,18 +21,16 @@ describe.each([
     })
 
     it('lazy evaluation', () => {
-      const iter = new MarkIterable()
-      const fn = function* (iterable: Iterable<void>) {
+      const iter = new MockIterable([1, 2, 3])
+      const fn = function* (iterable: Iterable<number>) {
         yield* iterable
       }
 
       const result = transform(iter, fn)
-      const isEval1 = iter.isEvaluated()
+      const isLazy = iter.nextIndex === 0
       toArray(result)
-      const isEval2 = iter.isEvaluated()
 
-      expect(isEval1).toBe(false)
-      expect(isEval2).toBe(true)
+      expect(isLazy).toBe(true)
     })
   })
 

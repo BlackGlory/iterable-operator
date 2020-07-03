@@ -1,19 +1,10 @@
 import { getError } from 'return-style'
 import { InvalidArgumentsLengthError } from '@src/error'
-import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { toArray, MarkIterable } from '@test/utils'
-import { zip as call } from '@middleware/zip'
-import { zip as pipe } from '@style/pipeline/middleware/zip'
-import { zip as bind } from '@style/binding/middleware/zip'
-import { IterableOperator } from '@style/chaining/iterable-operator'
+import { toArray, MockIterable } from '@test/utils'
+import { zip } from '@middleware/zip'
 import '@test/matchers'
 
-describe.each([
-  testCall('zip<T>(...iterables: Array<Iterable<unknown>>): Iterable<T>', call)
-, testPipe('zip<T>(...iterables: Array<Iterable<unknown>>): (iterable: Iterable<unknown>) => Iterable<T>', pipe)
-, testBind('zip<T>(this: Iterable, ...iterables: Array<Iterable<unknown>>): Iterable<T>', bind)
-, testIterableChain('IterableOperator<unknown>::zip<T>(...iterables: Array<Iterable<unknown>>): IterableOperator<T>', IterableOperator.prototype.zip)
-])('%s', (_, zip) => {
+describe('zip<T>(...iterables: Array<Iterable<unknown>>): Iterable<T>', () => {
   describe('size(iterables) < 2', () => {
     it('throw InvalidArgumentsLengthError', () => {
       const iter = [1, 2, 3]
@@ -27,16 +18,16 @@ describe.each([
 
   describe('size(iterables) >= 2', () => {
     it('lazy evaluation', () => {
-      const iter1 = new MarkIterable()
+      const iter1 = new MockIterable([1, 2, 3])
       const iter2: unknown[] = []
 
       const result = zip(iter1, iter2)
-      const isEval1 = iter1.isEvaluated()
+      const isLazy = iter1.nextIndex === 0
       toArray(result)
-      const isEval2 = iter1.isEvaluated()
+      const isPartial = iter1.nextIndex === 1
 
-      expect(isEval1).toBe(false)
-      expect(isEval2).toBe(true)
+      expect(isLazy).toBe(true)
+      expect(isPartial).toBe(true)
     })
 
     describe('iterables have same size', () => {

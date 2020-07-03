@@ -1,18 +1,9 @@
-import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { toArray, getCalledTimes, consume, MarkIterable } from '@test/utils'
-import { splitBy as call } from '@middleware/split-by'
-import { splitBy as pipe } from '@style/pipeline/middleware/split-by'
-import { splitBy as bind } from '@style/binding/middleware/split-by'
-import { IterableOperator } from '@style/chaining/iterable-operator'
+import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils'
+import { splitBy } from '@middleware/split-by'
 import { getError } from 'return-style'
 import '@test/matchers'
 
-describe.each([
-  testCall('splitBy<T>(iterable: Iterable<T>, fn: (element: T, index: number) => boolean): Iterable<T[]>', call)
-, testPipe('splitBy<T>(fn: (element: T, index: number) => boolean): (iterable: Iterable<T>) => Iterable<T[]>', pipe)
-, testBind('splitBy<T>(this: Iterable<T>, fn: (element: T, index: number) => boolean): Iterable<T[]>', bind)
-, testIterableChain('IterableOperator<T>::splitBy(fn: (element: T, index: number) => boolean): IterableOperator<T[]>', IterableOperator.prototype.splitBy)
-])('%s', (_, splitBy) => {
+describe('splitBy<T>(iterable: Iterable<T>, fn: (element: T, index: number) => boolean): Iterable<T[]>', () => {
   describe('fn is called', () => {
     it('called with [element,index]', () => {
       const iter = [1, 2, 3]
@@ -85,17 +76,17 @@ describe.each([
     })
   })
 
-  it('lazy evaluation', () => {
-    const iter = new MarkIterable()
-    const fn = jest.fn()
+  it('lazy and partial evaluation', () => {
+    const iter = new MockIterable([1, 2, 3])
+    const fn = () => true
 
     const result = splitBy(iter, fn)
-    const isEval1 = iter.isEvaluated()
-    toArray(result)
-    const isEval2 = iter.isEvaluated()
+    const isLazy = iter.nextIndex === 0
+    toArray(take(result, 1))
+    const isPartial = iter.nextIndex === 1
 
-    expect(isEval1).toBe(false)
-    expect(isEval2).toBe(true)
+    expect(isLazy).toBe(true)
+    expect(isPartial).toBe(true)
   })
 
   describe('fn throw error', () => {

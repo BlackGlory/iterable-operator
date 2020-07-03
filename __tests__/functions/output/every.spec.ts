@@ -1,16 +1,7 @@
 import { getError } from 'return-style'
-import { testCall, testPipe, testBind, testMethod } from '@test/test-fixtures'
-import { every as call } from '@output/every'
-import { every as pipe } from '@style/pipeline/output/every'
-import { every as bind } from '@style/binding/output/every'
-import { IterableOperator } from '@style/chaining/iterable-operator'
+import { every } from '@output/every'
 
-describe.each([
-  testCall('every<T>(itearble: Iterable<T>, fn: (element: T, index: number) => boolean): boolean', call)
-, testPipe('every<T>(fn: (element: T, index: number) => boolean): (iterable: Iterable<T>) => boolean', pipe)
-, testBind('every<T>(this: Iterable<T>, fn: (element: T, index: number) => boolean): boolean', bind)
-, testMethod('IterableOperator<T>::every(fn: (element: T, index: number) => boolean): boolean', IterableOperator.prototype.every)
-])('%s', (_, every) => {
+describe('every<T>(itearble: Iterable<T>, fn: (element: T, index: number) => boolean): boolean', () => {
   describe('fn is called', () => {
     describe('fn return false on first element', () => {
       it('called once', () => {

@@ -232,8 +232,8 @@ flattenDeep(['one', ['two', ['three']], 0, [1, [2, [3]]]], 2) // ['o', 'n', 'e',
 #### flattenBy, flattenByAsync
 
 ```ts
-function flattenBy(iterable: Iterable<unknown>, fn: (element: unknown, level: number) => boolean): Iterable<any>
-function flattenByAsync(iterable: Iterable<unknown> | AsyncIterable<unknown>, fn: (element: unknown, level: number) => boolean | PromiseLike<unknown>): AsyncIterable<any>
+function flattenBy<T>(iterable: Iterable<unknown>, fn: (element: unknown, level: number) => boolean): Iterable<T>
+function flattenByAsync<T>(iterable: Iterable<unknown> | AsyncIterable<unknown>, fn: (element: unknown, level: number) => boolean | PromiseLike<unknown>): AsyncIterable<T>
 ```
 
 ```js

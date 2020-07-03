@@ -1,5 +1,9 @@
-import { toSetAsync } from '@output/to-set-async'
-
 export async function* uniqAsync<T>(iterable: AsyncIterable<T>): AsyncIterable<T> {
-  yield* await toSetAsync(iterable)
+  const bucket = new Set<T>()
+  for await (const element of iterable) {
+    if (!bucket.has(element)) {
+      yield element
+      bucket.add(element)
+    }
+  }
 }

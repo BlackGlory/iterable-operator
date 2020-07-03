@@ -6,6 +6,6 @@ import { IterableOperator } from '../iterable-operator'
 export class ChunkByOperator<T> extends IterableOperatorBase<T> {
   chunkBy(fn: (element: T, index: number) => boolean): IterableOperator<T[]>
   chunkBy(...args: unknown[]) {
-    return applyChaining(this, target, args)
+    return applyChaining(this.subject, target, args)
   }
 }

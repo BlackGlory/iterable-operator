@@ -1,9 +1,9 @@
 export function toArray<T>(iterable: Iterable<T>, count: number = Infinity) {
   const result: T[] =[]
   for (const value of iterable) {
-    if (count <= 0) break
     result.push(value)
     count--
+    if (count <= 0) break
   }
   return result
 }
@@ -11,9 +11,9 @@ export function toArray<T>(iterable: Iterable<T>, count: number = Infinity) {
 export async function toArrayAsync<T>(iterable: AsyncIterable<T>, count: number = Infinity) {
   const result: T[] = []
   for await (const value of iterable) {
-    if (count <= 0) break
     result.push(value)
     count--
+    if (count <= 0) break
   }
   return result
 }
@@ -54,26 +54,77 @@ export function toFunction<T extends unknown[], U>(fn: (...args: T) => U): (...a
   return (...args: T) => fn(...args)
 }
 
-export class MarkIterable implements Iterable<void> {
-  #evaluated = false
+export class MockIterable<T> implements Iterable<T> {
+  nextIndex: number = 0
 
-  ;* [Symbol.iterator]() {
-    this.#evaluated = true
-  }
+  constructor(private contents: T[] = []) {}
 
-  isEvaluated() {
-    return this.#evaluated
+  [Symbol.iterator]() {
+    return {
+      next: () => {
+        if (this.contents.length) {
+          this.nextIndex++
+          return {
+            value: this.contents.shift()
+          , done: false
+          } as IteratorResult<T> // fuck tsc https://github.com/microsoft/TypeScript/issues/32890
+        } else {
+          return {
+            value: undefined
+          , done: true
+          } as IteratorResult<T> // fuck tsc https://github.com/microsoft/TypeScript/issues/32890
+        }
+      }
+    }
   }
 }
 
-export class MarkAsyncIterable implements AsyncIterable<void> {
-  #evaluated = false
+export class MockAsyncIterable<T> implements AsyncIterable<T> {
+  nextIndex: number = 0
 
-  async * [Symbol.asyncIterator]() {
-    this.#evaluated = true
+  constructor(private contents: T[] = []) {}
+
+  [Symbol.asyncIterator]() {
+    return {
+      next: async () => {
+        if (this.contents.length) {
+          this.nextIndex++
+          return {
+            value: this.contents.shift()
+          , done: false
+          } as IteratorResult<T> // fuck tsc https://github.com/microsoft/TypeScript/issues/32890
+        } else {
+          return {
+            value: undefined
+          , done: true
+          } as IteratorResult<T> // fuck tsc https://github.com/microsoft/TypeScript/issues/32890
+        }
+      }
+    }
   }
+}
 
-  isEvaluated() {
-    return this.#evaluated
+export function* countup() {
+  let i = 0
+  while (true) {
+    yield i++
+  }
+}
+
+export function* take<T>(iterable: Iterable<T>, count: number) {
+  if (count === 0) return
+  for (const element of iterable) {
+    yield element
+    count--
+    if (count === 0) break
+  }
+}
+
+export async function* takeAsync<T>(iterable: AsyncIterable<T>, count: number): AsyncIterable<T> {
+  if (count === 0) return
+  for await (const element of iterable) {
+    yield element
+    count--
+    if (count === 0) break
   }
 }

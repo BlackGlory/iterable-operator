@@ -6,6 +6,6 @@ import { IterableOperator } from '../iterable-operator'
 export class TapOperator<T> extends IterableOperatorBase<T> {
   tap(fn: (element: T, index: number) => unknown): IterableOperator<T>
   tap(...args: unknown[]) {
-    return applyChaining(this, target, args)
+    return applyChaining(this.subject, target, args)
   }
 }

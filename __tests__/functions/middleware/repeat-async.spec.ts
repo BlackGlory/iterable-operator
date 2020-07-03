@@ -1,30 +1,21 @@
 import { getError } from 'return-style'
-import { toArrayAsync, toAsyncIterable, MarkAsyncIterable } from '@test/utils'
-import { testCall, testPipe, testBind, testAsyncIterableChain } from '@test/test-fixtures'
+import { toArrayAsync, toAsyncIterable, MockAsyncIterable, takeAsync } from '@test/utils'
 import { InvalidArgumentError } from '@src/error'
-import { repeatAsync as call } from '@middleware/repeat-async'
-import { repeatAsync as pipe } from '@style/pipeline/middleware/repeat-async'
-import { repeatAsync as bind } from '@style/binding/middleware/repeat-async'
-import { AsyncIterableOperator } from '@style/chaining/async-iterable-operator'
+import { repeatAsync } from '@middleware/repeat-async'
 import '@test/matchers'
 
-describe.each([
-  testCall('repeatAsync<T>(iterable: AsyncIterable<T>, times: number): AsyncIterable<T>', call)
-, testPipe('repeatAsync<T>(times: number): (iterable: AsyncIterable<T>) => AsyncIterable<T>', pipe)
-, testBind('repeatAsync<T>(this: AsyncIterable<T>, times: number): AsyncIterable<T>', bind)
-, testAsyncIterableChain('AsyncIterableOperator<T>::repeatAsync(times: number): AsyncIterableOperaotr<T>', AsyncIterableOperator.prototype.repeatAsync)
-])('%s', (_, repeatAsync) => {
-  it('lazy evaluation', async () => {
-    const iter = new MarkAsyncIterable()
+describe('repeatAsync<T>(iterable: AsyncIterable<T>, times: number): AsyncIterable<T>', () => {
+  it('lazy and partial evaluation', async () => {
+    const iter = new MockAsyncIterable([1, 2, 3])
     const times = 2
 
     const result = repeatAsync(iter, times)
-    const isEval1 = iter.isEvaluated()
-    await toArrayAsync(result)
-    const isEval2 = iter.isEvaluated()
+    const isLazy = iter.nextIndex === 0
+    await toArrayAsync(takeAsync(result, 1))
+    const isPartial = iter.nextIndex === 1
 
-    expect(isEval1).toBe(false)
-    expect(isEval2).toBe(true)
+    expect(isLazy).toBe(true)
+    expect(isPartial).toBe(true)
   })
 
   describe('times > 0', () => {

@@ -5,6 +5,6 @@ import { everyAsync as target } from '@output/every-async'
 export class EveryAsyncOperator<T, U extends Iterable<T> | AsyncIterable<T>> extends Subject<U> {
   everyAsync(fn: (element: T, index: number) => boolean | PromiseLike<boolean>): Promise<boolean>
   everyAsync(...args: unknown[]) {
-    return applyBinding(this, target, args)
+    return applyBinding(this.subject, target, args)
   }
 }

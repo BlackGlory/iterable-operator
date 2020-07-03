@@ -1,30 +1,21 @@
 import { getError } from 'return-style'
 import { InvalidArgumentError } from '@src/error'
-import { testCall, testPipe, testBind, testIterableChain } from '@test/test-fixtures'
-import { toArray, MarkIterable } from '@test/utils'
-import { drop as call } from '@middleware/drop'
-import { drop as pipe } from '@style/pipeline/middleware/drop'
-import { drop as bind } from '@style/binding/middleware/drop'
-import { IterableOperator } from '@style/chaining/iterable-operator'
+import { toArray, MockIterable, take } from '@test/utils'
+import { drop } from '@middleware/drop'
 import '@test/matchers'
 
-describe.each([
-  testCall('drop<T>(iterable: Iterable<T>, count: number): Iterable<T>', call)
-, testPipe('drop<T>(count: number): (iterable: Iterable<T>) => Iterable<T>', pipe)
-, testBind('drop<T>(this: Iterable<T>, count: number): Iterable<T>', bind)
-, testIterableChain('IterableOperator<T>::drop(count: number): IterableOperator<T>', IterableOperator.prototype.drop)
-])('%s', (_, drop) => {
-  it('lazy evaluation', () => {
-    const iter = new MarkIterable()
-    const count = 2
+describe('drop<T>(iterable: Iterable<T>, count: number): Iterable<T>', () => {
+  it('lazy and partial evaluation', () => {
+    const iter = new MockIterable([1, 2, 3])
+    const count = 1
 
     const result = drop(iter, count)
-    const isEval1 = iter.isEvaluated()
-    toArray(result)
-    const isEval2 = iter.isEvaluated()
+    const isLazy = iter.nextIndex === 0
+    toArray(take(result, 1))
+    const isPartial = iter.nextIndex === 2
 
-    expect(isEval1).toBe(false)
-    expect(isEval2).toBe(true)
+    expect(isLazy).toBe(true)
+    expect(isPartial).toBe(true)
   })
 
   describe('count > 0', () => {

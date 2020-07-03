@@ -5,6 +5,6 @@ import { matchAsync as target } from '@output/match-async'
 export class MatchAsyncOperator<T> extends AsyncIterableOperatorBase<T> {
   matchAsync(sequence: ArrayLike<T>): Promise<boolean>
   matchAsync(...args: unknown[]) {
-    return applyBinding(this, target, args)
+    return applyBinding(this.subject, target, args)
   }
 }
