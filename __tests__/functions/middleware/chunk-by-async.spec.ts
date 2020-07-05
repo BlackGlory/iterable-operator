@@ -59,7 +59,7 @@ describe('chunkByAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element
 
       const result = chunkByAsync(iter, fn)
       const isLazy = mock.nextIndex === 0
-      await toArrayAsync(takeAsync(result, 1))
+      await consumeAsync(takeAsync(result, 1))
       const isPartial = mock.nextIndex === 1
 
       expect(isLazy).toBe(true)

@@ -1,6 +1,6 @@
 import { getError } from 'return-style'
 import { InvalidArgumentError } from '@src/error'
-import { toArray, MockIterable, take } from '@test/utils'
+import { consume, toArray, MockIterable, take } from '@test/utils'
 import { flattenDeep } from '@middleware/flatten-deep'
 import '@test/matchers'
 
@@ -11,7 +11,7 @@ describe('flattenDeep<T>(iterable: Iterable<unknown>, depth: number): Iterable<T
 
     const result = flattenDeep(iter, depth)
     const isLazy = iter.nextIndex === 0
-    toArray(take(result, 1))
+    consume(take(result, 1))
     const isPartial = iter.nextIndex === 1
 
     expect(isLazy).toBe(true)

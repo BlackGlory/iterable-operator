@@ -3,7 +3,7 @@
     "target": "ESNext"
   , "module": "CommonJS"
   , "strict": true
-  , "noUnusedLocals": false
+  , "noUnusedLocals": true
   , "noUnusedParameters": true
   , "baseUrl": "."
   , "paths": {

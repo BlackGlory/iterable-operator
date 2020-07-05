@@ -1,7 +1,7 @@
 import { getError } from 'return-style'
 import { InvalidArgumentsLengthError } from '@src/error'
 import { testIterable, testAsyncIterable } from '@test/test-fixtures'
-import { toArrayAsync, toIterable, toAsyncIterable, MockIterable } from '@test/utils'
+import { consumeAsync, toArrayAsync, toIterable, toAsyncIterable, MockIterable } from '@test/utils'
 import { zipAsync } from '@middleware/zip-async'
 import '@test/matchers'
 
@@ -42,7 +42,7 @@ describe('zipAsync<T>(...iterables: Array<Iterable<unknown>> | Array<AsyncIterab
 
         const result = zipAsync(iter1, iter2)
         const isLazy = mock.nextIndex === 0
-        await toArrayAsync(result)
+        await consumeAsync(result)
         const isPartial = mock.nextIndex === 1
 
         expect(isLazy).toBe(true)

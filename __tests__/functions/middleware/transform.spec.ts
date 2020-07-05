@@ -1,4 +1,4 @@
-import { toArray, MockIterable } from '@test/utils'
+import { consume, toArray, MockIterable } from '@test/utils'
 import { transform } from '@middleware/transform'
 import { getError } from 'return-style'
 import '@test/matchers'
@@ -28,7 +28,7 @@ describe('transform<T, U>(iterable: Iterable<T>, transformer: (iterable: Iterabl
 
       const result = transform(iter, fn)
       const isLazy = iter.nextIndex === 0
-      toArray(result)
+      consume(result)
 
       expect(isLazy).toBe(true)
     })

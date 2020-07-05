@@ -1,5 +1,5 @@
 import { InvalidArgumentError } from '@src/error'
-import { toArray, MockIterable } from '@test/utils'
+import { consume, toArray, MockIterable } from '@test/utils'
 import { getError } from 'return-style'
 import { takeRight } from '@middleware/take-right'
 import '@test/matchers'
@@ -11,7 +11,7 @@ describe('takeRight<T>(iterable: Iterable<T>, count: number): Iterable<T>', () =
 
     const result = takeRight(iter, count)
     const isLazy = iter.nextIndex === 0
-    toArray(result)
+    consume(result)
 
     expect(isLazy).toBe(true)
   })

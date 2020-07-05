@@ -1,6 +1,6 @@
 import { getError } from 'return-style'
 import { InvalidArgumentError } from '@src/error'
-import { toArray, MockIterable } from '@test/utils'
+import { consume, toArray, MockIterable } from '@test/utils'
 import { dropRight } from '@middleware/drop-right'
 import '@test/matchers'
 
@@ -11,7 +11,7 @@ describe('dropRight<T>(iterable: Iterable<T>, count: number): Iterable<T>', () =
 
     const result = dropRight(iter, count)
     const isEval1 = iter.nextIndex === 0
-    toArray(result)
+    consume(result)
 
     expect(isEval1).toBe(true)
   })

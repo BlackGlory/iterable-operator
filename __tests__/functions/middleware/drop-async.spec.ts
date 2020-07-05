@@ -1,4 +1,4 @@
-import { toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils'
+import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils'
 import { getError } from 'return-style'
 import { InvalidArgumentError } from '@src/error'
 import { dropAsync } from '@middleware/drop-async'
@@ -11,7 +11,7 @@ describe('dropAsync<T>(iterable: AsyncIterable<T>, count: number): AsyncIterable
 
     const result = dropAsync(iter, count)
     const isLazy = iter.nextIndex === 0
-    await toArrayAsync(takeAsync(result, 1))
+    await consumeAsync(takeAsync(result, 1))
     const isPartial = iter.nextIndex === 2
 
     expect(isLazy).toBe(true)

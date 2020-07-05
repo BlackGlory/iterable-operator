@@ -44,7 +44,7 @@ describe('flattenBy<T>(iterable: Iterable<unknown>, fn: (element: unknown, level
 
       const result = flattenBy(iter, fn)
       const isLazy = iter.nextIndex === 0
-      toArray(take(result, 1))
+      consume(take(result, 1))
       const isPartial = iter.nextIndex === 1
 
       expect(isLazy).toBe(true)

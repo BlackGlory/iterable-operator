@@ -1,6 +1,6 @@
 import { InvalidArgumentError } from '@src/error'
 import { getError } from 'return-style'
-import { toArray, MockIterable, take } from '@test/utils'
+import { consume, toArray, MockIterable, take } from '@test/utils'
 import { slice } from '@middleware/slice'
 import '@test/matchers'
 
@@ -12,7 +12,7 @@ describe('slice<T>(iterable: Iterable<T>, start: number, end: number): Iterable<
 
     const result = slice(iter, start, end)
     const isLazy = iter.nextIndex === 0
-    toArray(take(result, 1))
+    consume(take(result, 1))
     const isPartial = iter.nextIndex === 1
 
     expect(isLazy).toBe(true)

@@ -1,4 +1,4 @@
-import { toAsyncIterable, toArrayAsync, MockAsyncIterable } from '@test/utils'
+import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable } from '@test/utils'
 import { InvalidArgumentError } from '@src/error'
 import { getError } from 'return-style'
 import { takeRightAsync } from '@middleware/take-right-async'
@@ -11,7 +11,7 @@ describe('takeRightAsync<T>(iterable: AsyncIterable<T>, count: number): AsyncIte
 
     const result = takeRightAsync(iter, count)
     const isLazy = iter.nextIndex === 0
-    await toArrayAsync(result)
+    await consumeAsync(result)
 
     expect(isLazy).toBe(true)
   })

@@ -1,5 +1,5 @@
 import { getError } from 'return-style'
-import { toArrayAsync, toIterable, toAsyncIterable, MockIterable, takeAsync } from '@test/utils'
+import { consumeAsync, toArrayAsync, toIterable, toAsyncIterable, MockIterable, takeAsync } from '@test/utils'
 import { testIterable, testAsyncIterable } from '@test/test-fixtures'
 import { InvalidArgumentsLengthError } from '@src/error'
 import { concatAsync } from '@middleware/concat-async'
@@ -45,7 +45,7 @@ describe('concatAsync<T>(...iterables: Array<Iterable<unknown> | AsyncIterable<u
 
           const result = concatAsync(iter1, iter2)
           const isLazy = mock.nextIndex === 0
-          await toArrayAsync(takeAsync(result, 1))
+          await consumeAsync(takeAsync(result, 1))
           const isPartial = mock.nextIndex === 1
 
           expect(isLazy).toBe(true)

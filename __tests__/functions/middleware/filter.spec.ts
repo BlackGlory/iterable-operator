@@ -40,7 +40,7 @@ describe('filter<T>(iterable: Iterable<T>, fn: (element: T, index: number) => bo
 
       const result = filter(iter, fn)
       const isLazy = iter.nextIndex === 0
-      toArray(take(result, 1))
+      consume(take(result, 1))
       const isPartial = iter.nextIndex === 1
 
       expect(isLazy).toBe(true)

@@ -1,4 +1,4 @@
-import { toArrayAsync, MockIterable, MockAsyncIterable, toAsyncIterable } from '@test/utils'
+import { consumeAsync, toArrayAsync, MockIterable, MockAsyncIterable, toAsyncIterable } from '@test/utils'
 import { transformAsync } from '@middleware/transform-async'
 import { getErrorAsync } from 'return-style'
 import '@test/matchers'
@@ -28,7 +28,7 @@ describe('transformAsync<T, U>(iterable: Iterable<T>, transformer: (iterable: It
 
       const result = transformAsync(iter, fn)
       const isLazy = iter.nextIndex === 0
-      await toArrayAsync(result)
+      await consumeAsync(result)
 
       expect(isLazy).toBe(true)
     })
@@ -74,7 +74,7 @@ describe('transformAsync<T, U>(iterable: AsyncIterable<T>, transformer: (iterabl
 
       const result = transformAsync(iter, fn)
       const isLazy = iter.nextIndex === 0
-      await toArrayAsync(result)
+      await consumeAsync(result)
 
       expect(isLazy).toBe(true)
     })

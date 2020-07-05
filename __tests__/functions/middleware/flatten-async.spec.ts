@@ -1,4 +1,4 @@
-import { toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils'
+import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils'
 import { flattenAsync } from '@middleware/flatten-async'
 import '@test/matchers'
 
@@ -8,7 +8,7 @@ describe('flattenAsync<T, U>(iterable: AsyncIterable<T>): AsyncIterable<U>', () 
 
     const result = flattenAsync(iter)
     const isLazy = iter.nextIndex === 0
-    await toArrayAsync(takeAsync(result, 1))
+    await consumeAsync(takeAsync(result, 1))
     const isPartial = iter.nextIndex === 1
 
     expect(isLazy).toBe(true)

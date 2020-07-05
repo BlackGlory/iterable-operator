@@ -1,5 +1,5 @@
 import { InvalidArgumentError } from '@src/error'
-import { toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils'
+import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils'
 import { getError } from 'return-style'
 import { flattenDeepAsync } from '@middleware/flatten-deep-async'
 import '@test/matchers'
@@ -11,7 +11,7 @@ describe('flattenDeepAsync<T>(iterable: AsyncIterable<unknown>, depth: number): 
 
     const result = flattenDeepAsync(iter, depth)
     const isLazy = iter.nextIndex === 0
-    await toArrayAsync(takeAsync(result, 1))
+    await consumeAsync(takeAsync(result, 1))
     const iaPartial = iter.nextIndex === 1
 
     expect(isLazy).toBe(true)

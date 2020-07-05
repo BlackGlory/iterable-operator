@@ -1,6 +1,6 @@
 import { getError } from 'return-style'
 import { InvalidArgumentError } from '@src/error'
-import { toArray, MockIterable, take } from '@test/utils'
+import { consume, toArray, MockIterable, take } from '@test/utils'
 import { drop } from '@middleware/drop'
 import '@test/matchers'
 
@@ -11,7 +11,7 @@ describe('drop<T>(iterable: Iterable<T>, count: number): Iterable<T>', () => {
 
     const result = drop(iter, count)
     const isLazy = iter.nextIndex === 0
-    toArray(take(result, 1))
+    consume(take(result, 1))
     const isPartial = iter.nextIndex === 2
 
     expect(isLazy).toBe(true)

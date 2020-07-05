@@ -1,4 +1,4 @@
-import { toArray, MockIterable, take } from '@test/utils'
+import { consume, toArray, MockIterable, take } from '@test/utils'
 import { split } from '@middleware/split'
 import '@test/matchers'
 
@@ -63,7 +63,7 @@ describe('split<T>(iterable: Iterable<T>, separator: T): Iterable<T[]>', () => {
 
     const result = split(iter, sep)
     const isLazy = iter.nextIndex === 0
-    toArray(take(result, 1))
+    consume(take(result, 1))
     const isPartial = iter.nextIndex === 1
 
     expect(isLazy).toBe(true)

@@ -30,10 +30,6 @@ export function getCalledTimes(fn: jest.Mock) {
   return fn.mock.calls.length
 }
 
-export function isCalled(fn: jest.Mock) {
-  return fn.mock.calls.length > 0
-}
-
 export function* toIterable<T>(iterable: Iterable<T>): Iterable<T> {
   for (const element of iterable) {
     yield element
@@ -101,13 +97,6 @@ export class MockAsyncIterable<T> implements AsyncIterable<T> {
         }
       }
     }
-  }
-}
-
-export function* countup() {
-  let i = 0
-  while (true) {
-    yield i++
   }
 }
 

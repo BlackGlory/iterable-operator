@@ -1,4 +1,4 @@
-import { toArrayAsync, toAsyncIterable, MockAsyncIterable, takeAsync as testTakeAsync } from '@test/utils'
+import { consumeAsync, toArrayAsync, toAsyncIterable, MockAsyncIterable, takeAsync as testTakeAsync } from '@test/utils'
 import { getError } from 'return-style'
 import { InvalidArgumentError } from '@src/error'
 import { takeAsync } from '@middleware/take-async'
@@ -11,7 +11,7 @@ describe('takeAsync<T>(iterable: AsyncIterable<T>, count: number): AsyncIterable
 
     const result = takeAsync(iter, count)
     const isLazy = iter.nextIndex === 0
-    await toArrayAsync(testTakeAsync(result, 1))
+    await consumeAsync(testTakeAsync(result, 1))
     const isPartial = iter.nextIndex === 1
 
     expect(isLazy).toBe(true)

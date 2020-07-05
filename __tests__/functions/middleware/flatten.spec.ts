@@ -1,4 +1,4 @@
-import { toArray, MockIterable, take } from '@test/utils'
+import { consume, toArray, MockIterable, take } from '@test/utils'
 import { flatten } from '@middleware/flatten'
 import '@test/matchers'
 
@@ -8,7 +8,7 @@ describe('flatten<T, U>(iterable: Iterable<T>): Iterable<U>', () => {
 
     const result = flatten(iter)
     const isLazy = iter.nextIndex === 0
-    toArray(take(result, 1))
+    consume(take(result, 1))
     const isPartial = iter.nextIndex === 1
 
     expect(isLazy).toBe(true)

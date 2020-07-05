@@ -1,6 +1,6 @@
 import { getError } from 'return-style'
 import { InvalidArgumentsLengthError } from '@src/error'
-import { toArray, MockIterable, take } from '@test/utils'
+import { consume, toArray, MockIterable, take } from '@test/utils'
 import { concat } from '@middleware/concat'
 import '@test/matchers'
 
@@ -11,7 +11,7 @@ describe('concat<T>(...iterables: Array<Iterable<unknown>>): Iterable<T>', () =>
 
     const result = concat(iter1, iter2)
     const isLazy = iter1.nextIndex === 0
-    toArray(take(result, 1))
+    consume(take(result, 1))
     const isPartial = iter1.nextIndex === 1
 
     expect(isLazy).toBe(true)

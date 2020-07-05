@@ -1,4 +1,4 @@
-import { toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils'
+import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils'
 import { uniqAsync } from '@middleware/uniq-async'
 import '@test/matchers'
 
@@ -19,7 +19,7 @@ describe('uniqAsync<T>(iterable: AsyncIterable<T>): AsyncIterable<T>', () => {
 
       const result = uniqAsync(iter)
       const isLazy = iter.nextIndex === 0
-      await toArrayAsync(takeAsync(result, 1))
+      await consumeAsync(takeAsync(result, 1))
       const isPartial = iter.nextIndex === 1
 
       expect(isLazy).toBe(true)

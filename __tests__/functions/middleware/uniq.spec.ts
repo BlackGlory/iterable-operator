@@ -1,4 +1,4 @@
-import { toArray, MockIterable, take } from '@test/utils'
+import { consume, toArray, MockIterable, take } from '@test/utils'
 import { uniq } from '@middleware/uniq'
 import '@test/matchers'
 
@@ -19,7 +19,7 @@ describe('uniq<T>(iterable: Iterable<T>): Iterable<T>', () => {
 
       const result = uniq(iter)
       const isLazy = iter.nextIndex === 0
-      toArray(take(result, 1))
+      consume(take(result, 1))
       const isPartial = iter.nextIndex === 1
 
       expect(isLazy).toBe(true)

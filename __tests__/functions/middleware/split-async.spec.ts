@@ -1,4 +1,4 @@
-import { toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils'
+import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils'
 import { splitAsync } from '@middleware/split-async'
 import '@test/matchers'
 
@@ -63,7 +63,7 @@ describe('splitAsync<T>(iterable: AsyncIterable<T>, separator: T): AsyncIterable
 
     const result = splitAsync(iter, sep)
     const isLazy = iter.nextIndex === 0
-    await toArrayAsync(takeAsync(result, 1))
+    await consumeAsync(takeAsync(result, 1))
     const isPartial = iter.nextIndex === 1
 
     expect(isLazy).toBe(true)

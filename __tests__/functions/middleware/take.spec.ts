@@ -1,5 +1,5 @@
 import { InvalidArgumentError } from '@src/error'
-import { toArray, MockIterable, take as testTake } from '@test/utils'
+import { consume, toArray, MockIterable, take as testTake } from '@test/utils'
 import { getError } from 'return-style'
 import { take } from '@middleware/take'
 import '@test/matchers'
@@ -11,7 +11,7 @@ describe('take<T>(iterable: Iterable<T>, count: number): Iterable<T>', () => {
 
     const result = take(iter, count)
     const isLazy = iter.nextIndex === 0
-    toArray(testTake(result, 1))
+    consume(testTake(result, 1))
     const isPartial = iter.nextIndex === 1
 
     expect(isLazy).toBe(true)

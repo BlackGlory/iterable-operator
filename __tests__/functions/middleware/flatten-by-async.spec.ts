@@ -32,7 +32,7 @@ describe('flattenByAsync<T>(iterable: Iterable<unknown> | AsyncIterable<unknown>
 
       const result = flattenByAsync(iter, fn)
       const isLazy = mock.nextIndex === 0
-      await toArrayAsync(takeAsync(result, 1))
+      await consumeAsync(takeAsync(result, 1))
       const isPartial = mock.nextIndex === 1
 
       expect(isLazy).toBe(true)

@@ -1,6 +1,6 @@
 import { getError } from 'return-style'
 import { InvalidArgumentsLengthError } from '@src/error'
-import { toArray, MockIterable } from '@test/utils'
+import { consume, toArray, MockIterable } from '@test/utils'
 import { zip } from '@middleware/zip'
 import '@test/matchers'
 
@@ -23,7 +23,7 @@ describe('zip<T>(...iterables: Array<Iterable<unknown>>): Iterable<T>', () => {
 
       const result = zip(iter1, iter2)
       const isLazy = iter1.nextIndex === 0
-      toArray(result)
+      consume(result)
       const isPartial = iter1.nextIndex === 1
 
       expect(isLazy).toBe(true)

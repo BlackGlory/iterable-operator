@@ -1,4 +1,4 @@
-import { toArrayAsync, MockIterable, takeAsync } from '@test/utils'
+import { consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils'
 import { toAsyncIterable } from '@middleware/to-async-iterable'
 import '@test/matchers'
 
@@ -33,7 +33,7 @@ describe('toAsyncIterable<T>(iterable: Iterable<T>): AsyncIterable<T>', () => {
 
       const result = toAsyncIterable(iter)
       const isLazy = iter.nextIndex === 0
-      await toArrayAsync(takeAsync(result, 1))
+      await consumeAsync(takeAsync(result, 1))
       const isPartial = iter.nextIndex === 1
 
       expect(isLazy).toBe(true)

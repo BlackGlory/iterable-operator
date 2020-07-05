@@ -55,7 +55,7 @@ describe('dropUntil<T>(iterable: Iterable<T>, fn: (element: T, index: number) =>
 
       const result = dropUntil(iter, fn)
       const isLazy = iter.nextIndex === 0
-      toArray(take(result, 1))
+      consume(take(result, 1))
       const isPartial = iter.nextIndex === 2
 
       expect(isLazy).toBe(true)

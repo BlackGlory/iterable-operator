@@ -1,5 +1,5 @@
 import { getError } from 'return-style'
-import { toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils'
+import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils'
 import { chunkAsync } from '@middleware/chunk-async'
 import { InvalidArgumentError } from '@src/error'
 import '@test/matchers'
@@ -11,7 +11,7 @@ describe('chunkAsync<T>(iterable: AsyncIterable<T>, size: number): AsyncIterable
 
     const result = chunkAsync(iter, size)
     const isLazy = iter.nextIndex === 0
-    await toArrayAsync(takeAsync(result, 1))
+    await consumeAsync(takeAsync(result, 1))
     const isPartial = iter.nextIndex === 1
 
     expect(isLazy).toBe(true)

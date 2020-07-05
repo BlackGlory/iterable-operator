@@ -1,5 +1,5 @@
 import { getError } from 'return-style'
-import { toAsyncIterable, toArrayAsync, MockAsyncIterable } from '@test/utils'
+import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable } from '@test/utils'
 import { dropRightAsync } from '@middleware/drop-right-async'
 import { InvalidArgumentError } from '@src/error'
 import '@test/matchers'
@@ -11,7 +11,7 @@ describe('dropRightAsync<T>(iterable: AsyncIterable<T>, count: number): AsyncIte
 
     const result = dropRightAsync(iter, count)
     const isLazy = iter.nextIndex === 0
-    await toArrayAsync(result)
+    await consumeAsync(result)
 
     expect(isLazy).toBe(true)
   })

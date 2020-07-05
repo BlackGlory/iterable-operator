@@ -1,5 +1,5 @@
 import { getError } from 'return-style'
-import { toArrayAsync, toAsyncIterable, MockAsyncIterable, takeAsync } from '@test/utils'
+import { consumeAsync, toArrayAsync, toAsyncIterable, MockAsyncIterable, takeAsync } from '@test/utils'
 import { InvalidArgumentError } from '@src/error'
 import { repeatAsync } from '@middleware/repeat-async'
 import '@test/matchers'
@@ -11,7 +11,7 @@ describe('repeatAsync<T>(iterable: AsyncIterable<T>, times: number): AsyncIterab
 
     const result = repeatAsync(iter, times)
     const isLazy = iter.nextIndex === 0
-    await toArrayAsync(takeAsync(result, 1))
+    await consumeAsync(takeAsync(result, 1))
     const isPartial = iter.nextIndex === 1
 
     expect(isLazy).toBe(true)

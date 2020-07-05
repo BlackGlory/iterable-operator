@@ -1,5 +1,5 @@
 import { InvalidArgumentError } from '@src/error'
-import { toArray, MockIterable, take } from '@test/utils'
+import { consume, toArray, MockIterable, take } from '@test/utils'
 import { getError } from 'return-style'
 import { repeat } from '@middleware/repeat'
 import '@test/matchers'
@@ -11,7 +11,7 @@ describe('repeat<T>(iterable: Iterable<T>, times: number): Iterable<T>', () => {
 
     const result = repeat(iter, times)
     const isLazy = iter.nextIndex === 0
-    toArray(take(result, 1))
+    consume(take(result, 1))
     const isPartial = iter.nextIndex === 1
 
     expect(isLazy).toBe(true)

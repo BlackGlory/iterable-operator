@@ -1,6 +1,6 @@
 import { getError } from 'return-style'
 import { InvalidArgumentError } from '@src/error'
-import { toArray, MockIterable, take } from '@test/utils'
+import { consume, toArray, MockIterable, take } from '@test/utils'
 import { chunk } from '@middleware/chunk'
 import '@test/matchers'
 
@@ -11,7 +11,7 @@ describe('chunk<T>(iterable: Iterable<T>, size: number): Iterable<T[]>', () => {
 
     const result = chunk(iter, size)
     const isLazy = iter.nextIndex === 0
-    toArray(take(result, 1))
+    consume(take(result, 1))
     const isPartial = iter.nextIndex === 1
 
     expect(isLazy).toBe(true)

@@ -64,7 +64,7 @@ describe('dropUntilAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (eleme
 
       const result = dropUntilAsync(iter, fn)
       const isLazy = mock.nextIndex === 0
-      await toArrayAsync(takeAsync(result, 1))
+      await consumeAsync(takeAsync(result, 1))
       const isPartial = mock.nextIndex === 2
 
       expect(isLazy).toBe(true)
