@@ -1,4 +1,14 @@
-import 'jest-extended'
+/* eslint-disable */
+declare global {
+  namespace jest {
+    interface Matchers<R> {
+      toBeIterable(): R
+      toBeAsyncIterable(): R
+      toBePromise(): R
+    }
+  }
+}
+/* eslint-enable */
 
 expect.extend({
   toBeIterable(received: unknown) {
@@ -49,16 +59,6 @@ expect.extend({
   }
 })
 
-declare global {
-  namespace jest {
-    interface Matchers<R> {
-      toBeIterable(): R
-      toBeAsyncIterable(): R
-      toBePromise(): R
-    }
-  }
-}
-
 function isAsyncIterable<T>(val: any): val is AsyncIterable<T> {
   return val && typeof val[Symbol.asyncIterator] === 'function'
 }
@@ -70,3 +70,5 @@ function isPromise<T>(val: any): val is Promise<T> {
 function isIterable<T>(val: any): val is Iterable<T> {
   return val !== null && typeof val[Symbol.iterator] === 'function'
 }
+
+export {} // fuck tsc
