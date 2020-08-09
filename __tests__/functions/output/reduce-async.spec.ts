@@ -1,4 +1,4 @@
-import { getErrorAsync } from 'return-style'
+import { getErrorPromise } from 'return-style'
 import { RuntimeError } from '@src/error'
 import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures'
 import { reduceAsync } from '@output/reduce-async'
@@ -35,7 +35,7 @@ describe('reduceAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (accumula
             const iter = getIter([])
             const fn = getFn((acc: number, cur: number) => acc + cur)
 
-            const err = await getErrorAsync<RuntimeError>(reduceAsync(iter, fn))
+            const err = await getErrorPromise<RuntimeError>(reduceAsync(iter, fn))
 
             expect(err).toBeInstanceOf(RuntimeError)
           })
@@ -78,7 +78,7 @@ describe('reduceAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (accumula
             const iter = [1, 2, 3]
             const fn = () => { throw customError }
 
-            const err = await getErrorAsync(reduceAsync(iter, fn))
+            const err = await getErrorPromise(reduceAsync(iter, fn))
 
             expect(err).toBe(customError)
           })

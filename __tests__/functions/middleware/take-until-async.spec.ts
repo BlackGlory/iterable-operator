@@ -1,6 +1,6 @@
 import { testIterable, testAsyncIterable, testAsyncFunction, testFunction } from '@test/test-fixtures'
 import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils'
-import { getErrorAsync } from 'return-style'
+import { getErrorPromise } from 'return-style'
 import { takeUntilAsync } from '@middleware/take-until-async'
 import '@test/matchers'
 
@@ -95,7 +95,7 @@ describe('takeUntilAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (eleme
           const fn = getFn(() => { throw customError })
 
           const result = takeUntilAsync(iter, fn)
-          const err = await getErrorAsync(toArrayAsync(result))
+          const err = await getErrorPromise(toArrayAsync(result))
 
           expect(result).toBeAsyncIterable()
           expect(err).toBe(customError)

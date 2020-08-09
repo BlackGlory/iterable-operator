@@ -1,5 +1,5 @@
 import { RuntimeError } from '@src/error'
-import { getErrorAsync } from 'return-style'
+import { getErrorPromise } from 'return-style'
 import { toAsyncIterable } from '@test/utils'
 import { lastAsync } from '@output/last-async'
 import '@test/matchers'
@@ -9,7 +9,7 @@ describe('lastAsync<T>(iterable: AsyncIterable<T>): Promise<T>', () => {
     it('throw RuntimeError', async () => {
       const iter = toAsyncIterable([])
 
-      const err = await getErrorAsync<RuntimeError>(lastAsync(iter))
+      const err = await getErrorPromise<RuntimeError>(lastAsync(iter))
 
       expect(err).toBeInstanceOf(RuntimeError)
     })

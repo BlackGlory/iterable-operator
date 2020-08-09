@@ -1,7 +1,7 @@
 import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures'
 import { toArrayAsync, getCalledTimes, consumeAsync, MockIterable, takeAsync } from '@test/utils'
 import { dropUntilAsync } from '@middleware/drop-until-async'
-import { getErrorAsync } from 'return-style'
+import { getErrorPromise } from 'return-style'
 import '@test/matchers'
 
 describe('dropUntilAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => boolean | PromiseLike<boolean>): AsyncIterable<T>', () => {
@@ -95,7 +95,7 @@ describe('dropUntilAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (eleme
           const fn = () => { throw customError }
 
           const result = dropUntilAsync(iter, fn)
-          const err = await getErrorAsync(toArrayAsync(result))
+          const err = await getErrorPromise(toArrayAsync(result))
 
           expect(result).toBeAsyncIterable()
           expect(err).toBe(customError)

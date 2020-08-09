@@ -1,6 +1,6 @@
 import { consumeAsync, toArrayAsync, MockIterable, MockAsyncIterable, toAsyncIterable } from '@test/utils'
 import { transformAsync } from '@middleware/transform-async'
-import { getErrorAsync } from 'return-style'
+import { getErrorPromise } from 'return-style'
 import '@test/matchers'
 
 describe('transformAsync<T, U>(iterable: Iterable<T>, transformer: (iterable: Iterable<T>) => AsyncIterable<U>): AsyncIterable<U>', () => {
@@ -41,7 +41,7 @@ describe('transformAsync<T, U>(iterable: Iterable<T>, transformer: (iterable: It
       const fn = async function* () { throw customError }
 
       const result = transformAsync(iter, fn)
-      const err = await getErrorAsync(toArrayAsync(result))
+      const err = await getErrorPromise(toArrayAsync(result))
 
       expect(result).toBeAsyncIterable()
       expect(err).toBe(customError)
@@ -87,7 +87,7 @@ describe('transformAsync<T, U>(iterable: AsyncIterable<T>, transformer: (iterabl
       const fn = async function* () { throw customError }
 
       const result = transformAsync(iter as any, fn)
-      const err = await getErrorAsync(toArrayAsync(result))
+      const err = await getErrorPromise(toArrayAsync(result))
 
       expect(result).toBeAsyncIterable()
       expect(err).toBe(customError)

@@ -1,5 +1,5 @@
 import { toArrayAsync, consumeAsync, getCalledTimes, MockIterable, takeAsync } from '@test/utils'
-import { getErrorAsync } from 'return-style'
+import { getErrorPromise } from 'return-style'
 import { testFunction, testAsyncFunction, testIterable, testAsyncIterable } from '@test/test-fixtures'
 import { tapAsync } from '@middleware/tap-async'
 import '@test/matchers'
@@ -84,7 +84,7 @@ describe('tapAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T,
           const justThrow = () => { throw customError }
 
           const result = tapAsync(iter, justThrow)
-          const err = await getErrorAsync(toArrayAsync(result))
+          const err = await getErrorPromise(toArrayAsync(result))
 
           expect(result).toBeAsyncIterable()
           expect(err).toBe(customError)

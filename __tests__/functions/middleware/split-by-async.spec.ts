@@ -1,6 +1,6 @@
 import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils'
 import { testIterable, testAsyncIterable, testAsyncFunction, testFunction } from '@test/test-fixtures'
-import { getErrorAsync } from 'return-style'
+import { getErrorPromise } from 'return-style'
 import { splitByAsync } from '@middleware/split-by-async'
 import '@test/matchers'
 
@@ -131,7 +131,7 @@ describe('splitByAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element
           const fn = () => { throw customError }
 
           const result = splitByAsync(iter, fn)
-          const err = await getErrorAsync(toArrayAsync(result))
+          const err = await getErrorPromise(toArrayAsync(result))
 
           expect(result).toBeAsyncIterable()
           expect(err).toBe(customError)

@@ -1,4 +1,4 @@
-import { getErrorAsync } from 'return-style'
+import { getErrorPromise } from 'return-style'
 import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures'
 import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils'
 import { mapAsync } from '@middleware/map-async'
@@ -80,7 +80,7 @@ describe('mapAsync<T, U>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element:
           const fn = getFn(() => { throw customError })
 
           const result = mapAsync(iter, fn)
-          const err = await getErrorAsync(toArrayAsync(result))
+          const err = await getErrorPromise(toArrayAsync(result))
 
           expect(result).toBeAsyncIterable()
           expect(err).toBe(customError)

@@ -1,4 +1,4 @@
-import { getErrorAsync } from 'return-style'
+import { getErrorPromise } from 'return-style'
 import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures'
 import { toArrayAsync, consumeAsync, getCalledTimes, MockIterable, takeAsync } from '@test/utils'
 import { filterAsync } from '@middleware/filter-async'
@@ -80,7 +80,7 @@ describe('filterAsync<T, U extends T = T>(iterable: Iterable<T> | AsyncIterable<
           const fn = getFn(() => { throw customError })
 
           const result = filterAsync(iter, fn)
-          const err = await getErrorAsync(toArrayAsync(result))
+          const err = await getErrorPromise(toArrayAsync(result))
 
           expect(result).toBeAsyncIterable()
           expect(err).toBe(customError)

@@ -1,4 +1,4 @@
-import { getErrorAsync } from 'return-style'
+import { getErrorPromise } from 'return-style'
 import { RuntimeError } from '@src/error'
 import { testFunction, testAsyncFunction, testIterable, testAsyncIterable } from '@test/test-fixtures'
 import { findAsync } from '@output/find-async'
@@ -76,7 +76,7 @@ describe('findAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T
           const iter = getIter([1, 2, 3])
           const isFour = getFn((x: number) => x === 4)
 
-          const err = await getErrorAsync<RuntimeError>(findAsync(iter, isFour))
+          const err = await getErrorPromise<RuntimeError>(findAsync(iter, isFour))
 
           expect(err).toBeInstanceOf(RuntimeError)
         })
@@ -88,7 +88,7 @@ describe('findAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T
           const iter = getIter([1, 2, 3])
           const fn = getFn(() => { throw customError })
 
-          const err = await getErrorAsync(findAsync(iter, fn))
+          const err = await getErrorPromise(findAsync(iter, fn))
 
           expect(err).toBe(customError)
         })

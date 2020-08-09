@@ -1,6 +1,6 @@
 import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils'
 import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures'
-import { getErrorAsync } from 'return-style'
+import { getErrorPromise } from 'return-style'
 import { flattenByAsync } from '@middleware/flatten-by-async'
 import '@test/matchers'
 
@@ -109,7 +109,7 @@ describe('flattenByAsync<T>(iterable: Iterable<unknown> | AsyncIterable<unknown>
           const fn = getFn(() => { throw customError })
 
           const result = flattenByAsync(iter, fn)
-          const err = await getErrorAsync(toArrayAsync(result))
+          const err = await getErrorPromise(toArrayAsync(result))
 
           expect(result).toBeAsyncIterable()
           expect(err).toBe(customError)

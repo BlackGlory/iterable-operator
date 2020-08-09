@@ -1,6 +1,6 @@
 import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures'
 import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils'
-import { getErrorAsync } from 'return-style'
+import { getErrorPromise } from 'return-style'
 import { uniqByAsync } from '@middleware/uniq-by-async'
 import '@test/matchers'
 
@@ -80,7 +80,7 @@ describe('uniqByAsync<T, U>(iterable: Iterable<T> | AsyncIterable<T>, fn: (eleme
           const fn = getFn(() => { throw customError })
 
           const result = uniqByAsync(iter, fn)
-          const err = await getErrorAsync(toArrayAsync(result))
+          const err = await getErrorPromise(toArrayAsync(result))
 
           expect(result).toBeAsyncIterable()
           expect(err).toBe(customError)

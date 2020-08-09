@@ -1,7 +1,7 @@
 import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures'
 import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils'
 import { chunkByAsync } from '@middleware/chunk-by-async'
-import { getErrorAsync } from 'return-style'
+import { getErrorPromise } from 'return-style'
 import '@test/matchers'
 
 describe('chunkByAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => boolean | PromiseLike<boolean): AsyncIterable<T[]>', () => {
@@ -118,7 +118,7 @@ describe('chunkByAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element
           const fn = getFn(() => { throw customError })
 
           const result = chunkByAsync(iter, fn)
-          const err = await getErrorAsync(toArrayAsync(result))
+          const err = await getErrorPromise(toArrayAsync(result))
 
           expect(result).toBeAsyncIterable()
           expect(err).toBe(customError)

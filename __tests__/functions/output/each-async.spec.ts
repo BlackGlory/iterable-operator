@@ -1,4 +1,4 @@
-import { getErrorAsync } from 'return-style'
+import { getErrorPromise } from 'return-style'
 import { testFunction, testAsyncFunction, testIterable, testAsyncIterable } from '@test/test-fixtures'
 import { eachAsync } from '@output/each-async'
 import '@test/matchers'
@@ -63,7 +63,7 @@ describe('eachAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T
           const iter = getIter([1, 2, 3])
           const fn = getFn(() => { throw customError })
 
-          const err = await getErrorAsync(eachAsync(iter, fn))
+          const err = await getErrorPromise(eachAsync(iter, fn))
 
           expect(err).toBe(customError)
         })
