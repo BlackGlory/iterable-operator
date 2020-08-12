@@ -86,6 +86,6 @@
     "typescript": "^3.9.7"
   },
   "dependencies": {
-    "@blackglory/types": "^0.1.0"
+    "@blackglory/types": "^0.1.1"
   }
 }

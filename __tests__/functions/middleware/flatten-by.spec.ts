@@ -1,3 +1,4 @@
+import { isString } from '@blackglory/types'
 import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils'
 import { flattenBy } from '@middleware/flatten-by'
 import { getError } from 'return-style'
@@ -92,7 +93,3 @@ describe('flattenBy<T>(iterable: Iterable<unknown>, fn: (element: unknown, level
     })
   })
 })
-
-function isString(val: unknown): val is string {
-  return typeof val === 'string'
-}

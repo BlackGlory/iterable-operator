@@ -1,3 +1,5 @@
+import { isIterable, isAsyncIterable, isPromise } from '@blackglory/types'
+
 /* eslint-disable */
 declare global {
   namespace jest {
@@ -58,17 +60,3 @@ expect.extend({
     }
   }
 })
-
-function isAsyncIterable<T>(val: any): val is AsyncIterable<T> {
-  return val && typeof val[Symbol.asyncIterator] === 'function'
-}
-
-function isPromise<T>(val: any): val is Promise<T> {
-  return val instanceof Promise
-}
-
-function isIterable<T>(val: any): val is Iterable<T> {
-  return val !== null && typeof val[Symbol.iterator] === 'function'
-}
-
-export {} // fuck tsc

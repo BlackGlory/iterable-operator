@@ -440,10 +440,10 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@blackglory/types@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@blackglory/types/-/types-0.1.0.tgz#872250dc039c744c93aa8a1630014d40152ddf8d"
-  integrity sha512-gh08hOp9k2ZfLiOle0k9z6YSSkifRkjshO9SLyqqGx40J85O8Zp29DBsCFNIXVvzWYNhc1edpUmPOftBlPYChw==
+"@blackglory/types@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@blackglory/types/-/types-0.1.1.tgz#21a539b07ec53bf1cf86c37b6f1816be233a1a65"
+  integrity sha512-j7jGvCBshGIylCAWCoLW/o9ZcO9CZPF/1J05eFgjc8EJBmp5iV+TtsIWHcnxcF/BnOId8fSsA7YAXHFk/VR59A==
 
 "@cnakazawa/watch@^1.0.3":
   version "1.0.3"

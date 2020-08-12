@@ -1,3 +1,4 @@
+import { isString } from '@blackglory/types'
 import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils'
 import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures'
 import { getErrorPromise } from 'return-style'
@@ -118,7 +119,3 @@ describe('flattenByAsync<T>(iterable: Iterable<unknown> | AsyncIterable<unknown>
     })
   })
 })
-
-function isString(val: unknown): val is string {
-  return typeof val === 'string'
-}
