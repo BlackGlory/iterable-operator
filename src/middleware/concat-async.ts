@@ -1,4 +1,4 @@
-import { isAsyncIterable } from '../utils'
+import { isAsyncIterable } from '@blackglory/types'
 import { InvalidArgumentsLengthError } from '@src/error'
 export { InvalidArgumentsLengthError }
 

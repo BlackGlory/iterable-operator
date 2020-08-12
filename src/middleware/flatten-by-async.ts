@@ -1,4 +1,4 @@
-import { isAsyncIterable } from '../utils'
+import { isAsyncIterable, isIterable, isntChar } from '@blackglory/types'
 
 export function flattenByAsync<T>(iterable: Iterable<unknown> | AsyncIterable<unknown>, fn: (element: unknown, level: number) => boolean | PromiseLike<unknown>): AsyncIterable<T> {
   if (isAsyncIterable(iterable)) {
@@ -35,34 +35,4 @@ export function flattenByAsync<T>(iterable: Iterable<unknown> | AsyncIterable<un
 
 function isFiniteIterable<T>(val: unknown): val is Iterable<T> {
   return isIterable(val) && isntChar(val)
-}
-
-function isIterable<T>(val: any): val is Iterable<T> {
-  return isntNull(val) && isntUndefined(val) && typeof val[Symbol.iterator] === 'function'
-}
-
-function isntNull(val: unknown): boolean {
-  return val !== null
-}
-
-function isntUndefined(val: unknown): boolean {
-  return val !== undefined
-}
-
-type Char = (string | String) & { length: 1}
-
-function isStringObject(val: unknown): val is String {
-  return typeof val === 'object' && val instanceof String
-}
-
-function isString(val: unknown): val is string {
-  return typeof val === 'string'
-}
-
-function isChar(val: unknown): val is Char {
-  return (isString(val) || isStringObject(val)) && val.length === 1
-}
-
-function isntChar(val: unknown): boolean {
-  return !isChar(val)
 }

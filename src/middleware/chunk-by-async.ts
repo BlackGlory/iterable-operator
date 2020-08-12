@@ -1,4 +1,4 @@
-import { isAsyncIterable } from '../utils'
+import { isAsyncIterable } from '@blackglory/types'
 
 export function chunkByAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => boolean | PromiseLike<boolean>): AsyncIterable<T[]> {
   if (isAsyncIterable(iterable)) {

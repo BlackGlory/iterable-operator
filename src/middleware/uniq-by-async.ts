@@ -1,4 +1,4 @@
-import { isAsyncIterable } from '../utils'
+import { isAsyncIterable } from '@blackglory/types'
 
 export function uniqByAsync<T, U>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => U | PromiseLike<U>): AsyncIterable<T> {
   if (isAsyncIterable(iterable)) {

@@ -1,4 +1,4 @@
-import { isAsyncIterable } from '../utils'
+import { isAsyncIterable, isUndefined } from '@blackglory/types'
 import { RuntimeError } from '@src/error'
 export { RuntimeError }
 
@@ -117,8 +117,4 @@ function reduceAsyncWithoutInitialValue<T>(iterable: Iterable<T> | AsyncIterable
       return [result, iterator]
     }
   }
-}
-
-function isUndefined(val: unknown): val is undefined {
-  return typeof val === 'undefined'
 }

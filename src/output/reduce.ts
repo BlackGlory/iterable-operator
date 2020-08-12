@@ -1,3 +1,4 @@
+import { isUndefined } from '@blackglory/types'
 import { RuntimeError } from '@src/error'
 export { RuntimeError }
 
@@ -22,10 +23,6 @@ export function reduce<T, U>(
   } else {
     return reduceWithInitialValue<T, U>(iterable, fn, initialValue)
   }
-}
-
-function isUndefined(val: unknown): val is undefined {
-  return typeof val === 'undefined'
 }
 
 function reduceWithInitialValue<T, U>(iterable: Iterable<T>, fn: (accumulator: U, currentValue: T, index: number) => U, initialValue: U): U {

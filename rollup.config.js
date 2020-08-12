@@ -1,4 +1,6 @@
 import typescript from '@rollup/plugin-typescript'
+import commonjs from '@rollup/plugin-commonjs'
+import resolve from '@rollup/plugin-node-resolve'
 import { terser } from 'rollup-plugin-terser'
 
 function createOptions({ directory, target }) {
@@ -8,6 +10,8 @@ function createOptions({ directory, target }) {
     , output: createOutput('index')
     , plugins: [
         typescript({ target })
+      , resolve()
+      , commonjs()
       ]
     }
   , {
@@ -15,6 +19,8 @@ function createOptions({ directory, target }) {
     , output: createOutput('pipeline')
     , plugins: [
         typescript({ target })
+      , resolve()
+      , commonjs()
       ]
     }
   , {
@@ -22,6 +28,8 @@ function createOptions({ directory, target }) {
     , output: createOutput('binding')
     , plugins: [
         typescript({ target })
+      , resolve()
+      , commonjs()
       ]
     }
   , {
@@ -29,6 +37,8 @@ function createOptions({ directory, target }) {
     , output: createOutput('chaining')
     , plugins: [
         typescript({ target })
+      , resolve()
+      , commonjs()
       ]
     }
 
@@ -37,6 +47,8 @@ function createOptions({ directory, target }) {
     , output: createMinification('index')
     , plugins: [
         typescript({ target })
+      , resolve()
+      , commonjs()
       , terser()
       ]
     }
@@ -45,6 +57,8 @@ function createOptions({ directory, target }) {
     , output: createMinification('pipeline')
     , plugins: [
         typescript({ target })
+      , resolve()
+      , commonjs()
       , terser()
       ]
     }
@@ -53,6 +67,8 @@ function createOptions({ directory, target }) {
     , output: createMinification('binding')
     , plugins: [
         typescript({ target })
+      , resolve()
+      , commonjs()
       , terser()
       ]
     }
@@ -61,6 +77,8 @@ function createOptions({ directory, target }) {
     , output: createMinification('chaining')
     , plugins: [
         typescript({ target })
+      , resolve()
+      , commonjs()
       , terser()
       ]
     }

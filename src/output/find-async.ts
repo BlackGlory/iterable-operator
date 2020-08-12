@@ -1,4 +1,4 @@
-import { isAsyncIterable } from '../utils'
+import { isAsyncIterable } from '@blackglory/types'
 import { RuntimeError } from '@src/error'
 export { RuntimeError }
 

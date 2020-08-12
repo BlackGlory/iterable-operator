@@ -1,5 +1,5 @@
 import { InvalidArgumentsLengthError } from '@src/error'
-import { isAsyncIterable } from '../utils'
+import { isAsyncIterable } from '@blackglory/types'
 export { InvalidArgumentsLengthError }
 
 export function zipAsync<T1, T2>(
