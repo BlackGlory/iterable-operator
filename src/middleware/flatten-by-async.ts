@@ -38,7 +38,15 @@ function isFiniteIterable<T>(val: unknown): val is Iterable<T> {
 }
 
 function isIterable<T>(val: any): val is Iterable<T> {
-  return typeof val[Symbol.iterator] === 'function'
+  return isntNull(val) && isntUndefined(val) && typeof val[Symbol.iterator] === 'function'
+}
+
+function isntNull(val: unknown): boolean {
+  return val !== null
+}
+
+function isntUndefined(val: unknown): boolean {
+  return val !== undefined
 }
 
 type Char = (string | String) & { length: 1}
