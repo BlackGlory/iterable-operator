@@ -40,7 +40,6 @@ import { ToSetAsyncOperator } from './output/to-set-async'
 
 export {
   InvalidArgumentError
-, InvalidArgumentsLengthError
 , RuntimeError
 } from '@src/error'
 

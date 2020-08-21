@@ -4,7 +4,6 @@ test('Index', () => {
   const expectedExports: string[] = [
     'RuntimeError'
   , 'InvalidArgumentError'
-  , 'InvalidArgumentsLengthError'
 
   , 'countdown'
   , 'countup'

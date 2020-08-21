@@ -6,7 +6,6 @@ test('Chain', () => {
   , 'AsyncIterableOperator'
 
   , 'InvalidArgumentError'
-  , 'InvalidArgumentsLengthError'
   , 'RuntimeError'
   ].sort()
 

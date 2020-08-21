@@ -57,7 +57,6 @@ test.each([
   , 'zip'
 
   , 'InvalidArgumentError'
-  , 'InvalidArgumentsLengthError'
   ].sort()
 
   const actualExports = Object.keys(target).sort()

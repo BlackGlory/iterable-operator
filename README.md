@@ -145,7 +145,7 @@ function concatAsync<T, U>(
 ```
 
 ```js
-concat([1, 2, 3]) // return [1, 2, 3]
+concat([1, 2, 3]) // [1, 2, 3]
 concat([1, 2, 3], ['a', 'b', 'c']) // [1, 2, 3, 'a', 'b', 'c']
 ```
 
@@ -415,13 +415,20 @@ uniqBy([1, 2, 3], x => x % 2) // [1, 2]
 #### zip, zipAsync
 
 ```ts
-function zip<TResult>(...iterables: Iterable<unknown>[]): Iterable<TResult[]>
-function zipAsync<TResult>(...iterables: Array<Iterable<unknown> | AsyncIterable<unknown>>): AsyncIterable<TResult[]>
+function zip<T, U extends Array<Iterable<unknown>>>(
+  iterable: Iterable<T>
+, ...otherIterables: U
+): Iterable<[T, ...ExtractTypeTupleFromIterableTuple<U>]> {
+function zipAsync<T, U extends Array<Iterable<unknown> | AsyncIterable<unknown>>>(
+  iterable: Iterable<T | PromiseLike<T>> | AsyncIterable<T>
+, ...otherIterables: U
+): AsyncIterable<[T, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]> {
 ```
 
 ```js
 zip([1, 2, 3], ['a', 'b', 'c']) // [[1, 'a'], [2, 'b'], [3, 'c']]
-zip([1, 2, 3], ['a', 'b']) // [[1, 'a'], [2, 'b']]
+zip([1, 2, 3], ['a', 'b']) // [[1, 'a'], [2, 'b']
+zip([1, 2, 3], ['a', 'b'], ['i', 'ii', 'iii']) // [[1, 'a', 'i'], [2, 'b', 'ii']]
 ```
 
 ### Output

@@ -2,7 +2,7 @@ import * as middleware from '@middleware/zip-async'
 import { IterableOperator, AsyncIterableOperator } from '@style/chaining'
 import { toAsyncIterable } from '@test/utils'
 
-describe('IterableOperator<T>::zipAsync<T>(...iterables: Array<Iterable<unknown> | AsyncIterable<unknown>): AsyncIterableOperator<T[]>', () => {
+describe('IterableOperator<T>::zipAsync<U extends Array<Iterable<unknown> | AsyncIterable<unknown>>>(...iterables: U): AsyncIterableOperator<[T, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]>', () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(middleware, 'zipAsync')
     const iter = [1, 2, 3]
@@ -18,7 +18,7 @@ describe('IterableOperator<T>::zipAsync<T>(...iterables: Array<Iterable<unknown>
   })
 })
 
-describe('AsyncIterableOperator<T>::zipAsync<T>(...iterables: Array<Iterable<unknown> | AsyncIterable<unknown>): AsyncIterableOperator<T[]>', () => {
+describe('AsyncIterableOperator<T>::zipAsync<U extends Array<Iterable<unknown> | AsyncIterable<unknown>>>(...iterables: U): AsyncIterableOperator<[T, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]>', () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(middleware, 'zipAsync')
     const iter = toAsyncIterable([1, 2, 3])

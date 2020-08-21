@@ -1,7 +1,9 @@
 import * as middleware from '@middleware/zip-async'
 import { zipAsync } from '@style/pipeline/middleware/zip-async'
 
-describe('zipAsync<TResult>(...iterables: Array<Iterable<unknown> | AsyncIterable<unknown>>): (iterable: Iterable<unknown | PromiseLike<unknown>> | AsyncIterable<unknown>) => AsyncIterable<TResult[]>', () => {
+describe(`zipAsync<T, U extends Array<Iterable<unknown> | AsyncIterable<unknown>>>(
+  ...iterables: U
+): (iterable: Iterable<T | PromiseLike<T>> | AsyncIterable<T>) => AsyncIterable<[T, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]>`, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'zipAsync')
     const iter = [1, 2, 3]

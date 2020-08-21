@@ -60,7 +60,6 @@ import { SomeAsyncOperator } from './output/some-async'
 
 export {
   InvalidArgumentError
-, InvalidArgumentsLengthError
 , RuntimeError
 } from '@src/error'
 
