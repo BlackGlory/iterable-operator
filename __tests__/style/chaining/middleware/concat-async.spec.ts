@@ -2,7 +2,7 @@ import * as middleware from '@middleware/concat-async'
 import { IterableOperator, AsyncIterableOperator } from '@style/chaining'
 import { toAsyncIterable } from '@test/utils'
 
-describe('IterableOperator<T>::concatAsync<U>(...iterables: Array<Iterable<unknown> | AsyncIterable<unknown>>): AsyncIterableOperator<U>', () => {
+describe('IterableOperator<T>::concatAsync<U>(...iterables: Array<Iterable<U | PromiseLike<U>> | AsyncIterable<U>>): AsyncIterableOperator<T | U>', () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(middleware, 'concatAsync')
     const iter = [1, 2, 3]
@@ -18,7 +18,7 @@ describe('IterableOperator<T>::concatAsync<U>(...iterables: Array<Iterable<unkno
   })
 })
 
-describe('AsyncIterableOperator<T>::concatAsync<U>(...iterables: Array<Iterable<unknown> | AsyncIterable<unknown>>): AsyncIterableOperator<U>', () => {
+describe('AsyncIterableOperator<T>::concatAsync<U>(...iterables: Array<Iterable<U | PromiseLike<U>> | AsyncIterable<U>>): AsyncIterableOperator<T | U>', () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(middleware, 'concatAsync')
     const iter = toAsyncIterable([1, 2, 3])

@@ -1,15 +1,17 @@
 import * as middleware from '@middleware/concat-async'
 import { concatAsync } from '@style/pipeline/middleware/concat-async'
 
-describe('concatAsync<TResult>(...iterables: Array<Iterable<unknown> | AsyncIterable<unknown>>): (iterable: Iterable<unknown | PromiseLike<unknown>> | AsyncIterable<unknown>) => AsyncIterable<TResult>', () => {
+describe(`function concatAsync<T, U>(
+  ...iterables: Array<Iterable<T | PromiseLike<T>> | AsyncIterable<T>>
+): (...iterables: Array<Iterable<U | PromiseLike<U>> | AsyncIterable<U>>) => AsyncIterable<T | U>`, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'concatAsync')
-    const iter = [1, 2, 3]
+    const iter = [[1, 2, 3]]
     const iterables = [[1, 2, 3]]
 
-    const result = concatAsync(...iterables)(iter)
+    const result = concatAsync(...iterables)(...iter)
 
-    expect(spy).toBeCalledWith(iter, ...iterables)
+    expect(spy).toBeCalledWith(...iter, ...iterables)
     expect(spy).toReturnWith(result)
     spy.mockRestore()
   })

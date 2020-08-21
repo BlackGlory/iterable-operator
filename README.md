@@ -137,12 +137,15 @@ chunkBy([1, 2, 3], x => x === 5) // [[1, 2, 3]]
 #### concat, concatAsync
 
 ```ts
-function concat<TResult>(...iterables: Iterable<unknown>[]): Iterable<TResult>
-function concatAsync<TResult>(...iterables: Array<Iterable<unknown> | AsyncIterable<unknown>>): AsyncIterable<TResult>
+function concat<T, U>(iterable: Iterable<T>, ...otherIterables: Iterable<U>[]): Iterable<T | U> {
+function concatAsync<T, U>(
+  iterable: Iterable<T | PromiseLike<T>> | AsyncIterable<T>
+, ...otherIterables: Array<Iterable<U | PromiseLike<U>> | AsyncIterable<U>>
+): AsyncIterable<T | U> {
 ```
 
 ```js
-concat([1, 2, 3]) // throw InvalidArgumentsLengthError
+concat([1, 2, 3]) // return [1, 2, 3]
 concat([1, 2, 3], ['a', 'b', 'c']) // [1, 2, 3, 'a', 'b', 'c']
 ```
 

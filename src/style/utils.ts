@@ -4,7 +4,7 @@ import { AsyncIterableOperator } from './chaining/async-iterable-operator'
 type AnyFn = (...args: any[]) => any
 
 export function getPipelineProxy(fn: AnyFn, args: unknown[]) {
-  return (iterable: unknown) => fn(iterable, ...args)
+  return (...iterables: unknown[]) => fn(...iterables, ...args)
 }
 
 export function applyBinding(iterable: unknown, fn: AnyFn, args: unknown[]) {

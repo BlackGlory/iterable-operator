@@ -1,10 +1,8 @@
-import { getError } from 'return-style'
-import { InvalidArgumentsLengthError } from '@src/error'
 import { consume, toArray, MockIterable, take } from '@test/utils'
 import { concat } from '@middleware/concat'
 import '@test/matchers'
 
-describe('concat<T>(...iterables: Array<Iterable<unknown>>): Iterable<T>', () => {
+describe('concat<T, U>(iterable: Iterable<T>, ...otherIterables: Iterable<U>[]): Iterable<T | U>', () => {
   it('lazy and partial evaluation', () => {
     const iter1 = new MockIterable([1, 2, 3])
     const iter2: number[] = []
@@ -18,27 +16,14 @@ describe('concat<T>(...iterables: Array<Iterable<unknown>>): Iterable<T>', () =>
     expect(isPartial).toBe(true)
   })
 
-  describe('size(iterables) < 2', () => {
-    it('throw InvalidArgumentsLengthError', () => {
-      const iter = [1, 2, 3]
+  it('return concated iterable', () => {
+    const iter1 = [1, 2, 3]
+    const iter2 = ['a', 'b', 'c']
 
-      const err = getError<InvalidArgumentsLengthError>(() => concat(iter))
+    const result = concat(iter1, iter2)
+    const arrResult = toArray(result)
 
-      expect(err).toBeInstanceOf(InvalidArgumentsLengthError)
-      expect(err!.message).toMatch('2')
-    })
-  })
-
-  describe('size(iterables) >= 2', () => {
-    it('return concated iterable', () => {
-      const iter1 = [1, 2, 3]
-      const iter2 = ['a', 'b', 'c']
-
-      const result = concat(iter1, iter2)
-      const arrResult = toArray(result)
-
-      expect(result).toBeIterable()
-      expect(arrResult).toEqual([1, 2, 3, 'a', 'b', 'c'])
-    })
+    expect(result).toBeIterable()
+    expect(arrResult).toEqual([1, 2, 3, 'a', 'b', 'c'])
   })
 })
