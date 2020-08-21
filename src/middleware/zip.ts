@@ -1,3 +1,9 @@
+import { GetTypeOfIterable } from '@src/utils'
+
+export type ExtractTypeTupleFromIterableTuple<T> = {
+  [K in keyof T]: GetTypeOfIterable<T[K]>
+}
+
 export function zip<T, U extends Array<Iterable<unknown>>>(
   iterable: Iterable<T>
 , ...otherIterables: U

@@ -9,3 +9,5 @@ export function* copyIterable<T>(iterable: Iterable<T>) {
     yield element
   }
 }
+
+export type GetTypeOfIterable<T> = T extends Iterable<infer U> ? U : never

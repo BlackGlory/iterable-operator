@@ -1,5 +1,6 @@
 import { getPipelineProxy } from '@style/utils'
-import { zipAsync as target } from '@middleware/zip-async'
+import { zipAsync as target, ExtractTypeTupleFromAsyncLikeIterableTuple } from '@middleware/zip-async'
+export { ExtractTypeTupleFromAsyncLikeIterableTuple }
 
 export function zipAsync<T, U extends Array<Iterable<unknown> | AsyncIterable<unknown>>>(
   ...iterables: U

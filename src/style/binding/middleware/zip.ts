@@ -1,5 +1,6 @@
 import { applyBinding } from '@style/utils'
-import { zip as target } from '@middleware/zip'
+import { zip as target, ExtractTypeTupleFromIterableTuple } from '@middleware/zip'
+export { ExtractTypeTupleFromIterableTuple }
 
 export function zip<T, U extends Array<Iterable<unknown>>>(
   this: Iterable<T>

@@ -1,4 +1,12 @@
 import { isAsyncIterable } from '@blackglory/types'
+import { GetTypeOfIterable } from '@src/utils'
+
+export type ExtractTypeTupleFromAsyncLikeIterableTuple<T> = {
+  [K in keyof T]:
+    T[K] extends AsyncIterable<infer U> ? U :
+      T[K] extends Iterable<PromiseLike<infer V>> ? V :
+        GetTypeOfIterable<T[K]>
+}
 
 export function zipAsync<T, U extends Array<Iterable<unknown> | AsyncIterable<unknown>>>(
   iterable: Iterable<T | PromiseLike<T>> | AsyncIterable<T>

@@ -1,7 +1,8 @@
 import { applyChainingAsync } from '@style/utils'
 import { Subject } from '../subject'
 import { AsyncIterableOperator } from '../async-iterable-operator'
-import { zipAsync as target } from '@middleware/zip-async'
+import { zipAsync as target, ExtractTypeTupleFromAsyncLikeIterableTuple } from '@middleware/zip-async'
+export { ExtractTypeTupleFromAsyncLikeIterableTuple }
 
 export class ZipAsyncOperator<T, U extends Iterable<T> | AsyncIterable<T>> extends Subject<U> {
   zipAsync<V extends Array<Iterable<unknown> | AsyncIterable<unknown>>>(

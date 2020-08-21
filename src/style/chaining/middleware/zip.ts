@@ -1,7 +1,8 @@
 import { applyChaining } from '@style/utils'
-import { zip as target } from '@middleware/zip'
+import { zip as target, ExtractTypeTupleFromIterableTuple } from '@middleware/zip'
 import { IterableOperatorBase } from '../iterable-operator-base'
 import { IterableOperator } from '../iterable-operator'
+export { ExtractTypeTupleFromIterableTuple }
 
 export class ZipOperator<T> extends IterableOperatorBase<T> {
   zip<U extends Array<Iterable<unknown>>>(
