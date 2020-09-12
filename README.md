@@ -56,10 +56,10 @@ const result = [1, 2, 3]
 
 ## API
 
-There are three types of operators:
-* Input: Lazy evaluation, the return value is Iterable
-* Middleware: Lazy evaluation, the first parameter is Iterable, the return value is Iterable
-* Output: The first parameter is Iterable
+There are three kinds of operators:
+- Generating operation(input): lazy, the return value is Iterable
+- Intermediate operation(middleware): lazy, the first parameter is Iterable, the return value is Iterable(Iterable in, Iterable out)
+- Terminal operation(output): the first parameter is Iterable
 
 ### Input
 
