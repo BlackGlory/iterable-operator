@@ -1,6 +1,6 @@
 import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils'
 import { uniqAsync } from '@middleware/uniq-async'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('uniqAsync<T>(iterable: AsyncIterable<T>): AsyncIterable<T>', () => {
   describe('call', () => {

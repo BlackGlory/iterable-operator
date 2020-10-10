@@ -1,6 +1,6 @@
 import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils'
 import { flattenAsync } from '@middleware/flatten-async'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('flattenAsync<T, U>(iterable: AsyncIterable<T>): AsyncIterable<U>', () => {
   it('lazy and partial evaluation', async () => {

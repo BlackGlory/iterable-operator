@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/take-right'
 import { takeRight } from '@style/binding/middleware/take-right'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('takeRight<T>(this: Iterable<T>, count: number): Iterable<T>', () => {
   it('is binding style', () => {

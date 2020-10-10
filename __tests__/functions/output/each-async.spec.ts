@@ -1,7 +1,7 @@
 import { getErrorPromise } from 'return-style'
 import { testFunction, testAsyncFunction, testIterable, testAsyncIterable } from '@test/test-fixtures'
 import { eachAsync } from '@output/each-async'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('eachAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => unknown | PromiseLike<unknown>): Promise<void>', () => {
   describe(('T is PromiseLike<T>'), () => {

@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/filter'
 import { filter } from '@style/binding/middleware/filter'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('filter<T, U extends T = T>(this: Iterable<T>, fn: (element: T, index: number) => boolean): Iterable<U>', () => {
   it('is binding style', () => {

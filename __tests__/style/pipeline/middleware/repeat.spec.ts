@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/repeat'
 import { repeat } from '@style/pipeline/middleware/repeat'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('repeat<T>(times: number): (iterable: Iterable<T>) => Iterable<T>', () => {
   it('is pipeline style', () => {

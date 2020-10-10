@@ -3,7 +3,7 @@ import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } f
 import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures'
 import { getErrorPromise } from 'return-style'
 import { flattenByAsync } from '@middleware/flatten-by-async'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('flattenByAsync<T>(iterable: Iterable<unknown> | AsyncIterable<unknown>, fn: (element: unknown, level: number) => boolean | PromiseLike<boolean>): AsyncIterable<T>', () => {
   describe.each([

@@ -2,7 +2,7 @@ import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } f
 import { testIterable, testAsyncIterable, testAsyncFunction, testFunction } from '@test/test-fixtures'
 import { getErrorPromise } from 'return-style'
 import { splitByAsync } from '@middleware/split-by-async'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('splitByAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => boolean | PromiseLike<boolean>): AsyncIterable<T[]>', () => {
   describe('T is PromiseLike<T>', () => {

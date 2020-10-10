@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/transform'
 import { transform } from '@style/pipeline/middleware/transform'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('transform<T, U>(transformer: (iterable: Iterable<T>) => Iterable<U>): (iterable: Iterable<T>) => Iterable<U>', () => {
   it('is pipeline style', () => {

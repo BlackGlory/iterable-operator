@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/zip'
 import { zip } from '@style/binding/middleware/zip'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe(`zip<T, U extends Array<Iterable<unknown>>>(
   this: Iterable<T>

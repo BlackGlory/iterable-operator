@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/drop'
 import { drop } from '@style/binding/middleware/drop'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('drop<T>(this: Iterable<T>, count: number): Iterable<T>', () => {
   it('is binding style', () => {

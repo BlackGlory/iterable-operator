@@ -1,6 +1,6 @@
 import { toAsyncIterable } from '@test/utils'
 import { toArrayAsync } from '@output/to-array-async'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('toArrayAsync<T>(iterable: AsyncIterable<T>): Promise<T[]>', () => {
   describe('call', () => {

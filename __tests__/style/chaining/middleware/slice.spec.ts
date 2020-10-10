@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/slice'
 import { IterableOperator } from '@style/chaining'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('IterableOperator<T>::slice(start: number, end: number): IterableOperator<T>', () => {
   it('is chaining style', () => {

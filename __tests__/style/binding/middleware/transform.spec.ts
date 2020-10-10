@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/transform'
 import { transform } from '@style/binding/middleware/transform'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('transform<T, U>(this: Iterable<T>, transformer: (iterable: Iterable<T>) => Iterable<U>): Iterable<U>', () => {
   it('is binding style', () => {

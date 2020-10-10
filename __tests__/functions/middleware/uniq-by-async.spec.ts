@@ -2,7 +2,7 @@ import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from
 import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils'
 import { getErrorPromise } from 'return-style'
 import { uniqByAsync } from '@middleware/uniq-by-async'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('uniqByAsync<T, U>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => U | PromiseLike<U>): AsyncIterable<T>', () => {
   describe('T is PromiseLike<unknown>', () => {

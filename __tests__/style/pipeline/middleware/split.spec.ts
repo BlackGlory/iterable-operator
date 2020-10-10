@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/split'
 import { split } from '@style/pipeline/middleware/split'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('split<T>(separator: T): (iterable: Iterable<T>) => Iterable<T[]>', () => {
   it('is pipeline style', () => {

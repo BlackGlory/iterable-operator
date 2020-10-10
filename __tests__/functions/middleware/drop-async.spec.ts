@@ -2,7 +2,7 @@ import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsy
 import { getError } from 'return-style'
 import { InvalidArgumentError } from '@src/error'
 import { dropAsync } from '@middleware/drop-async'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('dropAsync<T>(iterable: AsyncIterable<T>, count: number): AsyncIterable<T>', () => {
   it('lazy and partial evaluation', async () => {

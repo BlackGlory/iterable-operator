@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/map'
 import { map } from '@style/pipeline/middleware/map'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('map<T, U>(fn: (element: T, index: number) => U): (iterable: Iterable<T>) => Iterable<U>', () => {
   it('is pipeline style', () => {

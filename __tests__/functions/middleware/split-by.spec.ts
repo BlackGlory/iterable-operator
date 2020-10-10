@@ -1,7 +1,7 @@
 import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils'
 import { splitBy } from '@middleware/split-by'
 import { getError } from 'return-style'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('splitBy<T>(iterable: Iterable<T>, fn: (element: T, index: number) => boolean): Iterable<T[]>', () => {
   describe('fn is called', () => {

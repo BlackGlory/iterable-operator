@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/map'
 import { map } from '@style/binding/middleware/map'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('map<T, U>(this: Iterable<T>, fn: (element: T, index: number) => U): Iterable<U>', () => {
   it('is binding style', () => {

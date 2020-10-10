@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/drop-until'
 import { IterableOperator } from '@style/chaining'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('IterableOperator<T>::dropUntil(fn: (element: T, index: number) => boolean): IterableOperator<T>', () => {
   it('is chaining style', () => {

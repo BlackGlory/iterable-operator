@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/flatten-by'
 import { flattenBy } from '@style/binding/middleware/flatten-by'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('flattenBy<T>(this: Iterable<unknown>, fn: (element: unknown, level: number) => boolean): Iterable<T>', () => {
   it('is binding style', () => {

@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/repeat'
 import { IterableOperator } from '@style/chaining'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('IterableOperator<T>::repeat(times: number): IterableOperator<T>', () => {
   it('is chaining style', () => {

@@ -1,7 +1,7 @@
 import { getError } from 'return-style'
 import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils'
 import { map } from '@middleware/map'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('map<T, U>(iterable: Iterable<T>, fn: (element: T, index: number) => U): Iterable<U>', () => {
   describe('fn called', () => {

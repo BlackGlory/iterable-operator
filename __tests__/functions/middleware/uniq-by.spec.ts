@@ -1,7 +1,7 @@
 import { getError } from 'return-style'
 import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils'
 import { uniqBy } from '@middleware/uniq-by'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('uniqBy<T, U>(iterable: Iterable<T>, fn: (element: T, index: number) => U): Iterable<T>', () => {
   describe('fn called', () => {

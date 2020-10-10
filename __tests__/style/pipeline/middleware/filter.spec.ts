@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/filter'
 import { filter } from '@style/pipeline/middleware/filter'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('filter<T, U extends T = T>(fn: (element: T, index: number) => boolean): (iterable: Iterable<T>) => Iterable<U>', () => {
   it('is pipeline style', () => {

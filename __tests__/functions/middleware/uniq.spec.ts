@@ -1,6 +1,6 @@
 import { consume, toArray, MockIterable, take } from '@test/utils'
 import { uniq } from '@middleware/uniq'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('uniq<T>(iterable: Iterable<T>): Iterable<T>', () => {
   describe('call', () => {

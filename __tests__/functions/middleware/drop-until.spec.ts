@@ -1,7 +1,7 @@
 import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils'
 import { dropUntil } from '@middleware/drop-until'
 import { getError } from 'return-style'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('dropUntil<T>(iterable: Iterable<T>, fn: (element: T, index: number) => boolean): Iterable<T>', () => {
   describe('fn is called', () => {

@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/uniq-by'
 import { uniqBy } from '@style/pipeline/middleware/uniq-by'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('uniqBy<T, U>(fn: (element: T, index: number) => U): (iterable: Iterable<T>) => Iterable<T>', () => {
   it('is pipeline style', () => {

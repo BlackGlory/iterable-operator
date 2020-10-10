@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/split'
 import { split } from '@style/binding/middleware/split'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('split<T>(this: Iterable<T>, separator: T): Iterable<T[]>', () => {
   it('is binding style', () => {

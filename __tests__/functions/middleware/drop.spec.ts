@@ -2,7 +2,7 @@ import { getError } from 'return-style'
 import { InvalidArgumentError } from '@src/error'
 import { consume, toArray, MockIterable, take } from '@test/utils'
 import { drop } from '@middleware/drop'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('drop<T>(iterable: Iterable<T>, count: number): Iterable<T>', () => {
   it('lazy and partial evaluation', () => {

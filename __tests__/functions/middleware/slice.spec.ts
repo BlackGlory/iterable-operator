@@ -2,7 +2,7 @@ import { InvalidArgumentError } from '@src/error'
 import { getError } from 'return-style'
 import { consume, toArray, MockIterable, take } from '@test/utils'
 import { slice } from '@middleware/slice'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('slice<T>(iterable: Iterable<T>, start: number, end: number): Iterable<T>', () => {
   it('lazy and partial evaluation', () => {

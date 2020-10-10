@@ -2,7 +2,7 @@ import { getErrorPromise } from 'return-style'
 import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures'
 import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils'
 import { mapAsync } from '@middleware/map-async'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('mapAsync<T, U>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => U | PromiseLike<U>): AsyncIterable<U>', () => {
   describe('T is PromiseLike<T>', () => {

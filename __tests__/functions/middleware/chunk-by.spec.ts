@@ -1,7 +1,7 @@
 import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils'
 import { chunkBy } from '@middleware/chunk-by'
 import { getError } from 'return-style'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('chunkBy<T>(iterable: Iterable<T>, fn: (element: T, index: number) => boolean): Iterable<T[]>', () => {
   describe('fn is called', () => {

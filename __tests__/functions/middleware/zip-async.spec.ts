@@ -1,7 +1,7 @@
 import { testIterable, testAsyncIterable } from '@test/test-fixtures'
 import { consumeAsync, toArrayAsync, toIterable, toAsyncIterable, MockIterable } from '@test/utils'
 import { zipAsync } from '@middleware/zip-async'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe(`zipAsync<T, U extends Array<Iterable<unknown> | AsyncIterable<unknown>>>(
   iterable: Iterable<T | PromiseLike<T>> | AsyncIterable<T>

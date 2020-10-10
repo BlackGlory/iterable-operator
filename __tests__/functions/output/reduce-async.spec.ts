@@ -3,7 +3,7 @@ import { RuntimeError } from '@src/error'
 import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures'
 import { reduceAsync } from '@output/reduce-async'
 import { getCalledTimes } from '@test/utils'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('reduceAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (accumulator: T, currentValue: T, index: number) => T | PromiseLike<T>): Promise<T>', () => {
   describe.each([

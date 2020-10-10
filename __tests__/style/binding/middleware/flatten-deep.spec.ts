@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/flatten-deep'
 import { flattenDeep } from '@style/binding/middleware/flatten-deep'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('flattenDeep<T>(this: Iterable<unknown>, depth: number): Iterable<T>', () => {
   it('is binding style', () => {

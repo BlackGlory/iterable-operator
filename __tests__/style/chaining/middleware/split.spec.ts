@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/split'
 import { IterableOperator } from '@style/chaining'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('IterableOperator<T>::split(separator: T): IterableOperator<T[]>', () => {
   it('is chaining style', () => {

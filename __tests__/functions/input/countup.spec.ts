@@ -1,6 +1,6 @@
 import { toArray } from '@test/utils'
 import { countup } from '@input/countup'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('countup(begin: number, end: number): Iterable<number>', () => {
   describe('begin < end', () => {

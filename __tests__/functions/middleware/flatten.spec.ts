@@ -1,6 +1,6 @@
 import { consume, toArray, MockIterable, take } from '@test/utils'
 import { flatten } from '@middleware/flatten'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('flatten<T, U>(iterable: Iterable<T>): Iterable<U>', () => {
   it('lazy and partial evaluation', () => {

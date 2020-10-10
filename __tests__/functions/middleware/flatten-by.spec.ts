@@ -2,7 +2,7 @@ import { isString } from '@blackglory/types'
 import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils'
 import { flattenBy } from '@middleware/flatten-by'
 import { getError } from 'return-style'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('flattenBy<T>(iterable: Iterable<unknown>, fn: (element: unknown, level: number) => boolean): Iterable<T>', () => {
   describe('fn is called', () => {

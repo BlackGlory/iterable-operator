@@ -2,7 +2,7 @@ import { getError } from 'return-style'
 import { InvalidArgumentError } from '@src/error'
 import { consume, toArray, MockIterable, take } from '@test/utils'
 import { chunk } from '@middleware/chunk'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('chunk<T>(iterable: Iterable<T>, size: number): Iterable<T[]>', () => {
   it('lazy and partial evaluation', () => {

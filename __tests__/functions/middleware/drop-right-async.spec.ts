@@ -2,7 +2,7 @@ import { getError } from 'return-style'
 import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable } from '@test/utils'
 import { dropRightAsync } from '@middleware/drop-right-async'
 import { InvalidArgumentError } from '@src/error'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('dropRightAsync<T>(iterable: AsyncIterable<T>, count: number): AsyncIterable<T>', () => {
   it('lazy evaluation', async () => {

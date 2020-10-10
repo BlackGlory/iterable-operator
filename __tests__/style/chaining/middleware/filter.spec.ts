@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/filter'
 import { IterableOperator } from '@style/chaining'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('IteralbeOperator<T>::filter<U extends T = T>(fn: (element: T, index: number) => boolean): IterableOperator<U>', () => {
   it('is chaining style', () => {

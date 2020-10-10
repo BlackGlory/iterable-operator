@@ -2,7 +2,7 @@ import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from
 import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils'
 import { chunkByAsync } from '@middleware/chunk-by-async'
 import { getErrorPromise } from 'return-style'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('chunkByAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => boolean | PromiseLike<boolean): AsyncIterable<T[]>', () => {
   describe('T is PromiseLike<unknown>', () => {

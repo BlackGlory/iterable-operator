@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/drop'
 import { drop } from '@style/pipeline/middleware/drop'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('drop<T>(count: number): (iterable: Iterable<T>) => Iterable<T>', () => {
   it('is pipeline style', () => {

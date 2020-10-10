@@ -2,7 +2,7 @@ import { getErrorPromise } from 'return-style'
 import { RuntimeError } from '@src/error'
 import { testFunction, testAsyncFunction, testIterable, testAsyncIterable } from '@test/test-fixtures'
 import { findAsync } from '@output/find-async'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('findAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => boolean | PromiseLike<boolean>): Promise<T>', () => {
   describe('T is PromiseLike<T>', () => {

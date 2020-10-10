@@ -2,7 +2,7 @@ import { RuntimeError } from '@src/error'
 import { getErrorPromise } from 'return-style'
 import { toAsyncIterable } from '@test/utils'
 import { lastAsync } from '@output/last-async'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('lastAsync<T>(iterable: AsyncIterable<T>): Promise<T>', () => {
   describe('iterable is empty', () => {

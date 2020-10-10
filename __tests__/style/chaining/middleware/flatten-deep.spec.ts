@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/flatten-deep'
 import { IterableOperator } from '@style/chaining'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('IterableOperator<T>::flattenDeep<T>(depth: number): IterableOperator<T>', () => {
   it('is chaining style', () => {

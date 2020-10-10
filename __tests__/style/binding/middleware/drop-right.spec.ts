@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/drop-right'
 import { dropRight } from '@style/binding/middleware/drop-right'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('dropRight<T>(this: Iterable<T>, count: number): Iterable<T>', () => {
   it('is binding style', () => {

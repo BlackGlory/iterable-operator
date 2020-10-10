@@ -2,7 +2,7 @@ import { InvalidArgumentError } from '@src/error'
 import { consume, toArray, MockIterable } from '@test/utils'
 import { getError } from 'return-style'
 import { takeRight } from '@middleware/take-right'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('takeRight<T>(iterable: Iterable<T>, count: number): Iterable<T>', () => {
   it('lazy evaluation', () => {

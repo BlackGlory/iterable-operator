@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/chunk'
 import { chunk } from '@style/pipeline/middleware/chunk'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('chunk<T>(size: number): (iterable: Iterable<T>) => Iterable<T[]>', () => {
   it('is pipeline style', () => {

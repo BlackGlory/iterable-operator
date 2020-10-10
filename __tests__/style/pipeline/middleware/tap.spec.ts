@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/tap'
 import { tap } from '@style/pipeline/middleware/tap'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('tap<T>(fn: (element: T, index: number) => unknown): (iterable: Iterable<T>) => Iterable<T>', () => {
   it('is pipeline style', () => {

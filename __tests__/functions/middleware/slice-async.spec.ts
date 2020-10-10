@@ -2,7 +2,7 @@ import { getError } from 'return-style'
 import { InvalidArgumentError } from '@src/error'
 import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils'
 import { sliceAsync } from '@middleware/slice-async'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('sliceAsync<T>(iterable: AsyncIterable<T>, start: number, end: number): AsyncIterable<T>', () => {
   it('lazy and partial evaluation', async () => {

@@ -2,7 +2,7 @@ import { InvalidArgumentError } from '@src/error'
 import { toArray } from '@test/utils'
 import { getError } from 'return-style'
 import { range } from '@input/range'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('range(start: number, end: number): Iterable<number>', () => {
   describe('start = end', () => {

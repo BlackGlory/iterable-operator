@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/concat'
 import { concat } from '@style/pipeline/middleware/concat'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('concat<T, U>(...iterables: Array<Iterable<U>>): (iterable: Iterable<T>) => Iterable<T | U>', () => {
   it('is pipeline style', () => {

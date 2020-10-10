@@ -2,7 +2,7 @@ import { getError } from 'return-style'
 import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils'
 import { chunkAsync } from '@middleware/chunk-async'
 import { InvalidArgumentError } from '@src/error'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('chunkAsync<T>(iterable: AsyncIterable<T>, size: number): AsyncIterable<T[]>', () => {
   it('lazy and evaluation', async () => {

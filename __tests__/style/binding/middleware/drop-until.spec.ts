@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/drop-until'
 import { dropUntil } from '@style/binding/middleware/drop-until'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('dropUntil<T>(this: Iterable<T>, fn: (element: T, index: number) => boolean): Iterable<T>', () => {
   it('is binding style', () => {

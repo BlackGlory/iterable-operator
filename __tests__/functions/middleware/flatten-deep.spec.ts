@@ -2,7 +2,7 @@ import { getError } from 'return-style'
 import { InvalidArgumentError } from '@src/error'
 import { consume, toArray, MockIterable, take } from '@test/utils'
 import { flattenDeep } from '@middleware/flatten-deep'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('flattenDeep<T>(iterable: Iterable<unknown>, depth: number): Iterable<T>', () => {
   it('lazy and partial evaluation', () => {

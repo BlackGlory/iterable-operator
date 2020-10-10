@@ -2,7 +2,7 @@ import { InvalidArgumentError } from '@src/error'
 import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils'
 import { getError } from 'return-style'
 import { flattenDeepAsync } from '@middleware/flatten-deep-async'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('flattenDeepAsync<T>(iterable: AsyncIterable<unknown>, depth: number): AsyncIterable<T>', () => {
   it('lazy and partial evaluation', async () => {

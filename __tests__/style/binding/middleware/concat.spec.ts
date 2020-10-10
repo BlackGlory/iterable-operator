@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/concat'
 import { concat } from '@style/binding/middleware/concat'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('export function concat<T, U>(this: Iterable<T>, ...iterables: Iterable<U>[]): Iterable<T | U>', () => {
   it('is binding style', () => {

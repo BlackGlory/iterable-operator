@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/slice'
 import { slice } from '@style/pipeline/middleware/slice'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('slice<T>(start: number, end: number): (iterable: Iterable<T>) => Iterable<T>', () => {
   it('is pipeline style', () => {

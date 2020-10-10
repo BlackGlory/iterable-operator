@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/tap'
 import { tap } from '@style/binding/middleware/tap'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('tap<T>(this: Iterable<T>, fn: (element: T, index: number) => unknown): Iterable<T>', () => {
   it('is binding style', () => {

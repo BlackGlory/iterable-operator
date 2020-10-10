@@ -1,6 +1,6 @@
 import { toAsyncIterable } from '@test/utils'
 import { includesAsync } from '@output/includes-async'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('includesAsync<T>(iterable: AsyncIterable<T>, value: T): Promise<boolean>', () => {
   describe('value is included in the iterable', () => {

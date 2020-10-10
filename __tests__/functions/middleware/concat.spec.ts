@@ -1,6 +1,6 @@
 import { consume, toArray, MockIterable, take } from '@test/utils'
 import { concat } from '@middleware/concat'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('concat<T, U>(iterable: Iterable<T>, ...otherIterables: Iterable<U>[]): Iterable<T | U>', () => {
   it('lazy and partial evaluation', () => {

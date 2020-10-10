@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/concat'
 import { IterableOperator } from '@style/chaining'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('IterableOperator<T>::concat<U>(...iterables: Array<Iterable<U>>): IterableOperator<T | U>', () => {
   it('is chaining style', () => {

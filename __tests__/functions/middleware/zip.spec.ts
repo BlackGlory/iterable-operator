@@ -1,6 +1,6 @@
 import { consume, toArray, MockIterable } from '@test/utils'
 import { zip } from '@middleware/zip'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe(`zip<T, U extends Array<Iterable<unknown>>>(
   iterable: Iterable<T>

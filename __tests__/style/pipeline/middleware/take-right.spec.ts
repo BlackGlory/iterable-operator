@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/take-right'
 import { takeRight } from '@style/pipeline/middleware/take-right'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('takeRight<T>(count: number): (iterable: Iterable<T>) => Iterable<T>', () => {
   it('is pipeline style', () => {

@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/uniq-by'
 import { uniqBy } from '@style/binding/middleware/uniq-by'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('uniqBy<T, U>(this: Iterable<T>, fn: (element: T, index: number) => U): Iterable<T>', () => {
   it('is binding style', () => {

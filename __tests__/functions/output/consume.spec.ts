@@ -1,7 +1,7 @@
 import { testIterable, testAsyncIterable } from '@test/test-fixtures'
 import { consume } from '@output/consume'
 import { getError } from 'return-style'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('consume<T, U>(iterable: Iterable<T> | AsyncIterable<T>, consumer: (iterable: Iterable<T> | AsyncIterable<T>) => U): U', () => {
   describe.each([

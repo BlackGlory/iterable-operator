@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/zip'
 import { IterableOperator } from '@style/chaining'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe(`IterableOperator<T>::zip<U extends Array<Iterable<unknown>>>(
   ...iterables: U

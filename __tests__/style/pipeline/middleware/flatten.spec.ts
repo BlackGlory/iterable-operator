@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/flatten'
 import { flatten } from '@style/pipeline/middleware/flatten'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('flatten<T>(): (iterable: Iterable<unknown>) => Iterable<T>', () => {
   it('is pipeline style', () => {

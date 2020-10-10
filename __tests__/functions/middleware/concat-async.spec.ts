@@ -1,7 +1,7 @@
 import { consumeAsync, toArrayAsync, toIterable, toAsyncIterable, MockIterable, takeAsync } from '@test/utils'
 import { testIterable, testAsyncIterable } from '@test/test-fixtures'
 import { concatAsync } from '@middleware/concat-async'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe(`concatAsync<T, U>(
   iterable: Iterable<T | PromiseLike<T>> | AsyncIterable<T>

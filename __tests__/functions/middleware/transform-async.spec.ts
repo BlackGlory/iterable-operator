@@ -1,7 +1,7 @@
 import { consumeAsync, toArrayAsync, MockIterable, MockAsyncIterable, toAsyncIterable } from '@test/utils'
 import { transformAsync } from '@middleware/transform-async'
 import { getErrorPromise } from 'return-style'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('transformAsync<T, U>(iterable: Iterable<T>, transformer: (iterable: Iterable<T>) => AsyncIterable<U>): AsyncIterable<U>', () => {
   describe('call', () => {

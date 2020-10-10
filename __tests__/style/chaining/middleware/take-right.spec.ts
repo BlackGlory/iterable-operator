@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/take-right'
 import { IterableOperator } from '@style/chaining'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('IterableOperator<T>::takeRight(count: number): IterableOperator<T>', () => {
   it('is chaining style', () => {

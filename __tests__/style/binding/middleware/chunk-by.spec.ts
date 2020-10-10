@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/chunk-by'
 import { chunkBy } from '@style/binding/middleware/chunk-by'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('chunkBy<T>(this: Iterable<T>, fn: (element: T, index: number) => boolean): Iterable<T[]>', () => {
   it('is binding style', () => {

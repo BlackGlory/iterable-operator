@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/map'
 import { IterableOperator } from '@style/chaining'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('IterableOperator<T>::map<U>(fn: (element: T, index: number) => U): IterableOperator<U>', () => {
   it('is chaining style', () => {

@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/chunk-by'
 import { IterableOperator } from '@style/chaining'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('IterableOperator<T>::chunkBy(fn: (element: T, index: number) => boolean): IterableOperator<T[]>', () => {
   it('is chaining style', () => {

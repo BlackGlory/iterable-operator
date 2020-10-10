@@ -1,6 +1,6 @@
 import * as middleware from '@middleware/slice'
 import { slice } from '@style/binding/middleware/slice'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('slice<T>(this: Iterable<T>, start: number, end: number): Iterable<T>', () => {
   it('is binding style', () => {

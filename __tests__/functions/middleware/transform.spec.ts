@@ -1,7 +1,7 @@
 import { consume, toArray, MockIterable } from '@test/utils'
 import { transform } from '@middleware/transform'
 import { getError } from 'return-style'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('transform<T, U>(iterable: Iterable<T>, transformer: (iterable: Iterable<T>) => Iterable<U>): Iterable<U>', () => {
   describe('call', () => {

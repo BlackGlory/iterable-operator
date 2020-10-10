@@ -2,7 +2,7 @@ import { getError } from 'return-style'
 import { consumeAsync, toArrayAsync, toAsyncIterable, MockAsyncIterable, takeAsync } from '@test/utils'
 import { InvalidArgumentError } from '@src/error'
 import { repeatAsync } from '@middleware/repeat-async'
-import '@test/matchers'
+import '@blackglory/jest-matchers'
 
 describe('repeatAsync<T>(iterable: AsyncIterable<T>, times: number): AsyncIterable<T>', () => {
   it('lazy and partial evaluation', async () => {
