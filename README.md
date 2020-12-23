@@ -1,6 +1,6 @@
 # iterable-operator
 
-Utility for JavaScript Iterable and AsyncIterable.
+Utilities for JavaScript Iterable and AsyncIterable.
 
 ## Install
 
