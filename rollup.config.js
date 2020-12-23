@@ -1,7 +1,10 @@
 import typescript from '@rollup/plugin-typescript'
 import commonjs from '@rollup/plugin-commonjs'
 import resolve from '@rollup/plugin-node-resolve'
+import json from '@rollup/plugin-json'
 import { terser } from 'rollup-plugin-terser'
+
+const UMD_NAME = 'IterableOperator'
 
 function createOptions({ directory, target }) {
   return [
@@ -10,6 +13,7 @@ function createOptions({ directory, target }) {
     , output: createOutput('index')
     , plugins: [
         typescript({ target })
+      , json()
       , resolve()
       , commonjs()
       ]
@@ -19,6 +23,7 @@ function createOptions({ directory, target }) {
     , output: createOutput('pipeline')
     , plugins: [
         typescript({ target })
+      , json()
       , resolve()
       , commonjs()
       ]
@@ -28,6 +33,7 @@ function createOptions({ directory, target }) {
     , output: createOutput('binding')
     , plugins: [
         typescript({ target })
+      , json()
       , resolve()
       , commonjs()
       ]
@@ -37,6 +43,7 @@ function createOptions({ directory, target }) {
     , output: createOutput('chaining')
     , plugins: [
         typescript({ target })
+      , json()
       , resolve()
       , commonjs()
       ]
@@ -47,6 +54,7 @@ function createOptions({ directory, target }) {
     , output: createMinification('index')
     , plugins: [
         typescript({ target })
+      , json()
       , resolve()
       , commonjs()
       , terser()
@@ -57,6 +65,7 @@ function createOptions({ directory, target }) {
     , output: createMinification('pipeline')
     , plugins: [
         typescript({ target })
+      , json()
       , resolve()
       , commonjs()
       , terser()
@@ -67,6 +76,7 @@ function createOptions({ directory, target }) {
     , output: createMinification('binding')
     , plugins: [
         typescript({ target })
+      , json()
       , resolve()
       , commonjs()
       , terser()
@@ -77,6 +87,7 @@ function createOptions({ directory, target }) {
     , output: createMinification('chaining')
     , plugins: [
         typescript({ target })
+      , json()
       , resolve()
       , commonjs()
       , terser()
@@ -94,7 +105,7 @@ function createOptions({ directory, target }) {
     , {
         file: `dist/${directory}/${name}.umd.js`
       , format: 'umd'
-      , name: 'IterableOperator'
+      , name: UMD_NAME
       , sourcemap: true
       }
     ]
@@ -110,7 +121,7 @@ function createOptions({ directory, target }) {
     , {
         file: `dist/${directory}/${name}.umd.min.js`
       , format: 'umd'
-      , name: 'IterableOperator'
+      , name: UMD_NAME
       , sourcemap: true
       }
     ]
