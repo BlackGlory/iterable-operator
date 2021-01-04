@@ -15,7 +15,7 @@ function createOptions({ directory, target }) {
     , plugins: [
         typescript({ target })
       , json()
-      , resolve()
+      , resolve({ browser: true })
       , commonjs()
       , analyze({ summaryOnly: true })
       ]
@@ -26,7 +26,7 @@ function createOptions({ directory, target }) {
     , plugins: [
         typescript({ target })
       , json()
-      , resolve()
+      , resolve({ browser: true })
       , commonjs()
       , analyze({ summaryOnly: true })
       ]
@@ -37,7 +37,7 @@ function createOptions({ directory, target }) {
     , plugins: [
         typescript({ target })
       , json()
-      , resolve()
+      , resolve({ browser: true })
       , commonjs()
       , analyze({ summaryOnly: true })
       ]
@@ -48,7 +48,7 @@ function createOptions({ directory, target }) {
     , plugins: [
         typescript({ target })
       , json()
-      , resolve()
+      , resolve({ brower: true })
       , commonjs()
       , analyze({ summaryOnly: true })
       ]
@@ -60,7 +60,7 @@ function createOptions({ directory, target }) {
     , plugins: [
         typescript({ target })
       , json()
-      , resolve()
+      , resolve({ browser: true })
       , commonjs()
       , terser()
       ]
@@ -71,7 +71,7 @@ function createOptions({ directory, target }) {
     , plugins: [
         typescript({ target })
       , json()
-      , resolve()
+      , resolve({ browser: true })
       , commonjs()
       , terser()
       ]
@@ -82,7 +82,7 @@ function createOptions({ directory, target }) {
     , plugins: [
         typescript({ target })
       , json()
-      , resolve()
+      , resolve({ browser: true })
       , commonjs()
       , terser()
       ]
@@ -93,7 +93,7 @@ function createOptions({ directory, target }) {
     , plugins: [
         typescript({ target })
       , json()
-      , resolve()
+      , resolve({ browser: true })
       , commonjs()
       , terser()
       ]
