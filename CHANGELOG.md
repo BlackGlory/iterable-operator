@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.12.7](https://github.com/BlackGlory/iterable-operator/compare/v0.12.6...v0.12.7) (2021-01-15)
+
+
+### Bug Fixes
+
+* esm bundle ([e5d0e1a](https://github.com/BlackGlory/iterable-operator/commit/e5d0e1acdd7f21bf8835b2d229ea660c6425e66c))
+
 ### [0.12.6](https://github.com/BlackGlory/iterable-operator/compare/v0.12.5...v0.12.6) (2021-01-04)
 
 
