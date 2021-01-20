@@ -457,12 +457,12 @@
     "@types/node" "^14.14.14"
     ajv "^7.0.1"
 
-"@blackglory/types@^0.2.7":
-  version "0.2.7"
-  resolved "https://registry.yarnpkg.com/@blackglory/types/-/types-0.2.7.tgz#f2c7bf6f71e9608b1df9db56aa853dbbfab4a4ec"
-  integrity sha512-Jjd2uIGePZL8gufsOOvUsOBqg8Gr+GHiB8HLSgaBmVZPV7gANGEZ1YmjrsGUBI4l17F2Jz+vXw7G+TFAtfOxfA==
+"@blackglory/types@^0.2.9":
+  version "0.2.9"
+  resolved "https://registry.yarnpkg.com/@blackglory/types/-/types-0.2.9.tgz#8f87fdc5242dd493cff7ef2d18d325debaa2e0ba"
+  integrity sha512-4Z9wpm98rV2uNw1MF10DqqtHiGVSGikwXz75Mb5Z3uF63w7pX4oRpuq+wdifyD50QOfZvb9ZP3pPdu1GlWy+hg==
   dependencies:
-    "@types/node" "^14.14.21"
+    "@types/node" "^14.14.22"
     ajv "^7.0.3"
 
 "@cnakazawa/watch@^1.0.3":
@@ -1128,7 +1128,7 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.14.tgz#f7fd5f3cc8521301119f63910f0fb965c7d761ae"
   integrity sha512-UHnOPWVWV1z+VV8k6L1HhG7UbGBgIdghqF3l9Ny9ApPghbjICXkUJSd/b9gOgQfjM1r+37cipdw/HJ3F6ICEnQ==
 
-"@types/node@^14.14.21", "@types/node@^14.14.22":
+"@types/node@^14.14.22":
   version "14.14.22"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.22.tgz#0d29f382472c4ccf3bd96ff0ce47daf5b7b84b18"
   integrity sha512-g+f/qj/cNcqKkc3tFqlXOYjrmZA+jNBiDzbP3kH+B+otKFqAdPgVTGP1IeKRdMml/aE69as5S4FqtxAbl+LaMw==
@@ -5626,10 +5626,10 @@ ret@~0.1.10:
   resolved "https://registry.yarnpkg.com/ret/-/ret-0.1.15.tgz#b8a4825d5bdb1fc3f6f53c2bc33f81388681c7bc"
   integrity sha512-TTlYpa+OL+vMMNG24xSlQGEJ3B/RzEfUlLct7b5G/ytav+wPrplCpVMFuwzXbkecJrb6IYo1iFb0S9v37754mg==
 
-return-style@^0.11.3:
-  version "0.11.3"
-  resolved "https://registry.yarnpkg.com/return-style/-/return-style-0.11.3.tgz#4efe2de778f476d95c2e744b3429053deb0451be"
-  integrity sha512-PJi1HtchIz2hniB7ajUgjbtU9M1uFqikXXznP5Q/7UcsUp8PSJTQ+0gVXmzypCb+VUdTf85Ajb3M+mYQ6SWvpA==
+return-style@^0.11.4:
+  version "0.11.4"
+  resolved "https://registry.yarnpkg.com/return-style/-/return-style-0.11.4.tgz#ec01cab21a2cf41aa0e2db75def0125ba92e4495"
+  integrity sha512-bxKSCFNhLByCfWZcyng5zN4V5Dgik7PhL5PMAobA/B9ifHMnDE/BkBTkvFW4XrFkjY8xL4mEn5nHqN16CEiImA==
 
 reusify@^1.0.4:
   version "1.0.4"
