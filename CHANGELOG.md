@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.12.10](https://github.com/BlackGlory/iterable-operator/compare/v0.12.9...v0.12.10) (2021-01-24)
+
+
+### Features
+
+* add of ([ad79afa](https://github.com/BlackGlory/iterable-operator/commit/ad79afaebc4a0ed1b15f015e69ed9332c0fe47f6))
+
 ### [0.12.9](https://github.com/BlackGlory/iterable-operator/compare/v0.12.8...v0.12.9) (2021-01-20)
 
 ### [0.12.8](https://github.com/BlackGlory/iterable-operator/compare/v0.12.7...v0.12.8) (2021-01-20)
