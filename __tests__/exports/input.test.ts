@@ -2,7 +2,8 @@ import * as Head from '@input/index'
 
 test('Head', () => {
   const expectedExports: string[] = [
-    'countdown'
+    'of'
+  , 'countdown'
   , 'countup'
   , 'range'
 

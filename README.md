@@ -63,6 +63,16 @@ There are three kinds of operators:
 
 ### Input
 
+#### of
+
+```ts
+function of<T>(val: T): Iterable<T>
+```
+
+```js
+of(1) // [1]
+```
+
 #### countdown
 
 ```ts
