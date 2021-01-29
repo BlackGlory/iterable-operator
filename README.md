@@ -56,62 +56,9 @@ const result = [1, 2, 3]
 
 ## API
 
-There are three kinds of operators:
-- Generating operation(input): lazy, the return value is Iterable
+There are two kinds of operators:
 - Intermediate operation(middleware): lazy, the first parameter is Iterable, the return value is Iterable(Iterable in, Iterable out)
 - Terminal operation(output): the first parameter is Iterable
-
-### Input
-
-#### of
-
-```ts
-function of<T>(val: T): Iterable<T>
-```
-
-```js
-of(1) // [1]
-```
-
-#### countdown
-
-```ts
-function countdown(begin: number, end: number): Iterable<number>
-```
-
-```js
-countdown(2, -2) // [2, 1, 0, -1, -2]
-countdown(1, 1) // [1]
-countdown(0, 1) // []
-```
-
-#### countup
-
-```ts
-function countup(begin: number, end: number): Iterable<number>
-```
-
-```js
-countup(-2, 2) // [-2, -1, 0, 1, 2]
-countup(1, 1) // [1]
-countup(1, 0) // []
-```
-
-#### range
-
-```ts
-function range(start: number, end: number, step: number = 1): Iterable<number>
-// step > 0
-```
-
-```js
-range(1, 1) // []
-range(-2, 2) // [-2, -1, 0, 1]
-range(2, -2) // [2, 1, 0, -1]
-range(1, -1, 0.5) // [1, 0.5, 0, -0.5]
-range(2, -2, 0) // throw InvalidArgumentError
-range(2, -2, -0.5) // throw InvalidArgumentError
-```
 
 ### Middleware
 

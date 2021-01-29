@@ -5,11 +5,6 @@ test('Index', () => {
     'RuntimeError'
   , 'InvalidArgumentError'
 
-  , 'of'
-  , 'countdown'
-  , 'countup'
-  , 'range'
-
   , 'chunkAsync'
   , 'chunkByAsync'
   , 'chunkBy'
