@@ -5,9 +5,6 @@
   "keywords": [
     "Iterable",
     "AsyncIterable",
-    "countdown",
-    "countup",
-    "range",
     "chunk",
     "concat",
     "drop",
