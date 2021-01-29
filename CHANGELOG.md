@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.13.0](https://github.com/BlackGlory/iterable-operator/compare/v0.12.11...v0.13.0) (2021-01-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* input operators were moved to `extra-generator` package
+
+### Features
+
+* remove input operators ([5235ff6](https://github.com/BlackGlory/iterable-operator/commit/5235ff6e46796a5f83fa737621311f8145bede6c))
+
 ### [0.12.11](https://github.com/BlackGlory/iterable-operator/compare/v0.12.10...v0.12.11) (2021-01-24)
 
 ### [0.12.10](https://github.com/BlackGlory/iterable-operator/compare/v0.12.9...v0.12.10) (2021-01-24)
