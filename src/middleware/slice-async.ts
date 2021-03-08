@@ -1,3 +1,4 @@
+import { go } from '@blackglory/go'
 import { InvalidArgumentError } from '@src/error'
 export { InvalidArgumentError }
 
@@ -7,12 +8,12 @@ export function sliceAsync<T>(iterable: AsyncIterable<T>, start: number, end: nu
   if (start < 0) throw new InvalidArgumentError('start', '>= 0')
   if (end < start) throw new InvalidArgumentError('end', '>= start')
 
-  return (async function* () {
+  return go(async function* () {
     let index = 0
     for await (const element of iterable) {
       if (index >= end) break
       if (index >= start) yield element
       index++
     }
-  })()
+  })
 }

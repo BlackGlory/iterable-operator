@@ -1,3 +1,4 @@
+import { go } from '@blackglory/go'
 import { InvalidArgumentError } from '@src/error'
 export { InvalidArgumentError }
 
@@ -5,7 +6,7 @@ export function repeat<T>(iterable: Iterable<T>, times: number): Iterable<T> {
   if (times < 0) throw new InvalidArgumentError('times', '>= 0')
 
   if (times === Infinity) warnInfiniteLoop()
-  return (function* () {
+  return go(function* () {
     const cache: T[] = []
     if (times > 0) {
       for (const element of iterable) {
@@ -18,7 +19,7 @@ export function repeat<T>(iterable: Iterable<T>, times: number): Iterable<T> {
       yield* cache
       times--
     }
-  })()
+  })
 }
 
 function warnInfiniteLoop(): void {

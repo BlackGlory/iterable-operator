@@ -1,3 +1,4 @@
+import { go } from '@blackglory/go'
 import { InvalidArgumentError } from '@src/error'
 export { InvalidArgumentError }
 
@@ -5,7 +6,7 @@ export function repeatAsync<T>(iterable: AsyncIterable<T>, times: number): Async
   if (times < 0) throw new InvalidArgumentError('times', '>= 0')
 
   if (times === Infinity) warnInfiniteLoop()
-  return (async function* () {
+  return go(async function* () {
     const cache: T[] = []
     if (times > 0) {
       for await (const element of iterable) {
@@ -18,7 +19,7 @@ export function repeatAsync<T>(iterable: AsyncIterable<T>, times: number): Async
       yield* cache
       times--
     }
-  })()
+  })
 }
 
 function warnInfiniteLoop(): void {

@@ -93,6 +93,7 @@
     "typescript": "^4.2.3"
   },
   "dependencies": {
+    "@blackglory/go": "^0.1.0",
     "@blackglory/types": "^0.3.0"
   }
 }

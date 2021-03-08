@@ -1,10 +1,11 @@
+import { go } from '@blackglory/go'
 import { InvalidArgumentError } from '@src/error'
 export { InvalidArgumentError }
 
 export function chunk<T>(iterable: Iterable<T>, size: number): Iterable<T[]> {
   if (size <= 0) throw new InvalidArgumentError('size', '> 0')
 
-  return (function* () {
+  return go(function* () {
     let buffer: T[] = []
     for (const element of iterable) {
       buffer.push(element)
@@ -14,5 +15,5 @@ export function chunk<T>(iterable: Iterable<T>, size: number): Iterable<T[]> {
       }
     }
     if (buffer.length) yield buffer
-  })()
+  })
 }

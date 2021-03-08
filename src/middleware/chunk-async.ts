@@ -1,10 +1,11 @@
 import { InvalidArgumentError } from '@src/error'
+import { go } from '@blackglory/go'
 export { InvalidArgumentError }
 
 export function chunkAsync<T>(iterable: AsyncIterable<T>, size: number): AsyncIterable<T[]> {
   if (size <= 0) throw new InvalidArgumentError('size', '> 0')
 
-  return (async function* () {
+  return go(async function* () {
     let buffer: T[] = []
     for await (const element of iterable) {
       buffer.push(element)
@@ -14,5 +15,5 @@ export function chunkAsync<T>(iterable: AsyncIterable<T>, size: number): AsyncIt
       }
     }
     if (buffer.length) yield buffer
-  })()
+  })
 }

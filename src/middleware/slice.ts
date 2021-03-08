@@ -1,3 +1,4 @@
+import { go } from '@blackglory/go'
 import { InvalidArgumentError } from '@src/error'
 export { InvalidArgumentError }
 
@@ -7,12 +8,12 @@ export function slice<T>(iterable: Iterable<T>, start: number, end: number = Inf
   if (start < 0) throw new InvalidArgumentError('start', '>= 0')
   if (end < start) throw new InvalidArgumentError('end', '>= start')
 
-  return (function* () {
+  return go(function* () {
     let index = 0
     for (const element of iterable) {
       if (index >= end) break
       if (index >= start) yield element
       index++
     }
-  })()
+  })
 }

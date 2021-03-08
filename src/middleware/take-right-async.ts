@@ -1,10 +1,11 @@
+import { go } from '@blackglory/go'
 import { InvalidArgumentError } from '@src/error'
 export { InvalidArgumentError }
 
 export function takeRightAsync<T>(iterable: AsyncIterable<T>, count: number): AsyncIterable<T> {
   if (count < 0) throw new InvalidArgumentError('count', '>= 0')
 
-  return (async function* () {
+  return go(async function* () {
     const iterator = iterable[Symbol.asyncIterator]()
     const buffer: T[] = []
     let result: IteratorResult<T>
@@ -13,5 +14,5 @@ export function takeRightAsync<T>(iterable: AsyncIterable<T>, count: number): As
       if (buffer.length > count) buffer.shift()
     }
     yield* buffer
-  })()
+  })
 }
