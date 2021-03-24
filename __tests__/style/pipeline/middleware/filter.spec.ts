@@ -2,7 +2,7 @@ import * as middleware from '@middleware/filter'
 import { filter } from '@style/pipeline/middleware/filter'
 import '@blackglory/jest-matchers'
 
-describe('filter<T, U extends T = T>(fn: (element: T, index: number) => boolean): (iterable: Iterable<T>) => Iterable<U>', () => {
+describe('filter<T, U extends T = T>(predicate: (element: T, index: number) => unknown): (iterable: Iterable<T>) => Iterable<U>', () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'filter')
     const iter = [1, 2, 3]

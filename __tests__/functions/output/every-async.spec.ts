@@ -3,7 +3,7 @@ import { testFunction, testAsyncFunction, testIterable, testAsyncIterable } from
 import { everyAsync } from '@output/every-async'
 import '@blackglory/jest-matchers'
 
-describe('everyAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => boolean | PromiseLike<boolean>): Promise<boolean>', () => {
+describe('everyAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): Promise<boolean>', () => {
   describe('T is PromiseLike<T>', () => {
     describe('fn is called', () => {
       it('called with [element(promise),index]', async () => {

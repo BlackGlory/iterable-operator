@@ -1,7 +1,7 @@
 import * as output from '@output/find'
 import { find } from '@style/binding/output/find'
 
-describe('find<T>(this: Iterable<T>, fn: (element: T, index: number) => boolean): T', () => {
+describe('find<T>(this: Iterable<T>, predicate: (element: T, index: number) => unknown): T', () => {
   it('is binding style', () => {
     const spy = jest.spyOn(output, 'find')
     const iter = [1, 2, 3]

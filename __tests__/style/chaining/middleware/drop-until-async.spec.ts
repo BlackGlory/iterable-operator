@@ -2,7 +2,7 @@ import * as middleware from '@middleware/drop-until-async'
 import { IterableOperator, AsyncIterableOperator } from '@style/chaining'
 import { toAsyncIterable } from '@test/utils'
 
-describe('IterableOperator<T>::dropUntilAsync(fn: (element: T, index: number) => boolean | PromiseLike<boolean>): AsyncIterableOperator<T>', () => {
+describe('IterableOperator<T>::dropUntilAsync(predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): AsyncIterableOperator<T>', () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(middleware, 'dropUntilAsync')
     const iter = [1, 2, 3]
@@ -18,7 +18,7 @@ describe('IterableOperator<T>::dropUntilAsync(fn: (element: T, index: number) =>
   })
 })
 
-describe('AsyncIterableOperator<T>::dropUntilAsync(fn: (element: T, index: number) => boolean | PromiseLike<boolean>): AsyncIterableOperator<T>', () => {
+describe('AsyncIterableOperator<T>::dropUntilAsync(predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): AsyncIterableOperator<T>', () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(middleware, 'dropUntilAsync')
     const iter = toAsyncIterable([1, 2, 3])

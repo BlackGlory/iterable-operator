@@ -4,7 +4,7 @@ import { dropUntilAsync } from '@middleware/drop-until-async'
 import { getErrorPromise } from 'return-style'
 import '@blackglory/jest-matchers'
 
-describe('dropUntilAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => boolean | PromiseLike<boolean>): AsyncIterable<T>', () => {
+describe('dropUntilAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): AsyncIterable<T>', () => {
   describe('T is PromiseLike<unknown>', () => {
     it('called with [element(promise),index]', async () => {
       const iter = [Promise.resolve(), Promise.resolve(), Promise.resolve()]

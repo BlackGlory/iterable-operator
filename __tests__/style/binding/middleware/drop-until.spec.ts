@@ -2,7 +2,7 @@ import * as middleware from '@middleware/drop-until'
 import { dropUntil } from '@style/binding/middleware/drop-until'
 import '@blackglory/jest-matchers'
 
-describe('dropUntil<T>(this: Iterable<T>, fn: (element: T, index: number) => boolean): Iterable<T>', () => {
+describe('dropUntil<T>(this: Iterable<T>, predicate: (element: T, index: number) => unknown): Iterable<T>', () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'dropUntil')
     const iter = [1, 2, 3]

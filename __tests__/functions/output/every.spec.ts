@@ -1,7 +1,7 @@
 import { getError } from 'return-style'
 import { every } from '@output/every'
 
-describe('every<T>(itearble: Iterable<T>, fn: (element: T, index: number) => boolean): boolean', () => {
+describe('every<T>(itearble: Iterable<T>, predicate: (element: T, index: number) => unknown): boolean', () => {
   describe('fn is called', () => {
     describe('fn return false on first element', () => {
       it('called once', () => {

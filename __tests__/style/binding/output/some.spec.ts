@@ -1,7 +1,7 @@
 import * as output from '@output/some'
 import { some } from '@style/binding/output/some'
 
-describe('some<T>(this: Iterable<T>, fn: (element: T, index: number) => boolean): boolean', () => {
+describe('some<T>(this: Iterable<T>, predicate: (element: T, index: number) => unknown): boolean', () => {
   it('is binding style', () => {
     const spy = jest.spyOn(output, 'some')
     const iter = [1, 2, 3]

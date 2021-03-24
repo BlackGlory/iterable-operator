@@ -4,7 +4,7 @@ import { IterableOperatorBase } from '../iterable-operator-base'
 import { IterableOperator } from '../iterable-operator'
 
 export class SplitByOperator<T> extends IterableOperatorBase<T> {
-  splitBy(fn: (element: T, index: number) => boolean): IterableOperator<T[]>
+  splitBy(predicate: (element: T, index: number) => unknown): IterableOperator<T[]>
   splitBy(...args: unknown[]) {
     return applyChaining(this.subject, target, args)
   }

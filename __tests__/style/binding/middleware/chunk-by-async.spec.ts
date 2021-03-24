@@ -1,7 +1,7 @@
 import * as middleware from '@middleware/chunk-by-async'
 import { chunkByAsync } from '@style/binding/middleware/chunk-by-async'
 
-describe('chunkByAsync<T>(this: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => boolean | PromiseLike<boolean>): AsyncIterable<T[]>', () => {
+describe('chunkByAsync<T>(this: Iterable<T> | AsyncIterable<T>, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): AsyncIterable<T[]>', () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'chunkByAsync')
     const iter = [1, 2, 3]

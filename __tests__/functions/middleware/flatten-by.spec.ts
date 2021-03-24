@@ -4,7 +4,7 @@ import { flattenBy } from '@middleware/flatten-by'
 import { getError } from 'return-style'
 import '@blackglory/jest-matchers'
 
-describe('flattenBy<T>(iterable: Iterable<unknown>, fn: (element: unknown, level: number) => boolean): Iterable<T>', () => {
+describe('flattenBy<T>(iterable: Iterable<unknown>, predicate: (element: unknown, level: number) => unknown): Iterable<T>', () => {
   describe('fn is called', () => {
     it('called with [element,level]', () => {
       const iter = [0, [1]]

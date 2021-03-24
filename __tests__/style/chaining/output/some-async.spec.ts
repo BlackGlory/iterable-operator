@@ -1,7 +1,7 @@
 import * as output from '@output/some-async'
 import { IterableOperator } from '@style/chaining'
 
-describe('IterableOperator<T>::someAsync(fn: (element: T, index: number) => boolean | PromiseLike<boolean>): Promise<boolean>', () => {
+describe('IterableOperator<T>::someAsync(predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): Promise<boolean>', () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(output, 'someAsync')
     const iter = [1, 2, 3]

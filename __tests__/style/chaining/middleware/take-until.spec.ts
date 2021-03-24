@@ -1,7 +1,7 @@
 import * as middleware from '@middleware/take-until'
 import { IterableOperator } from '@style/chaining'
 
-describe('IterableOperator<T>::takeUntil(fn: (element: T, index: number) => boolean): IterableOperator<T>', () => {
+describe('IterableOperator<T>::takeUntil(predicate: (element: T, index: number) => unknown): IterableOperator<T>', () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(middleware, 'takeUntil')
     const iter = [1, 2, 3]

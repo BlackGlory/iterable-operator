@@ -2,7 +2,7 @@ import * as middleware from '@middleware/take-until-async'
 import { IterableOperator, AsyncIterableOperator } from '@style/chaining'
 import { toAsyncIterable } from '@test/utils'
 
-describe('IterableOperator<T>::takeUntilAsync(fn: (element: T, index: number) => boolean | PromiseLike<T>): AsyncIterableOperator<T>', () => {
+describe('IterableOperator<T>::takeUntilAsync(predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): AsyncIterableOperator<T>', () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(middleware, 'takeUntilAsync')
     const iter = [1, 2, 3]
@@ -18,7 +18,7 @@ describe('IterableOperator<T>::takeUntilAsync(fn: (element: T, index: number) =>
   })
 })
 
-describe('AsyncIterableOperator<T>::takeUntilAsync(fn: (element: T, index: number) => boolean | PromiseLike<T>): AsyncIterableOperator<T>', () => {
+describe('AsyncIterableOperator<T>::takeUntilAsync(predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): AsyncIterableOperator<T>', () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(middleware, 'takeUntilAsync')
     const iter = toAsyncIterable([1, 2, 3])

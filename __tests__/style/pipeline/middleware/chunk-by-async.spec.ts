@@ -1,7 +1,7 @@
 import * as middleware from '@middleware/chunk-by-async'
 import { chunkByAsync } from '@style/pipeline/middleware/chunk-by-async'
 
-describe('chunkByAsync<T>(fn: (element: T, index: number) => boolean | PromiseLike<boolean>): (iterable: Iterable<T> | AsyncIterable<T>) => AsyncIterable<T[]>', () => {
+describe('chunkByAsync<T>(predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): (iterable: Iterable<T> | AsyncIterable<T>) => AsyncIterable<T[]>', () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'chunkByAsync')
     const iter = [1, 2, 3]

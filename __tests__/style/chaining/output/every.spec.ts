@@ -1,7 +1,7 @@
 import * as output from '@output/every'
 import { IterableOperator } from '@style/chaining'
 
-describe('IterableOperator<T>::every(fn: (element: T, index: number) => boolean): boolean', () => {
+describe('IterableOperator<T>::every(predicate: (element: T, index: number) => unknown): boolean', () => {
   it('is biding style', () => {
     const spy = jest.spyOn(output, 'every')
     const iter = [1, 2, 3]

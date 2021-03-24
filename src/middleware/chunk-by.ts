@@ -1,13 +1,15 @@
-export function* chunkBy<T>(iterable: Iterable<T>, fn: (element: T, index: number) => boolean): Iterable<T[]> {
+export function* chunkBy<T>(iterable: Iterable<T>, predicate: (element: T, index: number) => unknown): Iterable<T[]> {
   let buffer: T[] = []
-    , index = 0
+  let index = 0
+
   for (const element of iterable) {
     buffer.push(element)
-    if (fn(element, index)) {
+    if (predicate(element, index)) {
       yield buffer
       buffer = []
     }
     index++
   }
+
   if (buffer.length) yield buffer
 }

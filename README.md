@@ -81,8 +81,8 @@ chunk([1, 2, 3], -1) // throw InvalidArgumentError
 #### chunkBy, chunkBy
 
 ```ts
-function chunkBy<T>(iterable: Iterable<T>, fn: (element: T, index: number) => boolean): Iterable<T[]>
-function chunkByAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => boolean | PromiseLike<boolean>): AsyncIterable<T[]>
+function chunkBy<T>(iterable: Iterable<T>, predicate: (element: T, index: number) => unknown): Iterable<T[]>
+function chunkByAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): AsyncIterable<T[]>
 ```
 
 ```js
@@ -141,8 +141,8 @@ dropRight([1, 2, 3], -1) // throw InvalidArgumentError
 #### dropUntil, dropUntilAsync
 
 ```ts
-function dropUntil<T>(iterable: Iterable<T>, fn: (element: T, index: number) => boolean): Iterable<T>
-function dropUntilAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => boolean | PromiseLike<boolean>): AsyncIterable<T>
+function dropUntil<T>(iterable: Iterable<T>, predicate: (element: T, index: number) => unknown): Iterable<T>
+function dropUntilAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, predicate: (element: T, index: number) => boolean | PromiseLike<boolean>): AsyncIterable<T>
 ```
 
 ```js
@@ -152,8 +152,8 @@ dropUntil([1, 2, 3], x => x === 2) // [2, 3]
 #### filter, filterAsync
 
 ```ts
-function filter<T, U extends T = T>(iterable: Iterable<T>, fn: (element: T, index: number) => boolean): Iterable<U>
-function filterAsync<T, U extends T = T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => boolean | PromiseLike<boolean>): AsyncIterable<U>
+function filter<T, U extends T = T>(iterable: Iterable<T>, predicate: (element: T, index: number) => unknown): Iterable<U>
+function filterAsync<T, U extends T = T>(iterable: Iterable<T> | AsyncIterable<T>, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): AsyncIterable<U>
 ```
 
 ```js
@@ -192,8 +192,8 @@ flattenDeep(['one', ['two', ['three']], 0, [1, [2, [3]]]], 2) // ['o', 'n', 'e',
 #### flattenBy, flattenByAsync
 
 ```ts
-function flattenBy<T>(iterable: Iterable<unknown>, fn: (element: unknown, level: number) => boolean): Iterable<T>
-function flattenByAsync<T>(iterable: Iterable<unknown> | AsyncIterable<unknown>, fn: (element: unknown, level: number) => boolean | PromiseLike<unknown>): AsyncIterable<T>
+function flattenBy<T>(iterable: Iterable<unknown>, predicate: (element: unknown, level: number) => boolean): Iterable<T>
+function flattenByAsync<T>(iterable: Iterable<unknown> | AsyncIterable<unknown>, predicate: (element: unknown, level: number) => boolean | PromiseLike<unknown>): AsyncIterable<T>
 ```
 
 ```js
@@ -260,8 +260,8 @@ split([1, 2, 3, 4, 5], 0) // [[1, 2, 3, 4, 5]]
 #### splitBy, splitByAsync
 
 ```ts
-function splitBy<T>(iterable: Iterable<T>, fn: (element: T, index: number) => boolean): Iterable<T[]>
-function splitByAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => boolean | PromiseLike<boolean>): AsyncIterable<T[]> {
+function splitBy<T>(iterable: Iterable<T>, predicate: (element: T, index: number) => unknown): Iterable<T[]>
+function splitByAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): AsyncIterable<T[]> {
 ```
 
 ```js
@@ -302,8 +302,8 @@ takeRight([1, 2, 3], -1) // throw InvalidArgumentError
 #### takeUntil, takeUntilAsync
 
 ```ts
-function takeUntil<T>(iterable: Iterable<T>, fn: (element: T, index: number) => boolean): Iterable<T>
-function takeUntilAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => boolean | PromiseLike<T>): AsyncIterable<T>
+function takeUntil<T>(iterable: Iterable<T>, predicate: (element: T, index: number) => unknown): Iterable<T>
+function takeUntilAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): AsyncIterable<T>
 ```
 
 ```js
@@ -415,8 +415,8 @@ each([1, 2, 3], x => console.log(x)) // void
 #### every, everyAsync
 
 ```ts
-function every<T>(iterable: Iterable<T>, fn: (element: T, index: number) => boolean): boolean
-function everyAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => boolean | PromiseLike<boolean>): Promise<boolean>
+function every<T>(iterable: Iterable<T>, predicate: (element: T, index: number) => unknown): boolean
+function everyAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): Promise<boolean>
 ```
 
 ```js
@@ -427,8 +427,8 @@ every([1, 2, 3], x => x <= 2) // false
 #### find, findAsync
 
 ```ts
-function find<T>(iterable: Iterable<T>, fn: (element: T, index: number) => boolean): T
-function findAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => boolean | PromiseLike<boolean>): Promise<T>
+function find<T>(iterable: Iterable<T>, predicate: (element: T, index: number) => unknown): T
+function findAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): Promise<T>
 ```
 
 ```js
@@ -519,8 +519,8 @@ reduce([1, 2, 3], (acc, cur, index) => {
 
 
 ```ts
-function some<T>(iterable: Iterable<T>, fn: (element: T, index: number) => boolean): boolean
-function someAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => boolean | PromiseLike<boolean>): Promise<boolean>
+function some<T>(iterable: Iterable<T>, predicate: (element: T, index: number) => unknown): boolean
+function someAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): Promise<boolean>
 ```
 
 ```js

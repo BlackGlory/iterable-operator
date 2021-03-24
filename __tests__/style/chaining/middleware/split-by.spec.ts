@@ -1,7 +1,7 @@
 import * as middleware from '@middleware/split-by'
 import { IterableOperator } from '@style/chaining'
 
-describe('IterableOperator<T>::splitBy(fn: (element: T, index: number) => boolean): IterableOperator<T[]>', () => {
+describe('IterableOperator<T>::splitBy(predicate: (element: T, index: number) => unknown): IterableOperator<T[]>', () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(middleware, 'splitBy')
     const iter = [1, 2, 3]

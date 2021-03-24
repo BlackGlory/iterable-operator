@@ -2,7 +2,7 @@ import * as output from '@output/find-async'
 import { IterableOperator, AsyncIterableOperator } from '@style/chaining'
 import { toAsyncIterable } from '@test/utils'
 
-describe('IterableOperator<T>::findAsync(fn: (element: T, index: number) => boolean | PromiseLike<boolean>): Promise<T>', () => {
+describe('IterableOperator<T>::findAsync(predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): Promise<T>', () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(output, 'findAsync')
     const iter = [1, 2, 3]
@@ -16,7 +16,7 @@ describe('IterableOperator<T>::findAsync(fn: (element: T, index: number) => bool
   })
 })
 
-describe('AsyncIterableOperator<T>::findAsync(fn: (element: T, index: number) => boolean | PromiseLike<boolean>): Promise<T>', () => {
+describe('AsyncIterableOperator<T>::findAsync(predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): Promise<T>', () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(output, 'findAsync')
     const iter = toAsyncIterable([1, 2, 3])

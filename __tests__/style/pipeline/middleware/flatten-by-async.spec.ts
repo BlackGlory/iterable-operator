@@ -1,7 +1,7 @@
 import * as middleware from '@middleware/flatten-by-async'
 import { flattenByAsync } from '@style/pipeline/middleware/flatten-by-async'
 
-describe('flattenByAsync<T>(fn: (element: unknown, level: number) => boolean | PromiseLike<unknown>): (iterable: Iterable<unknown> | AsyncIterable<unknown>) => AsyncIterable<T>', () => {
+describe('flattenByAsync<T>(predicate: (element: unknown, level: number) => unknown | PromiseLike<unknown>): (iterable: Iterable<unknown> | AsyncIterable<unknown>) => AsyncIterable<T>', () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'flattenByAsync')
     const iter = [1, 2, 3]

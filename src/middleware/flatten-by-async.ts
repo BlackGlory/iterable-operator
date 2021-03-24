@@ -1,6 +1,6 @@
 import { isAsyncIterable, isIterable, isntChar } from '@blackglory/types'
 
-export function flattenByAsync<T>(iterable: Iterable<unknown> | AsyncIterable<unknown>, fn: (element: unknown, level: number) => boolean | PromiseLike<unknown>): AsyncIterable<T> {
+export function flattenByAsync<T>(iterable: Iterable<unknown> | AsyncIterable<unknown>, predicate: (element: unknown, level: number) => unknown | PromiseLike<unknown>): AsyncIterable<T> {
   if (isAsyncIterable(iterable)) {
     return flattenByAsyncIterable(iterable) as AsyncIterable<T>
   } else {
@@ -10,7 +10,7 @@ export function flattenByAsync<T>(iterable: Iterable<unknown> | AsyncIterable<un
   async function* flattenByAsyncIterable(iterable: AsyncIterable<unknown>) {
     const level = 1
     for await (const element of iterable) {
-      if (isFiniteIterable(element) && await fn(element, level)) {
+      if (isFiniteIterable(element) && await predicate(element, level)) {
         yield* flatten(element, level + 1)
       } else {
         yield element
@@ -24,7 +24,7 @@ export function flattenByAsync<T>(iterable: Iterable<unknown> | AsyncIterable<un
 
   async function* flatten<T>(iterable: Iterable<unknown>, level: number): AsyncIterable<T> {
     for (const element of iterable) {
-      if (isFiniteIterable(element) && await fn(element, level)) {
+      if (isFiniteIterable(element) && await predicate(element, level)) {
         yield* flatten<T>(element, level + 1)
       } else {
         yield element as T

@@ -5,7 +5,7 @@ import { getErrorPromise } from 'return-style'
 import { flattenByAsync } from '@middleware/flatten-by-async'
 import '@blackglory/jest-matchers'
 
-describe('flattenByAsync<T>(iterable: Iterable<unknown> | AsyncIterable<unknown>, fn: (element: unknown, level: number) => boolean | PromiseLike<boolean>): AsyncIterable<T>', () => {
+describe('flattenByAsync<T>(iterable: Iterable<unknown> | AsyncIterable<unknown>, predicate: (element: unknown, level: number) => unknown | PromiseLike<unknown>): AsyncIterable<T>', () => {
   describe.each([
     testIterable('Iterable<unknown>')
   , testAsyncIterable('AsyncIterable<unknown>')

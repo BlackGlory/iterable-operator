@@ -2,7 +2,7 @@ import * as middleware from '@middleware/split-by-async'
 import { IterableOperator, AsyncIterableOperator } from '@style/chaining'
 import { toAsyncIterable } from '@test/utils'
 
-describe('IterableOperator<T>::splitByAsync(fn: (element: T, index: number) => boolean | PromiseLike<boolean>): AsyncIterableOperator<T[]>', () => {
+describe('IterableOperator<T>::splitByAsync(predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): AsyncIterableOperator<T[]>', () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(middleware, 'splitByAsync')
     const iter = [1, 2, 3]
@@ -18,7 +18,7 @@ describe('IterableOperator<T>::splitByAsync(fn: (element: T, index: number) => b
   })
 })
 
-describe('AsyncIterableOperator<T>::splitByAsync(fn: (element: T, index: number) => boolean | PromiseLike<boolean>): AsyncIterableOperator<T[]>', () => {
+describe('AsyncIterableOperator<T>::splitByAsync(predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): AsyncIterableOperator<T[]>', () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(middleware, 'splitByAsync')
     const iter = toAsyncIterable([1, 2, 3])

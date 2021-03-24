@@ -1,8 +1,9 @@
-export function* splitBy<T>(iterable: Iterable<T>, fn: (element: T, index: number) => boolean): Iterable<T[]> {
+export function* splitBy<T>(iterable: Iterable<T>, predicate: (element: T, index: number) => unknown): Iterable<T[]> {
   let buffer: T[] = []
-    , index = 0
+  let index = 0
+
   for (const element of iterable) {
-    if (fn(element, index)) {
+    if (predicate(element, index)) {
       yield buffer
       buffer = []
     } else {
@@ -10,5 +11,6 @@ export function* splitBy<T>(iterable: Iterable<T>, fn: (element: T, index: numbe
     }
     index++
   }
+
   yield buffer
 }

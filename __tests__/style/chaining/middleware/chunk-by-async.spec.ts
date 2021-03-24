@@ -2,7 +2,7 @@ import * as middleware from '@middleware/chunk-by-async'
 import { IterableOperator, AsyncIterableOperator } from '@style/chaining'
 import { toAsyncIterable } from '@test/utils'
 
-describe('IterableOperator<T>::chunkByAsync(fn: (element: T, index: number) => boolean | PromiseLike<boolean>): AsyncIterableOperator<T[]>', () => {
+describe('IterableOperator<T>::chunkByAsync(predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): AsyncIterableOperator<T[]>', () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(middleware, 'chunkByAsync')
     const iter = [1, 2, 3]
@@ -18,7 +18,7 @@ describe('IterableOperator<T>::chunkByAsync(fn: (element: T, index: number) => b
   })
 })
 
-describe('AsyncIterableOperator<T>::chunkByAsync(fn: (element: T, index: number) => boolean | PromiseLike<boolean>): AsyncIterableOperator<T[]>', () => {
+describe('AsyncIterableOperator<T>::chunkByAsync(predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): AsyncIterableOperator<T[]>', () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(middleware, 'chunkByAsync')
     const iter = toAsyncIterable([1, 2, 3])

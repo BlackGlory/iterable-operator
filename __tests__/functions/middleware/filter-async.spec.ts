@@ -4,7 +4,7 @@ import { toArrayAsync, consumeAsync, getCalledTimes, MockIterable, takeAsync } f
 import { filterAsync } from '@middleware/filter-async'
 import '@blackglory/jest-matchers'
 
-describe('filterAsync<T, U extends T = T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => boolean | PromiseLike<boolean>): AsyncIterable<U>', () => {
+describe('filterAsync<T, U extends T = T>(iterable: Iterable<T> | AsyncIterable<T>, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): AsyncIterable<U>', () => {
   describe('T is PromiseLike<T>', () => {
     it('called with [element(promise),index]', async () => {
       const iter = [Promise.resolve(), Promise.resolve(), Promise.resolve()]

@@ -1,7 +1,7 @@
 import * as middleware from '@middleware/take-until'
 import { takeUntil } from '@style/binding/middleware/take-until'
 
-describe('takeUntil<T>(this: Iterable<T>, fn: (element: T, index: number) => boolean): Iterable<T>', () => {
+describe('takeUntil<T>(this: Iterable<T>, fn: (element: T, index: number) => unknown): Iterable<T>', () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'takeUntil')
     const iter = [1, 2, 3]

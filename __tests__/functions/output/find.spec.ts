@@ -2,7 +2,7 @@ import { getError } from 'return-style'
 import { RuntimeError } from '@src/error'
 import { find } from '@output/find'
 
-describe('find<T>(iterable: Iterable<T>, fn: (element: T, index: number) => boolean): T', () => {
+describe('find<T>(iterable: Iterable<T>, predicate: (element: T, index: number) => unknown): T', () => {
   describe('fn is called', () => {
     it('called with [element,index]', () => {
       const iter = [1, 2, 3]
