@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.13.6](https://github.com/BlackGlory/iterable-operator/compare/v0.13.5...v0.13.6) (2021-03-24)
+
+
+### Features
+
+* improve signatures ([fcea188](https://github.com/BlackGlory/iterable-operator/commit/fcea1889e51e908ed6075e6a457d806a00dc3f11))
+
 ### [0.13.5](https://github.com/BlackGlory/iterable-operator/compare/v0.13.4...v0.13.5) (2021-03-17)
 
 ### [0.13.4](https://github.com/BlackGlory/iterable-operator/compare/v0.13.3...v0.13.4) (2021-03-05)
