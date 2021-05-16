@@ -74,8 +74,8 @@ function chunkAsync<T>(iterable: AsyncIterable<T>, size: number): AsyncIterable<
 chunk([1, 2, 3], 2) // [[1, 2], [3]]
 chunk([1, 2, 3], 3) // [[1, 2, 3]]
 chunk([1, 2, 3], 5) // [[1, 2, 3]]
-chunk([1, 2, 3], 0) // throw InvalidArgumentError
-chunk([1, 2, 3], -1) // throw InvalidArgumentError
+chunk([1, 2, 3], 0) // throw Error
+chunk([1, 2, 3], -1) // throw Error
 ```
 
 #### chunkBy, chunkBy
@@ -128,7 +128,7 @@ drop([1, 2, 3], 0) // [1, 2, 3]
 drop([1, 2, 3], 2) // [3]
 drop([1, 2, 3], 3) // []
 drop([1, 2, 3], 5) // []
-drop([1, 2, 3], -1) // throw InvalidArgumentError
+drop([1, 2, 3], -1) // throw Error
 ```
 
 #### dropRight, dropRightAsync
@@ -144,7 +144,7 @@ dropRight([1, 2, 3], 0) // [1, 2, 3]
 dropRight([1, 2, 3], 2) // [1]
 dropRight([1, 2, 3], 3) // []
 dropRight([1, 2, 3], 5) // []
-dropRight([1, 2, 3], -1) // throw InvalidArgumentError
+dropRight([1, 2, 3], -1) // throw Error
 ```
 
 #### dropUntil, dropUntilAsync
@@ -208,7 +208,7 @@ function flattenDeepAsync<T>(
 ```js
 flattenDeep([]) // []
 flattenDeep('123') // ['1', '2', '3']
-flattenDeep([], -1) // throw InvalidArgumentError
+flattenDeep([], -1) // throw Error
 flattenDeep([0, [1]], 0) // [0, [1]]
 flattenDeep(['one', ['two', ['three']], 0, [1, [2, [3]]]], 2) // ['o', 'n', 'e', 't', 'w', 'o', 'three', 0, 1, 2, [3]]
 ```
@@ -260,7 +260,7 @@ function repeatAsync<T>(iterable: AsyncIterable<T>, times: number): AsyncIterabl
 ```js
 repeat([1, 2, 3], 2) // [1, 2, 3, 1, 2, 3]
 repeat([1, 2, 3], 0) // []
-repeat([1, 2, 3], -1) // throw InvalidArgumentError
+repeat([1, 2, 3], -1) // throw Error
 ```
 
 #### slice, sliceAsync
@@ -280,11 +280,11 @@ function sliceAsync<T>(
 ```
 
 ```js
-slice([1, 2, 3], -1, 1) // throw InvalidArgumentError
+slice([1, 2, 3], -1, 1) // throw Error
 slice([1, 2, 3], 3, 5) // []
 slice([1, 2, 3], 1, 2) // [2]
 slice([1, 2, 3], 1, 1) // []
-slice([1, 2, 3], 2, 1) // throw InvalidArgumentError
+slice([1, 2, 3], 2, 1) // throw Error
 ```
 
 #### split, splitAsync
@@ -332,7 +332,7 @@ function takeAsync<T>(iterable: AsyncIterable<T>, count: number): AsyncIterable<
 take([1, 2, 3], 5) // [1, 2, 3]
 take([1, 2, 3], 2) // [1, 2]
 take([1, 2, 3], 0) // []
-take([1, 2, 3], -1) // throw InvalidArgumentError
+take([1, 2, 3], -1) // throw Error
 ```
 
 #### takeRight, takeRightAsync
@@ -346,7 +346,7 @@ function takeRightAsync<T>(iterable: AsyncIterable<T>, count: number): AsyncIter
 takeRight([1, 2, 3], 2) // [2, 3]
 takeRight([1, 2, 3], 5) // [1, 2, 3]
 takeRight([1, 2, 3], 0) // []
-takeRight([1, 2, 3], -1) // throw InvalidArgumentError
+takeRight([1, 2, 3], -1) // throw Error
 ```
 
 #### takeUntil, takeUntilAsync
@@ -603,7 +603,7 @@ function reduceAsync<T, U>(
 ```
 
 ```js
-reduce([], (acc, cur) => acc + cur) // throw RuntimeError
+reduce([], (acc, cur) => acc + cur) // throw Error
 reduce([1], (acc, cur) => acc + cur) // 1
 reduce([1, 2, 3], (acc, cur) => acc + cur) // 6
 
