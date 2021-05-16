@@ -1,7 +1,7 @@
-import { RuntimeError } from '@src/error'
-export { RuntimeError }
-
-export function find<T>(iterable: Iterable<T>, predicate: (element: T, index: number) => unknown): T {
+export function find<T>(
+  iterable: Iterable<T>
+, predicate: (element: T, index: number) => unknown
+): T | undefined {
   let index = 0
 
   for (const element of iterable) {
@@ -9,5 +9,5 @@ export function find<T>(iterable: Iterable<T>, predicate: (element: T, index: nu
     index++
   }
 
-  throw new RuntimeError('Iterable has no matched elements')
+  return undefined
 }

@@ -1,10 +1,11 @@
-import { InvalidArgumentError } from '@src/error'
 import { getError } from 'return-style'
 import { consume, toArray, MockIterable, take } from '@test/utils'
 import { slice } from '@middleware/slice'
 import '@blackglory/jest-matchers'
 
-describe('slice<T>(iterable: Iterable<T>, start: number, end: number): Iterable<T>', () => {
+describe(`
+  slice<T>(iterable: Iterable<T>, start: number, end: number): Iterable<T>
+`, () => {
   it('lazy and partial evaluation', () => {
     const iter = new MockIterable([1, 2, 3])
     const start = 0
@@ -20,14 +21,14 @@ describe('slice<T>(iterable: Iterable<T>, start: number, end: number): Iterable<
   })
 
   describe('start < 0', () => {
-    it('throw InvalidArgumentError', () => {
+    it('throw Error', () => {
       const iter = [1, 2, 3]
       const start = -1
       const end = 1
 
-      const err = getError<InvalidArgumentError>(() => slice(iter, start, end))
+      const err = getError(() => slice(iter, start, end))
 
-      expect(err).toBeInstanceOf(InvalidArgumentError)
+      expect(err).toBeInstanceOf(Error)
       expect(err!.message).toMatch('start')
     })
   })
@@ -77,14 +78,14 @@ describe('slice<T>(iterable: Iterable<T>, start: number, end: number): Iterable<
       })
 
       describe('start > end', () => {
-        it('throw InvalidArgumentError', () => {
+        it('throw Error', () => {
           const iter = [1, 2, 3]
           const start = 2
           const end = 1
 
-          const err = getError<InvalidArgumentError>(() => slice(iter, start, end))
+          const err = getError(() => slice(iter, start, end))
 
-          expect(err).toBeInstanceOf(InvalidArgumentError)
+          expect(err).toBeInstanceOf(Error)
           expect(err!.message).toMatch('end')
         })
       })

@@ -2,7 +2,7 @@ import * as output from '@output/first-async'
 import { firstAsync } from '@style/pipeline/output/first-async'
 import { toAsyncIterable } from '@test/utils'
 
-describe('firstAsync<T>(): (iterable: AsyncIterable<T>) => Promise<T>', () => {
+describe('firstAsync<T>(): (iterable: AsyncIterable<T>) => Promise<T | undefined>', () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(output, 'firstAsync')
     const iter = toAsyncIterable([1, 2, 3])

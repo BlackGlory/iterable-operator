@@ -38,11 +38,6 @@ import { LastAsyncOperator } from './output/last-async'
 import { ToArrayAsyncOperator } from './output/to-array-async'
 import { ToSetAsyncOperator } from './output/to-set-async'
 
-export {
-  InvalidArgumentError
-, RuntimeError
-} from '@src/error'
-
 export class AsyncIterableOperator<T> extends AsyncIterableOperatorBase<T> {}
 
 export interface AsyncIterableOperator<T> extends

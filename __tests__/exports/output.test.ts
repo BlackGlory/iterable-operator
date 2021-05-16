@@ -31,8 +31,6 @@ test.each([
   , 'toArray'
   , 'toSetAsync'
   , 'toSet'
-
-  , 'RuntimeError'
   ].sort()
 
   const actualExports = Object.keys(target).sort()

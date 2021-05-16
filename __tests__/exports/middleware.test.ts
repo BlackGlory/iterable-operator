@@ -55,8 +55,6 @@ test.each([
   , 'uniq'
   , 'zipAsync'
   , 'zip'
-
-  , 'InvalidArgumentError'
   ].sort()
 
   const actualExports = Object.keys(target).sort()

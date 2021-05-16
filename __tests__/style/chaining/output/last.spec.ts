@@ -1,7 +1,7 @@
 import * as output from '@output/last'
 import { IterableOperator } from '@style/chaining'
 
-describe('IterableOperator<T>::last(): T', () => {
+describe('IterableOperator<T>::last(): T | undefined', () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(output, 'last')
     const iter = [1, 2, 3]

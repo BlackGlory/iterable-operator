@@ -4,9 +4,6 @@ test('Chain', () => {
   const expectedExports: string[] = [
     'IterableOperator'
   , 'AsyncIterableOperator'
-
-  , 'InvalidArgumentError'
-  , 'RuntimeError'
   ].sort()
 
   const actualExports = Object.keys(Chain).sort()

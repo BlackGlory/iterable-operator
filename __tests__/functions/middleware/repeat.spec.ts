@@ -1,4 +1,3 @@
-import { InvalidArgumentError } from '@src/error'
 import { consume, toArray, MockIterable, take } from '@test/utils'
 import { getError } from 'return-style'
 import { repeat } from '@middleware/repeat'
@@ -49,9 +48,9 @@ describe('repeat<T>(iterable: Iterable<T>, times: number): Iterable<T>', () => {
       const iter = [1, 2, 3]
       const times = -1
 
-      const err = getError<InvalidArgumentError>(() => repeat(iter, times))
+      const err = getError(() => repeat(iter, times))
 
-      expect(err).toBeInstanceOf(InvalidArgumentError)
+      expect(err).toBeInstanceOf(Error)
       expect(err!.message).toMatch('times')
     })
   })

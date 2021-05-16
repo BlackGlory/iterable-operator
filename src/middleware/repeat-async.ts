@@ -1,9 +1,15 @@
 import { go } from '@blackglory/go'
-import { InvalidArgumentError } from '@src/error'
-export { InvalidArgumentError }
+import { assert } from '@blackglory/errors'
 
-export function repeatAsync<T>(iterable: AsyncIterable<T>, times: number): AsyncIterable<T> {
-  if (times < 0) throw new InvalidArgumentError('times', '>= 0')
+export function repeatAsync<T>(
+  iterable: AsyncIterable<T>
+, times: number
+): AsyncIterable<T> {
+  assert(
+    times === Infinity || Number.isInteger(times)
+  , 'The parameter times must be an integer'
+  )
+  assert(times >= 0, 'The parameter times must be greater than or equal to 0')
 
   if (times === Infinity) warnInfiniteLoop()
   return go(async function* () {

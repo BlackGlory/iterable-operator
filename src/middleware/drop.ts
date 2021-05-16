@@ -1,12 +1,12 @@
 import { go } from '@blackglory/go'
 import { copyIterable } from '../utils'
-import { InvalidArgumentError } from '@src/error'
-export { InvalidArgumentError }
+import { assert } from '@blackglory/errors'
 
 export function drop<T>(iterable: Iterable<T>, count: number): Iterable<T> {
-  if (count < 0) throw new InvalidArgumentError('count', '>= 0')
-
+  assert(Number.isInteger(count), 'The parameter count must be an integer')
+  assert(count >= 0, 'The parameter count must be greater than or equal to 0')
   if (count === 0) return copyIterable(iterable)
+
   return go(function* () {
     const iterator = iterable[Symbol.iterator]()
     let result: IteratorResult<T>

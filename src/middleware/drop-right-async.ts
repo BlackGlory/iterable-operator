@@ -1,12 +1,12 @@
 import { go } from '@blackglory/go'
-import { InvalidArgumentError } from '@src/error'
 import { copyAsyncIterable } from '../utils'
-export { InvalidArgumentError }
+import { assert } from '@blackglory/errors'
 
 export function dropRightAsync<T>(iterable: AsyncIterable<T>, count: number): AsyncIterable<T> {
-  if (count < 0) throw new InvalidArgumentError('count', '>= 0')
-
+  assert(Number.isInteger(count), 'The parameter count must be an integer')
+  assert(count >= 0, 'The parameter count must be greater than or equal to 0')
   if (count === 0) return copyAsyncIterable(iterable)
+
   return go(async function* () {
     const arr = await toArrayAsync(iterable)
     const result = arr.slice(0, -count)

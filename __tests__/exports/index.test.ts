@@ -2,10 +2,7 @@ import * as Index from '@src/index'
 
 test('Index', () => {
   const expectedExports: string[] = [
-    'RuntimeError'
-  , 'InvalidArgumentError'
-
-  , 'chunkAsync'
+    'chunkAsync'
   , 'chunkByAsync'
   , 'chunkBy'
   , 'chunk'

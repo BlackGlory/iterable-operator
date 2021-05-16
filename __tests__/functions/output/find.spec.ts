@@ -1,8 +1,12 @@
 import { getError } from 'return-style'
-import { RuntimeError } from '@src/error'
 import { find } from '@output/find'
 
-describe('find<T>(iterable: Iterable<T>, predicate: (element: T, index: number) => unknown): T', () => {
+describe(`
+  find<T>(
+    iterable: Iterable<T>
+  , predicate: (element: T, index: number) => unknown
+  ): T | undefined
+`, () => {
   describe('fn is called', () => {
     it('called with [element,index]', () => {
       const iter = [1, 2, 3]
@@ -43,13 +47,13 @@ describe('find<T>(iterable: Iterable<T>, predicate: (element: T, index: number) 
   })
 
   describe('fn return false every time', () => {
-    it('throw RuntimeError', () => {
+    it('return undefined', () => {
       const iter = [1, 2, 3]
       const isFour = (x: number) => x === 4
 
-      const err = getError<RuntimeError>(() => find(iter, isFour))
+      const result = find(iter, isFour)
 
-      expect(err).toBeInstanceOf(RuntimeError)
+      expect(result).toBeUndefined()
     })
   })
 

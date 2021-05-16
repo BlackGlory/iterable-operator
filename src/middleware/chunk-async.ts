@@ -1,9 +1,12 @@
-import { InvalidArgumentError } from '@src/error'
 import { go } from '@blackglory/go'
-export { InvalidArgumentError }
+import { assert } from '@blackglory/errors'
 
-export function chunkAsync<T>(iterable: AsyncIterable<T>, size: number): AsyncIterable<T[]> {
-  if (size <= 0) throw new InvalidArgumentError('size', '> 0')
+export function chunkAsync<T>(
+  iterable: AsyncIterable<T>
+, size: number
+): AsyncIterable<T[]> {
+  assert(Number.isInteger(size), 'The parameter size must be an integer')
+  assert(size > 0, 'The parameter size must be greater than 0')
 
   return go(async function* () {
     let buffer: T[] = []

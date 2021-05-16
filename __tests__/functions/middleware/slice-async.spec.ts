@@ -1,10 +1,16 @@
 import { getError } from 'return-style'
-import { InvalidArgumentError } from '@src/error'
-import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils'
+import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync }
+  from '@test/utils'
 import { sliceAsync } from '@middleware/slice-async'
 import '@blackglory/jest-matchers'
 
-describe('sliceAsync<T>(iterable: AsyncIterable<T>, start: number, end: number): AsyncIterable<T>', () => {
+describe(`
+  sliceAsync<T>(
+    iterable: AsyncIterable<T>
+  , start: number
+  , end: number
+  ): AsyncIterable<T>
+`, () => {
   it('lazy and partial evaluation', async () => {
     const iter = new MockAsyncIterable([1, 2, 3])
     const start = 0
@@ -20,14 +26,14 @@ describe('sliceAsync<T>(iterable: AsyncIterable<T>, start: number, end: number):
   })
 
   describe('start < 0', () => {
-    it('throw InvalidArgumentError', () => {
+    it('throw Error', () => {
       const iter = toAsyncIterable([1, 2, 3])
       const start = -1
       const end = 1
 
-      const err = getError<InvalidArgumentError>(() => sliceAsync(iter, start, end))
+      const err = getError(() => sliceAsync(iter, start, end))
 
-      expect(err).toBeInstanceOf(InvalidArgumentError)
+      expect(err).toBeInstanceOf(Error)
       expect(err!.message).toMatch('start')
     })
   })
@@ -77,14 +83,14 @@ describe('sliceAsync<T>(iterable: AsyncIterable<T>, start: number, end: number):
       })
 
       describe('start > end', () => {
-        it('throw InvalidArgumentError', async () => {
+        it('throw Error', async () => {
           const iter = toAsyncIterable([1, 2, 3])
           const start = 2
           const end = 1
 
-          const err = getError<InvalidArgumentError>(() => sliceAsync(iter, start, end))
+          const err = getError(() => sliceAsync(iter, start, end))
 
-          expect(err).toBeInstanceOf(InvalidArgumentError)
+          expect(err).toBeInstanceOf(Error)
           expect(err!.message).toMatch('end')
         })
       })

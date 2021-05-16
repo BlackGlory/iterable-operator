@@ -1,5 +1,4 @@
 import { getError } from 'return-style'
-import { InvalidArgumentError } from '@src/error'
 import { consume, toArray, MockIterable, take } from '@test/utils'
 import { flattenDeep } from '@middleware/flatten-deep'
 import '@blackglory/jest-matchers'
@@ -47,13 +46,13 @@ describe('flattenDeep<T>(iterable: Iterable<unknown>, depth: number): Iterable<T
 
     describe('iterable isnt string', () => {
       describe('depth < 0', () => {
-        it('throw InvalidArgumentError', () => {
+        it('throw Error', () => {
           const iter: number[] = []
           const depth = -1
 
-          const err = getError<InvalidArgumentError>(() => flattenDeep(iter, depth))
+          const err = getError(() => flattenDeep(iter, depth))
 
-          expect(err).toBeInstanceOf(InvalidArgumentError)
+          expect(err).toBeInstanceOf(Error)
           expect(err!.message).toMatch('depth')
         })
       })

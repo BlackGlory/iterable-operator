@@ -1,10 +1,15 @@
 import { getErrorPromise } from 'return-style'
-import { RuntimeError } from '@src/error'
-import { testFunction, testAsyncFunction, testIterable, testAsyncIterable } from '@test/test-fixtures'
+import { testFunction, testAsyncFunction, testIterable, testAsyncIterable }
+  from '@test/test-fixtures'
 import { findAsync } from '@output/find-async'
 import '@blackglory/jest-matchers'
 
-describe('findAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): Promise<T>', () => {
+describe(`
+  findAsync<T>(
+    iterable: Iterable<T> | AsyncIterable<T>
+  , predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+  ): Promise<T | undefined>
+`, () => {
   describe('T is PromiseLike<T>', () => {
     it('called with [element(promise),index]', async () => {
       const iter = [Promise.resolve(), Promise.resolve(), Promise.resolve()]
@@ -72,13 +77,13 @@ describe('findAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, predicate: (ele
       })
 
       describe('fn return false every time', () => {
-        it('throw RuntimeError', async () => {
+        it('return undefined', async () => {
           const iter = getIter([1, 2, 3])
           const isFour = getFn((x: number) => x === 4)
 
-          const err = await getErrorPromise<RuntimeError>(findAsync(iter, isFour))
+          const result = await findAsync(iter, isFour)
 
-          expect(err).toBeInstanceOf(RuntimeError)
+          expect(result).toBeUndefined()
         })
       })
 

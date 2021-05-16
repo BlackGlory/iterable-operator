@@ -3,7 +3,7 @@ import { last as target } from '@output/last'
 import { IterableOperatorBase } from '../iterable-operator-base'
 
 export class LastOperator<T> extends IterableOperatorBase<T> {
-  last(): T
+  last(): T | undefined
   last(...args: unknown[]) {
     return applyBinding(this.subject, target, args)
   }

@@ -1,10 +1,14 @@
 import { consumeAsync, toArrayAsync, toAsyncIterable, MockAsyncIterable, takeAsync as testTakeAsync } from '@test/utils'
 import { getError } from 'return-style'
-import { InvalidArgumentError } from '@src/error'
 import { takeAsync } from '@middleware/take-async'
 import '@blackglory/jest-matchers'
 
-describe('takeAsync<T>(iterable: AsyncIterable<T>, count: number): AsyncIterable<T>', () => {
+describe(`
+  takeAsync<T>(
+    iterable: AsyncIterable<T>
+  , count: number
+  ): AsyncIterable<T>
+`, () => {
   it('lazy and partial evaluation', async () => {
     const iter = new MockAsyncIterable([1, 2, 3])
     const count = 2
@@ -59,13 +63,13 @@ describe('takeAsync<T>(iterable: AsyncIterable<T>, count: number): AsyncIterable
   })
 
   describe('count < 0', () => {
-    it('throw InvalidArgumentError', () => {
+    it('throw Error', () => {
       const iter = toAsyncIterable([])
       const count = -1
 
-      const err = getError<InvalidArgumentError>(() => takeAsync(iter, count))
+      const err = getError(() => takeAsync(iter, count))
 
-      expect(err).toBeInstanceOf(InvalidArgumentError)
+      expect(err).toBeInstanceOf(Error)
       expect(err!.message).toMatch('count')
     })
   })

@@ -1,5 +1,4 @@
 import { getError } from 'return-style'
-import { InvalidArgumentError } from '@src/error'
 import { consume, toArray, MockIterable, take } from '@test/utils'
 import { drop } from '@middleware/drop'
 import '@blackglory/jest-matchers'
@@ -74,13 +73,13 @@ describe('drop<T>(iterable: Iterable<T>, count: number): Iterable<T>', () => {
   })
 
   describe('count < 0', () => {
-    it('throw InvalidArgumentError', () => {
+    it('throw Error', () => {
       const iter = [1, 2, 3]
       const count = -1
 
-      const err = getError<InvalidArgumentError>(() => drop(iter, count))
+      const err = getError(() => drop(iter, count))
 
-      expect(err).toBeInstanceOf(InvalidArgumentError)
+      expect(err).toBeInstanceOf(Error)
       expect(err!.message).toMatch('count')
     })
   })

@@ -1,7 +1,7 @@
 import * as output from '@output/first'
 import { first } from '@style/binding/output/first'
 
-describe('first<T>(this: Iterable<T>): T', () => {
+describe('first<T>(this: Iterable<T>): T | undefined', () => {
   it('is biding style', () => {
     const spy = jest.spyOn(output, 'first')
     const iter = [1, 2, 3]

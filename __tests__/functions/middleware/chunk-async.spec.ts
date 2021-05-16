@@ -1,10 +1,15 @@
 import { getError } from 'return-style'
-import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils'
+import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync }
+  from '@test/utils'
 import { chunkAsync } from '@middleware/chunk-async'
-import { InvalidArgumentError } from '@src/error'
 import '@blackglory/jest-matchers'
 
-describe('chunkAsync<T>(iterable: AsyncIterable<T>, size: number): AsyncIterable<T[]>', () => {
+describe(`
+  chunkAsync<T>(
+    iterable: AsyncIterable<T>
+  , size: number
+  ): AsyncIterable<T[]>
+`, () => {
   it('lazy and evaluation', async () => {
     const iter = new MockAsyncIterable([1, 2, 3])
     const size = 1
@@ -60,25 +65,25 @@ describe('chunkAsync<T>(iterable: AsyncIterable<T>, size: number): AsyncIterable
   })
 
   describe('size = 0', () => {
-    it('throw InvalidArgumentError', () => {
+    it('throw Error', () => {
       const iter = toAsyncIterable([1, 2, 3])
       const size = 0
 
-      const err = getError<InvalidArgumentError>(() => chunkAsync(iter, size))
+      const err = getError(() => chunkAsync(iter, size))
 
-      expect(err).toBeInstanceOf(InvalidArgumentError)
+      expect(err).toBeInstanceOf(Error)
       expect(err!.message).toMatch('size')
     })
   })
 
   describe('size < 0', () => {
-    it('throw InvalidArgumentError', () => {
+    it('throw Error', () => {
       const iter = toAsyncIterable([1, 2, 3])
       const size = -1
 
-      const err = getError<InvalidArgumentError>(() => chunkAsync(iter, size))
+      const err = getError(() => chunkAsync(iter, size))
 
-      expect(err).toBeInstanceOf(InvalidArgumentError)
+      expect(err).toBeInstanceOf(Error)
       expect(err!.message).toMatch('size')
     })
   })

@@ -1,15 +1,13 @@
-import { getError } from 'return-style'
-import { RuntimeError } from '@src/error'
 import { first } from '@output/first'
 
-describe('first<T>(iterable: Iterable<T>): T', () => {
+describe('first<T>(iterable: Iterable<T>): T | undefined', () => {
   describe('iterable is empty', () => {
-    it('throw RuntimeError', () => {
+    it('return undefined', () => {
       const iter: number[] = []
 
-      const err = getError<RuntimeError>(() => first(iter))
+      const result = first(iter)
 
-      expect(err).toBeInstanceOf(RuntimeError)
+      expect(result).toBeUndefined()
     })
   })
 

@@ -1,9 +1,9 @@
 import { go } from '@blackglory/go'
-import { InvalidArgumentError } from '@src/error'
-export { InvalidArgumentError }
+import { assert } from '@blackglory/errors'
 
 export function chunk<T>(iterable: Iterable<T>, size: number): Iterable<T[]> {
-  if (size <= 0) throw new InvalidArgumentError('size', '> 0')
+  assert(Number.isInteger(size), 'The parameter size must be an integer')
+  assert(size > 0, 'The parameter size must be greater than 0')
 
   return go(function* () {
     let buffer: T[] = []

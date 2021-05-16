@@ -1,6 +1,4 @@
 import { isUndefined } from '@blackglory/types'
-import { RuntimeError } from '@src/error'
-export { RuntimeError }
 
 export function reduce<T>(
   iterable: Iterable<T>
@@ -25,7 +23,11 @@ export function reduce<T, U>(
   }
 }
 
-function reduceWithInitialValue<T, U>(iterable: Iterable<T>, fn: (accumulator: U, currentValue: T, index: number) => U, initialValue: U): U {
+function reduceWithInitialValue<T, U>(
+  iterable: Iterable<T>
+, fn: (accumulator: U, currentValue: T, index: number) => U
+, initialValue: U
+): U {
   let result: U = initialValue
     , index = 0
   for (const currentValue of iterable) {
@@ -34,7 +36,10 @@ function reduceWithInitialValue<T, U>(iterable: Iterable<T>, fn: (accumulator: U
   return result
 }
 
-function reduceWithoutInitialValue<T>(iterable: Iterable<T>, fn: (accumulator: T, currentValue: T, index: number) => T): T {
+function reduceWithoutInitialValue<T>(
+  iterable: Iterable<T>
+, fn: (accumulator: T, currentValue: T, index: number) => T
+): T {
   const [initialValue, iterator] = readFirst(iterable)
   let result: T = initialValue
     , index = 1
@@ -48,20 +53,9 @@ function reduceWithoutInitialValue<T>(iterable: Iterable<T>, fn: (accumulator: T
 
   // If iterable has only single element then return [element, undoneIterator(next done)]
   function readFirst<T>(iterable: Iterable<T>): [T, Iterator<T>] {
-    const [[result], iterator] = read(iterable, 1)
-    return [result, iterator]
-  }
-
-  // If iterable has only single element then return [[element], undoneIterator(next done)]
-  function read<T>(iterable: Iterable<T>, count: number): [Array<T>, Iterator<T>] {
     const iterator = iterable[Symbol.iterator]()
-    const result: T[] = []
-    while (count > 0) {
-      const current = iterator.next()
-      if (current.done) throw new RuntimeError('Reduce of empty iterable with no initial value')
-      result.push(current.value)
-      count--
-    }
-    return [result, iterator]
+    const result = iterator.next()
+    if (result.done) throw new Error('Reduce of empty iterable with no initial value')
+    return [result.value, iterator]
   }
 }

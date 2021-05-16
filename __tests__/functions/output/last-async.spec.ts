@@ -1,17 +1,17 @@
-import { RuntimeError } from '@src/error'
-import { getErrorPromise } from 'return-style'
 import { toAsyncIterable } from '@test/utils'
 import { lastAsync } from '@output/last-async'
 import '@blackglory/jest-matchers'
 
-describe('lastAsync<T>(iterable: AsyncIterable<T>): Promise<T>', () => {
+describe('lastAsync<T>(iterable: AsyncIterable<T>): Promise<T | undefined>', () => {
   describe('iterable is empty', () => {
-    it('throw RuntimeError', async () => {
+    it('return undefined', async () => {
       const iter = toAsyncIterable([])
 
-      const err = await getErrorPromise<RuntimeError>(lastAsync(iter))
+      const result = lastAsync(iter)
+      const proResult = await result
 
-      expect(err).toBeInstanceOf(RuntimeError)
+      expect(result).toBePromise()
+      expect(proResult).toBeUndefined()
     })
   })
 

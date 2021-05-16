@@ -1,7 +1,11 @@
 import * as output from '@output/find'
 import { IterableOperator } from '@style/chaining'
 
-describe('IterableOperator<T>::find(predicate: (element: T, index: number) => unknown): T', () => {
+describe(`
+  IterableOperator<T>::find(
+    predicate: (element: T, index: number) => unknown
+  ): T | undefined
+`, () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(output, 'find')
     const iter = [1, 2, 3]

@@ -1,15 +1,13 @@
-import { RuntimeError } from '@src/error'
-import { getError } from 'return-style'
 import { last } from '@output/last'
 
-describe('last<T>(iterable: Iterable<T>): T', () => {
+describe('last<T>(iterable: Iterable<T>): T | undefined', () => {
   describe('iterable is empty', () => {
-    it('throw RuntimeError', () => {
+    it('return undefined', () => {
       const iter: number[] = []
 
-      const err = getError<RuntimeError>(() => last(iter))
+      const result = last(iter)
 
-      expect(err).toBeInstanceOf(RuntimeError)
+      expect(result).toBeUndefined()
     })
   })
 

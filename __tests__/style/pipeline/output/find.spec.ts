@@ -1,7 +1,11 @@
 import * as output from '@output/find'
 import { find } from '@style/pipeline/output/find'
 
-describe('find<T>(predicate: (element: T, index: number) => unknown): (iterable: Iterable<T>) => T', () => {
+describe(`
+  find<T>(
+    predicate: (element: T, index: number) => unknown
+  ): (iterable: Iterable<T>) => T | undefined
+`, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(output, 'find')
     const iter = [1, 2, 3]

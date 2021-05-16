@@ -1,9 +1,12 @@
 import { go } from '@blackglory/go'
-import { InvalidArgumentError } from '@src/error'
-export { InvalidArgumentError }
+import { assert } from '@blackglory/errors'
 
-export function takeRightAsync<T>(iterable: AsyncIterable<T>, count: number): AsyncIterable<T> {
-  if (count < 0) throw new InvalidArgumentError('count', '>= 0')
+export function takeRightAsync<T>(
+  iterable: AsyncIterable<T>
+, count: number
+): AsyncIterable<T> {
+  assert(Number.isInteger(count), 'The parameter count must be an integer')
+  assert(count >= 0, 'The parameter count must be greater than or equal to 0')
 
   return go(async function* () {
     const iterator = iterable[Symbol.asyncIterator]()

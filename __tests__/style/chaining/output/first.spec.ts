@@ -1,7 +1,7 @@
 import * as output from '@output/first'
 import { IterableOperator } from '@style/chaining'
 
-describe('IterableOperator<T>::first(): T', () => {
+describe('IterableOperator<T>::first(): T | undefined', () => {
   it('is biding style', () => {
     const spy = jest.spyOn(output, 'first')
     const iter = [1, 2, 3]

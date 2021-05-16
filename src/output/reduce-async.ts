@@ -1,6 +1,4 @@
 import { isAsyncIterable, isUndefined } from '@blackglory/types'
-import { RuntimeError } from '@src/error'
-export { RuntimeError }
 
 export function reduceAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
@@ -25,7 +23,11 @@ export function reduceAsync<T, U>(
   }
 }
 
-function reduceAsyncWithInitialValue<T, U>(iterable: Iterable<T> | AsyncIterable<T>, fn: (accumulator: U, currentValue: T, index: number) => U | PromiseLike<U>, initialValue: U): Promise<U> {
+function reduceAsyncWithInitialValue<T, U>(
+  iterable: Iterable<T> | AsyncIterable<T>
+, fn: (accumulator: U, currentValue: T, index: number) => U | PromiseLike<U>
+, initialValue: U
+): Promise<U> {
   if (isAsyncIterable(iterable)) {
     return reduceAsyncIterable(iterable)
   } else {
@@ -51,7 +53,10 @@ function reduceAsyncWithInitialValue<T, U>(iterable: Iterable<T> | AsyncIterable
   }
 }
 
-function reduceAsyncWithoutInitialValue<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (accumulator: T, currentValue: T, index: number) => T | PromiseLike<T>): Promise<T> {
+function reduceAsyncWithoutInitialValue<T>(
+  iterable: Iterable<T> | AsyncIterable<T>
+, fn: (accumulator: T, currentValue: T, index: number) => T | PromiseLike<T>
+): Promise<T> {
   if (isAsyncIterable(iterable)) {
     return reduceAsyncIterable(iterable)
   } else {
@@ -70,21 +75,15 @@ function reduceAsyncWithoutInitialValue<T>(iterable: Iterable<T> | AsyncIterable
     }
     return result
 
-    async function readFirst<T>(iterable: AsyncIterable<T>): Promise<[T, AsyncIterator<T>]> {
-      const [[result], iterator] = await read(iterable, 1)
-      return [result, iterator]
-    }
-
-    async function read<T>(iterable: AsyncIterable<T>, count: number): Promise<[Array<T>, AsyncIterator<T>]> {
+    async function readFirst<T>(
+      iterable: AsyncIterable<T>
+    ): Promise<[T, AsyncIterator<T>]> {
       const iterator = iterable[Symbol.asyncIterator]()
-      const result: T[] = []
-      while (count > 0) {
-        const current = await iterator.next()
-        if (current.done) throw new RuntimeError('Reduce of empty iterable with no initial value')
-        result.push(current.value)
-        count--
+      const result = await iterator.next()
+      if (result.done) {
+        throw new Error('Reduce of empty iterable with no initial value')
       }
-      return [result, iterator]
+      return [result.value, iterator]
     }
   }
 
@@ -101,20 +100,12 @@ function reduceAsyncWithoutInitialValue<T>(iterable: Iterable<T> | AsyncIterable
     return result
 
     function readFirst<T>(iterable: Iterable<T>): [T, Iterator<T>] {
-      const [[result], iterator] = read(iterable, 1)
-      return [result, iterator]
-    }
-
-    function read<T>(iterable: Iterable<T>, count: number): [Array<T>, Iterator<T>] {
       const iterator = iterable[Symbol.iterator]()
-      const result: T[] = []
-      while (count > 0) {
-        const current = iterator.next()
-        if (current.done) throw new RuntimeError('Reduce of empty iterable with no initial value')
-        result.push(current.value)
-        count--
+      const result = iterator.next()
+      if (result.done) {
+        throw new Error('Reduce of empty iterable with no initial value')
       }
-      return [result, iterator]
+      return [result.value, iterator]
     }
   }
 }

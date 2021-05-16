@@ -1,4 +1,3 @@
-import { InvalidArgumentError } from '@src/error'
 import { consume, toArray, MockIterable } from '@test/utils'
 import { getError } from 'return-style'
 import { takeRight } from '@middleware/take-right'
@@ -57,13 +56,13 @@ describe('takeRight<T>(iterable: Iterable<T>, count: number): Iterable<T>', () =
   })
 
   describe('count < 0', () => {
-    it('throw InvalidArgumentError', () => {
+    it('throw Error', () => {
       const iter: number[] = []
       const count = -1
 
-      const err = getError<InvalidArgumentError>(() => takeRight(iter, count))
+      const err = getError(() => takeRight(iter, count))
 
-      expect(err).toBeInstanceOf(InvalidArgumentError)
+      expect(err).toBeInstanceOf(Error)
       expect(err!.message).toMatch('count')
     })
   })

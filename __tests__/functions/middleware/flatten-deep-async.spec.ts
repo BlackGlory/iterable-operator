@@ -1,10 +1,15 @@
-import { InvalidArgumentError } from '@src/error'
-import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils'
+import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync }
+  from '@test/utils'
 import { getError } from 'return-style'
 import { flattenDeepAsync } from '@middleware/flatten-deep-async'
 import '@blackglory/jest-matchers'
 
-describe('flattenDeepAsync<T>(iterable: AsyncIterable<unknown>, depth: number): AsyncIterable<T>', () => {
+describe(`
+  flattenDeepAsync<T>(
+    iterable: AsyncIterable<unknown>
+  , depth: number
+  ): AsyncIterable<T>
+`, () => {
   it('lazy and partial evaluation', async () => {
     const iter = new MockAsyncIterable([1, 2, 3])
     const depth = Infinity
@@ -33,13 +38,13 @@ describe('flattenDeepAsync<T>(iterable: AsyncIterable<unknown>, depth: number): 
 
   describe('iterable isnt empty', () => {
     describe('depth < 0', () => {
-      it('throw InvalidArgumentError', () => {
+      it('throw Error', () => {
         const iter = toAsyncIterable([])
         const depth = -1
 
-        const err = getError<InvalidArgumentError>(() => flattenDeepAsync(iter, depth))
+        const err = getError(() => flattenDeepAsync(iter, depth))
 
-        expect(err).toBeInstanceOf(InvalidArgumentError)
+        expect(err).toBeInstanceOf(Error)
         expect(err!.message).toMatch('depth')
       })
     })

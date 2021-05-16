@@ -1,7 +1,11 @@
 import * as output from '@output/find-async'
 import { findAsync } from '@style/pipeline/output/find-async'
 
-describe('findAsync<T>(predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): (iterable: Iterable<T> | AsyncIterable<T>) => Promise<T>', () => {
+describe(`
+  findAsync<T>(
+    predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+  ): (iterable: Iterable<T> | AsyncIterable<T>) => Promise<T | undefined>
+`, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(output, 'findAsync')
     const iter = [1, 2, 3]

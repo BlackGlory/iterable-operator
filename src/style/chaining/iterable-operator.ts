@@ -58,11 +58,6 @@ import { FindAsyncOperator } from './output/find-async'
 import { ReduceAsyncOperator } from './output/reduce-async'
 import { SomeAsyncOperator } from './output/some-async'
 
-export {
-  InvalidArgumentError
-, RuntimeError
-} from '@src/error'
-
 export class IterableOperator<T> extends IterableOperatorBase<T> {}
 
 export interface IterableOperator<T> extends

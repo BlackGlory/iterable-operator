@@ -1,7 +1,12 @@
 import * as output from '@output/find-async'
 import { findAsync } from '@style/binding/output/find-async'
 
-describe('findAsync<T>(this: Iterable<T> | AsyncIterable<T>, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): Promise<T>', () => {
+describe(`
+  findAsync<T>(
+    this: Iterable<T> | AsyncIterable<T>
+  , predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+  ): Promise<T | undefined>
+`, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(output, 'findAsync')
     const iter = [1, 2, 3]

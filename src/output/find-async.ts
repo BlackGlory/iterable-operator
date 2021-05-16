@@ -1,8 +1,9 @@
 import { isAsyncIterable } from '@blackglory/types'
-import { RuntimeError } from '@src/error'
-export { RuntimeError }
 
-export function findAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): Promise<T> {
+export function findAsync<T>(
+  iterable: Iterable<T> | AsyncIterable<T>
+, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+): Promise<T | undefined> {
   if (isAsyncIterable(iterable)) {
     return findAsyncIterable(iterable)
   } else {
@@ -17,7 +18,7 @@ export function findAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, predicate
       index++
     }
 
-    throw new RuntimeError('Iterable has no matched elements')
+    return undefined
   }
 
   async function findAsyncIterable(iterable: AsyncIterable<T>) {
@@ -28,6 +29,6 @@ export function findAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, predicate
       index++
     }
 
-    throw new RuntimeError('Iterable has no matched elements')
+    return undefined
   }
 }

@@ -1,8 +1,12 @@
-import { RuntimeError } from '@src/error'
 import { getError } from 'return-style'
 import { reduce } from '@output/reduce'
 
-describe('reduce<T>(iterable: Iterable<T>, fn: (accumulator: T, currentValue: T, index: number) => T)): T', () => {
+describe(`
+  reduce<T>(
+    iterable: Iterable<T>
+  , fn: (accumulator: T, currentValue: T, index: number) => T)
+  ): T
+`, () => {
   describe('fn is called', () => {
     it('called with [accumulator,currentValue,index]', () => {
       const iter = [1, 2, 3]
@@ -20,13 +24,13 @@ describe('reduce<T>(iterable: Iterable<T>, fn: (accumulator: T, currentValue: T,
 
   describe('size(iterable) = 0', () => {
     describe('call', () => {
-      it('throw RuntimeError', () => {
+      it('throw Error', () => {
         const iter: number[] = []
         const fn = (acc: number, cur: number) => acc + cur
 
-        const err = getError<RuntimeError>(() => reduce(iter, fn))
+        const err = getError(() => reduce(iter, fn))
 
-        expect(err).toBeInstanceOf(RuntimeError)
+        expect(err).toBeInstanceOf(Error)
       })
     })
   })
@@ -72,7 +76,13 @@ describe('reduce<T>(iterable: Iterable<T>, fn: (accumulator: T, currentValue: T,
   })
 })
 
-describe('(iterable: Iterable<T>, fn: (accumulator: U, currentValue: T, index: number) => U, initalValue: U) => U', () => {
+describe(`
+  reduce(
+    iterable: Iterable<T>
+  , fn: (accumulator: U, currentValue: T, index: number) => U
+  , initalValue: U
+  ) => U
+`, () => {
   describe('fn is called', () => {
     it('called with [accumulator,currentValue,index]', () => {
       const iter = [1, 2, 3]

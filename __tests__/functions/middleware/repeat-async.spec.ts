@@ -1,10 +1,15 @@
 import { getError } from 'return-style'
-import { consumeAsync, toArrayAsync, toAsyncIterable, MockAsyncIterable, takeAsync } from '@test/utils'
-import { InvalidArgumentError } from '@src/error'
+import { consumeAsync, toArrayAsync, toAsyncIterable, MockAsyncIterable, takeAsync }
+  from '@test/utils'
 import { repeatAsync } from '@middleware/repeat-async'
 import '@blackglory/jest-matchers'
 
-describe('repeatAsync<T>(iterable: AsyncIterable<T>, times: number): AsyncIterable<T>', () => {
+describe(`
+  repeatAsync<T>(
+    iterable: AsyncIterable<T>
+  , times: number
+  ): AsyncIterable<T>
+`, () => {
   it('lazy and partial evaluation', async () => {
     const iter = new MockAsyncIterable([1, 2, 3])
     const times = 2
@@ -45,13 +50,13 @@ describe('repeatAsync<T>(iterable: AsyncIterable<T>, times: number): AsyncIterab
   })
 
   describe('times < 0', () => {
-    it('throw InvalidArgumentError', () => {
+    it('throw Error', () => {
       const iter = toAsyncIterable([1, 2, 3])
       const times = -1
 
-      const err = getError<InvalidArgumentError>(() => repeatAsync(iter, times))
+      const err = getError(() => repeatAsync(iter, times))
 
-      expect(err).toBeInstanceOf(InvalidArgumentError)
+      expect(err).toBeInstanceOf(Error)
       expect(err!.message).toMatch('times')
     })
   })

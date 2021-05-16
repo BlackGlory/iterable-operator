@@ -1,11 +1,16 @@
 import { getErrorPromise } from 'return-style'
-import { RuntimeError } from '@src/error'
-import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures'
+import { testIterable, testAsyncIterable, testFunction, testAsyncFunction }
+  from '@test/test-fixtures'
 import { reduceAsync } from '@output/reduce-async'
 import { getCalledTimes } from '@test/utils'
 import '@blackglory/jest-matchers'
 
-describe('reduceAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (accumulator: T, currentValue: T, index: number) => T | PromiseLike<T>): Promise<T>', () => {
+describe(`
+  reduceAsync<T>(
+    iterable: Iterable<T> | AsyncIterable<T>
+  , fn: (accumulator: T, currentValue: T, index: number) => T | PromiseLike<T>
+  ): Promise<T>
+`, () => {
   describe.each([
     testIterable('Iterable<T>')
   , testAsyncIterable('AsyncIterable<T>')
@@ -31,13 +36,13 @@ describe('reduceAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (accumula
     ])('%s', (_, getFn) => {
       describe('size(iterable) = 0', () => {
         describe('call', () => {
-          it('throw RuntimeError', async () => {
+          it('throw Error', async () => {
             const iter = getIter([])
             const fn = getFn((acc: number, cur: number) => acc + cur)
 
-            const err = await getErrorPromise<RuntimeError>(reduceAsync(iter, fn))
+            const err = await getErrorPromise(reduceAsync(iter, fn))
 
-            expect(err).toBeInstanceOf(RuntimeError)
+            expect(err).toBeInstanceOf(Error)
           })
         })
       })
@@ -88,7 +93,13 @@ describe('reduceAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (accumula
   })
 })
 
-describe('reduceAsync<T, U>(iterable: Iterable<T> | AsyncIterable<T>, fn: (accumulator: U, currentValue: T, index: number) => U | PromiseLike<U>, initalValue: U): Promise<U>', () => {
+describe(`
+  reduceAsync<T, U>(
+    iterable: Iterable<T> | AsyncIterable<T>
+  , fn: (accumulator: U, currentValue: T, index: number) => U | PromiseLike<U>
+  , initalValue: U
+  ): Promise<U>
+`, () => {
   describe('T is PromiseLike<T>', () => {
     describe('fn is called', () => {
       it('called with [accumulator,currentValue(promise),index]', async () => {

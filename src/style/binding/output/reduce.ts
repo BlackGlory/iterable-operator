@@ -1,6 +1,5 @@
 import { applyBinding } from '@style/utils'
 import { reduce as target } from '@output/reduce'
-export { RuntimeError } from '@output/reduce'
 
 export function reduce<T>(
   this: Iterable<T>

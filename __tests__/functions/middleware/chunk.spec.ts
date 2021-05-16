@@ -1,5 +1,4 @@
 import { getError } from 'return-style'
-import { InvalidArgumentError } from '@src/error'
 import { consume, toArray, MockIterable, take } from '@test/utils'
 import { chunk } from '@middleware/chunk'
 import '@blackglory/jest-matchers'
@@ -60,25 +59,25 @@ describe('chunk<T>(iterable: Iterable<T>, size: number): Iterable<T[]>', () => {
   })
 
   describe('size = 0', () => {
-    it('throw InvalidArgumentError', () => {
+    it('throw Error', () => {
       const iter = [1, 2, 3]
       const size = 0
 
-      const err = getError<InvalidArgumentError>(() => chunk(iter, size))
+      const err = getError(() => chunk(iter, size))
 
-      expect(err).toBeInstanceOf(InvalidArgumentError)
+      expect(err).toBeInstanceOf(Error)
       expect(err!.message).toMatch('size')
     })
   })
 
   describe('size < 0', () => {
-    it('throw InvalidArgumentError', () => {
+    it('throw Error', () => {
       const iter = [1, 2, 3]
       const size = -1
 
-      const err = getError<InvalidArgumentError>(() => chunk(iter, size))
+      const err = getError(() => chunk(iter, size))
 
-      expect(err).toBeInstanceOf(InvalidArgumentError)
+      expect(err).toBeInstanceOf(Error)
       expect(err!.message).toMatch('size')
     })
   })
