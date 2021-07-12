@@ -2,7 +2,12 @@ import * as middleware from '@middleware/transform-async'
 import { transformAsync } from '@style/binding/middleware/transform-async'
 import { toAsyncIterable } from '@test/utils'
 
-describe('transformAsync<T, U>(this: Iterable<T>, transformer: (iterable: Iterable<T>) => AsyncIterable<U>): AsyncIterable<U>', () => {
+describe(`
+  transformAsync<T, U>(
+    this: Iterable<T>
+  , transformer: (iterable: Iterable<T>) => AsyncIterable<U>
+  ): AsyncIterable<U>
+`, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'transformAsync')
     const iter = [1, 2, 3]
@@ -16,7 +21,12 @@ describe('transformAsync<T, U>(this: Iterable<T>, transformer: (iterable: Iterab
   })
 })
 
-describe('transformAsync<T, U>(this: AsyncIterable<T>, transformer: (iterable: AsyncIterable<T>) => AsyncIterable<U>): AsyncIterable<U>', () => {
+describe(`
+  transformAsync<T, U>(
+    this: AsyncIterable<T>
+  , transformer: (iterable: AsyncIterable<T>) => AsyncIterable<U>
+  ): AsyncIterable<U>
+`, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'transformAsync')
     const iter = toAsyncIterable([1, 2, 3])

@@ -2,9 +2,11 @@ import * as middleware from '@middleware/zip'
 import { IterableOperator } from '@style/chaining'
 import '@blackglory/jest-matchers'
 
-describe(`IterableOperator<T>::zip<U extends Array<Iterable<unknown>>>(
-  ...iterables: U
-): IterableOperator<[T, ...ExtractTypeTupleFromIterableTuple<U>]>`, () => {
+describe(`
+  IterableOperator<T>::zip<U extends Array<Iterable<unknown>>>(
+    ...iterables: U
+  ): IterableOperator<[T, ...ExtractTypeTupleFromIterableTuple<U>]>
+`, () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(middleware, 'zip')
     const iter = [1, 2, 3]

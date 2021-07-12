@@ -1,7 +1,12 @@
 import * as middleware from '@middleware/flatten-by-async'
 import { flattenByAsync } from '@style/binding/middleware/flatten-by-async'
 
-describe('flattenByAsync<T>(this: Iterable<unknown> | AsyncIterable<unknown>, predicate: (element: unknown, level: number) => unknown | PromiseLike<unknown>): AsyncIterable<T>', () => {
+describe(`
+  flattenByAsync<T>(
+    this: Iterable<unknown> | AsyncIterable<unknown>
+  , predicate: (element: unknown, level: number) => unknown | PromiseLike<unknown>
+  ): AsyncIterable<T>
+`, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'flattenByAsync')
     const iter = [1, 2, 3]

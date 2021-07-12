@@ -2,7 +2,9 @@ import * as output from '@output/match-async'
 import { AsyncIterableOperator } from '@style/chaining'
 import { toAsyncIterable } from '@test/utils'
 
-describe('AsyncIterableOperator<T>::matchAsync(sequence: ArrayLike<T>): Promise<boolean>', () => {
+describe(`
+  AsyncIterableOperator<T>::matchAsync(sequence: ArrayLike<T>): Promise<boolean>
+`, () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(output, 'matchAsync')
     const iter = toAsyncIterable([1, 2, 3])

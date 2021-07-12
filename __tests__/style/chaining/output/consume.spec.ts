@@ -16,7 +16,9 @@ describe('IterableOperator<T>::consume<U>(consumer: (iterable: Iterable<T>) => U
   })
 })
 
-describe('AsyncIterableOperator<T>::consume<U>(consumer: (iterable: AsyncIterable<T>) => U): U', () => {
+describe(`
+  AsyncIterableOperator<T>::consume<U>(consumer: (iterable: AsyncIterable<T>) => U): U
+`, () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(output, 'consume')
     const iter = toAsyncIterable([1, 2, 3])

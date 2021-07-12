@@ -3,7 +3,12 @@ import { transform } from '@middleware/transform'
 import { getError } from 'return-style'
 import '@blackglory/jest-matchers'
 
-describe('transform<T, U>(iterable: Iterable<T>, transformer: (iterable: Iterable<T>) => Iterable<U>): Iterable<U>', () => {
+describe(`
+  transform<T, U>(
+    iterable: Iterable<T>
+  , transformer: (iterable: Iterable<T>) => Iterable<U>
+  ): Iterable<U>
+`, () => {
   describe('call', () => {
     it('return result from transformer', () => {
       const iter = [1, 2, 3]

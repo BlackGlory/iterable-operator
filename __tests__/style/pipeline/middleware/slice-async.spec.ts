@@ -2,7 +2,12 @@ import * as middleware from '@middleware/slice-async'
 import { sliceAsync } from '@style/pipeline/middleware/slice-async'
 import { toAsyncIterable } from '@test/utils'
 
-describe('sliceAsync<T>(start: number, end: number): (iterable: AsyncIterable<T>) => AsyncIterable<T>', () => {
+describe(`
+  sliceAsync<T>(
+    start: number
+  , end: number
+  ): (iterable: AsyncIterable<T>) => AsyncIterable<T>
+`, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'sliceAsync')
     const iter = toAsyncIterable([1, 2, 3])

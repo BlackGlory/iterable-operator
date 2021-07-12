@@ -2,7 +2,11 @@ import * as middleware from '@middleware/flatten-by-async'
 import { IterableOperator, AsyncIterableOperator } from '@style/chaining'
 import { toAsyncIterable } from '@test/utils'
 
-describe('IterableOperator<T>::flattenByAsync<T>(predicate: (element: unknown, level: number) => unknown | PromiseLike<unknown>): AsyncIterable<T>', () => {
+describe(`
+  IterableOperator<T>::flattenByAsync<T>(
+    predicate: (element: unknown, level: number) => unknown | PromiseLike<unknown>
+  ): AsyncIterable<T>
+`, () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(middleware, 'flattenByAsync')
     const iter = [1, 2, 3]
@@ -18,7 +22,11 @@ describe('IterableOperator<T>::flattenByAsync<T>(predicate: (element: unknown, l
   })
 })
 
-describe('AsyncIterableOperator<T>::flattenByAsync<T>(predicate: (element: unknown, level: number) => unknown | PromiseLike<unknown>): AsyncIterable<T>', () => {
+describe(`
+  AsyncIterableOperator<T>::flattenByAsync<T>(
+    predicate: (element: unknown, level: number) => unknown | PromiseLike<unknown>
+  ): AsyncIterable<T>
+`, () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(middleware, 'flattenByAsync')
     const iter = toAsyncIterable([1, 2, 3])

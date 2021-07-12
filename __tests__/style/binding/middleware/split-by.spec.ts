@@ -1,7 +1,12 @@
 import * as middleware from '@middleware/split-by'
 import { splitBy } from '@style/binding/middleware/split-by'
 
-describe('splitBy<T>(this: Iterable<T>, predicate: (element: T, index: number) => unknown): Iterable<T[]>', () => {
+describe(`
+  splitBy<T>(
+    this: Iterable<T>
+  , predicate: (element: T, index: number) => unknown
+  ): Iterable<T[]>
+`, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'splitBy')
     const iter = [1, 2, 3]

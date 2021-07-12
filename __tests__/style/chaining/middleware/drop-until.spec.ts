@@ -2,7 +2,11 @@ import * as middleware from '@middleware/drop-until'
 import { IterableOperator } from '@style/chaining'
 import '@blackglory/jest-matchers'
 
-describe('IterableOperator<T>::dropUntil(predicate: (element: T, index: number) => unknown): IterableOperator<T>', () => {
+describe(`
+  IterableOperator<T>::dropUntil(
+    predicate: (element: T, index: number) => unknown
+  ): IterableOperator<T>
+`, () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(middleware, 'dropUntil')
     const iter = [1, 2, 3]

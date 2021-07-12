@@ -3,7 +3,12 @@ import { consume } from '@output/consume'
 import { getError } from 'return-style'
 import '@blackglory/jest-matchers'
 
-describe('consume<T, U>(iterable: Iterable<T> | AsyncIterable<T>, consumer: (iterable: Iterable<T> | AsyncIterable<T>) => U): U', () => {
+describe(`
+  consume<T, U>(
+    iterable: Iterable<T> | AsyncIterable<T>
+  , consumer: (iterable: Iterable<T> | AsyncIterable<T>) => U
+  ): U
+`, () => {
   describe.each([
     testIterable('Iterable<T>')
   , testAsyncIterable('AsyncIterable<T>')

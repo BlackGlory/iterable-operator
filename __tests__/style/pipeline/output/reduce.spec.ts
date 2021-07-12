@@ -1,7 +1,12 @@
 import * as output from '@output/reduce'
 import { reduce } from '@style/pipeline/output/reduce'
 
-describe('reduce<T, U>(fn: (accumulator: U, currentValue: T, index: number) => U, initialValue: U): (iterable: Iterable<T>) => U', () => {
+describe(`
+  reduce<T, U>(
+    fn: (accumulator: U, currentValue: T, index: number) => U
+  , initialValue: U
+  ): (iterable: Iterable<T>) => U
+`, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(output, 'reduce')
     const iter = [1, 2, 3]

@@ -2,7 +2,11 @@ import * as output from '@output/match-async'
 import { matchAsync } from '@style/pipeline/output/match-async'
 import { toAsyncIterable } from '@test/utils'
 
-describe('matchAsync<T>(sequence: ArrayLike<T>): (iterable: AsyncIterable<T>) => Promise<boolean>', () => {
+describe(`
+  matchAsync<T>(
+    sequence: ArrayLike<T>
+  ): (iterable: AsyncIterable<T>) => Promise<boolean>
+`, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(output, 'matchAsync')
     const iter = toAsyncIterable([1, 2, 3])

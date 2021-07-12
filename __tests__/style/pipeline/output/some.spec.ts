@@ -1,7 +1,11 @@
 import * as output from '@output/some'
 import { some } from '@style/pipeline/output/some'
 
-describe('some<T>(predicate: (element: T, index: number) => unknown): (iterable: Iterable<T>) => boolean', () => {
+describe(`
+  some<T>(
+    predicate: (element: T, index: number) => unknown
+  ): (iterable: Iterable<T>) => boolean
+`, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(output, 'some')
     const iter = [1, 2, 3]

@@ -2,7 +2,12 @@ import * as middleware from '@middleware/concat'
 import { concat } from '@style/binding/middleware/concat'
 import '@blackglory/jest-matchers'
 
-describe('export function concat<T, U>(this: Iterable<T>, ...iterables: Iterable<U>[]): Iterable<T | U>', () => {
+describe(`
+  concat<T, U>(
+    this: Iterable<T>
+  , ...iterables: Iterable<U>[]
+  ): Iterable<T | U>
+`, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'concat')
     const iter = [1, 2, 3]

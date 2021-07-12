@@ -2,7 +2,9 @@ import * as middleware from '@middleware/take-async'
 import { AsyncIterableOperator } from '@style/chaining'
 import { toAsyncIterable } from '@test/utils'
 
-describe('AsyncIterableOperaotr<T>::takeAsync(count: number): AsyncIterableOperator<T>', () => {
+describe(`
+  AsyncIterableOperaotr<T>::takeAsync(count: number): AsyncIterableOperator<T>
+`, () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(middleware, 'takeAsync')
     const iter = toAsyncIterable([1, 2, 3])

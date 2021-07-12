@@ -4,7 +4,12 @@ import { getErrorPromise } from 'return-style'
 import { uniqByAsync } from '@middleware/uniq-by-async'
 import '@blackglory/jest-matchers'
 
-describe('uniqByAsync<T, U>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => U | PromiseLike<U>): AsyncIterable<T>', () => {
+describe(`
+  uniqByAsync<T, U>(
+    iterable: Iterable<T> | AsyncIterable<T>
+  , fn: (element: T, index: number) => U | PromiseLike<U>
+  ): AsyncIterable<T>
+`, () => {
   describe('T is PromiseLike<unknown>', () => {
     it('called with [element(promise),index]', async () => {
       const iter = [Promise.resolve(), Promise.resolve(), Promise.resolve()]

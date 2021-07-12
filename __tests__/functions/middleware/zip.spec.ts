@@ -2,10 +2,12 @@ import { consume, toArray, MockIterable } from '@test/utils'
 import { zip } from '@middleware/zip'
 import '@blackglory/jest-matchers'
 
-describe(`zip<T, U extends Array<Iterable<unknown>>>(
-  iterable: Iterable<T>
-, ...otherIterables: U
-): Iterable<[T, ...ExtractTypeTupleFromIterableTuple<U>]>` , () => {
+describe(`
+  zip<T, U extends Array<Iterable<unknown>>>(
+    iterable: Iterable<T>
+  , ...otherIterables: U
+  ): Iterable<[T, ...ExtractTypeTupleFromIterableTuple<U>]>
+` , () => {
   it('lazy evaluation', () => {
     const iter1 = new MockIterable([1, 2, 3])
     const iter2: unknown[] = []

@@ -1,4 +1,4 @@
-export function toArray<T>(iterable: Iterable<T>, count: number = Infinity) {
+export function toArray<T>(iterable: Iterable<T>, count: number = Infinity): T[] {
   const result: T[] =[]
   for (const value of iterable) {
     result.push(value)
@@ -8,7 +8,10 @@ export function toArray<T>(iterable: Iterable<T>, count: number = Infinity) {
   return result
 }
 
-export async function toArrayAsync<T>(iterable: AsyncIterable<T>, count: number = Infinity) {
+export async function toArrayAsync<T>(
+  iterable: AsyncIterable<T>
+, count: number = Infinity
+): Promise<T[]> {
   const result: T[] = []
   for await (const value of iterable) {
     result.push(value)
@@ -18,7 +21,7 @@ export async function toArrayAsync<T>(iterable: AsyncIterable<T>, count: number 
   return result
 }
 
-export function consume<T>(iterable: Iterable<T>) {
+export function consume<T>(iterable: Iterable<T>): void {
   for (const _ of iterable) {}
 }
 
@@ -42,11 +45,15 @@ export async function* toAsyncIterable<T>(iterable: Iterable<T>): AsyncIterable<
   }
 }
 
-export function toAsyncFunction<T extends unknown[], U>(fn: (...args: T) => U): (...args: T) => Promise<U>  {
+export function toAsyncFunction<T extends unknown[], U>(
+  fn: (...args: T) => U
+): (...args: T) => Promise<U>  {
   return async (...args: T) => fn(...args)
 }
 
-export function toFunction<T extends unknown[], U>(fn: (...args: T) => U): (...args: T) => U {
+export function toFunction<T extends unknown[], U>(
+  fn: (...args: T) => U
+): (...args: T) => U {
   return (...args: T) => fn(...args)
 }
 
@@ -94,7 +101,7 @@ export class MockAsyncIterable<T> implements AsyncIterable<T> {
   }
 }
 
-export function* take<T>(iterable: Iterable<T>, count: number) {
+export function* take<T>(iterable: Iterable<T>, count: number): Iterable<T> {
   if (count === 0) return
   for (const element of iterable) {
     yield element
@@ -103,7 +110,9 @@ export function* take<T>(iterable: Iterable<T>, count: number) {
   }
 }
 
-export async function* takeAsync<T>(iterable: AsyncIterable<T>, count: number): AsyncIterable<T> {
+export async function* takeAsync<T>(
+  iterable: AsyncIterable<T>, count: number
+): AsyncIterable<T> {
   if (count === 0) return
   for await (const element of iterable) {
     yield element

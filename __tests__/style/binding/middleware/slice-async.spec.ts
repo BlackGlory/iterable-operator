@@ -2,7 +2,13 @@ import * as middleware from '@middleware/slice-async'
 import { sliceAsync } from '@style/binding/middleware/slice-async'
 import { toAsyncIterable } from '@test/utils'
 
-describe('sliceAsync<T>(this: AsyncIterable<T>, start: number, end: number): AsyncIterable<T>', () => {
+describe(`
+  sliceAsync<T>(
+    this: AsyncIterable<T>
+  , start: number
+  , end: number
+  ): AsyncIterable<T>
+`, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'sliceAsync')
     const iter = toAsyncIterable([1, 2, 3])

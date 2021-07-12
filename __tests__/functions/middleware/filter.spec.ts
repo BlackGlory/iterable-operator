@@ -3,7 +3,12 @@ import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/util
 import { filter } from '@middleware/filter'
 import '@blackglory/jest-matchers'
 
-describe('filter<T>(iterable: Iterable<T>, predicate: (element: T, index: number) => unknown): Iterable<T>', () => {
+describe(`
+  filter<T>(
+    iterable: Iterable<T>
+  , predicate: (element: T, index: number) => unknown
+  ): Iterable<T>
+`, () => {
   describe('fn is called', () => {
     it('called with [element,index]', () => {
       const iter = [1, 2, 3]

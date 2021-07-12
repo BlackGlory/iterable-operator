@@ -2,10 +2,12 @@ import * as middleware from '@middleware/zip'
 import { zip } from '@style/binding/middleware/zip'
 import '@blackglory/jest-matchers'
 
-describe(`zip<T, U extends Array<Iterable<unknown>>>(
-  this: Iterable<T>
-, ...iterables: U
-): Iterable<[T, ...ExtractTypeTupleFromIterableTuple<U>]>`, () => {
+describe(`
+  zip<T, U extends Array<Iterable<unknown>>>(
+    this: Iterable<T>
+  , ...iterables: U
+  ): Iterable<[T, ...ExtractTypeTupleFromIterableTuple<U>]>
+`, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'zip')
     const iter = [1, 2, 3]

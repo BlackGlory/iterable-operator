@@ -4,7 +4,12 @@ import { testFunction, testAsyncFunction, testIterable, testAsyncIterable } from
 import { tapAsync } from '@middleware/tap-async'
 import '@blackglory/jest-matchers'
 
-describe('tapAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => unknown | PromiseLike<unknown>): AsyncIterable<T>', () => {
+describe(`
+  tapAsync<T>(
+    iterable: Iterable<T> | AsyncIterable<T>
+  , fn: (element: T, index: number) => unknown | PromiseLike<unknown>
+  ): AsyncIterable<T>
+`, () => {
   describe('T is PromiseLike<T>', () => {
     it('called with [element(promise),index]', async () => {
       const iter = [Promise.resolve(), Promise.resolve(), Promise.resolve()]

@@ -2,7 +2,11 @@ import * as middleware from '@middleware/map-async'
 import { IterableOperator, AsyncIterableOperator } from '@style/chaining'
 import { toAsyncIterable } from '@test/utils'
 
-describe('IterableOperator<T>::mapAsync<U>(fn: (element: T, index: number) => U | PromiseLike<U>): AsyncIterableOperator<U>', () => {
+describe(`
+  IterableOperator<T>::mapAsync<U>(
+    fn: (element: T, index: number) => U | PromiseLike<U>
+  ): AsyncIterableOperator<U>
+`, () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(middleware, 'mapAsync')
     const iter = [1, 2, 3]
@@ -18,7 +22,11 @@ describe('IterableOperator<T>::mapAsync<U>(fn: (element: T, index: number) => U 
   })
 })
 
-describe('AsyncIterableOperator<T>::mapAsync<U>(fn: (element: T, index: number) => U | PromiseLike<U>): AsyncIterableOperator<U>', () => {
+describe(`
+  AsyncIterableOperator<T>::mapAsync<U>(
+    fn: (element: T, index: number) => U | PromiseLike<U>
+  ): AsyncIterableOperator<U>
+`, () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(middleware, 'mapAsync')
     const iter = toAsyncIterable([1, 2, 3])

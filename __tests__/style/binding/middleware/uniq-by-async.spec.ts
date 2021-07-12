@@ -1,7 +1,12 @@
 import * as middleware from '@middleware/uniq-by-async'
 import { uniqByAsync } from '@style/binding/middleware/uniq-by-async'
 
-describe('uniqByAsync<T, U>(this: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => U | PromiseLike<U>): AsyncIterable<T>', () => {
+describe(`
+  uniqByAsync<T, U>(
+    this: Iterable<T> | AsyncIterable<T>
+  , fn: (element: T, index: number) => U | PromiseLike<U>
+  ): AsyncIterable<T>
+`, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'uniqByAsync')
     const iter = [1, 2, 3]

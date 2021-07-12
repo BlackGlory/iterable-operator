@@ -2,7 +2,11 @@ import * as middleware from '@middleware/transform'
 import { IterableOperator } from '@style/chaining'
 import '@blackglory/jest-matchers'
 
-describe('IterableOperator<T>::transform<U>(transformer: (iterable: Iterable<T>) => Iterable<U>): IterableOperator<U>', () => {
+describe(`
+  IterableOperator<T>::transform<U>(
+    transformer: (iterable: Iterable<T>) => Iterable<U>
+  ): IterableOperator<U>
+`, () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(middleware, 'transform')
     const iter = [1, 2, 3]

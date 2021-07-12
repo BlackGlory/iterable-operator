@@ -2,7 +2,12 @@ import * as output from '@output/match-async'
 import { matchAsync } from '@style/binding/output/match-async'
 import { toAsyncIterable } from '@test/utils'
 
-describe('matchAsync<T>(this: AsyncIterable<T>, sequence: ArrayLike<T>): Promise<boolean>', () => {
+describe(`
+  matchAsync<T>(
+    this: AsyncIterable<T>
+  , sequence: ArrayLike<T>
+  ): Promise<boolean>
+`, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(output, 'matchAsync')
     const iter = toAsyncIterable([1, 2, 3])

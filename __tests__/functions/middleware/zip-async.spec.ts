@@ -3,10 +3,12 @@ import { consumeAsync, toArrayAsync, toIterable, toAsyncIterable, MockIterable }
 import { zipAsync } from '@middleware/zip-async'
 import '@blackglory/jest-matchers'
 
-describe(`zipAsync<T, U extends Array<Iterable<unknown> | AsyncIterable<unknown>>>(
-  iterable: Iterable<T | PromiseLike<T>> | AsyncIterable<T>
-, ...otherIterables: U
-): AsyncIterable<[T, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]>`, () => {
+describe(`
+  zipAsync<T, U extends Array<Iterable<unknown> | AsyncIterable<unknown>>>(
+    iterable: Iterable<T | PromiseLike<T>> | AsyncIterable<T>
+  , ...otherIterables: U
+  ): AsyncIterable<[T, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]>
+`, () => {
   describe('T is PromiseLike<T>', () => {
     it('return AsyncIterable<Array<PromiseLike<T>>>', async () => {
       const iter1 = [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)]

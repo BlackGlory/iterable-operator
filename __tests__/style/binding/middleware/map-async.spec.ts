@@ -1,7 +1,12 @@
 import * as middleware from '@middleware/map-async'
 import { mapAsync } from '@style/binding/middleware/map-async'
 
-describe('mapAsync<T, U>(this: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => U | PromiseLike<U>): AsyncIterable<U>', () => {
+describe(`
+  mapAsync<T, U>(
+    this: Iterable<T> | AsyncIterable<T>
+  , fn: (element: T, index: number) => U | PromiseLike<U>
+  ): AsyncIterable<U>
+`, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'mapAsync')
     const iter = [1, 2, 3]

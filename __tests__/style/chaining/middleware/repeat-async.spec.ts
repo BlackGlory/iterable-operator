@@ -2,7 +2,9 @@ import * as middleware from '@middleware/repeat-async'
 import { AsyncIterableOperator } from '@style/chaining'
 import { toAsyncIterable } from '@test/utils'
 
-describe('AsyncIterableOperator<T>::repeatAsync(times: number): AsyncIterableOperator<T>', () => {
+describe(`
+  AsyncIterableOperator<T>::repeatAsync(times: number): AsyncIterableOperator<T>
+`, () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(middleware, 'repeatAsync')
     const iter = toAsyncIterable([1, 2, 3])

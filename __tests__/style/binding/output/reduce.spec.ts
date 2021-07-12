@@ -1,7 +1,13 @@
 import * as output from '@output/reduce'
 import { reduce } from '@style/binding/output/reduce'
 
-describe('reduce<T, U>(this: Iterable<T>, fn: (accumulator: U, currentValue: T, index: number) => U, initialValue: U): U', () => {
+describe(`
+  reduce<T, U>(
+    this: Iterable<T>
+  , fn: (accumulator: U, currentValue: T, index: number) => U
+  , initialValue: U
+  ): U
+`, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(output, 'reduce')
     const iter = [1, 2, 3]

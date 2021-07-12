@@ -4,7 +4,12 @@ import { getErrorPromise } from 'return-style'
 import { splitByAsync } from '@middleware/split-by-async'
 import '@blackglory/jest-matchers'
 
-describe('splitByAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): AsyncIterable<T[]>', () => {
+describe(`
+  splitByAsync<T>(
+    iterable: Iterable<T> | AsyncIterable<T>
+  , predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+  ): AsyncIterable<T[]>
+`, () => {
   describe('T is PromiseLike<T>', () => {
     it('called with [element(promise),index]', async () => {
       const iter = [Promise.resolve(), Promise.resolve(), Promise.resolve()]

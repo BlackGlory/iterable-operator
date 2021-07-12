@@ -2,7 +2,11 @@ import * as middleware from '@middleware/concat'
 import { IterableOperator } from '@style/chaining'
 import '@blackglory/jest-matchers'
 
-describe('IterableOperator<T>::concat<U>(...iterables: Array<Iterable<U>>): IterableOperator<T | U>', () => {
+describe(`
+  IterableOperator<T>::concat<U>(
+    ...iterables: Array<Iterable<U>>
+  ): IterableOperator<T | U>
+`, () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(middleware, 'concat')
     const iter = [1, 2, 3]

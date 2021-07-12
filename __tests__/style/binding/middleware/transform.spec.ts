@@ -2,7 +2,12 @@ import * as middleware from '@middleware/transform'
 import { transform } from '@style/binding/middleware/transform'
 import '@blackglory/jest-matchers'
 
-describe('transform<T, U>(this: Iterable<T>, transformer: (iterable: Iterable<T>) => Iterable<U>): Iterable<U>', () => {
+describe(`
+  transform<T, U>(
+    this: Iterable<T>
+  , transformer: (iterable: Iterable<T>) => Iterable<U>
+  ): Iterable<U>
+`, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'transform')
     const iter = [1, 2, 3]

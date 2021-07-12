@@ -2,7 +2,11 @@ import * as middleware from '@middleware/transform'
 import { transform } from '@style/pipeline/middleware/transform'
 import '@blackglory/jest-matchers'
 
-describe('transform<T, U>(transformer: (iterable: Iterable<T>) => Iterable<U>): (iterable: Iterable<T>) => Iterable<U>', () => {
+describe(`
+  transform<T, U>(
+    transformer: (iterable: Iterable<T>) => Iterable<U>
+  ): (iterable: Iterable<T>) => Iterable<U>
+`, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'transform')
     const iter = [1, 2, 3]

@@ -2,7 +2,11 @@ import * as middleware from '@middleware/tap-async'
 import { IterableOperator, AsyncIterableOperator } from '@style/chaining'
 import { toAsyncIterable } from '@test/utils'
 
-describe('IterableOperator<T>::tapAsync(fn: (element: T, index: number) => unknown | PromiseLike<unknown>): AsyncIterableOperator<T>', () => {
+describe(`
+  IterableOperator<T>::tapAsync(
+    fn: (element: T, index: number) => unknown | PromiseLike<unknown>
+  ): AsyncIterableOperator<T>
+`, () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(middleware, 'tapAsync')
     const iter = [1, 2, 3]
@@ -18,7 +22,11 @@ describe('IterableOperator<T>::tapAsync(fn: (element: T, index: number) => unkno
   })
 })
 
-describe('AsyncIterableOperator<T>::tapAsync(fn: (element: T, index: number) => unknown | PromiseLike<unknown>): AsyncIterableOperator<T>', () => {
+describe(`
+  AsyncIterableOperator<T>::tapAsync(
+    fn: (element: T, index: number) => unknown | PromiseLike<unknown>
+  ): AsyncIterableOperator<T>
+`, () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(middleware, 'tapAsync')
     const iter = toAsyncIterable([1, 2, 3])

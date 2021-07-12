@@ -2,7 +2,9 @@ import { toAsyncIterable } from '@test/utils'
 import { matchAsync } from '@output/match-async'
 import '@blackglory/jest-matchers'
 
-describe('matchAsync<T>(iterable: AsyncItreable<T>, sequence: ArrayLike<T>): Promise<boolean>', () => {
+describe(`
+  matchAsync<T>(iterable: AsyncItreable<T>, sequence: ArrayLike<T>): Promise<boolean>
+`, () => {
   describe('sequence isnt empty', () => {
     describe('sequence is matched', () => {
       it('return true', async () => {

@@ -3,7 +3,9 @@ import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/util
 import { uniqBy } from '@middleware/uniq-by'
 import '@blackglory/jest-matchers'
 
-describe('uniqBy<T, U>(iterable: Iterable<T>, fn: (element: T, index: number) => U): Iterable<T>', () => {
+describe(`
+  uniqBy<T, U>(iterable: Iterable<T>, fn: (element: T, index: number) => U): Iterable<T>
+`, () => {
   describe('fn called', () => {
     it('called with [element,index]', () => {
       const iter = [1, 2, 3]

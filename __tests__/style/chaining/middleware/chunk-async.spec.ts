@@ -2,7 +2,9 @@ import * as middleware from '@middleware/chunk-async'
 import { AsyncIterableOperator } from '@style/chaining'
 import { toAsyncIterable } from '@test/utils'
 
-describe('AsyncIterableOperator<T>::chunkAsync(size: number): AsyncIterableOperator<T[]>', () => {
+describe(`
+  AsyncIterableOperator<T>::chunkAsync(size: number): AsyncIterableOperator<T[]>
+`, () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(middleware, 'chunkAsync')
     const iter = toAsyncIterable([1, 2, 3])

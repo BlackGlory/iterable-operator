@@ -1,7 +1,12 @@
 import * as output from '@output/reduce-async'
 import { reduceAsync } from '@style/pipeline/output/reduce-async'
 
-describe('reduceAsync<T, U>(fn: (accumulator: U, currentValue: T, index: number) => U | PromiseLike<U> , initialValue: U): (iterable: Iterable<T> | AsyncIterable<T>) => Promise<U>', () => {
+describe(`
+  reduceAsync<T, U>(
+    fn: (accumulator: U, currentValue: T, index: number) => U | PromiseLike<U>
+  , initialValue: U
+  ): (iterable: Iterable<T> | AsyncIterable<T>) => Promise<U>
+`, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(output, 'reduceAsync')
     const iter = [1, 2, 3]

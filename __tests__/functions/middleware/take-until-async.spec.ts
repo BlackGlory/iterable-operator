@@ -4,7 +4,12 @@ import { getErrorPromise } from 'return-style'
 import { takeUntilAsync } from '@middleware/take-until-async'
 import '@blackglory/jest-matchers'
 
-describe('takeUntilAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): AsyncIterable<T>', () => {
+describe(`
+  takeUntilAsync<T>(
+    iterable: Iterable<T> | AsyncIterable<T>
+  , predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+  ): AsyncIterable<T>
+`, () => {
   describe('T is PromiseLike<T>', () => {
     it('called with [element(promise),index]', async () => {
       const iter = [Promise.resolve(), Promise.resolve(), Promise.resolve()]

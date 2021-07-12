@@ -1,7 +1,13 @@
 import * as output from '@output/reduce-async'
 import { reduceAsync } from '@style/binding/output/reduce-async'
 
-describe('reduceAsync<T, U>(this: Iterable<T> | AsyncIterable<T>, fn: (accumulator: U, currentValue: T, index: number) => U | PromiseLike<U>, initialValue: U): Promise<U>', () => {
+describe(`
+  reduceAsync<T, U>(
+    this: Iterable<T> | AsyncIterable<T>
+  , fn: (accumulator: U, currentValue: T, index: number) => U | PromiseLike<U>
+  , initialValue: U
+  ): Promise<U>
+`, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(output, 'reduceAsync')
     const iter = [1, 2, 3]

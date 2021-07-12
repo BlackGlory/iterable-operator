@@ -2,7 +2,11 @@ import * as middleware from '@middleware/filter-async'
 import { IterableOperator, AsyncIterableOperator } from '@style/chaining'
 import { toAsyncIterable } from '@test/utils'
 
-describe('IterableOperator<T>::filterAsync<U extends T = T>(predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): AsyncIterableOperator<U>', () => {
+describe(`
+  IterableOperator<T>::filterAsync<U extends T = T>(
+    predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+  ): AsyncIterableOperator<U>
+`, () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(middleware, 'filterAsync')
     const iter = [1, 2, 3]
@@ -18,7 +22,11 @@ describe('IterableOperator<T>::filterAsync<U extends T = T>(predicate: (element:
   })
 })
 
-describe('AsyncIterableOperator<T>::filterAsync<U extends T = T>(predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): AsyncIterableOperator<U>', () => {
+describe(`
+  AsyncIterableOperator<T>::filterAsync<U extends T = T>(
+    predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+  ): AsyncIterableOperator<U>
+`, () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(middleware, 'filterAsync')
     const iter = toAsyncIterable([1, 2, 3])

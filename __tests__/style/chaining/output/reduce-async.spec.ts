@@ -2,7 +2,12 @@ import * as output from '@output/reduce-async'
 import { IterableOperator, AsyncIterableOperator } from '@style/chaining'
 import { toAsyncIterable } from '@test/utils'
 
-describe('IterableOperator<T>::reduceAsync<U>(fn: (accumulator: U, currentValue: T, index: number) => U | PromiseLike<U>, initialValue: U): Promise<U>', () => {
+describe(`
+  IterableOperator<T>::reduceAsync<U>(
+    fn: (accumulator: U, currentValue: T, index: number) => U | PromiseLike<U>
+  , initialValue: U
+  ): Promise<U>
+`, () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(output, 'reduceAsync')
     const iter = [1, 2, 3]
@@ -17,7 +22,12 @@ describe('IterableOperator<T>::reduceAsync<U>(fn: (accumulator: U, currentValue:
   })
 })
 
-describe('AsyncIterableOperator<T>::reduceAsync<U>(fn: (accumulator: U, currentValue: T, index: number) => U | PromiseLike<U>, initialValue: U): Promise<U>', () => {
+describe(`
+  AsyncIterableOperator<T>::reduceAsync<U>(
+    fn: (accumulator: U, currentValue: T, index: number) => U | PromiseLike<U>
+  , initialValue: U
+  ): Promise<U>
+`, () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(output, 'reduceAsync')
     const iter = toAsyncIterable([1, 2, 3])

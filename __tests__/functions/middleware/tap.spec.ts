@@ -3,7 +3,9 @@ import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/util
 import { tap } from '@middleware/tap'
 import '@blackglory/jest-matchers'
 
-describe('tap<T>(iterable: Iterable<T>, fn: (element: T, index: number) => unknown): Iterable<T>', () => {
+describe(`
+  tap<T>(iterable: Iterable<T>, fn: (element: T, index: number) => unknown): Iterable<T>
+`, () => {
   describe('fn is called', () => {
     it('called with [element,index]', () => {
       const iter = [1, 2, 3]

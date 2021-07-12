@@ -3,7 +3,12 @@ import { dropUntil } from '@middleware/drop-until'
 import { getError } from 'return-style'
 import '@blackglory/jest-matchers'
 
-describe('dropUntil<T>(iterable: Iterable<T>, predicate: (element: T, index: number) => unknown): Iterable<T>', () => {
+describe(`
+  dropUntil<T>(
+    iterable: Iterable<T>
+  , predicate: (element: T, index: number) => unknown
+  ): Iterable<T>
+`, () => {
   describe('fn is called', () => {
     it('called with [element,index]', () => {
       const iter = [1, 2, 3]

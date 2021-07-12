@@ -4,7 +4,12 @@ import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } f
 import { mapAsync } from '@middleware/map-async'
 import '@blackglory/jest-matchers'
 
-describe('mapAsync<T, U>(iterable: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => U | PromiseLike<U>): AsyncIterable<U>', () => {
+describe(`
+  mapAsync<T, U>(
+    iterable: Iterable<T> | AsyncIterable<T>
+  , fn: (element: T, index: number) => U | PromiseLike<U>
+  ): AsyncIterable<U>
+`, () => {
   describe('T is PromiseLike<T>', () => {
     it('called with [element(promise),index]', async () => {
       const iter = [Promise.resolve(), Promise.resolve(), Promise.resolve()]

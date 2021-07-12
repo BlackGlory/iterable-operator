@@ -2,7 +2,12 @@ import * as middleware from '@middleware/slice-async'
 import { AsyncIterableOperator } from '@style/chaining'
 import { toAsyncIterable } from '@test/utils'
 
-describe('AsyncIterableOperator<T>::sliceAsync(start: number, end: number): AsyncIterableOperator<T>', () => {
+describe(`
+  AsyncIterableOperator<T>::sliceAsync(
+    start: number
+  , end: number
+  ): AsyncIterableOperator<T>
+`, () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(middleware, 'sliceAsync')
     const iter = toAsyncIterable([1, 2, 3])

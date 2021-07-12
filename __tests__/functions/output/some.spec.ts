@@ -1,7 +1,9 @@
 import { getError } from 'return-style'
 import { some } from '@output/some'
 
-describe('some<T>(iterable: Iterable<T>, predicate: (element: T, index: number) => unknown): boolean', () => {
+describe(`
+  some<T>(iterable: Iterable<T>, predicate: (element: T, index: number) => unknown): boolean
+`, () => {
   describe('fn is called', () => {
     it('called with [element,index]', () => {
       const iter = [1, 2, 3]

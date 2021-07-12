@@ -1,7 +1,12 @@
 import * as output from '@output/reduce'
 import { IterableOperator } from '@style/chaining'
 
-describe('IterableOperator<T>::reduce<U>(fn: (accumulator: U, currentValue: T, index: number) => U, initialValue: U): U', () => {
+describe(`
+  IterableOperator<T>::reduce<U>(
+    fn: (accumulator: U, currentValue: T, index: number) => U
+  , initialValue: U
+  ): U
+`, () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(output, 'reduce')
     const iter = [1, 2, 3]

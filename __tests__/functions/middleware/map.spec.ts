@@ -3,7 +3,12 @@ import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/util
 import { map } from '@middleware/map'
 import '@blackglory/jest-matchers'
 
-describe('map<T, U>(iterable: Iterable<T>, fn: (element: T, index: number) => U): Iterable<U>', () => {
+describe(`
+  map<T, U>(
+    iterable: Iterable<T>
+  , fn: (element: T, index: number) => U
+  ): Iterable<U>
+`, () => {
   describe('fn called', () => {
     it('called with [element,index]', () => {
       const iter = [1, 2, 3]

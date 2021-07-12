@@ -1,7 +1,11 @@
 import * as output from '@output/every-async'
 import { everyAsync } from '@style/pipeline/output/every-async'
 
-describe('everyAsync<T>(predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): (iterable: Iterable<T> | AsyncIterable<T>) => Promise<boolean>', () => {
+describe(`
+  everyAsync<T>(
+    predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+  ): (iterable: Iterable<T> | AsyncIterable<T>) => Promise<boolean>
+`, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(output, 'everyAsync')
     const iter = [1, 2, 3]

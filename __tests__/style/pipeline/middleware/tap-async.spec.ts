@@ -1,7 +1,11 @@
 import * as middleware from '@middleware/tap-async'
 import { tapAsync } from '@style/pipeline/middleware/tap-async'
 
-describe('tapAsync<T>(fn: (element: T, index: number) => unknown | PromiseLike<unknown>): (iterable: Iterable<T> | AsyncIterable<T>) => AsyncIterable<T>', () => {
+describe(`
+  tapAsync<T>(
+    fn: (element: T, index: number) => unknown | PromiseLike<unknown>
+  ): (iterable: Iterable<T> | AsyncIterable<T>) => AsyncIterable<T>
+`, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'tapAsync')
     const iter = [1, 2, 3]

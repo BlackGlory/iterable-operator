@@ -1,9 +1,13 @@
 import * as middleware from '@middleware/concat-async'
 import { concatAsync } from '@style/pipeline/middleware/concat-async'
 
-describe(`function concatAsync<T, U>(
-  ...iterables: Array<Iterable<U | PromiseLike<U>> | AsyncIterable<U>>
-): (...iterables: Array<Iterable<T | PromiseLike<T>> | AsyncIterable<T>>) => AsyncIterable<T | U>`, () => {
+describe(`
+  concatAsync<T, U>(
+    ...iterables: Array<Iterable<U | PromiseLike<U>> | AsyncIterable<U>>
+  ): (
+    ...iterables: Array<Iterable<T | PromiseLike<T>> | AsyncIterable<T>>
+  ) => AsyncIterable<T | U>
+`, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'concatAsync')
     const iter = [1, 2, 3]

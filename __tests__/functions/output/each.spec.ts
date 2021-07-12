@@ -1,7 +1,9 @@
 import { getError } from 'return-style'
 import { each } from '@output/each'
 
-describe('each<T>(iterable: Iterable<T>, fn: (element: T, index: number) => unknown): void', () => {
+describe(`
+  each<T>(iterable: Iterable<T>, fn: (element: T, index: number) => unknown): void
+`, () => {
   describe('fn is called', () => {
     it('called with [element,index]', () => {
       const iter = [1, 2, 3]

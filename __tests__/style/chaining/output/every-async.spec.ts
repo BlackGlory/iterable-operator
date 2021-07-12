@@ -2,7 +2,11 @@ import * as output from '@output/every-async'
 import { IterableOperator, AsyncIterableOperator } from '@style/chaining'
 import { toAsyncIterable } from '@test/utils'
 
-describe('IterableOperator<T>::everyAsync(predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): Promise<boolean>', () => {
+describe(`
+  IterableOperator<T>::everyAsync(
+    predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+  ): Promise<boolean>
+`, () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(output, 'everyAsync')
     const iter = [1, 2, 3]
@@ -16,7 +20,11 @@ describe('IterableOperator<T>::everyAsync(predicate: (element: T, index: number)
   })
 })
 
-describe('AsyncIterableOperator<T>::everyAsync(predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): Promise<boolean>', () => {
+describe(`
+  AsyncIterableOperator<T>::everyAsync(
+    predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+  ): Promise<boolean>
+`, () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(output, 'everyAsync')
     const iter = toAsyncIterable([1, 2, 3])

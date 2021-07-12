@@ -2,7 +2,11 @@ import * as middleware from '@middleware/flatten-deep-async'
 import { AsyncIterableOperator } from '@style/chaining'
 import { toAsyncIterable } from '@test/utils'
 
-describe('AsyncIterableOperator<T>::flattenDeepAsync<T>(depth: number): AsyncIterableOperator<T>', () => {
+describe(`
+  AsyncIterableOperator<T>::flattenDeepAsync<T>(
+    depth: number
+  ): AsyncIterableOperator<T>
+`, () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(middleware, 'flattenDeepAsync')
     const iter = toAsyncIterable([1, 2, 3])

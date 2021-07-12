@@ -1,7 +1,11 @@
 import * as middleware from '@middleware/split-by-async'
 import { splitByAsync } from '@style/pipeline/middleware/split-by-async'
 
-describe('splitByAsync<T>(predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): (iterable: Iterable<T> | AsyncIterable<T>) => AsyncIterable<T[]>', () => {
+describe(`
+  splitByAsync<T>(
+    predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+  ): (iterable: Iterable<T> | AsyncIterable<T>) => AsyncIterable<T[]>
+`, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'splitByAsync')
     const iter = [1, 2, 3]

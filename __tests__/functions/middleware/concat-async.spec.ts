@@ -3,11 +3,17 @@ import { testIterable, testAsyncIterable } from '@test/test-fixtures'
 import { concatAsync } from '@middleware/concat-async'
 import '@blackglory/jest-matchers'
 
-describe(`concatAsync<T, U>(
-  iterable: Iterable<T | PromiseLike<T>> | AsyncIterable<T>
-, ...otherIterables: Array<Iterable<U | PromiseLike<U>> | AsyncIterable<U>>
-): AsyncIterable<T | U>`, () => {
-  describe('concatAsync<PromiseLike<T>>(...iterables: Array<Iterable<PromiseLike<T>>>): AsyncIterable<T>', () => {
+describe(`
+  concatAsync<T, U>(
+    iterable: Iterable<T | PromiseLike<T>> | AsyncIterable<T>
+  , ...otherIterables: Array<Iterable<U | PromiseLike<U>> | AsyncIterable<U>>
+  ): AsyncIterable<T | U>
+`, () => {
+  describe(`
+    concatAsync<PromiseLike<T>>(
+      ...iterables: Array<Iterable<PromiseLike<T>>>
+    ): AsyncIterable<T>
+  `, () => {
     describe('call', () => {
       it('return concated AsyncIterable', async () => {
         const iter1 = [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)]

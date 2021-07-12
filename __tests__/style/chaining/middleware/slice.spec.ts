@@ -2,7 +2,9 @@ import * as middleware from '@middleware/slice'
 import { IterableOperator } from '@style/chaining'
 import '@blackglory/jest-matchers'
 
-describe('IterableOperator<T>::slice(start: number, end: number): IterableOperator<T>', () => {
+describe(`
+  IterableOperator<T>::slice(start: number, end: number): IterableOperator<T>
+`, () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(middleware, 'slice')
     const iter = [1, 2, 3]

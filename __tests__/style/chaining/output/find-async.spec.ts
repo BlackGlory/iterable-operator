@@ -5,7 +5,8 @@ import { toAsyncIterable } from '@test/utils'
 describe(`
   IterableOperator<T>::findAsync(
     predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
-  ): Promise<T | undefined>`, () => {
+  ): Promise<T | undefined>
+`, () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(output, 'findAsync')
     const iter = [1, 2, 3]

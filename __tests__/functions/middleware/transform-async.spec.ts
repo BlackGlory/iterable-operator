@@ -3,7 +3,12 @@ import { transformAsync } from '@middleware/transform-async'
 import { getErrorPromise } from 'return-style'
 import '@blackglory/jest-matchers'
 
-describe('transformAsync<T, U>(iterable: Iterable<T>, transformer: (iterable: Iterable<T>) => AsyncIterable<U>): AsyncIterable<U>', () => {
+describe(`
+  transformAsync<T, U>(
+    iterable: Iterable<T>
+  , transformer: (iterable: Iterable<T>) => AsyncIterable<U>
+  ): AsyncIterable<U>
+`, () => {
   describe('call', () => {
     it('return result from transformer', async () => {
       const iter = [1, 2, 3]
@@ -49,7 +54,12 @@ describe('transformAsync<T, U>(iterable: Iterable<T>, transformer: (iterable: It
   })
 })
 
-describe('transformAsync<T, U>(iterable: AsyncIterable<T>, transformer: (iterable: AsyncIterable<T>) => AsyncIterable<T>): AsyncIterable<U>', () => {
+describe(`
+  transformAsync<T, U>(
+    iterable: AsyncIterable<T>
+  , transformer: (iterable: AsyncIterable<T>) => AsyncIterable<T>
+  ): AsyncIterable<U>
+`, () => {
   describe('call', () => {
     it('return result from transformer', async () => {
       const iter = toAsyncIterable([1, 2, 3])

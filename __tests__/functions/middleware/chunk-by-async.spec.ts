@@ -4,7 +4,12 @@ import { chunkByAsync } from '@middleware/chunk-by-async'
 import { getErrorPromise } from 'return-style'
 import '@blackglory/jest-matchers'
 
-describe('chunkByAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, predicate: (element: T, index: number) => unknown | PromiseLike<unknown): AsyncIterable<T[]>', () => {
+describe(`
+  chunkByAsync<T>(
+    iterable: Iterable<T> | AsyncIterable<T>
+  , predicate: (element: T, index: number) => unknown | PromiseLike<unknown
+  ): AsyncIterable<T[]>
+`, () => {
   describe('T is PromiseLike<unknown>', () => {
     it('called with [element(promise),index]', async () => {
       const iter = [Promise.resolve(), Promise.resolve(), Promise.resolve()]

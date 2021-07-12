@@ -2,7 +2,11 @@ import * as middleware from '@middleware/tap'
 import { IterableOperator } from '@style/chaining'
 import '@blackglory/jest-matchers'
 
-describe('IterableOperator<T>::tap(fn: (element: T, index: number) => unknown): IterableOperator<T>', () => {
+describe(`
+  IterableOperator<T>::tap(
+    fn: (element: T, index: number) => unknown
+  ): IterableOperator<T>
+`, () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(middleware, 'tap')
     const iter = [1, 2, 3]

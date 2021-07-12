@@ -1,7 +1,12 @@
 import * as middleware from '@middleware/tap-async'
 import { tapAsync } from '@style/binding/middleware/tap-async'
 
-describe('tapAsync<T>(this: Iterable<T> | AsyncIterable<T>, fn: (element: T, index: number) => unknown | PromiseLike<unknown>): AsyncIterable<T>', () => {
+describe(`
+  tapAsync<T>(
+    this: Iterable<T> | AsyncIterable<T>
+  , fn: (element: T, index: number) => unknown | PromiseLike<unknown>
+  ): AsyncIterable<T>
+`, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'tapAsync')
     const iter = [1, 2, 3]

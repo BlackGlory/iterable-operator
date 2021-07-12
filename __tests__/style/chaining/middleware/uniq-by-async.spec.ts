@@ -2,7 +2,11 @@ import * as middleware from '@middleware/uniq-by-async'
 import { IterableOperator, AsyncIterableOperator } from '@style/chaining'
 import { toAsyncIterable } from '@test/utils'
 
-describe('IterableOperator<T>::uniqByAsync<U>(fn: (element: T, index: number) => U | PromiseLike<U>): AsyncIterableOperator<T>', () => {
+describe(`
+  IterableOperator<T>::uniqByAsync<U>(
+    fn: (element: T, index: number) => U | PromiseLike<U>
+  ): AsyncIterableOperator<T>
+`, () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(middleware, 'uniqByAsync')
     const iter = [1, 2, 3]
@@ -18,7 +22,11 @@ describe('IterableOperator<T>::uniqByAsync<U>(fn: (element: T, index: number) =>
   })
 })
 
-describe('AsyncIterableOperator<T>::uniqByAsync<U>(fn: (element: T, index: number) => U | PromiseLike<U>): AsyncIterableOperator<T>', () => {
+describe(`
+  AsyncIterableOperator<T>::uniqByAsync<U>(
+    fn: (element: T, index: number) => U | PromiseLike<U>
+  ): AsyncIterableOperator<T>
+`, () => {
   it('is chaining style', () => {
     const spy = jest.spyOn(middleware, 'uniqByAsync')
     const iter = toAsyncIterable([1, 2, 3])
