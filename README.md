@@ -78,7 +78,9 @@ chunk([1, 2, 3], 0) // throw Error
 chunk([1, 2, 3], -1) // throw Error
 ```
 
-#### chunkBy, chunkBy
+The memory usage of this function depends on `size`.
+
+#### chunkBy, chunkByAsync
 
 ```ts
 function chunkBy<T>(
@@ -96,6 +98,8 @@ chunkBy([1, 2, 3], x => x === 2) // [[1, 2], [3]]
 chunkBy([1, 2, 3], x => x === 3) // [[1, 2, 3]]
 chunkBy([1, 2, 3], x => x === 5) // [[1, 2, 3]]
 ```
+
+The memory usage of this function depends on `iterable` and `predicate`.
 
 #### concat, concatAsync
 
@@ -147,6 +151,8 @@ dropRight([1, 2, 3], 5) // []
 dropRight([1, 2, 3], -1) // throw Error
 ```
 
+The memory usage of this function depends on `iterable`.
+
 #### dropUntil, dropUntilAsync
 
 ```ts
@@ -163,6 +169,8 @@ function dropUntilAsync<T>(
 ```js
 dropUntil([1, 2, 3], x => x === 2) // [2, 3]
 ```
+
+The memory usage of this function depends on `iterable` and `predicate`.
 
 #### filter, filterAsync
 
@@ -263,6 +271,8 @@ repeat([1, 2, 3], 0) // []
 repeat([1, 2, 3], -1) // throw Error
 ```
 
+The memory usage of this function depends on `iterable`.
+
 #### slice, sliceAsync
 
 ```ts
@@ -301,6 +311,8 @@ split([1, 2, 3, 4, 5], 5) // [[1, 2, 3, 4], []]
 split([1, 2, 3, 4, 5], 0) // [[1, 2, 3, 4, 5]]
 ```
 
+The memory usage of this function depends on `iterable` and `separator`.
+
 #### splitBy, splitByAsync
 
 ```ts
@@ -320,6 +332,8 @@ splitBy([1, 2, 3, 4, 5], x => x === 1) // [[], [2, 3, 4, 5]]
 splitBy([1, 2, 3, 4, 5], x => x === 5) // [[1, 2, 3, 4], []]
 splitBy([1, 2, 3, 4, 5], x => x === 0) // [[1, 2, 3, 4, 5]]
 ```
+
+The memory usage of this function depends on `iterable` and `predicate`.
 
 #### take, takeAsync
 
@@ -348,6 +362,8 @@ takeRight([1, 2, 3], 5) // [1, 2, 3]
 takeRight([1, 2, 3], 0) // []
 takeRight([1, 2, 3], -1) // throw Error
 ```
+
+The memory usage of this function depends on `count`.
 
 #### takeUntil, takeUntilAsync
 
@@ -429,6 +445,8 @@ function uniqAsync<T>(iterable: AsyncIterable<T>): AsyncIterable<T>
 uniq([1, 1, 2, 2, 3, 3]) // [1, 2, 3]
 ```
 
+The memory usage of this function depends on `iterable`.
+
 #### uniqBy, uniqByAsync
 
 ```ts
@@ -445,6 +463,8 @@ function uniqByAsync<T, U>(
 ```js
 uniqBy([1, 2, 3], x => x % 2) // [1, 2]
 ```
+
+The memory usage of this function depends on `fn`.
 
 #### zip, zipAsync
 
