@@ -60,16 +60,13 @@ export class MockIterable<T> implements Iterable<T> {
       next: () => {
         if (this.contents.length) {
           this.nextIndex++
-          return {
-            value: this.contents.shift()
-          , done: false
-          } as IteratorResult<T> // fuck tsc https://github.com/microsoft/TypeScript/issues/32890
+          return { value: this.contents.shift()!, done: false } as const
         } else {
-          return {
-            value: undefined
-          , done: true
-          } as IteratorResult<T> // fuck tsc https://github.com/microsoft/TypeScript/issues/32890
+          return { value: undefined, done: true } as const
         }
+      }
+    , return: () => {
+        return { done: true, value: undefined } as const
       }
     }
   }
@@ -85,16 +82,13 @@ export class MockAsyncIterable<T> implements AsyncIterable<T> {
       next: async () => {
         if (this.contents.length) {
           this.nextIndex++
-          return {
-            value: this.contents.shift()
-          , done: false
-          } as IteratorResult<T> // fuck tsc https://github.com/microsoft/TypeScript/issues/32890
+          return { value: this.contents.shift()!, done: false } as const
         } else {
-          return {
-            value: undefined
-          , done: true
-          } as IteratorResult<T> // fuck tsc https://github.com/microsoft/TypeScript/issues/32890
+          return { value: undefined, done: true } as const
         }
+      }
+    , return: async () => {
+        return { done: true, value: undefined } as const
       }
     }
   }
