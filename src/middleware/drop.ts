@@ -9,14 +9,21 @@ export function drop<T>(iterable: Iterable<T>, count: number): Iterable<T> {
 
   return go(function* () {
     const iterator = iterable[Symbol.iterator]()
-    let result: IteratorResult<T>
-    while (result = iterator.next(), !result.done) {
-      if (count <= 0) break
-      count--
-    }
-    while (!result.done) {
-      yield result.value
-      result = iterator.next()
+    let done: boolean | undefined
+
+    try {
+      let value: T
+      while ({ value, done } = iterator.next(), !done) {
+        if (count <= 0) break
+        count--
+      }
+
+      while (!done) {
+        yield value
+        ;({ value, done } = iterator.next())
+      }
+    } finally {
+      if (!done) iterator.return?.()
     }
   })
 }

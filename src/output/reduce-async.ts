@@ -64,48 +64,56 @@ function reduceAsyncWithoutInitialValue<T>(
   }
 
   async function reduceAsyncIterable(iterable: AsyncIterable<T>) {
-    const [initialValue, iterator] = await readFirst(iterable)
-    let result: T = initialValue
-      , index = 1
-    while (true) {
-      const current = await iterator.next()
-      if (current.done) break
-      const currentValue = current.value
-      result = await fn(result, currentValue, index++)
-    }
-    return result
+    const iterator = iterable[Symbol.asyncIterator]()
+    let done: boolean | undefined
 
-    async function readFirst<T>(
-      iterable: AsyncIterable<T>
-    ): Promise<[T, AsyncIterator<T>]> {
-      const iterator = iterable[Symbol.asyncIterator]()
+    try {
+      let result: T = await readInitialValue(iterator)
+      let index = 1
+      let value: T
+      while ({ value, done } = await iterator.next(), !done) {
+        result = await fn(result, value, index++)
+      }
+      return result
+    } finally {
+      if (!done) await iterator.return?.()
+    }
+
+    async function readInitialValue<T>(
+      iterator: AsyncIterator<T>
+    ): Promise<T> {
       const result = await iterator.next()
       if (result.done) {
+        done = true
         throw new Error('Reduce of empty iterable with no initial value')
       }
-      return [result.value, iterator]
+      return result.value
     }
   }
 
   async function reduceIterable(iterable: Iterable<T>) {
-    const [initialValue, iterator] = readFirst(iterable)
-    let result: T = initialValue
-      , index = 1
-    while (true) {
-      const current = iterator.next()
-      if (current.done) break
-      const currentValue = current.value
-      result = await fn(result, currentValue, index++)
-    }
-    return result
+    const iterator = iterable[Symbol.iterator]()
+    let done: boolean | undefined
 
-    function readFirst<T>(iterable: Iterable<T>): [T, Iterator<T>] {
-      const iterator = iterable[Symbol.iterator]()
+    try {
+      let result: T = readInitialValue(iterator)
+      let index = 1
+      let value: T
+      while ({ value, done } = iterator.next(), !done) {
+        result = await fn(result, value, index++)
+      }
+      return result
+    } finally {
+      if (!done) iterator.return?.()
+    }
+
+    function readInitialValue<T>(iterator: Iterator<T>): T {
       const result = iterator.next()
       if (result.done) {
+        done = true
         throw new Error('Reduce of empty iterable with no initial value')
       }
-      return [result.value, iterator]
+      return result.value
     }
   }
 }

@@ -1,15 +1,19 @@
 export function* dropUntil<T>(iterable: Iterable<T>, predicate: (element: T, index: number) => unknown): Iterable<T> {
   const iterator = iterable[Symbol.iterator]()
+  let done: boolean | undefined
 
-  let index = 0
-  let result: IteratorResult<T>
+  try {
+    let index = 0
+    let value: T
+    while ({ value, done } = iterator.next(), !done) {
+      if (predicate(value, index++)) break
+    }
 
-  while (result = iterator.next(), !result.done) {
-    if (predicate(result.value, index++)) break
-  }
-
-  while (!result.done) {
-    yield result.value
-    result = iterator.next()
+    while (!done) {
+      yield value
+      ;({ value, done } = iterator.next())
+    }
+  } finally {
+    if (!done) iterator.return?.()
   }
 }

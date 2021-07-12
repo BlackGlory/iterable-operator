@@ -10,12 +10,18 @@ export function takeRightAsync<T>(
 
   return go(async function* () {
     const iterator = iterable[Symbol.asyncIterator]()
-    const buffer: T[] = []
-    let result: IteratorResult<T>
-    while (result = await iterator.next(), !result.done) {
-      buffer.push(result.value)
-      if (buffer.length > count) buffer.shift()
+    let done: boolean | undefined
+
+    try {
+      const buffer: T[] = []
+      let value: T
+      while ({ value, done } = await iterator.next(), !done) {
+        buffer.push(value)
+        if (buffer.length > count) buffer.shift()
+      }
+      yield* buffer
+    } finally {
+      if (!done) await iterator.return?.()
     }
-    yield* buffer
   })
 }

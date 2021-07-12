@@ -14,13 +14,23 @@ export function zip<T, U extends Array<Iterable<unknown>>>(
 function* zipWithSize<T>(...iterables: Array<Iterable<T>>): Iterable<T[]> {
   const length = iterables.length
   const iterators = iterables.map(iterable => iterable[Symbol.iterator]())
-  while (true) {
-    const result = new Array<T>(length)
-    for (let i = 0; i < length; i++) {
-      const { value, done } = iterators[i].next()
-      if (done) return
-      result[i] = value
+  const dones = iterators.map(() => false)
+
+  try {
+    while (true) {
+      const result = new Array<T>(length)
+      for (let i = 0; i < length; i++) {
+        const { value, done } = iterators[i].next()
+        if (done) {
+          dones[i] = true
+          return
+        }
+        result[i] = value
+      }
+      yield result
     }
-    yield result
+  } finally {
+    const undoneIterators = iterators.filter((_, i) => !dones[i])
+    undoneIterators.forEach(x => x.return?.())
   }
 }

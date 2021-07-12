@@ -9,33 +9,42 @@ export function dropUntilAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, pred
 
   async function* dropUntilAsyncIterable(iterable: AsyncIterable<T>) {
     const iterator = iterable[Symbol.asyncIterator]()
+    let done: boolean | undefined
 
-    let index = 0
-    let result: IteratorResult<T>
+    try {
+      let index = 0
+      let value: T
+      while ({ value, done } = await iterator.next(), !done) {
+        if (await predicate(value, index++)) break
+      }
 
-    while (result = await iterator.next(), !result.done) {
-      if (await predicate(result.value, index++)) break
-    }
-
-    while (!result.done) {
-      yield result.value
-      result = await iterator.next()
+      while (!done) {
+        yield value
+        ;({ value, done } = await iterator.next())
+      }
+    } finally {
+      if (!done) await iterator.return?.()
     }
   }
 
   async function* dropUntilIterable(iterable: Iterable<T>) {
     const iterator = iterable[Symbol.iterator]()
+    let done: boolean | undefined
 
-    let index = 0
-    let result: IteratorResult<T>
+    try {
+      let index = 0
+      let value: T
 
-    while (result = iterator.next(), !result.done) {
-      if (await predicate(result.value, index++)) break
-    }
+      while ({ value, done } = iterator.next(), !done) {
+        if (await predicate(value, index++)) break
+      }
 
-    while (!result.done) {
-      yield result.value
-      result = iterator.next()
+      while (!done) {
+        yield value
+        ;({ value, done } = iterator.next())
+      }
+    } finally {
+      if (!done) iterator.return?.()
     }
   }
 }

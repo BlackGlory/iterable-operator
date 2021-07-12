@@ -40,22 +40,28 @@ function reduceWithoutInitialValue<T>(
   iterable: Iterable<T>
 , fn: (accumulator: T, currentValue: T, index: number) => T
 ): T {
-  const [initialValue, iterator] = readFirst(iterable)
-  let result: T = initialValue
-    , index = 1
-  while (true) {
-    const current = iterator.next()
-    if (current.done) break
-    const currentValue = current.value
-    result = fn(result, currentValue, index++)
+  const iterator = iterable[Symbol.iterator]()
+  let done: boolean | undefined
+
+  try {
+    let result: T = readInitialValue(iterator)
+    let index = 1
+    let value: T
+    while ({ value, done } = iterator.next(), !done) {
+      result = fn(result, value, index++)
+    }
+    return result
+  } finally {
+    if (!done) iterator.return?.()
   }
-  return result
 
   // If iterable has only single element then return [element, undoneIterator(next done)]
-  function readFirst<T>(iterable: Iterable<T>): [T, Iterator<T>] {
-    const iterator = iterable[Symbol.iterator]()
+  function readInitialValue<T>(iterator: Iterator<T>): T {
     const result = iterator.next()
-    if (result.done) throw new Error('Reduce of empty iterable with no initial value')
-    return [result.value, iterator]
+    if (result.done) {
+      done = true
+      throw new Error('Reduce of empty iterable with no initial value')
+    }
+    return result.value
   }
 }

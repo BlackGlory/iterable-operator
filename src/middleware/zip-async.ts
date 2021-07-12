@@ -1,6 +1,11 @@
 import { isAsyncIterable } from '@blackglory/types'
 import { GetTypeOfIterable } from '@src/utils'
 
+enum Kind {
+  Sync
+, Async
+}
+
 export type ExtractTypeTupleFromAsyncLikeIterableTuple<T> = {
   [K in keyof T]:
     T[K] extends AsyncIterable<infer U> ? U :
@@ -17,26 +22,42 @@ export function zipAsync<T, U extends Array<Iterable<unknown> | AsyncIterable<un
 
 async function* zipWithSize<T>(...iterables: Array<Iterable<T | PromiseLike<T>> | AsyncIterable<T>>): AsyncIterable<T[]> {
   const length = iterables.length
-  const iterators: Array<[Symbol, Iterator<T | PromiseLike<T>> | AsyncIterator<T>]> = iterables.map(iterable => {
+  const iterators = iterables.map(iterable => {
     if (isAsyncIterable(iterable)) {
-      return [Symbol.asyncIterator, iterable[Symbol.asyncIterator]()]
+      return [Kind.Async, iterable[Symbol.asyncIterator]()] as const
     } else {
-      return [Symbol.iterator, iterable[Symbol.iterator]()]
+      return [Kind.Sync, iterable[Symbol.iterator]()] as const
     }
   })
-  while (true) {
-    const result = new Array<T>(length)
-    for (let i = 0; i < length; i++) {
-      const [type, iterator] = iterators[i]
-      let temp: IteratorResult<T>
-      if (type === Symbol.asyncIterator) {
-        temp = await (iterator as AsyncIterator<T>).next()
-      } else {
-        temp = (iterator as Iterator<T>).next()
+  const dones = iterators.map(() => false)
+
+  try {
+    while (true) {
+      const result = new Array<T>(length)
+      for (let i = 0; i < length; i++) {
+        const [kind, iterator] = iterators[i]
+        let temp: IteratorResult<T>
+        if (kind === Kind.Async) {
+          temp = await (iterator as AsyncIterator<T>).next()
+        } else {
+          temp = (iterator as Iterator<T>).next()
+        }
+        if (temp.done) {
+          dones[i] = true
+          return
+        }
+        result[i] = temp.value
       }
-      if (temp.done) return
-      result[i] = temp.value
+      yield result
     }
-    yield result
+  } finally {
+    const undoneIterators = iterators.filter((_, i) => !dones[i])
+    for (const [kind, iterator] of undoneIterators) {
+      if (kind === Kind.Async) {
+        await (iterator as AsyncIterator<T>).return?.()
+      } else {
+        (iterator as Iterator<T>).return?.()
+      }
+    }
   }
 }
