@@ -1,8 +1,9 @@
 import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures'
-import { toArrayAsync, getCalledTimes, consumeAsync, MockIterable, takeAsync } from '@test/utils'
+import { toArrayAsync, getCalledTimes, consumeAsync, MockIterable, MockAsyncIterable, takeAsync } from '@test/utils'
 import { dropUntilAsync } from '@middleware/drop-until-async'
 import { getErrorPromise } from 'return-style'
 import '@blackglory/jest-matchers'
+import { go } from '@blackglory/go'
 
 describe(`
   dropUntilAsync<T>(
@@ -10,6 +11,34 @@ describe(`
   , predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
   ): AsyncIterable<T>
 `, () => {
+  describe('close unexhausted iterator', () => {
+    test('iterable', async () => {
+      const iter = new MockIterable(go(function* () {
+        throw new Error()
+      }))
+
+      try {
+        await consumeAsync(dropUntilAsync(iter, () => true))
+      } catch {}
+
+      expect(iter.returnCalled).toBeTruthy()
+      expect(iter.done).toBeTruthy()
+    })
+
+    test('async iterable', async () => {
+      const iter = new MockAsyncIterable(go(function* () {
+        throw new Error()
+      }))
+
+      try {
+        await consumeAsync(dropUntilAsync(iter, () => true))
+      } catch {}
+
+      expect(iter.returnCalled).toBeTruthy()
+      expect(iter.done).toBeTruthy()
+    })
+  })
+
   describe('T is PromiseLike<unknown>', () => {
     it('called with [element(promise),index]', async () => {
       const iter = [Promise.resolve(), Promise.resolve(), Promise.resolve()]

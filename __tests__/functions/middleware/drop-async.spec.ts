@@ -3,10 +3,24 @@ import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsy
 import { getError } from 'return-style'
 import { dropAsync } from '@middleware/drop-async'
 import '@blackglory/jest-matchers'
+import { go } from '@blackglory/go'
 
 describe(`
   dropAsync<T>(iterable: AsyncIterable<T>, count: number): AsyncIterable<T>
 `, () => {
+  test('close unexhausted iterator', async () => {
+    const iter = new MockAsyncIterable(go(function* () {
+      throw new Error()
+    }))
+
+    try {
+      await consumeAsync(dropAsync(iter, 1))
+    } catch {}
+
+    expect(iter.returnCalled).toBeTruthy()
+    expect(iter.done).toBeTruthy()
+  })
+
   it('lazy and partial evaluation', async () => {
     const iter = new MockAsyncIterable([1, 2, 3])
     const count = 1

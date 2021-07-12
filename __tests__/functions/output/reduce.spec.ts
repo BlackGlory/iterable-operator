@@ -1,5 +1,6 @@
 import { getError } from 'return-style'
 import { reduce } from '@output/reduce'
+import { MockIterable } from '@test/utils'
 
 describe(`
   reduce<T>(
@@ -7,6 +8,19 @@ describe(`
   , fn: (accumulator: T, currentValue: T, index: number) => T)
   ): T
 `, () => {
+  test('close unexhausted iterator', () => {
+    const iter = new MockIterable([1, 2, 3])
+
+    try {
+      reduce(iter, () => {
+        throw new Error()
+      })
+    } catch {}
+
+    expect(iter.returnCalled).toBeTruthy()
+    expect(iter.done).toBeTruthy()
+  })
+
   describe('fn is called', () => {
     it('called with [accumulator,currentValue,index]', () => {
       const iter = [1, 2, 3]
@@ -83,6 +97,19 @@ describe(`
   , initalValue: U
   ) => U
 `, () => {
+  test('close unexhausted iterator', () => {
+    const iter = new MockIterable([1, 2, 3])
+
+    try {
+      reduce(iter, () => {
+        throw new Error()
+      }, 1)
+    } catch {}
+
+    expect(iter.returnCalled).toBeTruthy()
+    expect(iter.done).toBeTruthy()
+  })
+
   describe('fn is called', () => {
     it('called with [accumulator,currentValue,index]', () => {
       const iter = [1, 2, 3]

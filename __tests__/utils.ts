@@ -59,20 +59,30 @@ export function toFunction<T extends unknown[], U>(
 
 export class MockIterable<T> implements Iterable<T> {
   nextIndex: number = 0
+  done: boolean = false
+  iterator: Iterator<T>
+  returnCalled: boolean = false
 
-  constructor(private contents: T[] = []) {}
+  constructor(contents: Iterable<T> = []) {
+    this.iterator = contents[Symbol.iterator]()
+  }
 
   [Symbol.iterator]() {
     return {
       next: () => {
-        if (this.contents.length) {
-          this.nextIndex++
-          return { value: this.contents.shift()!, done: false } as const
+        const { value, done } = this.iterator.next()
+        if (done) {
+          this.done = true
+          return { value, done } as const
         } else {
-          return { value: undefined, done: true } as const
+          this.nextIndex++
+          return { value, done } as const
         }
       }
     , return: () => {
+        this.returnCalled = true
+        this.done = true
+        this.iterator.return?.()
         return { done: true, value: undefined } as const
       }
     }
@@ -81,20 +91,30 @@ export class MockIterable<T> implements Iterable<T> {
 
 export class MockAsyncIterable<T> implements AsyncIterable<T> {
   nextIndex: number = 0
+  done: boolean = false
+  iterator: Iterator<T>
+  returnCalled: boolean = false
 
-  constructor(private contents: T[] = []) {}
+  constructor(contents: Iterable<T> = []) {
+    this.iterator = contents[Symbol.iterator]()
+  }
 
   [Symbol.asyncIterator]() {
     return {
       next: async () => {
-        if (this.contents.length) {
-          this.nextIndex++
-          return { value: this.contents.shift()!, done: false } as const
+        const { value, done } = this.iterator.next()
+        if (done) {
+          this.done = true
+          return { value, done } as const
         } else {
-          return { value: undefined, done: true } as const
+          this.nextIndex++
+          return { value, done } as const
         }
       }
     , return: async () => {
+        this.returnCalled = true
+        this.done = true
+        this.iterator.return?.()
         return { done: true, value: undefined } as const
       }
     }

@@ -2,6 +2,7 @@ import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/util
 import { dropUntil } from '@middleware/drop-until'
 import { getError } from 'return-style'
 import '@blackglory/jest-matchers'
+import { go } from '@blackglory/go'
 
 describe(`
   dropUntil<T>(
@@ -9,6 +10,19 @@ describe(`
   , predicate: (element: T, index: number) => unknown
   ): Iterable<T>
 `, () => {
+  test('close unexhausted iterator', () => {
+    const iter = new MockIterable(go(function* () {
+      throw new Error()
+    }))
+
+    try {
+      consume(dropUntil(iter, () => true))
+    } catch {}
+
+    expect(iter.returnCalled).toBeTruthy()
+    expect(iter.done).toBeTruthy()
+  })
+
   describe('fn is called', () => {
     it('called with [element,index]', () => {
       const iter = [1, 2, 3]

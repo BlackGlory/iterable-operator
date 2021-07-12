@@ -2,6 +2,7 @@ import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable } from '
 import { getError } from 'return-style'
 import { takeRightAsync } from '@middleware/take-right-async'
 import '@blackglory/jest-matchers'
+import { go } from '@blackglory/go'
 
 describe(`
   takeRightAsync<T>(
@@ -9,6 +10,19 @@ describe(`
   , count: number
   ): AsyncIterable<T>
 `, () => {
+  test('close unexhausted iterator', async () => {
+    const iter = new MockAsyncIterable(go(function* () {
+      throw new Error()
+    }))
+
+    try {
+      await consumeAsync(takeRightAsync(iter, 1))
+    } catch {}
+
+    expect(iter.returnCalled).toBeTruthy()
+    expect(iter.done).toBeTruthy()
+  })
+
   it('lazy evaluation', async () => {
     const iter = new MockAsyncIterable()
     const count = 5

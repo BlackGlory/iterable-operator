@@ -1,9 +1,23 @@
 import { getError } from 'return-style'
 import { consume, toArray, MockIterable, take } from '@test/utils'
 import { drop } from '@middleware/drop'
+import { go } from '@blackglory/go'
 import '@blackglory/jest-matchers'
 
 describe('drop<T>(iterable: Iterable<T>, count: number): Iterable<T>', () => {
+  test('close unexhausted iterator', () => {
+    const iter = new MockIterable(go(function* () {
+      throw new Error()
+    }))
+
+    try {
+      consume(drop(iter, 1))
+    } catch {}
+
+    expect(iter.returnCalled).toBeTruthy()
+    expect(iter.done).toBeTruthy()
+  })
+
   it('lazy and partial evaluation', () => {
     const iter = new MockIterable([1, 2, 3])
     const count = 1

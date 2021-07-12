@@ -1,7 +1,15 @@
 import { testIterable, testAsyncIterable } from '@test/test-fixtures'
-import { consumeAsync, toArrayAsync, toIterable, toAsyncIterable, MockIterable } from '@test/utils'
+import {
+  consumeAsync
+, toArrayAsync
+, toIterable
+, toAsyncIterable
+, MockIterable
+, MockAsyncIterable
+} from '@test/utils'
 import { zipAsync } from '@middleware/zip-async'
 import '@blackglory/jest-matchers'
+import { go } from '@blackglory/go'
 
 describe(`
   zipAsync<T, U extends Array<Iterable<unknown> | AsyncIterable<unknown>>>(
@@ -9,6 +17,34 @@ describe(`
   , ...otherIterables: U
   ): AsyncIterable<[T, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]>
 `, () => {
+  describe('close unexhausted iterator', () => {
+    test('iterable', async () => {
+      const iter = new MockIterable(go(function* () {
+        throw new Error()
+      }))
+
+      try {
+        await consumeAsync(zipAsync(iter, []))
+      } catch {}
+
+      expect(iter.returnCalled).toBeTruthy()
+      expect(iter.done).toBeTruthy()
+    })
+
+    test('async iterable', async () => {
+      const iter = new MockAsyncIterable(go(function* () {
+        throw new Error()
+      }))
+
+      try {
+        await consumeAsync(zipAsync(iter, []))
+      } catch {}
+
+      expect(iter.returnCalled).toBeTruthy()
+      expect(iter.done).toBeTruthy()
+    })
+  })
+
   describe('T is PromiseLike<T>', () => {
     it('return AsyncIterable<Array<PromiseLike<T>>>', async () => {
       const iter1 = [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)]

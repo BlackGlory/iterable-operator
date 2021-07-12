@@ -2,8 +2,22 @@ import { consume, toArray, MockIterable } from '@test/utils'
 import { getError } from 'return-style'
 import { takeRight } from '@middleware/take-right'
 import '@blackglory/jest-matchers'
+import { go } from '@blackglory/go'
 
 describe('takeRight<T>(iterable: Iterable<T>, count: number): Iterable<T>', () => {
+  test('close unexhausted iterator', () => {
+    const iter = new MockIterable(go(function* () {
+      throw new Error()
+    }))
+
+    try {
+      consume(takeRight(iter, 1))
+    } catch {}
+
+    expect(iter.returnCalled).toBeTruthy()
+    expect(iter.done).toBeTruthy()
+  })
+
   it('lazy evaluation', () => {
     const iter = new MockIterable([1, 2, 3])
     const count = 5

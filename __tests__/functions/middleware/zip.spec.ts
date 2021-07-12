@@ -1,6 +1,7 @@
 import { consume, toArray, MockIterable } from '@test/utils'
 import { zip } from '@middleware/zip'
 import '@blackglory/jest-matchers'
+import { go } from '@blackglory/go'
 
 describe(`
   zip<T, U extends Array<Iterable<unknown>>>(
@@ -8,6 +9,19 @@ describe(`
   , ...otherIterables: U
   ): Iterable<[T, ...ExtractTypeTupleFromIterableTuple<U>]>
 ` , () => {
+  test('close unexhausted iterator', () => {
+    const iter = new MockIterable(go(function* () {
+      throw new Error()
+    }))
+
+    try {
+      consume(zip(iter, []))
+    } catch {}
+
+    expect(iter.returnCalled).toBeTruthy()
+    expect(iter.done).toBeTruthy()
+  })
+
   it('lazy evaluation', () => {
     const iter1 = new MockIterable([1, 2, 3])
     const iter2: unknown[] = []

@@ -1,6 +1,21 @@
 import { last } from '@output/last'
+import { MockIterable } from '@test/utils'
+import { go } from '@blackglory/go'
 
 describe('last<T>(iterable: Iterable<T>): T | undefined', () => {
+  test('close unexhausted iterator', () => {
+    const iter = new MockIterable(go(function* () {
+      throw new Error()
+    }))
+
+    try {
+      last(iter)
+    } catch {}
+
+    expect(iter.returnCalled).toBeTruthy()
+    expect(iter.done).toBeTruthy()
+  })
+
   describe('iterable is empty', () => {
     it('return undefined', () => {
       const iter: number[] = []
