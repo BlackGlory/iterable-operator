@@ -4,6 +4,7 @@ import { testIterable, testAsyncIterable, testFunction, testAsyncFunction }
 import { reduceAsync } from '@output/reduce-async'
 import { getCalledTimes, MockIterable, MockAsyncIterable } from '@test/utils'
 import '@blackglory/jest-matchers'
+import { pass } from '@blackglory/pass'
 
 describe(`
   reduceAsync<T>(
@@ -19,7 +20,9 @@ describe(`
         await reduceAsync(iter, () => {
           throw new Error()
         })
-      } catch {}
+      } catch {
+        pass()
+      }
 
       expect(iter.returnCalled).toBeTruthy()
       expect(iter.done).toBeTruthy()
@@ -32,7 +35,9 @@ describe(`
         await reduceAsync(iter, () => {
           throw new Error()
         })
-      } catch {}
+      } catch {
+        pass()
+      }
 
       expect(iter.returnCalled).toBeTruthy()
       expect(iter.done).toBeTruthy()
@@ -136,7 +141,9 @@ describe(`
         await reduceAsync(iter, () => {
           throw new Error()
         }, 1)
-      } catch {}
+      } catch {
+        pass()
+      }
 
       expect(iter.returnCalled).toBeTruthy()
       expect(iter.done).toBeTruthy()
@@ -149,7 +156,9 @@ describe(`
         await reduceAsync(iter, () => {
           throw new Error()
         }, 1)
-      } catch {}
+      } catch {
+        pass()
+      }
 
       expect(iter.returnCalled).toBeTruthy()
       expect(iter.done).toBeTruthy()

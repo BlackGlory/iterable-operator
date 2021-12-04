@@ -3,6 +3,7 @@ import { getError } from 'return-style'
 import { takeRight } from '@middleware/take-right'
 import '@blackglory/jest-matchers'
 import { go } from '@blackglory/go'
+import { pass } from '@blackglory/pass'
 
 describe('takeRight<T>(iterable: Iterable<T>, count: number): Iterable<T>', () => {
   test('close unexhausted iterator', () => {
@@ -12,7 +13,9 @@ describe('takeRight<T>(iterable: Iterable<T>, count: number): Iterable<T>', () =
 
     try {
       consume(takeRight(iter, 1))
-    } catch {}
+    } catch {
+      pass()
+    }
 
     expect(iter.returnCalled).toBeTruthy()
     expect(iter.done).toBeTruthy()

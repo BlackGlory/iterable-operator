@@ -1,6 +1,7 @@
 import { getError } from 'return-style'
 import { reduce } from '@output/reduce'
 import { MockIterable } from '@test/utils'
+import { pass } from '@blackglory/pass'
 
 describe(`
   reduce<T>(
@@ -15,7 +16,9 @@ describe(`
       reduce(iter, () => {
         throw new Error()
       })
-    } catch {}
+    } catch {
+      pass()
+    }
 
     expect(iter.returnCalled).toBeTruthy()
     expect(iter.done).toBeTruthy()
@@ -104,7 +107,9 @@ describe(`
       reduce(iter, () => {
         throw new Error()
       }, 1)
-    } catch {}
+    } catch {
+      pass()
+    }
 
     expect(iter.returnCalled).toBeTruthy()
     expect(iter.done).toBeTruthy()

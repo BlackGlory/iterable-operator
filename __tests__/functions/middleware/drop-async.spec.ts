@@ -4,6 +4,7 @@ import { getError } from 'return-style'
 import { dropAsync } from '@middleware/drop-async'
 import '@blackglory/jest-matchers'
 import { go } from '@blackglory/go'
+import { pass } from '@blackglory/pass'
 
 describe(`
   dropAsync<T>(iterable: AsyncIterable<T>, count: number): AsyncIterable<T>
@@ -15,7 +16,9 @@ describe(`
 
     try {
       await consumeAsync(dropAsync(iter, 1))
-    } catch {}
+    } catch {
+      pass()
+    }
 
     expect(iter.returnCalled).toBeTruthy()
     expect(iter.done).toBeTruthy()

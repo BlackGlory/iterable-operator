@@ -3,6 +3,7 @@ import { consume, toArray, MockIterable, take } from '@test/utils'
 import { drop } from '@middleware/drop'
 import { go } from '@blackglory/go'
 import '@blackglory/jest-matchers'
+import { pass } from '@blackglory/pass'
 
 describe('drop<T>(iterable: Iterable<T>, count: number): Iterable<T>', () => {
   test('close unexhausted iterator', () => {
@@ -12,7 +13,9 @@ describe('drop<T>(iterable: Iterable<T>, count: number): Iterable<T>', () => {
 
     try {
       consume(drop(iter, 1))
-    } catch {}
+    } catch {
+      pass()
+    }
 
     expect(iter.returnCalled).toBeTruthy()
     expect(iter.done).toBeTruthy()

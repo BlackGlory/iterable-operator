@@ -1,3 +1,5 @@
+import { pass } from '@blackglory/pass'
+
 export function toArray<T>(iterable: Iterable<T>, count: number = Infinity): T[] {
   const result: T[] =[]
   for (const value of iterable) {
@@ -22,11 +24,15 @@ export async function toArrayAsync<T>(
 }
 
 export function consume<T>(iterable: Iterable<T>): void {
-  for (const _ of iterable) {}
+  for (const _ of iterable) {
+    pass()
+  }
 }
 
 export async function consumeAsync<T>(iterable: AsyncIterable<T>) {
-  for await (const _ of iterable) {}
+  for await (const _ of iterable) {
+    pass()
+  }
 }
 
 export function getCalledTimes(fn: jest.Mock) {

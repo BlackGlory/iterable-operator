@@ -2,6 +2,7 @@ import { consume, toArray, MockIterable } from '@test/utils'
 import { zip } from '@middleware/zip'
 import '@blackglory/jest-matchers'
 import { go } from '@blackglory/go'
+import { pass } from '@blackglory/pass'
 
 describe(`
   zip<T, U extends Array<Iterable<unknown>>>(
@@ -16,7 +17,9 @@ describe(`
 
     try {
       consume(zip(iter, []))
-    } catch {}
+    } catch {
+      pass()
+    }
 
     expect(iter.returnCalled).toBeTruthy()
     expect(iter.done).toBeTruthy()

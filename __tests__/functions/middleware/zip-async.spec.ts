@@ -10,6 +10,7 @@ import {
 import { zipAsync } from '@middleware/zip-async'
 import '@blackglory/jest-matchers'
 import { go } from '@blackglory/go'
+import { pass } from '@blackglory/pass'
 
 describe(`
   zipAsync<T, U extends Array<Iterable<unknown> | AsyncIterable<unknown>>>(
@@ -25,7 +26,9 @@ describe(`
 
       try {
         await consumeAsync(zipAsync(iter, []))
-      } catch {}
+      } catch {
+        pass()
+      }
 
       expect(iter.returnCalled).toBeTruthy()
       expect(iter.done).toBeTruthy()
@@ -38,7 +41,9 @@ describe(`
 
       try {
         await consumeAsync(zipAsync(iter, []))
-      } catch {}
+      } catch {
+        pass()
+      }
 
       expect(iter.returnCalled).toBeTruthy()
       expect(iter.done).toBeTruthy()

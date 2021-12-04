@@ -2,6 +2,7 @@ import { toAsyncIterable, MockAsyncIterable } from '@test/utils'
 import { lastAsync } from '@output/last-async'
 import '@blackglory/jest-matchers'
 import { go } from '@blackglory/go'
+import { pass } from '@blackglory/pass'
 
 describe('lastAsync<T>(iterable: AsyncIterable<T>): Promise<T | undefined>', () => {
   test('close unexhausted iterator', async () => {
@@ -11,7 +12,9 @@ describe('lastAsync<T>(iterable: AsyncIterable<T>): Promise<T | undefined>', () 
 
     try {
       await lastAsync(iter)
-    } catch {}
+    } catch {
+      pass()
+    }
 
     expect(iter.returnCalled).toBeTruthy()
     expect(iter.done).toBeTruthy()

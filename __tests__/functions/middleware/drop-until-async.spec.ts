@@ -4,6 +4,7 @@ import { dropUntilAsync } from '@middleware/drop-until-async'
 import { getErrorPromise } from 'return-style'
 import '@blackglory/jest-matchers'
 import { go } from '@blackglory/go'
+import { pass } from '@blackglory/pass'
 
 describe(`
   dropUntilAsync<T>(
@@ -19,7 +20,9 @@ describe(`
 
       try {
         await consumeAsync(dropUntilAsync(iter, () => true))
-      } catch {}
+      } catch {
+        pass()
+      }
 
       expect(iter.returnCalled).toBeTruthy()
       expect(iter.done).toBeTruthy()
@@ -32,7 +35,9 @@ describe(`
 
       try {
         await consumeAsync(dropUntilAsync(iter, () => true))
-      } catch {}
+      } catch {
+        pass()
+      }
 
       expect(iter.returnCalled).toBeTruthy()
       expect(iter.done).toBeTruthy()

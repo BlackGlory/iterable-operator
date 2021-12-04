@@ -3,6 +3,7 @@ import { dropUntil } from '@middleware/drop-until'
 import { getError } from 'return-style'
 import '@blackglory/jest-matchers'
 import { go } from '@blackglory/go'
+import { pass } from '@blackglory/pass'
 
 describe(`
   dropUntil<T>(
@@ -17,7 +18,9 @@ describe(`
 
     try {
       consume(dropUntil(iter, () => true))
-    } catch {}
+    } catch {
+      pass()
+    }
 
     expect(iter.returnCalled).toBeTruthy()
     expect(iter.done).toBeTruthy()

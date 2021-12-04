@@ -3,6 +3,7 @@ import { getError } from 'return-style'
 import { takeRightAsync } from '@middleware/take-right-async'
 import '@blackglory/jest-matchers'
 import { go } from '@blackglory/go'
+import { pass } from '@blackglory/pass'
 
 describe(`
   takeRightAsync<T>(
@@ -17,7 +18,9 @@ describe(`
 
     try {
       await consumeAsync(takeRightAsync(iter, 1))
-    } catch {}
+    } catch {
+      pass()
+    }
 
     expect(iter.returnCalled).toBeTruthy()
     expect(iter.done).toBeTruthy()

@@ -1,6 +1,7 @@
 import { last } from '@output/last'
 import { MockIterable } from '@test/utils'
 import { go } from '@blackglory/go'
+import { pass } from '@blackglory/pass'
 
 describe('last<T>(iterable: Iterable<T>): T | undefined', () => {
   test('close unexhausted iterator', () => {
@@ -10,7 +11,9 @@ describe('last<T>(iterable: Iterable<T>): T | undefined', () => {
 
     try {
       last(iter)
-    } catch {}
+    } catch {
+      pass()
+    }
 
     expect(iter.returnCalled).toBeTruthy()
     expect(iter.done).toBeTruthy()

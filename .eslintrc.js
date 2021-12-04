@@ -11,7 +11,6 @@ module.exports = {
 , rules: {
     'no-constant-condition': 'off'
   , 'require-yield': 'off'
-  , 'no-empty': 'off'
   , '@typescript-eslint/no-inferrable-types': 'off'
   , '@typescript-eslint/ban-types': 'off'
   , '@typescript-eslint/ban-ts-comment': 'off'
