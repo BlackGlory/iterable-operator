@@ -525,19 +525,20 @@
   dependencies:
     justypes "^0.1.4"
 
-"@blackglory/types@^0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@blackglory/types/-/types-0.5.0.tgz#07da1f0c1e0ba29bf64ee2f6f77cb8f31d481c2b"
-  integrity sha512-bsx+PuiuAN3quUE9oE0H7FDG77wgFQtfMnI6KSsF3iQVT+EygqgoVsZ7e1MwQf+mtHT4gnffYqxo+CHESYMqeQ==
-  dependencies:
-    justypes "^0.1.5"
-
-"@blackglory/types@^0.5.1":
+"@blackglory/types@^0.5.0", "@blackglory/types@^0.5.1":
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/@blackglory/types/-/types-0.5.1.tgz#ef0290abd4b3c3e6a141ff45da6dc49bbb53d2f6"
   integrity sha512-9bvd60w7CGPyFFcEYsqPu65+fj99Ga5TlgCZzsiP9A3nbP0+VR1WgUCaaGqmUZWg4fjuXbFWBAvdhNP2tNrX2g==
   dependencies:
     justypes "^0.1.5"
+
+"@blackglory/types@^0.6.4":
+  version "0.6.4"
+  resolved "https://registry.yarnpkg.com/@blackglory/types/-/types-0.6.4.tgz#ba511c58d4a8cf321bfc34c4b3c94e8a9b3341bd"
+  integrity sha512-QtiPJllbKOXHbX9S/h2NsUbP+vgm6J5w2oQI4N4IuoTdzBbQJZNkcHTf2FeD/1yi/xhzEVdR0L4ZKfLlcmAJbw==
+  dependencies:
+    justypes "^0.1.6"
+    lodash.isplainobject "^4.0.6"
 
 "@commitlint/cli@^13.2.1":
   version "13.2.1"
@@ -4159,17 +4160,7 @@ jsonparse@^1.2.0:
   resolved "https://registry.yarnpkg.com/jsonparse/-/jsonparse-1.3.1.tgz#3f4dae4a91fac315f71062f8521cc239f1366280"
   integrity sha1-P02uSpH6wxX3EGL4UhzCOfE2YoA=
 
-justypes@^0.1.4:
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/justypes/-/justypes-0.1.4.tgz#f6c4aeccf491008fc87adef96a14767ac54f2167"
-  integrity sha512-AZ35Bau1EmJjByG8A8LggpT+tqOj2XxWPIbtdoAoumwwnEBXKkLoyXuI/L0pSyx4uFqSyVoJPBFCcsL8FwP88g==
-
-justypes@^0.1.5:
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/justypes/-/justypes-0.1.5.tgz#efa30b083b1cb59f9a8757dbc5f16a70ee48d83e"
-  integrity sha512-IEeo88ZvQ4GdleKVtbGMAhqpeiwrjOpBqAyTQvzqc/jy23V0hkoKUbq5ig5F4TPirGBehm4/3/nstWKGwvFN0Q==
-
-justypes@^0.1.6:
+justypes@^0.1.4, justypes@^0.1.5, justypes@^0.1.6:
   version "0.1.6"
   resolved "https://registry.yarnpkg.com/justypes/-/justypes-0.1.6.tgz#4878d68cc75a9b8c6f38e62d696457e40c093e90"
   integrity sha512-J3C64F3cPR9cfheVhO6c+Qt6TE5ey3vThrQvcvj7uwJpBq2g99TCOk86YhrhTaqQnIaVb5ww2VhMUmJgAF5YRg==
@@ -4289,6 +4280,11 @@ lodash.ismatch@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/lodash.ismatch/-/lodash.ismatch-4.4.0.tgz#756cb5150ca3ba6f11085a78849645f188f85f37"
   integrity sha1-dWy1FQyjum8RCFp4hJZF8Yj4Xzc=
+
+lodash.isplainobject@^4.0.6:
+  version "4.0.6"
+  resolved "https://registry.yarnpkg.com/lodash.isplainobject/-/lodash.isplainobject-4.0.6.tgz#7c526a52d89b45c45cc690b88163be0497f550cb"
+  integrity sha1-fFJqUtibRcRcxpC4gWO+BJf1UMs=
 
 lodash.merge@^4.6.2:
   version "4.6.2"
