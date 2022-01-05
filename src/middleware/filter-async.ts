@@ -10,7 +10,7 @@ export function filterAsync<T, U extends T = T>(iterable: Iterable<T> | AsyncIte
   async function* filterAsyncIterable(iterable: AsyncIterable<T>) {
     let index = 0
     for await (const element of iterable) {
-      if (await predicate(element, index)) yield element as U
+      if (await predicate(element, index)) yield element as unknown as U
       index++
     }
   }
