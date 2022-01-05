@@ -36,6 +36,7 @@
   ],
   "main": "lib/es2018/index.js",
   "types": "lib/es2018/index.d.ts",
+  "sideEffects": false,
   "repository": "git@github.com:BlackGlory/iterable-operator.git",
   "author": "BlackGlory <woshenmedoubuzhidao@blackglory.me>",
   "license": "MIT",
