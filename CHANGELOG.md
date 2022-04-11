@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/BlackGlory/iterable-operator/compare/v1.0.1...v1.1.0) (2022-04-11)
+
+
+### Features
+
+* add count, countAsync ([4cf7e63](https://github.com/BlackGlory/iterable-operator/commit/4cf7e6314c55097f10809830cd3d1059c7fc178f))
+
+
+### Bug Fixes
+
+* signatures of consume ([6722c39](https://github.com/BlackGlory/iterable-operator/commit/6722c399513b1872832f90ec8592931127f0c370))
+
 ### [1.0.1](https://github.com/BlackGlory/iterable-operator/compare/v1.0.0...v1.0.1) (2022-03-19)
 
 ## [1.0.0](https://github.com/BlackGlory/iterable-operator/compare/v0.14.5...v1.0.0) (2022-03-05)
