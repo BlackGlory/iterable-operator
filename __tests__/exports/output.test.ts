@@ -31,6 +31,8 @@ test.each([
   , 'toArray'
   , 'toSetAsync'
   , 'toSet'
+  , 'count'
+  , 'countAsync'
   ].sort()
 
   const actualExports = Object.keys(target).sort()

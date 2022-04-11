@@ -51,6 +51,7 @@ import { SomeOperator } from './output/some'
 import { LastOperator } from './output/last'
 import { ToArrayOperator } from './output/to-array'
 import { ToSetOperator } from './output/to-set'
+import { CountOperator } from './output/count'
 
 import { EachAsyncOperator } from './output/each-async'
 import { EveryAsyncOperator } from './output/every-async'
@@ -111,6 +112,7 @@ export interface IterableOperator<T> extends
 , LastOperator<T>
 , ToArrayOperator<T>
 , ToSetOperator<T>
+, CountOperator<T>
 
 , EachAsyncOperator<T, Iterable<T>>
 , EveryAsyncOperator<T, Iterable<T>>
@@ -170,6 +172,7 @@ mixinDecorators(IterableOperator, [
 , LastOperator
 , ToArrayOperator
 , ToSetOperator
+, CountOperator
 
 , EachAsyncOperator
 , EveryAsyncOperator

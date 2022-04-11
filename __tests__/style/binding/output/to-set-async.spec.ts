@@ -11,5 +11,6 @@ describe('toSetAsync<T>(this: AsyncIterable<T>): Promise<Set<T>>', () => {
 
     expect(spy).toBeCalledWith(iter)
     expect(spy).toReturnWith(result)
+    spy.mockRestore()
   })
 })

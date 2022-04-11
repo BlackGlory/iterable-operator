@@ -18,5 +18,6 @@ describe(`
 
     expect(spy).toBeCalledWith(iter, fn, initialValue)
     expect(spy).toReturnWith(result)
+    spy.mockRestore()
   })
 })

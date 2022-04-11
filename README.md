@@ -1,9 +1,7 @@
 # iterable-operator
-
-Utilities for JavaScript Iterable and AsyncIterable.
+Utilities for JavaScript `Iterable` and `AsyncIterable`.
 
 ## Install
-
 ```sh
 npm install --save iterable-operator
 # or
@@ -11,7 +9,6 @@ yarn add iterable-operator
 ```
 
 ## Usage
-
 ```js
 import { map, toArray } from 'iterable-operator'
 
@@ -21,7 +18,6 @@ const result = toArray(doubleIter)
 ```
 
 ### Chaining
-
 ```js
 import { IterableOperator } from 'iterable-operator/lib/es2018/style/chaining'
 
@@ -31,7 +27,6 @@ const result = new IterableOperator([1, 2, 3])
 ```
 
 ### Binding
-
 It is prepared for [bind-operator](https://github.com/tc39/proposal-bind-operator).
 
 ```js
@@ -43,7 +38,6 @@ const result = [1, 2, 3]
 ```
 
 ### Pipeline
-
 It is prepared for [pipeline-operator](https://github.com/tc39/proposal-pipeline-operator).
 
 ```js
@@ -55,15 +49,12 @@ const result = [1, 2, 3]
 ```
 
 ## API
-
 There are two kinds of operators:
 - Intermediate operation(middleware): lazy, the first parameter is Iterable, the return value is Iterable(Iterable in, Iterable out)
 - Terminal operation(output): the first parameter is Iterable
 
 ### Middleware
-
 #### chunk, chunkAsync
-
 ```ts
 function chunk<T>(iterable: Iterable<T>, size: number): Iterable<T[]>
 function chunkAsync<T>(iterable: AsyncIterable<T>, size: number): AsyncIterable<T[]>
@@ -81,7 +72,6 @@ chunk([1, 2, 3], -1) // throw Error
 The memory usage of this function depends on `size`.
 
 #### chunkBy, chunkByAsync
-
 ```ts
 function chunkBy<T>(
   iterable: Iterable<T>
@@ -102,7 +92,6 @@ chunkBy([1, 2, 3], x => x === 5) // [[1, 2, 3]]
 The memory usage of this function depends on `iterable` and `predicate`.
 
 #### concat, concatAsync
-
 ```ts
 function concat<T, U>(
   iterable: Iterable<T>
@@ -120,7 +109,6 @@ concat([1, 2, 3], ['a', 'b', 'c']) // [1, 2, 3, 'a', 'b', 'c']
 ```
 
 #### drop, dropAsync
-
 ```ts
 function drop<T>(iterable: Iterable<T>, count: number): Iterable<T>
 function dropAsync<T>(iterable: AsyncIterable<T>, count: number): AsyncIterable<T>
@@ -136,7 +124,6 @@ drop([1, 2, 3], -1) // throw Error
 ```
 
 #### dropRight, dropRightAsync
-
 ```ts
 function dropRight<T>(iterable: Iterable<T>, count: number): Iterable<T>
 function dropRightAsync<T>(iterable: AsyncIterable<T>, count: number): AsyncIterable<T>
@@ -154,7 +141,6 @@ dropRight([1, 2, 3], -1) // throw Error
 The memory usage of this function depends on `iterable`.
 
 #### dropUntil, dropUntilAsync
-
 ```ts
 function dropUntil<T>(
   iterable: Iterable<T>
@@ -173,7 +159,6 @@ dropUntil([1, 2, 3], x => x === 2) // [2, 3]
 The memory usage of this function depends on `iterable` and `predicate`.
 
 #### filter, filterAsync
-
 ```ts
 function filter<T, U extends T = T>(
   iterable: Iterable<T>
@@ -190,7 +175,6 @@ filter([1, 2, 3], x => x % 2 === 1) // [1, 3]
 ```
 
 #### flatten, flattenAsync
-
 ```ts
 function flatten<T>(iterable: Iterable<unknown>): Iterable<T>
 function flattenAsync<T>(iterable: AsyncIterable<unknown>): AsyncIterable<T>
@@ -203,7 +187,6 @@ flatten(['one', ['two'], 0, [1, [2]]]) // ['o', 'n', 'e', 'two', 0, 1, [2]]
 ```
 
 #### flattenDeep, flattenDeepAsync
-
 ```ts
 function flattenDeep<T>(iterable: Iterable<unknown>, depth: number = Infinity): Iterable<T>
 function flattenDeepAsync<T>(
@@ -222,7 +205,6 @@ flattenDeep(['one', ['two', ['three']], 0, [1, [2, [3]]]], 2) // ['o', 'n', 'e',
 ```
 
 #### flattenBy, flattenByAsync
-
 ```ts
 function flattenBy<T>(
   iterable: Iterable<unknown>
@@ -241,7 +223,6 @@ flattenBy('123', () => true) // ['1', '2', '3']
 ```
 
 #### map, mapAsync
-
 ```ts
 function map<T, U>(
   iterable: Iterable<T>
@@ -258,7 +239,6 @@ map([1, 2, 3], x => x * 2) // [2, 4, 6]
 ```
 
 #### repeat, repeatAsync
-
 ```ts
 function repeat<T>(iterable: Iterable<T>, times: number): Iterable<T>
 function repeatAsync<T>(iterable: AsyncIterable<T>, times: number): AsyncIterable<T>
@@ -274,7 +254,6 @@ repeat([1, 2, 3], -1) // throw Error
 The memory usage of this function depends on `iterable`.
 
 #### slice, sliceAsync
-
 ```ts
 function slice<T>(
   iterable: Iterable<T>
@@ -298,7 +277,6 @@ slice([1, 2, 3], 2, 1) // throw Error
 ```
 
 #### split, splitAsync
-
 ```ts
 function split<T>(iterable: Iterable<T>, separator: T): Iterable<T[]>
 function splitAsync<T>(iterable: AsyncIterable<T>, separator: T): AsyncIterable<T[]>
@@ -314,7 +292,6 @@ split([1, 2, 3, 4, 5], 0) // [[1, 2, 3, 4, 5]]
 The memory usage of this function depends on `iterable` and `separator`.
 
 #### splitBy, splitByAsync
-
 ```ts
 function splitBy<T>(
   iterable: Iterable<T>
@@ -336,7 +313,6 @@ splitBy([1, 2, 3, 4, 5], x => x === 0) // [[1, 2, 3, 4, 5]]
 The memory usage of this function depends on `iterable` and `predicate`.
 
 #### take, takeAsync
-
 ```ts
 function take<T>(iterable: Iterable<T>, count: number): Iterable<T>
 function takeAsync<T>(iterable: AsyncIterable<T>, count: number): AsyncIterable<T>
@@ -350,7 +326,6 @@ take([1, 2, 3], -1) // throw Error
 ```
 
 #### takeRight, takeRightAsync
-
 ```ts
 function takeRight<T>(iterable: Iterable<T>, count: number): Iterable<T>
 function takeRightAsync<T>(iterable: AsyncIterable<T>, count: number): AsyncIterable<T>
@@ -366,7 +341,6 @@ takeRight([1, 2, 3], -1) // throw Error
 The memory usage of this function depends on `count`.
 
 #### takeUntil, takeUntilAsync
-
 ```ts
 function takeUntil<T>(
   iterable: Iterable<T>
@@ -383,7 +357,6 @@ takeUntil([1, 2, 3], x => x === 2) // [1]
 ```
 
 #### tap, tapAsync
-
 ```ts
 function tap<T>(
   iterable: Iterable<T>
@@ -400,7 +373,6 @@ tap([1, 2, 3], x => console.log(x)) // [1, 2, 3]
 ```
 
 #### toAsyncIterable
-
 ```ts
 function toAsyncIterable<T>(iterable: Iterable<T | PromiseLike<T>>): AsyncIterable<T>
 ```
@@ -410,7 +382,6 @@ toAsyncIterable([1, 2, 3]) // AsyncIterable [1, 2, 3]
 ```
 
 #### transform, transformAsync
-
 ```ts
 function transform<T, U>(
   iterable: Iterable<T>
@@ -435,7 +406,6 @@ transform([1, 2, 3], function* double(iter) {
 ```
 
 #### uniq, uniqAsync
-
 ```ts
 function uniq<T>(iterable: Iterable<T>): Iterable<T>
 function uniqAsync<T>(iterable: AsyncIterable<T>): AsyncIterable<T>
@@ -448,7 +418,6 @@ uniq([1, 1, 2, 2, 3, 3]) // [1, 2, 3]
 The memory usage of this function depends on `iterable`.
 
 #### uniqBy, uniqByAsync
-
 ```ts
 function uniqBy<T, U>(
   iterable: Iterable<T>
@@ -467,7 +436,6 @@ uniqBy([1, 2, 3], x => x % 2) // [1, 2]
 The memory usage of this function depends on `fn`.
 
 #### zip, zipAsync
-
 ```ts
 function zip<T, U extends Array<Iterable<unknown>>>(
   iterable: Iterable<T>
@@ -486,9 +454,7 @@ zip([1, 2, 3], ['a', 'b'], ['i', 'ii', 'iii']) // [[1, 'a', 'i'], [2, 'b', 'ii']
 ```
 
 ### Output
-
 #### consume
-
 ```ts
 function consume<T, U>(iterable: Iterable<T>, consumer: (iterable: Iterable<T>) => U): U
 function consume<T, U>(
@@ -502,7 +468,6 @@ consume([1, 2, 3], xs => new Set(xs)) // Set [1, 2, 3]
 ```
 
 #### each, eachAsync
-
 ```ts
 function each<T>(iterable: Iterable<T>, fn: (element: T, index: number) => unknown): void
 function eachAsync<T>(
@@ -516,7 +481,6 @@ each([1, 2, 3], x => console.log(x)) // void
 ```
 
 #### every, everyAsync
-
 ```ts
 function every<T>(
   iterable: Iterable<T>
@@ -534,7 +498,6 @@ every([1, 2, 3], x => x <= 2) // false
 ```
 
 #### find, findAsync
-
 ```ts
 function find<T>(
   iterable: Iterable<T>
@@ -552,7 +515,6 @@ find([1, 2, 3], x => x === 4) // undefined
 ```
 
 #### first, firstAsync
-
 ```ts
 function first<T>(iterable: Iterable<T>): T | undefined
 function firstAsync<T>(iterable: AsyncIterable<T>): Promise<T | undefined>
@@ -564,7 +526,6 @@ first([]) // undefined
 ```
 
 #### includes, includesAsync
-
 ```ts
 function includes<T>(iterable: Iterable<T>, value: T): boolean
 function includesAsync<T>(iterable: AsyncIterable<T>, value: T): Promise<boolean>
@@ -576,7 +537,6 @@ includes([1, 2, 3], 4) // false
 ```
 
 #### last, lastAsync
-
 ```ts
 function last<T>(iterable: Iterable<T>): T | undefined
 function lastAsync<T>(iterable: AsyncIterable<T>): Promise<T | undefined>
@@ -588,7 +548,6 @@ last([]) // undefined
 ```
 
 #### match, matchAsync
-
 ```ts
 function match<T>(iterable: Iterable<T>, sequence: ArrayLike<T>): boolean
 function matchAsync<T>(
@@ -604,7 +563,6 @@ match([1, 2, 3], []) // true
 ```
 
 #### reduce, reduceAsync
-
 ```ts
 function reduce<T, U>(
   iterable: Iterable<T>
@@ -634,8 +592,6 @@ reduce([1, 2, 3], (acc, cur, index) => {
 ```
 
 #### some, someAsync
-
-
 ```ts
 function some<T>(
   iterable: Iterable<T>
@@ -653,7 +609,6 @@ some([1, 2, 3], x => x === 4) // false
 ```
 
 #### toArray, toArrayAsync
-
 ```ts
 function toArray<T>(iterable: Iterable<T>): T[]
 function toArrayAsync<T>(iterable: AsyncIterable<T>): Promise<T[]>
@@ -664,7 +619,6 @@ toArray([1, 2, 3]) // Array [1, 2, 3]
 ```
 
 #### toSet, toSetAsync
-
 ```ts
 function toSet<T>(iterable: Iterable<T>): Set<T>
 function toSetAsync<T>(iterable: AsyncIterable<T>): Promise<Set<T>>
@@ -672,4 +626,14 @@ function toSetAsync<T>(iterable: AsyncIterable<T>): Promise<Set<T>>
 
 ```js
 toSet([1, 1, 2, 2, 3, 3]) // Set [1, 2, 3]
+```
+
+#### count, countAsync
+```ts
+function count(iterable: Iterable<unknown>): number
+function countAsync(iterable: AsyncIterable<unknown>): Promise<number>
+```
+
+```js
+count([1, 2, 3]) // 3
 ```

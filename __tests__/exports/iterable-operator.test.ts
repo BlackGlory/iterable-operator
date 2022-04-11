@@ -60,6 +60,7 @@ test('IterableOperator', () => {
   , 'last'
   , 'toArray'
   , 'toSet'
+  , 'count'
   ].sort()
 
   const actualMethods = Object.getOwnPropertyNames(IterableOperator.prototype).sort()

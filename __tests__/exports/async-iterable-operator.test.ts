@@ -40,6 +40,7 @@ test('AsyncIterableOperator', () => {
   , 'lastAsync'
   , 'toArrayAsync'
   , 'toSetAsync'
+  , 'countAsync'
   ].sort()
 
   const actualMethods = Object.getOwnPropertyNames(AsyncIterableOperator.prototype).sort()
