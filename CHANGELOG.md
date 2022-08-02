@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/BlackGlory/iterable-operator/compare/v1.1.0...v1.2.0) (2022-08-02)
+
+
+### Features
+
+* add groupBy, groupByAsync ([44aefa0](https://github.com/BlackGlory/iterable-operator/commit/44aefa0058e0732ed74d4568c051382527319773))
+
 ## [1.1.0](https://github.com/BlackGlory/iterable-operator/compare/v1.0.1...v1.1.0) (2022-04-11)
 
 
