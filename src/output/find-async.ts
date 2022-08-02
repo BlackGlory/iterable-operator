@@ -5,30 +5,36 @@ export function findAsync<T>(
 , predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
 ): Promise<T | undefined> {
   if (isAsyncIterable(iterable)) {
-    return findAsyncIterable(iterable)
+    return findAsyncIterable(iterable, predicate)
   } else {
-    return findIterable(iterable)
+    return findIterable(iterable, predicate)
+  }
+}
+
+async function findIterable<T>(
+  iterable: Iterable<T>
+, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+) {
+  let index = 0
+
+  for (const element of iterable) {
+    if (await predicate(element, index)) return element
+    index++
   }
 
-  async function findIterable(iterable: Iterable<T>) {
-    let index = 0
+  return undefined
+}
 
-    for (const element of iterable) {
-      if (await predicate(element, index)) return element
-      index++
-    }
+async function findAsyncIterable<T>(
+  iterable: AsyncIterable<T>
+, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+) {
+  let index = 0
 
-    return undefined
+  for await (const element of iterable) {
+    if (await predicate(element, index)) return element
+    index++
   }
 
-  async function findAsyncIterable(iterable: AsyncIterable<T>) {
-    let index = 0
-
-    for await (const element of iterable) {
-      if (await predicate(element, index)) return element
-      index++
-    }
-
-    return undefined
-  }
+  return undefined
 }

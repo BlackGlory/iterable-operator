@@ -1,41 +1,50 @@
 import { isAsyncIterable } from '@blackglory/types'
 
-export function chunkByAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): AsyncIterable<T[]> {
+export function chunkByAsync<T>(
+  iterable: Iterable<T> | AsyncIterable<T>
+, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+): AsyncIterable<T[]> {
   if (isAsyncIterable(iterable)) {
-    return chunkByAsyncIterable(iterable)
+    return chunkByAsyncIterable(iterable, predicate)
   } else {
-    return chunkByIterable(iterable)
+    return chunkByIterable(iterable, predicate)
   }
+}
 
-  async function* chunkByAsyncIterable(iterable: AsyncIterable<T>) {
-    let buffer: T[] = []
-    let index = 0
+async function* chunkByAsyncIterable<T>(
+  iterable: AsyncIterable<T>
+, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+) {
+  let buffer: T[] = []
+  let index = 0
 
-    for await (const element of iterable) {
-      buffer.push(element)
-      if (await predicate(element, index)) {
-        yield buffer
-        buffer = []
-      }
-      index++
+  for await (const element of iterable) {
+    buffer.push(element)
+    if (await predicate(element, index)) {
+      yield buffer
+      buffer = []
     }
-
-    if (buffer.length) yield buffer
+    index++
   }
 
-  async function* chunkByIterable(iterable: Iterable<T>) {
-    let buffer: T[] = []
-    let index = 0
+  if (buffer.length) yield buffer
+}
 
-    for (const element of iterable) {
-      buffer.push(element)
-      if (await predicate(element, index)) {
-        yield buffer
-        buffer = []
-      }
-      index++
+async function* chunkByIterable<T>(
+  iterable: Iterable<T>
+, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+) {
+  let buffer: T[] = []
+  let index = 0
+
+  for (const element of iterable) {
+    buffer.push(element)
+    if (await predicate(element, index)) {
+      yield buffer
+      buffer = []
     }
-
-    if (buffer.length) yield buffer
+    index++
   }
+
+  if (buffer.length) yield buffer
 }

@@ -1,31 +1,40 @@
 import { isAsyncIterable } from '@blackglory/types'
 
-export function someAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): Promise<boolean> {
+export function someAsync<T>(
+  iterable: Iterable<T> | AsyncIterable<T>
+, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+): Promise<boolean> {
   if (isAsyncIterable(iterable)) {
-    return someAsyncIterable(iterable)
+    return someAsyncIterable(iterable, predicate)
   } else {
-    return someIterable(iterable)
+    return someIterable(iterable, predicate)
+  }
+}
+
+async function someIterable<T>(
+  iterable: Iterable<T>
+, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+) {
+  let index = 0
+
+  for (const element of iterable) {
+    if (await predicate(element, index)) return true
+    index++
   }
 
-  async function someIterable(iterable: Iterable<T>) {
-    let index = 0
+  return false
+}
 
-    for (const element of iterable) {
-      if (await predicate(element, index)) return true
-      index++
-    }
+async function someAsyncIterable<T>(
+  iterable: AsyncIterable<T>
+, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+) {
+  let index = 0
 
-    return false
+  for await (const element of iterable) {
+    if (await predicate(element, index)) return true
+    index++
   }
 
-  async function someAsyncIterable(iterable: AsyncIterable<T>) {
-    let index = 0
-
-    for await (const element of iterable) {
-      if (await predicate(element, index)) return true
-      index++
-    }
-
-    return false
-  }
+  return false
 }

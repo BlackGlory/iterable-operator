@@ -1,29 +1,38 @@
 import { isAsyncIterable } from '@blackglory/types'
 
-export function takeUntilAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): AsyncIterable<T> {
+export function takeUntilAsync<T>(
+  iterable: Iterable<T> | AsyncIterable<T>
+, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+): AsyncIterable<T> {
   if (isAsyncIterable(iterable)) {
-    return takeUntilAsyncIterable(iterable)
+    return takeUntilAsyncIterable(iterable, predicate)
   } else {
-    return takeUntilIterable(iterable)
+    return takeUntilIterable(iterable, predicate)
   }
+}
 
-  async function* takeUntilAsyncIterable(iterable: AsyncIterable<T>) {
-    let index = 0
+async function* takeUntilAsyncIterable<T>(
+  iterable: AsyncIterable<T>
+, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+) {
+  let index = 0
 
-    for await (const element of iterable) {
-      if (await predicate(element, index)) break
-      yield element
-      index++
-    }
+  for await (const element of iterable) {
+    if (await predicate(element, index)) break
+    yield element
+    index++
   }
+}
 
-  async function* takeUntilIterable(iterable: Iterable<T>) {
-    let index = 0
+async function* takeUntilIterable<T>(
+  iterable: Iterable<T>
+, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+) {
+  let index = 0
 
-    for (const element of iterable) {
-      if (await predicate(element, index)) break
-      yield element
-      index++
-    }
+  for (const element of iterable) {
+    if (await predicate(element, index)) break
+    yield element
+    index++
   }
 }

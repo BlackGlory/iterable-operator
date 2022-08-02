@@ -1,7 +1,9 @@
 import { flattenByAsync } from './flatten-by-async'
 import { assert } from '@blackglory/errors'
 
-export function flattenDeepAsync<T>(iterable: AsyncIterable<unknown>): AsyncIterable<T>
+export function flattenDeepAsync<T>(
+  iterable: AsyncIterable<unknown>
+): AsyncIterable<T>
 export function flattenDeepAsync<T>(
   iterable: AsyncIterable<unknown>
 , depth: number

@@ -1,4 +1,6 @@
-export async function lastAsync<T>(iterable: AsyncIterable<T>): Promise<T | undefined> {
+export async function lastAsync<T>(
+  iterable: AsyncIterable<T>
+): Promise<T | undefined> {
   const iterator = iterable[Symbol.asyncIterator]()
   let done: boolean | undefined
 

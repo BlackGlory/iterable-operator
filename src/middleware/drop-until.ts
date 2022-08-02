@@ -1,4 +1,7 @@
-export function* dropUntil<T>(iterable: Iterable<T>, predicate: (element: T, index: number) => unknown): Iterable<T> {
+export function* dropUntil<T>(
+  iterable: Iterable<T>
+, predicate: (element: T, index: number) => unknown
+): Iterable<T> {
   const iterator = iterable[Symbol.iterator]()
   let done: boolean | undefined
 

@@ -1,43 +1,52 @@
 import { isAsyncIterable } from '@blackglory/types'
 
-export function splitByAsync<T>(iterable: Iterable<T> | AsyncIterable<T>, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>): AsyncIterable<T[]> {
+export function splitByAsync<T>(
+  iterable: Iterable<T> | AsyncIterable<T>
+, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+): AsyncIterable<T[]> {
   if (isAsyncIterable(iterable)) {
-    return splitByAsyncIterable(iterable)
+    return splitByAsyncIterable(iterable, predicate)
   } else {
-    return splitByIterable(iterable)
+    return splitByIterable(iterable, predicate)
   }
+}
 
-  async function* splitByIterable(iterable: Iterable<T>) {
-    let buffer: T[] = []
-    let index = 0
+async function* splitByIterable<T>(
+  iterable: Iterable<T>
+, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+) {
+  let buffer: T[] = []
+  let index = 0
 
-    for (const element of iterable) {
-      if (await predicate(element, index)) {
-        yield buffer
-        buffer = []
-      } else {
-        buffer.push(element)
-      }
-      index++
+  for (const element of iterable) {
+    if (await predicate(element, index)) {
+      yield buffer
+      buffer = []
+    } else {
+      buffer.push(element)
     }
-
-    yield buffer
+    index++
   }
 
-  async function* splitByAsyncIterable(iterable: AsyncIterable<T>) {
-    let buffer: T[] = []
-    let index = 0
+  yield buffer
+}
 
-    for await (const element of iterable) {
-      if (await predicate(element, index)) {
-        yield buffer
-        buffer = []
-      } else {
-        buffer.push(element)
-      }
-      index++
+async function* splitByAsyncIterable<T>(
+  iterable: AsyncIterable<T>
+, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+) {
+  let buffer: T[] = []
+  let index = 0
+
+  for await (const element of iterable) {
+    if (await predicate(element, index)) {
+      yield buffer
+      buffer = []
+    } else {
+      buffer.push(element)
     }
-
-    yield buffer
+    index++
   }
+
+  yield buffer
 }

@@ -13,14 +13,19 @@ export type ExtractTypeTupleFromAsyncLikeIterableTuple<T> = {
         GetTypeOfIterable<T[K]>
 }
 
-export function zipAsync<T, U extends Array<Iterable<unknown> | AsyncIterable<unknown>>>(
+export function zipAsync<
+  T
+, U extends Array<Iterable<unknown> | AsyncIterable<unknown>>
+>(
   iterable: Iterable<T | PromiseLike<T>> | AsyncIterable<T>
 , ...otherIterables: U
 ): AsyncIterable<[T, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]> {
   return zipWithSize(iterable, ...otherIterables) as AsyncIterable<[T, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]>
 }
 
-async function* zipWithSize<T>(...iterables: Array<Iterable<T | PromiseLike<T>> | AsyncIterable<T>>): AsyncIterable<T[]> {
+async function* zipWithSize<T>(
+  ...iterables: Array<Iterable<T | PromiseLike<T>> | AsyncIterable<T>>
+): AsyncIterable<T[]> {
   const length = iterables.length
   const iterators = iterables.map(iterable => {
     if (isAsyncIterable(iterable)) {

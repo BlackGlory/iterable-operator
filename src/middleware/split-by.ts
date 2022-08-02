@@ -1,4 +1,7 @@
-export function* splitBy<T>(iterable: Iterable<T>, predicate: (element: T, index: number) => unknown): Iterable<T[]> {
+export function* splitBy<T>(
+  iterable: Iterable<T>
+, predicate: (element: T, index: number) => unknown
+): Iterable<T[]> {
   let buffer: T[] = []
   let index = 0
 

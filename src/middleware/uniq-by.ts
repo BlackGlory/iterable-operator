@@ -1,4 +1,7 @@
-export function* uniqBy<T, U>(iterable: Iterable<T>, fn: (element: T, index: number) => U): Iterable<T> {
+export function* uniqBy<T, U>(
+  iterable: Iterable<T>
+, fn: (element: T, index: number) => U
+): Iterable<T> {
   const bucket = new Set<U>()
   let index = 0
   for (const element of iterable) {

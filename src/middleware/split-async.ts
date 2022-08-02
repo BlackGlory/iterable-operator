@@ -1,4 +1,7 @@
-export async function* splitAsync<T>(iterable: AsyncIterable<T>, separator: T): AsyncIterable<T[]> {
+export async function* splitAsync<T>(
+  iterable: AsyncIterable<T>
+, separator: T
+): AsyncIterable<T[]> {
   let buffer: T[] = []
   for await (const element of iterable) {
     if (element === separator) {
