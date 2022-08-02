@@ -27,7 +27,9 @@ const result = new IterableOperator([1, 2, 3])
 ```
 
 ### Binding
-It is prepared for [bind-operator](https://github.com/tc39/proposal-bind-operator).
+It is prepared for [bind-operator].
+
+[bind-operator]: https://github.com/tc39/proposal-bind-operator
 
 ```js
 import { map, toArray } from 'iterable-operator/lib/es2018/style/binding'
@@ -38,7 +40,9 @@ const result = [1, 2, 3]
 ```
 
 ### Pipeline
-It is prepared for [pipeline-operator](https://github.com/tc39/proposal-pipeline-operator).
+It is prepared for [pipeline-operator].
+
+[pipeline-operator]: https://github.com/tc39/proposal-pipeline-operator
 
 ```js
 import { map, toArray } from 'iterable-operator/lib/es2018/style/pipeline'
@@ -56,9 +60,14 @@ There are two kinds of operators:
 ### Middleware
 #### chunk, chunkAsync
 ```ts
-function chunk<T>(iterable: Iterable<T>, size: number): Iterable<T[]>
-function chunkAsync<T>(iterable: AsyncIterable<T>, size: number): AsyncIterable<T[]>
-// size > 0
+function chunk<T>(
+  iterable: Iterable<T>
+, size: number // size > 0
+): Iterable<T[]>
+function chunkAsync<T>(
+  iterable: AsyncIterable<T>
+, size: number // size > 0
+): AsyncIterable<T[]>
 ```
 
 ```js
@@ -110,9 +119,14 @@ concat([1, 2, 3], ['a', 'b', 'c']) // [1, 2, 3, 'a', 'b', 'c']
 
 #### drop, dropAsync
 ```ts
-function drop<T>(iterable: Iterable<T>, count: number): Iterable<T>
-function dropAsync<T>(iterable: AsyncIterable<T>, count: number): AsyncIterable<T>
-// count >= 0
+function drop<T>(
+  iterable: Iterable<T>
+, count: number // count >= 0
+): Iterable<T>
+function dropAsync<T>(
+  iterable: AsyncIterable<T>
+, count: number // count >= 0
+): AsyncIterable<T>
 ```
 
 ```js
@@ -125,9 +139,14 @@ drop([1, 2, 3], -1) // throw Error
 
 #### dropRight, dropRightAsync
 ```ts
-function dropRight<T>(iterable: Iterable<T>, count: number): Iterable<T>
-function dropRightAsync<T>(iterable: AsyncIterable<T>, count: number): AsyncIterable<T>
-// count >= 0
+function dropRight<T>(
+  iterable: Iterable<T>
+, count: number // count >= 0
+): Iterable<T>
+function dropRightAsync<T>(
+  iterable: AsyncIterable<T>
+, count: number // count >= 0
+): AsyncIterable<T>
 ```
 
 ```js
@@ -188,12 +207,14 @@ flatten(['one', ['two'], 0, [1, [2]]]) // ['o', 'n', 'e', 'two', 0, 1, [2]]
 
 #### flattenDeep, flattenDeepAsync
 ```ts
-function flattenDeep<T>(iterable: Iterable<unknown>, depth: number = Infinity): Iterable<T>
+function flattenDeep<T>(
+  iterable: Iterable<unknown>
+, depth: number = Infinity // depth >= 0
+): Iterable<T>
 function flattenDeepAsync<T>(
   iterable: AsyncIterable<unknown>
-, depth: number = Infinity
+, depth: number = Infinity // depth >= 0
 ): AsyncIterable<T>
-// depth >= 0
 ```
 
 ```js
@@ -240,9 +261,14 @@ map([1, 2, 3], x => x * 2) // [2, 4, 6]
 
 #### repeat, repeatAsync
 ```ts
-function repeat<T>(iterable: Iterable<T>, times: number): Iterable<T>
-function repeatAsync<T>(iterable: AsyncIterable<T>, times: number): AsyncIterable<T>
-// times >= 0
+function repeat<T>(
+  iterable: Iterable<T>
+, times: number // times >= 0
+): Iterable<T>
+function repeatAsync<T>(
+  iterable: AsyncIterable<T>
+, times: number // times >= 0
+): AsyncIterable<T>
 ```
 
 ```js
@@ -257,15 +283,14 @@ The memory usage of this function depends on `iterable`.
 ```ts
 function slice<T>(
   iterable: Iterable<T>
-, start: number
-, end: number = Infinity
+, start: number // start >= 0
+, end: number = Infinity // end >= start
 ): Iterable<T>
 function sliceAsync<T>(
   iterable: AsyncIterable<T>
-, start: number
-, end: number = Infinity
+, start: number // start >= 0
+, end: number = Infinity // end >= start
 ): AsyncIterable<T>
-// start >= 0, end >= start
 ```
 
 ```js
@@ -279,7 +304,10 @@ slice([1, 2, 3], 2, 1) // throw Error
 #### split, splitAsync
 ```ts
 function split<T>(iterable: Iterable<T>, separator: T): Iterable<T[]>
-function splitAsync<T>(iterable: AsyncIterable<T>, separator: T): AsyncIterable<T[]>
+function splitAsync<T>(
+  iterable: AsyncIterable<T>
+, separator: T
+): AsyncIterable<T[]>
 ```
 
 ```js
@@ -328,7 +356,10 @@ take([1, 2, 3], -1) // throw Error
 #### takeRight, takeRightAsync
 ```ts
 function takeRight<T>(iterable: Iterable<T>, count: number): Iterable<T>
-function takeRightAsync<T>(iterable: AsyncIterable<T>, count: number): AsyncIterable<T>
+function takeRightAsync<T>(
+  iterable: AsyncIterable<T>
+, count: number
+): AsyncIterable<T>
 ```
 
 ```js
@@ -469,7 +500,10 @@ consume([1, 2, 3], xs => new Set(xs)) // Set [1, 2, 3]
 
 #### each, eachAsync
 ```ts
-function each<T>(iterable: Iterable<T>, fn: (element: T, index: number) => unknown): void
+function each<T>(
+  iterable: Iterable<T>
+, fn: (element: T, index: number) => unknown
+): void
 function eachAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
 , fn: (element: T, index: number) => unknown | PromiseLike<unknown>
@@ -564,18 +598,24 @@ match([1, 2, 3], []) // true
 
 #### reduce, reduceAsync
 ```ts
+function reduce<T>(
+  iterable: Iterable<T>
+, fn: (accumulator: T, currentValue: T, index: number) => T
+): T
 function reduce<T, U>(
   iterable: Iterable<T>
-, fn: ((accumulator: T, currentValue: T, index: number) => T)
-    & ((accumulator: U, currentValue: T, index: number) => U)
-, initialValue?: U
-)
+, fn: (accumulator: U, currentValue: T, index: number) => U
+, initialValue: U
+): U
+function reduceAsync<T>(
+  iterable: Iterable<T> | AsyncIterable<T>
+, fn: (accumulator: T, currentValue: T, index: number) => T | PromiseLike<T>
+): Promise<T>
 function reduceAsync<T, U>(
   iterable: Iterable<T> | AsyncIterable<T>
-, fn: ((accumulator: T, currentValue: T, index: number) => T | PromiseLike<T>)
-    & ((accumulator: U, currentValue: T, index: number) => U | PromiseLike<U>)
-, initialValue?: U
-)
+, fn: (accumulator: U, currentValue: T, index: number) => U | PromiseLike<U>
+, initialValue: U
+): Promise<U>
 ```
 
 ```js
