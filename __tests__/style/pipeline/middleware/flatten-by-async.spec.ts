@@ -3,7 +3,7 @@ import { flattenByAsync } from '@style/pipeline/middleware/flatten-by-async'
 
 describe(`
   flattenByAsync<T>(
-    predicate: (element: unknown, level: number) => unknown | PromiseLike<unknown>
+    predicate: (element: unknown, level: number) => Awaitable<unknown>
   ): (iterable: Iterable<unknown> | AsyncIterable<unknown>) => AsyncIterable<T>
 `, () => {
   it('is pipeline style', () => {

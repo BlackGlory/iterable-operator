@@ -4,7 +4,7 @@ import { flattenByAsync } from '@style/binding/middleware/flatten-by-async'
 describe(`
   flattenByAsync<T>(
     this: Iterable<unknown> | AsyncIterable<unknown>
-  , predicate: (element: unknown, level: number) => unknown | PromiseLike<unknown>
+  , predicate: (element: unknown, level: number) => Awaitable<unknown>
   ): AsyncIterable<T>
 `, () => {
   it('is binding style', () => {

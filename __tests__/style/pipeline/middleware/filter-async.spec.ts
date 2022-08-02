@@ -3,7 +3,7 @@ import { filterAsync } from '@style/pipeline/middleware/filter-async'
 
 describe(`
   filterAsync<T, U extends T = T>(
-    predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+    predicate: (element: T, index: number) => Awaitable<unknown>
   ): (iterable: Iterable<T> | AsyncIterable<T>) => AsyncIterable<U>
 `, () => {
   it('is pipeline style', () => {

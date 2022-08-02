@@ -4,7 +4,7 @@ import { toAsyncIterable } from '@test/utils'
 
 describe(`
   IterableOperator<T>::takeUntilAsync(
-    predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+    predicate: (element: T, index: number) => Awaitable<unknown>
   ): AsyncIterableOperator<T>
 `, () => {
   it('is chaining style', () => {
@@ -24,7 +24,7 @@ describe(`
 
 describe(`
   AsyncIterableOperator<T>::takeUntilAsync(
-    predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+    predicate: (element: T, index: number) => Awaitable<unknown>
   ): AsyncIterableOperator<T>
 `, () => {
   it('is chaining style', () => {

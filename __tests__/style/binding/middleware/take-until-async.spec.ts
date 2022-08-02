@@ -4,7 +4,7 @@ import { takeUntilAsync } from '@style/binding/middleware/take-until-async'
 describe(`
   takeUntilAsync<T>(
     this: Iterable<T> | AsyncIterable<T>
-  , predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+  , predicate: (element: T, index: number) => Awaitable<unknown>
   ): AsyncIterable<T>
 `, () => {
   it('is binding style', () => {

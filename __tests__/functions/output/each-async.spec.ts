@@ -6,7 +6,7 @@ import '@blackglory/jest-matchers'
 describe(`
   eachAsync<T>(
     iterable: Iterable<T> | AsyncIterable<T>
-  , fn: (element: T, index: number) => unknown | PromiseLike<unknown>
+  , fn: (element: T, index: number) => Awaitable<unknown>
   ): Promise<void>
 `, () => {
   describe(('T is PromiseLike<T>'), () => {

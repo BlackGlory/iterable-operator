@@ -9,7 +9,7 @@ import { pass } from '@blackglory/pass'
 describe(`
   reduceAsync<T>(
     iterable: Iterable<T> | AsyncIterable<T>
-  , fn: (accumulator: T, currentValue: T, index: number) => T | PromiseLike<T>
+  , fn: (accumulator: T, currentValue: T, index: number) => Awaitable<T>
   ): Promise<T>
 `, () => {
   describe('close unexhausted iterator', () => {
@@ -129,7 +129,7 @@ describe(`
 describe(`
   reduceAsync<T, U>(
     iterable: Iterable<T> | AsyncIterable<T>
-  , fn: (accumulator: U, currentValue: T, index: number) => U | PromiseLike<U>
+  , fn: (accumulator: U, currentValue: T, index: number) => Awaitable<U>
   , initalValue: U
   ): Promise<U>
 `, () => {

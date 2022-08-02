@@ -88,7 +88,7 @@ function chunkBy<T>(
 ): Iterable<T[]>
 function chunkByAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
-, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+, predicate: (element: T, index: number) => Awaitable<unknown>
 ): AsyncIterable<T[]>
 ```
 
@@ -107,8 +107,8 @@ function concat<T, U>(
 , ...otherIterables: Iterable<U>[]
 ): Iterable<T | U> {
 function concatAsync<T, U>(
-  iterable: Iterable<T | PromiseLike<T>> | AsyncIterable<T>
-, ...otherIterables: Array<Iterable<U | PromiseLike<U>> | AsyncIterable<U>>
+  iterable: Iterable<Awaitable<T>> | AsyncIterable<T>
+, ...otherIterables: Array<Iterable<Awaitable<U>> | AsyncIterable<U>>
 ): AsyncIterable<T | U> {
 ```
 
@@ -167,7 +167,7 @@ function dropUntil<T>(
 ): Iterable<T>
 function dropUntilAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
-, predicate: (element: T, index: number) => boolean | PromiseLike<boolean>
+, predicate: (element: T, index: number) => Awaitable<boolean>
 ): AsyncIterable<T>
 ```
 
@@ -185,7 +185,7 @@ function filter<T, U extends T = T>(
 ): Iterable<U>
 function filterAsync<T, U extends T = T>(
   iterable: Iterable<T> | AsyncIterable<T>
-, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+, predicate: (element: T, index: number) => Awaitable<unknown>
 ): AsyncIterable<U>
 ```
 
@@ -233,7 +233,7 @@ function flattenBy<T>(
 ): Iterable<T>
 function flattenByAsync<T>(
   iterable: Iterable<unknown> | AsyncIterable<unknown>
-, predicate: (element: unknown, level: number) => boolean | PromiseLike<unknown>
+, predicate: (element: unknown, level: number) => Awaitable<unknown>
 ): AsyncIterable<T>
 ```
 
@@ -251,7 +251,7 @@ function map<T, U>(
 ): Iterable<U>
 function mapAsync<T, U>(
   iterable: Iterable<T> | AsyncIterable<T>
-, fn: (element: T, index: number) => U | PromiseLike<U>
+, fn: (element: T, index: number) => Awaitable<U>
 ): AsyncIterable<U>
 ```
 
@@ -327,7 +327,7 @@ function splitBy<T>(
 ): Iterable<T[]>
 function splitByAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
-, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+, predicate: (element: T, index: number) => Awaitable<unknown>
 ): AsyncIterable<T[]>
 ```
 
@@ -379,7 +379,7 @@ function takeUntil<T>(
 ): Iterable<T>
 function takeUntilAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
-, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+, predicate: (element: T, index: number) => Awaitable<unknown>
 ): AsyncIterable<T>
 ```
 
@@ -395,7 +395,7 @@ function tap<T>(
 ): Iterable<T> {
 function tapAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
-, fn: (element: T, index: number) => unknown | PromiseLike<unknown>
+, fn: (element: T, index: number) => Awaitable<unknown>
 ): AsyncIterable<T>
 ```
 
@@ -405,7 +405,7 @@ tap([1, 2, 3], x => console.log(x)) // [1, 2, 3]
 
 #### toAsyncIterable
 ```ts
-function toAsyncIterable<T>(iterable: Iterable<T | PromiseLike<T>>): AsyncIterable<T>
+function toAsyncIterable<T>(iterable: Iterable<Awaitable<T>>): AsyncIterable<T>
 ```
 
 ```js
@@ -456,7 +456,7 @@ function uniqBy<T, U>(
 ): Iterable<T> {
 function uniqByAsync<T, U>(
   iterable: Iterable<T> | AsyncIterable<T>
-, fn: (element: T, index: number) => U | PromiseLike<U>
+, fn: (element: T, index: number) => Awaitable<U>
 ): AsyncIterable<T>
 ```
 
@@ -473,7 +473,7 @@ function zip<T, U extends Array<Iterable<unknown>>>(
 , ...otherIterables: U
 ): Iterable<[T, ...ExtractTypeTupleFromIterableTuple<U>]> {
 function zipAsync<T, U extends Array<Iterable<unknown> | AsyncIterable<unknown>>>(
-  iterable: Iterable<T | PromiseLike<T>> | AsyncIterable<T>
+  iterable: Iterable<Awaitable<T>> | AsyncIterable<T>
 , ...otherIterables: U
 ): AsyncIterable<[T, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]> {
 ```
@@ -506,7 +506,7 @@ function each<T>(
 ): void
 function eachAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
-, fn: (element: T, index: number) => unknown | PromiseLike<unknown>
+, fn: (element: T, index: number) => Awaitable<unknown>
 ): Promise<void>
 ```
 
@@ -522,7 +522,7 @@ function every<T>(
 ): boolean
 function everyAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
-, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+, predicate: (element: T, index: number) => Awaitable<unknown>
 ): Promise<boolean>
 ```
 
@@ -539,7 +539,7 @@ function find<T>(
 ): T | undefined
 function findAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
-, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+, predicate: (element: T, index: number) => Awaitable<unknown>
 ): Promise<T | undefined>
 ```
 
@@ -609,11 +609,11 @@ function reduce<T, U>(
 ): U
 function reduceAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
-, fn: (accumulator: T, currentValue: T, index: number) => T | PromiseLike<T>
+, fn: (accumulator: T, currentValue: T, index: number) => Awaitable<T>
 ): Promise<T>
 function reduceAsync<T, U>(
   iterable: Iterable<T> | AsyncIterable<T>
-, fn: (accumulator: U, currentValue: T, index: number) => U | PromiseLike<U>
+, fn: (accumulator: U, currentValue: T, index: number) => Awaitable<U>
 , initialValue: U
 ): Promise<U>
 ```
@@ -637,7 +637,7 @@ function some<T>(
 ): boolean
 function someAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
-, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+, predicate: (element: T, index: number) => Promise<unknown>
 ): Promise<boolean>
 ```
 
@@ -684,7 +684,7 @@ function groupBy<T, U>(
 ): Map<U, T[]>
 function groupByAsync<T, U>(
   iterable: Iterable<T> | AsyncIterable<T>
-, fn: (element: T, index: number) => U | PromiseLike<U>
+, fn: (element: T, index: number) => Awaitable<U>
 ): Promise<Map<U, T[]>>
 ```
 

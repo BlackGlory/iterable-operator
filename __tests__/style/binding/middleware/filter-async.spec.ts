@@ -4,7 +4,7 @@ import { filterAsync } from '@style/binding/middleware/filter-async'
 describe(`
   filterAsync<T, U extends T = T>(
     this: Iterable<T> | AsyncIterable<T>
-  , predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+  , predicate: (element: T, index: number) => Awaitable<unknown>
   ): AsyncIterable<U>
 `, () => {
   it('is binding style', () => {

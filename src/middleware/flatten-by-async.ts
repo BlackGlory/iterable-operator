@@ -1,8 +1,9 @@
 import { isAsyncIterable, isIterable, isntChar } from '@blackglory/types'
+import { Awaitable } from 'justypes'
 
 export function flattenByAsync<T>(
   iterable: Iterable<unknown> | AsyncIterable<unknown>
-, predicate: (element: unknown, level: number) => unknown | PromiseLike<unknown>
+, predicate: (element: unknown, level: number) => Awaitable<unknown>
 ): AsyncIterable<T> {
   if (isAsyncIterable(iterable)) {
     return flattenByAsyncIterable(iterable, predicate) as AsyncIterable<T>
@@ -13,7 +14,7 @@ export function flattenByAsync<T>(
 
 async function* flattenByAsyncIterable(
   iterable: AsyncIterable<unknown>
-, predicate: (element: unknown, level: number) => unknown | PromiseLike<unknown>
+, predicate: (element: unknown, level: number) => Awaitable<unknown>
 ) {
   const level = 1
   for await (const element of iterable) {
@@ -27,14 +28,14 @@ async function* flattenByAsyncIterable(
 
 function flattenByIterable(
   iterable: Iterable<unknown>
-, predicate: (element: unknown, level: number) => unknown | PromiseLike<unknown>
+, predicate: (element: unknown, level: number) => Awaitable<unknown>
 ) {
   return flatten(iterable, predicate, 1)
 }
 
 async function* flatten<T>(
   iterable: Iterable<unknown>
-, predicate: (element: unknown, level: number) => unknown | PromiseLike<unknown>
+, predicate: (element: unknown, level: number) => Awaitable<unknown>
 , level: number
 ): AsyncIterable<T> {
   for (const element of iterable) {

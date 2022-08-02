@@ -4,7 +4,7 @@ import { eachAsync } from '@style/binding/output/each-async'
 describe(`
   eachAsync<T>(
     this: Iterable<T> | AsyncIterable<T>
-  , fn: (element: T, index: number) => unknown | PromiseLike<unknown>
+  , fn: (element: T, index: number) => Awaitable<unknown>
   ): Promise<void>
 `, () => {
   it('is binding style', () => {

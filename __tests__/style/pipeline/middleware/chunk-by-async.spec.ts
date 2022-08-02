@@ -3,7 +3,7 @@ import { chunkByAsync } from '@style/pipeline/middleware/chunk-by-async'
 
 describe(`
   chunkByAsync<T>(
-    predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+    predicate: (element: T, index: number) => Awaitable<unknown>
   ): (iterable: Iterable<T> | AsyncIterable<T>) => AsyncIterable<T[]>
 `, () => {
   it('is pipeline style', () => {

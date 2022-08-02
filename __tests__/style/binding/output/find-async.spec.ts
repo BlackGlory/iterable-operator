@@ -4,7 +4,7 @@ import { findAsync } from '@style/binding/output/find-async'
 describe(`
   findAsync<T>(
     this: Iterable<T> | AsyncIterable<T>
-  , predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+  , predicate: (element: T, index: number) => Awaitable<unknown>
   ): Promise<T | undefined>
 `, () => {
   it('is binding style', () => {

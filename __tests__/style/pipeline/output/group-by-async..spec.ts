@@ -3,7 +3,7 @@ import { groupByAsync } from '@style/pipeline/output/group-by-async'
 
 describe(`
   groupByAsync<T, U>(
-    fn: (element: T, index: number) => U | PromiseLike<U>
+    fn: (element: T, index: number) => Awaitable<U>
   ): (iterable: Iterable<T> | AsyncIterable<T>) => Promise<Map<U, T[]>>
 `, () => {
   it('is pipeline style', () => {

@@ -3,7 +3,7 @@ import { reduceAsync } from '@style/pipeline/output/reduce-async'
 
 describe(`
   reduceAsync<T, U>(
-    fn: (accumulator: U, currentValue: T, index: number) => U | PromiseLike<U>
+    fn: (accumulator: U, currentValue: T, index: number) => Awaitable<U>
   , initialValue: U
   ): (iterable: Iterable<T> | AsyncIterable<T>) => Promise<U>
 `, () => {

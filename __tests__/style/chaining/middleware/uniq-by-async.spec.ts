@@ -4,7 +4,7 @@ import { toAsyncIterable } from '@test/utils'
 
 describe(`
   IterableOperator<T>::uniqByAsync<U>(
-    fn: (element: T, index: number) => U | PromiseLike<U>
+    fn: (element: T, index: number) => Awaitable<U>
   ): AsyncIterableOperator<T>
 `, () => {
   it('is chaining style', () => {
@@ -24,7 +24,7 @@ describe(`
 
 describe(`
   AsyncIterableOperator<T>::uniqByAsync<U>(
-    fn: (element: T, index: number) => U | PromiseLike<U>
+    fn: (element: T, index: number) => Awaitable<U>
   ): AsyncIterableOperator<T>
 `, () => {
   it('is chaining style', () => {

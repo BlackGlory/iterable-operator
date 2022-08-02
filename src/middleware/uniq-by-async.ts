@@ -1,8 +1,9 @@
 import { isAsyncIterable } from '@blackglory/types'
+import { Awaitable } from 'justypes'
 
 export function uniqByAsync<T, U>(
   iterable: Iterable<T> | AsyncIterable<T>
-, fn: (element: T, index: number) => U | PromiseLike<U>
+, fn: (element: T, index: number) => Awaitable<U>
 ): AsyncIterable<T> {
   if (isAsyncIterable(iterable)) {
     return uniqByAsyncIterable(iterable, fn)
@@ -13,7 +14,7 @@ export function uniqByAsync<T, U>(
 
 async function* uniqByAsyncIterable<T, U>(
   iterable: AsyncIterable<T>
-, fn: (element: T, index: number) => U | PromiseLike<U>
+, fn: (element: T, index: number) => Awaitable<U>
 ) {
   const bucket = new Set<U>()
   let index = 0
@@ -29,7 +30,7 @@ async function* uniqByAsyncIterable<T, U>(
 
 async function* uniqByIterable<T, U>(
   iterable: Iterable<T>
-, fn: (element: T, index: number) => U | PromiseLike<U>
+, fn: (element: T, index: number) => Awaitable<U>
 ) {
   const bucket = new Set<U>()
   let index = 0

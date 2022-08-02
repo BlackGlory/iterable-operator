@@ -5,8 +5,8 @@ import '@blackglory/jest-matchers'
 
 describe(`
   concatAsync<T, U>(
-    iterable: Iterable<T | PromiseLike<T>> | AsyncIterable<T>
-  , ...otherIterables: Array<Iterable<U | PromiseLike<U>> | AsyncIterable<U>>
+    iterable: Iterable<Awaitalbe<T>> | AsyncIterable<T>
+  , ...otherIterables: Array<Iterable<Awaitable<U>> | AsyncIterable<U>>
   ): AsyncIterable<T | U>
 `, () => {
   describe(`

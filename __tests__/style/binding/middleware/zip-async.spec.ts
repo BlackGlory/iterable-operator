@@ -3,7 +3,7 @@ import { zipAsync } from '@style/binding/middleware/zip-async'
 
 describe(`
   zipAsync<T, U extends Array<Iterable<unknown> | AsyncIterable<unknown>>>(
-    this: Iterable<T | PromiseLike<T>> | AsyncIterable<T>
+    this: Iterable<Awaitable<T>> | AsyncIterable<T>
   , ...iterables: U
   ): AsyncIterable<[T, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]>
 `, () => {

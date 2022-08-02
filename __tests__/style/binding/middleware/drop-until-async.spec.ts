@@ -4,7 +4,7 @@ import { dropUntilAsync } from '@style/binding/middleware/drop-until-async'
 describe(`
   dropUntilAsync<T>(
     this: Iterable<T> | AsyncIterable<T>
-  , predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+  , predicate: (element: T, index: number) => Awaitable<unknown>
   ): AsyncIterable<T>
 `, () => {
   it('is binding style', () => {

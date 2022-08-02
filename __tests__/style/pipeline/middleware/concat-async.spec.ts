@@ -3,9 +3,9 @@ import { concatAsync } from '@style/pipeline/middleware/concat-async'
 
 describe(`
   concatAsync<T, U>(
-    ...iterables: Array<Iterable<U | PromiseLike<U>> | AsyncIterable<U>>
+    ...iterables: Array<Iterable<Awaitable<U>> | AsyncIterable<U>>
   ): (
-    ...iterables: Array<Iterable<T | PromiseLike<T>> | AsyncIterable<T>>
+    ...iterables: Array<Iterable<Awaitable<T>> | AsyncIterable<T>>
   ) => AsyncIterable<T | U>
 `, () => {
   it('is pipeline style', () => {

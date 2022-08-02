@@ -4,7 +4,7 @@ import { uniqByAsync } from '@style/binding/middleware/uniq-by-async'
 describe(`
   uniqByAsync<T, U>(
     this: Iterable<T> | AsyncIterable<T>
-  , fn: (element: T, index: number) => U | PromiseLike<U>
+  , fn: (element: T, index: number) => Awaitable<U>
   ): AsyncIterable<T>
 `, () => {
   it('is binding style', () => {

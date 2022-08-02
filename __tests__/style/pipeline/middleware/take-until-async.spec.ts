@@ -3,7 +3,7 @@ import { takeUntilAsync } from '@style/pipeline/middleware/take-until-async'
 
 describe(`
   takeUntilAsync<T>(
-    predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+    predicate: (element: T, index: number) => Awaitable<unknown>
   ): (iterable: Iterable<T> | AsyncIterable<T>) => AsyncIterable<T>
 `, () => {
   it('is pipeline style', () => {

@@ -97,6 +97,7 @@
   "dependencies": {
     "@blackglory/errors": "^2.2.2",
     "@blackglory/go": "^1.1.2",
-    "@blackglory/types": "^1.2.1"
+    "@blackglory/types": "^1.2.1",
+    "justypes": "^2.0.1"
   }
 }

@@ -4,7 +4,7 @@ import { toAsyncIterable } from '@test/utils'
 
 describe(`
   IterableOperator<T>::reduceAsync<U>(
-    fn: (accumulator: U, currentValue: T, index: number) => U | PromiseLike<U>
+    fn: (accumulator: U, currentValue: T, index: number) => Awaitable<U>
   , initialValue: U
   ): Promise<U>
 `, () => {
@@ -24,7 +24,7 @@ describe(`
 
 describe(`
   AsyncIterableOperator<T>::reduceAsync<U>(
-    fn: (accumulator: U, currentValue: T, index: number) => U | PromiseLike<U>
+    fn: (accumulator: U, currentValue: T, index: number) => Awaitable<U>
   , initialValue: U
   ): Promise<U>
 `, () => {

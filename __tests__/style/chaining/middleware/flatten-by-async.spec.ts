@@ -4,7 +4,7 @@ import { toAsyncIterable } from '@test/utils'
 
 describe(`
   IterableOperator<T>::flattenByAsync<T>(
-    predicate: (element: unknown, level: number) => unknown | PromiseLike<unknown>
+    predicate: (element: unknown, level: number) => Awaitable<unknown>
   ): AsyncIterable<T>
 `, () => {
   it('is chaining style', () => {
@@ -24,7 +24,7 @@ describe(`
 
 describe(`
   AsyncIterableOperator<T>::flattenByAsync<T>(
-    predicate: (element: unknown, level: number) => unknown | PromiseLike<unknown>
+    predicate: (element: unknown, level: number) => Awaitable<unknown>
   ): AsyncIterable<T>
 `, () => {
   it('is chaining style', () => {

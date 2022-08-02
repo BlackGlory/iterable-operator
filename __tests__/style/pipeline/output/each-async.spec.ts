@@ -3,7 +3,7 @@ import { eachAsync } from '@style/pipeline/output/each-async'
 
 describe(`
   eachAsync<T>(
-    fn: (element: T, index: number) => unknown | PromiseLike<unknown>
+    fn: (element: T, index: number) => Awaitable<unknown>
   ): (iterable: Iterable<T> | AsyncIterable<T>) => Promise<void>
 `, () => {
   it('is pipeline style', () => {

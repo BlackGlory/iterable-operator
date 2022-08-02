@@ -1,8 +1,9 @@
 import { isAsyncIterable } from '@blackglory/types'
+import { Awaitable } from 'justypes'
 
 export function dropUntilAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
-, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+, predicate: (element: T, index: number) => Awaitable<unknown>
 ): AsyncIterable<T> {
   if (isAsyncIterable(iterable)) {
     return dropUntilAsyncIterable(iterable, predicate)
@@ -13,7 +14,7 @@ export function dropUntilAsync<T>(
 
 async function* dropUntilAsyncIterable<T>(
   iterable: AsyncIterable<T>
-, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+, predicate: (element: T, index: number) => Awaitable<unknown>
 ) {
   const iterator = iterable[Symbol.asyncIterator]()
   let done: boolean | undefined
@@ -36,7 +37,7 @@ async function* dropUntilAsyncIterable<T>(
 
 async function* dropUntilIterable<T>(
   iterable: Iterable<T>
-, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+, predicate: (element: T, index: number) => Awaitable<unknown>
 ) {
   const iterator = iterable[Symbol.iterator]()
   let done: boolean | undefined

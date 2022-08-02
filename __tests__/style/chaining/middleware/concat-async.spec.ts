@@ -4,7 +4,7 @@ import { toAsyncIterable } from '@test/utils'
 
 describe(`
   IterableOperator<T>::concatAsync<U>(
-    ...iterables: Array<Iterable<U | PromiseLike<U>> | AsyncIterable<U>>
+    ...iterables: Array<Iterable<Awaitable<U>> | AsyncIterable<U>>
   ): AsyncIterableOperator<T | U>
 `, () => {
   it('is chaining style', () => {
@@ -24,7 +24,7 @@ describe(`
 
 describe(`
   AsyncIterableOperator<T>::concatAsync<U>(
-    ...iterables: Array<Iterable<U | PromiseLike<U>> | AsyncIterable<U>>
+    ...iterables: Array<Iterable<Awaitable<U>> | AsyncIterable<U>>
   ): AsyncIterableOperator<T | U>
 `, () => {
   it('is chaining style', () => {

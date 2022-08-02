@@ -3,7 +3,7 @@ import { findAsync } from '@style/pipeline/output/find-async'
 
 describe(`
   findAsync<T>(
-    predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+    predicate: (element: T, index: number) => Awaitable<unknown>
   ): (iterable: Iterable<T> | AsyncIterable<T>) => Promise<T | undefined>
 `, () => {
   it('is pipeline style', () => {

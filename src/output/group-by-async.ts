@@ -1,8 +1,9 @@
 import { eachAsync } from '@output/each-async'
+import { Awaitable } from 'justypes'
 
 export async function groupByAsync<T, U>(
   iterable: Iterable<T> | AsyncIterable<T>
-, fn: (element: T, index: number) => U | PromiseLike<U>
+, fn: (element: T, index: number) => Awaitable<U>
 ): Promise<Map<U, T[]>> {
   const map = new Map<U, T[]>()
 

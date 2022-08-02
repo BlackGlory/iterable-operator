@@ -4,7 +4,7 @@ import { toAsyncIterable } from '@test/utils'
 
 describe(`
   IterableOperator<T>::groupByAsync<U>(
-    fn: (element: T, index: number) => U | PromiseLike<U>
+    fn: (element: T, index: number) => Awaitable<U>
   ): Promise<Map<U, T[]>>
 `, () => {
   it('is chaining style', () => {
@@ -22,7 +22,7 @@ describe(`
 
 describe(`
   AsyncIterableOperator<T>::eachAsync(
-    fn: (element: T, index: number) => unknown | PromiseLike<unknown>
+    fn: (element: T, index: number) => Awaitable<unknown>
   ): Promise<void>
 `, () => {
   it('is chaining style', () => {

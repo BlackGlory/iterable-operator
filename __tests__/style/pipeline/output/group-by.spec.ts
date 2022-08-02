@@ -3,7 +3,7 @@ import { groupBy } from '@style/pipeline/output/group-by'
 
 describe(`
   groupBy<T, U>(
-    fn: (element: T, index: number) => U | PromiseLike<U>
+    fn: (element: T, index: number) => Awaitable<U>
   ): (iterable: Iterable<T>) => Map<U, T[]>
 `, () => {
   it('is pipeline style', () => {

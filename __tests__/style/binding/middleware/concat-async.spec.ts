@@ -3,8 +3,8 @@ import { concatAsync } from '@style/binding/middleware/concat-async'
 
 describe(`
   concatAsync<T, U>(
-    this: Iterable<T | PromiseLike<T>> | AsyncIterable<T>
-  , ...iterables: Array<Iterable<U | PromiseLike<U>> | AsyncIterable<U>>
+    this: Iterable<Awaitable<T>> | AsyncIterable<T>
+  , ...iterables: Array<Iterable<Awaitable<U>> | AsyncIterable<U>>
   ): AsyncIterable<T | U>
 `, () => {
   it('is binding style', () => {

@@ -8,7 +8,7 @@ import '@blackglory/jest-matchers'
 describe(`
   flattenByAsync<T>(
     iterable: Iterable<unknown> | AsyncIterable<unknown>
-  , predicate: (element: unknown, level: number) => unknown | PromiseLike<unknown>
+  , predicate: (element: unknown, level: number) => Awaitable<unknown>
   ): AsyncIterable<T>
 `, () => {
   describe.each([

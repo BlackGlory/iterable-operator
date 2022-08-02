@@ -3,7 +3,7 @@ import { tapAsync } from '@style/pipeline/middleware/tap-async'
 
 describe(`
   tapAsync<T>(
-    fn: (element: T, index: number) => unknown | PromiseLike<unknown>
+    fn: (element: T, index: number) => Awaitable<unknown>
   ): (iterable: Iterable<T> | AsyncIterable<T>) => AsyncIterable<T>
 `, () => {
   it('is pipeline style', () => {

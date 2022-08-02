@@ -4,7 +4,7 @@ import { groupByAsync } from '@style/binding/output/group-by-async'
 describe(`
   groupByAsync<T>(
     this: Iterable<T> | AsyncIterable<T>
-  , fn: (element: T, index: number) => unknown | PromiseLike<unknown>
+  , fn: (element: T, index: number) => Awaitable<unknown>
   ): Promise<void>
 `, () => {
   it('is binding style', () => {

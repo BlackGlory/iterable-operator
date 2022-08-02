@@ -1,8 +1,9 @@
 import { isAsyncIterable } from '@blackglory/types'
+import { Awaitable } from 'justypes'
 
 export function splitByAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
-, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+, predicate: (element: T, index: number) => Awaitable<unknown>
 ): AsyncIterable<T[]> {
   if (isAsyncIterable(iterable)) {
     return splitByAsyncIterable(iterable, predicate)
@@ -13,7 +14,7 @@ export function splitByAsync<T>(
 
 async function* splitByIterable<T>(
   iterable: Iterable<T>
-, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+, predicate: (element: T, index: number) => Awaitable<unknown>
 ) {
   let buffer: T[] = []
   let index = 0
@@ -33,7 +34,7 @@ async function* splitByIterable<T>(
 
 async function* splitByAsyncIterable<T>(
   iterable: AsyncIterable<T>
-, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+, predicate: (element: T, index: number) => Awaitable<unknown>
 ) {
   let buffer: T[] = []
   let index = 0

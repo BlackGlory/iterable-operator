@@ -14,7 +14,7 @@ import { pass } from '@blackglory/pass'
 
 describe(`
   zipAsync<T, U extends Array<Iterable<unknown> | AsyncIterable<unknown>>>(
-    iterable: Iterable<T | PromiseLike<T>> | AsyncIterable<T>
+    iterable: Iterable<Awaitable<T>> | AsyncIterable<T>
   , ...otherIterables: U
   ): AsyncIterable<[T, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]>
 `, () => {

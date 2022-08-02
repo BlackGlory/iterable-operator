@@ -3,7 +3,7 @@ import { IterableOperator } from '@style/chaining'
 
 describe(`
   IterableOperator<T>::someAsync(
-    predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+    predicate: (element: T, index: number) => Awaitable<unknown>
   ): Promise<boolean>
 `, () => {
   it('is chaining style', () => {

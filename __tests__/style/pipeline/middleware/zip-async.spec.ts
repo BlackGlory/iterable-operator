@@ -5,7 +5,7 @@ describe(`
   zipAsync<T, U extends Array<Iterable<unknown> | AsyncIterable<unknown>>>(
     ...iterables: U
   ): (
-    iterable: Iterable<T | PromiseLike<T>> | AsyncIterable<T>
+    iterable: Iterable<Awaitable<T>> | AsyncIterable<T>
   ) => AsyncIterable<[T, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]>
 `, () => {
   it('is pipeline style', () => {

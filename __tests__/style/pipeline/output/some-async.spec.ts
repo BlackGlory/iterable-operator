@@ -3,8 +3,8 @@ import { someAsync } from '@style/pipeline/output/some-async'
 
 describe(`
   someAsync<T>(
-    predicate: (element: T, index: number) => unknown | Promise<unknown>
-  ): (iterable: Iterable<T> | AsyncIterable<T>) => PromiseLike<boolean>
+    predicate: (element: T, index: number) => Awaitable<unknown>
+  ): (iterable: Iterable<T> | AsyncIterable<T>) => Promise<boolean>
 `, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(output, 'someAsync')

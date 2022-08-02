@@ -2,7 +2,7 @@ import * as middleware from '@middleware/to-async-iterable'
 import { toAsyncIterable } from '@style/binding/middleware/to-async-iterable'
 
 describe(`
-  toAsyncIterable<T>(iterable: Iterable<T | PromiseLike<T>>): AsyncIterable<T>
+  toAsyncIterable<T>(iterable: Iterable<Awaitable<T>>): AsyncIterable<T>
 `, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'toAsyncIterable')

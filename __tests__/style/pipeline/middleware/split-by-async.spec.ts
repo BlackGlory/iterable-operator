@@ -3,7 +3,7 @@ import { splitByAsync } from '@style/pipeline/middleware/split-by-async'
 
 describe(`
   splitByAsync<T>(
-    predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+    predicate: (element: T, index: number) => Awaitable<unknown>
   ): (iterable: Iterable<T> | AsyncIterable<T>) => AsyncIterable<T[]>
 `, () => {
   it('is pipeline style', () => {

@@ -9,7 +9,7 @@ import { pass } from '@blackglory/pass'
 describe(`
   dropUntilAsync<T>(
     iterable: Iterable<T> | AsyncIterable<T>
-  , predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+  , predicate: (element: T, index: number) => Awaitable<unknown>
   ): AsyncIterable<T>
 `, () => {
   describe('close unexhausted iterator', () => {

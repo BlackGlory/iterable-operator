@@ -1,19 +1,20 @@
 import { isAsyncIterable, isUndefined } from '@blackglory/types'
+import { Awaitable } from 'justypes'
 
 export function reduceAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
-, fn: (accumulator: T, currentValue: T, index: number) => T | PromiseLike<T>
+, fn: (accumulator: T, currentValue: T, index: number) => Awaitable<T>
 ): Promise<T>
 export function reduceAsync<T, U>(
   iterable: Iterable<T> | AsyncIterable<T>
-, fn: (accumulator: U, currentValue: T, index: number) => U | PromiseLike<U>
+, fn: (accumulator: U, currentValue: T, index: number) => Awaitable<U>
 , initialValue: U
 ): Promise<U>
 export function reduceAsync<T, U>(
   iterable: Iterable<T> | AsyncIterable<T>
 , fn:
-    ((accumulator: T, currentValue: T, index: number) => T | PromiseLike<T>)
-  & ((accumulator: U, currentValue: T, index: number) => U | PromiseLike<U>)
+    ((accumulator: T, currentValue: T, index: number) => Awaitable<T>)
+  & ((accumulator: U, currentValue: T, index: number) => Awaitable<U>)
 , initialValue?: U
 ) {
   if (isUndefined(initialValue)) {
@@ -25,7 +26,7 @@ export function reduceAsync<T, U>(
 
 function reduceAsyncWithInitialValue<T, U>(
   iterable: Iterable<T> | AsyncIterable<T>
-, fn: (accumulator: U, currentValue: T, index: number) => U | PromiseLike<U>
+, fn: (accumulator: U, currentValue: T, index: number) => Awaitable<U>
 , initialValue: U
 ): Promise<U> {
   if (isAsyncIterable(iterable)) {
@@ -55,7 +56,7 @@ function reduceAsyncWithInitialValue<T, U>(
 
 function reduceAsyncWithoutInitialValue<T>(
   iterable: Iterable<T> | AsyncIterable<T>
-, fn: (accumulator: T, currentValue: T, index: number) => T | PromiseLike<T>
+, fn: (accumulator: T, currentValue: T, index: number) => Awaitable<T>
 ): Promise<T> {
   if (isAsyncIterable(iterable)) {
     return reduceAsyncIterable(iterable)

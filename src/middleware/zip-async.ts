@@ -1,5 +1,6 @@
 import { isAsyncIterable } from '@blackglory/types'
 import { GetTypeOfIterable } from '@src/utils'
+import { Awaitable } from 'justypes'
 
 enum Kind {
   Sync
@@ -17,14 +18,14 @@ export function zipAsync<
   T
 , U extends Array<Iterable<unknown> | AsyncIterable<unknown>>
 >(
-  iterable: Iterable<T | PromiseLike<T>> | AsyncIterable<T>
+  iterable: Iterable<Awaitable<T>> | AsyncIterable<T>
 , ...otherIterables: U
 ): AsyncIterable<[T, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]> {
   return zipWithSize(iterable, ...otherIterables) as AsyncIterable<[T, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]>
 }
 
 async function* zipWithSize<T>(
-  ...iterables: Array<Iterable<T | PromiseLike<T>> | AsyncIterable<T>>
+  ...iterables: Array<Iterable<Awaitable<T>> | AsyncIterable<T>>
 ): AsyncIterable<T[]> {
   const length = iterables.length
   const iterators = iterables.map(iterable => {

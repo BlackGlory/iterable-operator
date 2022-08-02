@@ -2,7 +2,7 @@ import { isAsyncIterable } from '@blackglory/types'
 
 export function someAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
-, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+, predicate: (element: T, index: number) => Promise<unknown>
 ): Promise<boolean> {
   if (isAsyncIterable(iterable)) {
     return someAsyncIterable(iterable, predicate)
@@ -13,7 +13,7 @@ export function someAsync<T>(
 
 async function someIterable<T>(
   iterable: Iterable<T>
-, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+, predicate: (element: T, index: number) => Promise<unknown>
 ) {
   let index = 0
 
@@ -27,7 +27,7 @@ async function someIterable<T>(
 
 async function someAsyncIterable<T>(
   iterable: AsyncIterable<T>
-, predicate: (element: T, index: number) => unknown | PromiseLike<unknown>
+, predicate: (element: T, index: number) => Promise<unknown>
 ) {
   let index = 0
 
