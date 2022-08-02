@@ -75,6 +75,8 @@ test('Index', () => {
   , 'toSet'
   , 'count'
   , 'countAsync'
+  , 'groupBy'
+  , 'groupByAsync'
   ].sort()
 
   const actualExports = Object.keys(Index).sort()

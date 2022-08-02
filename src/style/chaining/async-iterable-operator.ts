@@ -38,6 +38,7 @@ import { LastAsyncOperator } from './output/last-async'
 import { ToArrayAsyncOperator } from './output/to-array-async'
 import { ToSetAsyncOperator } from './output/to-set-async'
 import { CountAsyncOperator } from './output/count-async'
+import { GroupByAsyncOperator } from './output/group-by-async'
 
 export class AsyncIterableOperator<T> extends AsyncIterableOperatorBase<T> {}
 
@@ -79,6 +80,7 @@ export interface AsyncIterableOperator<T> extends
 , ToArrayAsyncOperator<T>
 , ToSetAsyncOperator<T>
 , CountAsyncOperator<T>
+, GroupByAsyncOperator<T, AsyncIterable<T>>
 {}
 
 mixinDecorators(AsyncIterableOperator, [
@@ -119,4 +121,5 @@ mixinDecorators(AsyncIterableOperator, [
 , ToArrayAsyncOperator
 , ToSetAsyncOperator
 , CountAsyncOperator
+, GroupByAsyncOperator
 ])

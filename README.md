@@ -566,16 +566,14 @@ match([1, 2, 3], []) // true
 ```ts
 function reduce<T, U>(
   iterable: Iterable<T>
-, fn:
-    ((accumulator: T, currentValue: T, index: number) => T)
-  & ((accumulator: U, currentValue: T, index: number) => U)
+, fn: ((accumulator: T, currentValue: T, index: number) => T)
+    & ((accumulator: U, currentValue: T, index: number) => U)
 , initialValue?: U
 )
 function reduceAsync<T, U>(
   iterable: Iterable<T> | AsyncIterable<T>
-, fn:
-    ((accumulator: T, currentValue: T, index: number) => T | PromiseLike<T>)
-  & ((accumulator: U, currentValue: T, index: number) => U | PromiseLike<U>)
+, fn: ((accumulator: T, currentValue: T, index: number) => T | PromiseLike<T>)
+    & ((accumulator: U, currentValue: T, index: number) => U | PromiseLike<U>)
 , initialValue?: U
 )
 ```
@@ -636,4 +634,20 @@ function countAsync(iterable: AsyncIterable<unknown>): Promise<number>
 
 ```js
 count([1, 2, 3]) // 3
+```
+
+#### groupBy
+```ts
+function groupBy<T, U>(
+  iterable: Iterable<T>
+, fn: (element: T, index: number) => U
+): Map<U, T[]>
+function groupByAsync<T, U>(
+  iterable: Iterable<T> | AsyncIterable<T>
+, fn: (element: T, index: number) => U | PromiseLike<U>
+): Promise<Map<U, T[]>>
+```
+
+```js
+groupBy([1, 2, 3], x => x % 2) // { 1: [1, 3], 0: [2] }
 ```

@@ -52,12 +52,14 @@ import { LastOperator } from './output/last'
 import { ToArrayOperator } from './output/to-array'
 import { ToSetOperator } from './output/to-set'
 import { CountOperator } from './output/count'
+import { GroupByOperator } from './output/group-by'
 
 import { EachAsyncOperator } from './output/each-async'
 import { EveryAsyncOperator } from './output/every-async'
 import { FindAsyncOperator } from './output/find-async'
 import { ReduceAsyncOperator } from './output/reduce-async'
 import { SomeAsyncOperator } from './output/some-async'
+import { GroupByAsyncOperator } from './output/group-by-async'
 
 export class IterableOperator<T> extends IterableOperatorBase<T> {}
 
@@ -113,12 +115,14 @@ export interface IterableOperator<T> extends
 , ToArrayOperator<T>
 , ToSetOperator<T>
 , CountOperator<T>
+, GroupByOperator<T>
 
 , EachAsyncOperator<T, Iterable<T>>
 , EveryAsyncOperator<T, Iterable<T>>
 , FindAsyncOperator<T, Iterable<T>>
 , ReduceAsyncOperator<T, Iterable<T>>
 , SomeAsyncOperator<T, Iterable<T>>
+, GroupByAsyncOperator<T, Iterable<T>>
 {}
 
 mixinDecorators(IterableOperator, [
@@ -173,10 +177,12 @@ mixinDecorators(IterableOperator, [
 , ToArrayOperator
 , ToSetOperator
 , CountOperator
+, GroupByOperator
 
 , EachAsyncOperator
 , EveryAsyncOperator
 , FindAsyncOperator
 , ReduceAsyncOperator
 , SomeAsyncOperator
+, GroupByAsyncOperator
 ])

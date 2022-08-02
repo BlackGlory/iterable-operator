@@ -4,19 +4,6 @@ test('IterableOperator', () => {
   const expectedMethods = [
     'constructor'
 
-  , 'chunkByAsync'
-  , 'concatAsync'
-  , 'dropUntilAsync'
-  , 'filterAsync'
-  , 'flattenByAsync'
-  , 'mapAsync'
-  , 'splitByAsync'
-  , 'takeUntilAsync'
-  , 'tapAsync'
-  , 'transformAsync'
-  , 'uniqByAsync'
-  , 'zipAsync'
-
   , 'chunkBy'
   , 'chunk'
   , 'concat'
@@ -42,11 +29,18 @@ test('IterableOperator', () => {
   , 'uniq'
   , 'zip'
 
-  , 'eachAsync'
-  , 'everyAsync'
-  , 'findAsync'
-  , 'reduceAsync'
-  , 'someAsync'
+  , 'chunkByAsync'
+  , 'concatAsync'
+  , 'dropUntilAsync'
+  , 'filterAsync'
+  , 'flattenByAsync'
+  , 'mapAsync'
+  , 'splitByAsync'
+  , 'takeUntilAsync'
+  , 'tapAsync'
+  , 'transformAsync'
+  , 'uniqByAsync'
+  , 'zipAsync'
 
   , 'consume'
   , 'each'
@@ -61,6 +55,14 @@ test('IterableOperator', () => {
   , 'toArray'
   , 'toSet'
   , 'count'
+  , 'groupBy'
+
+  , 'eachAsync'
+  , 'everyAsync'
+  , 'findAsync'
+  , 'reduceAsync'
+  , 'someAsync'
+  , 'groupByAsync'
   ].sort()
 
   const actualMethods = Object.getOwnPropertyNames(IterableOperator.prototype).sort()
