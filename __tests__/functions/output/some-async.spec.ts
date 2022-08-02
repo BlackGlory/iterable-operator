@@ -26,10 +26,10 @@ describe(`
   describe.each([
     testIterable('Iterable<T>')
   , testAsyncIterable('AsyncIterable<T>')
-  ])('%s', (_, getIter) => {
+  ])('%s', (_, createIter) => {
     describe('fn is called', () => {
       it('called with [element,index]', async () => {
-        const iter = getIter([1, 2, 3])
+        const iter = createIter([1, 2, 3])
         const fn = jest.fn().mockReturnValue(false)
 
         await someAsync(iter, fn)
@@ -42,7 +42,7 @@ describe(`
 
       describe('fn return true on first element', () => {
         it('called once', async () => {
-          const iter = getIter([1, 2, 3])
+          const iter = createIter([1, 2, 3])
           const fn = jest.fn().mockReturnValueOnce(true)
 
           await someAsync(iter, fn)
@@ -55,11 +55,11 @@ describe(`
     describe.each([
       testFunction('fn return non-promise')
     , testAsyncFunction('fn return PromiseLike')
-    ])('%s', (_, getFn) => {
+    ])('%s', (_, createFn) => {
       describe('fn return true', () => {
         it('return true', async () => {
-          const iter = getIter([1, 2, 3])
-          const fn = getFn(() => true)
+          const iter = createIter([1, 2, 3])
+          const fn = createFn(() => true)
 
           const result = someAsync(iter, fn)
           const proResult = await result
@@ -71,8 +71,8 @@ describe(`
 
       describe('fn return false every time', () => {
         it('return false', async () => {
-          const iter = getIter([1, 2, 3])
-          const fn = getFn(() => false)
+          const iter = createIter([1, 2, 3])
+          const fn = createFn(() => false)
 
           const result = someAsync(iter, fn)
           const proResult = await result
@@ -85,8 +85,8 @@ describe(`
       describe('fn throw error', () => {
         it('throw error', async () => {
           const customError = new Error('CustomError')
-          const iter = getIter([1, 2, 3])
-          const fn = getFn(() => { throw customError })
+          const iter = createIter([1, 2, 3])
+          const fn = createFn(() => { throw customError })
 
           const err = await getErrorPromise(someAsync(iter, fn))
 

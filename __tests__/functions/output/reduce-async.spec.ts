@@ -47,10 +47,10 @@ describe(`
   describe.each([
     testIterable('Iterable<T>')
   , testAsyncIterable('AsyncIterable<T>')
-  ])('%s', (_, getIter) => {
+  ])('%s', (_, createIter) => {
     describe('fn is called', () => {
       it('called with [accumulator,currentValue,index]', async () => {
-        const iter = getIter([1, 2, 3])
+        const iter = createIter([1, 2, 3])
         const fn = jest.fn()
           .mockReturnValueOnce(1 + 2)
           .mockReturnValueOnce(1 + 2 + 3)
@@ -66,12 +66,12 @@ describe(`
     describe.each([
       testFunction('fn return non-promise')
     , testAsyncFunction('fn return promise')
-    ])('%s', (_, getFn) => {
+    ])('%s', (_, createFn) => {
       describe('size(iterable) = 0', () => {
         describe('call', () => {
           it('throw Error', async () => {
-            const iter = getIter([])
-            const fn = getFn((acc: number, cur: number) => acc + cur)
+            const iter = createIter([])
+            const fn = createFn((acc: number, cur: number) => acc + cur)
 
             const err = await getErrorPromise(reduceAsync(iter, fn))
 
@@ -83,7 +83,7 @@ describe(`
       describe('size(iterable) = 1', () => {
         describe('call', () => {
           it('return the element without calling fn', async () => {
-            const iter = getIter([1])
+            const iter = createIter([1])
             const fn = jest.fn()
 
             const result = reduceAsync(iter, fn)
@@ -99,8 +99,8 @@ describe(`
       describe('size(iterable) > 1', () => {
         describe('call', () => {
           it('return result from reduction', async () => {
-            const iter = getIter([1, 2, 3])
-            const fn = getFn((acc: number, cur: number ) => acc + cur)
+            const iter = createIter([1, 2, 3])
+            const fn = createFn((acc: number, cur: number ) => acc + cur)
 
             const result = reduceAsync(iter, fn)
             const proResult = await result
@@ -184,10 +184,10 @@ describe(`
   describe.each([
     testIterable('Iterable<T>')
   , testAsyncIterable('AsyncIterable<T>')
-  ])('%s', (_, getIter) => {
+  ])('%s', (_, createIter) => {
     describe('fn is called', () => {
       it('called with [accumulator,currentValue,index]', async () => {
-        const iter = getIter([1, 2, 3])
+        const iter = createIter([1, 2, 3])
         const fn = jest.fn()
           .mockReturnValueOnce(0 + 1)
           .mockReturnValueOnce(0 + 1 + 2)
@@ -206,11 +206,11 @@ describe(`
     describe.each([
       testFunction('fn return non-promise')
     , testAsyncFunction('fn return promise')
-    ])('%s', (_, getFn) => {
+    ])('%s', (_, createFn) => {
       describe('call', () => {
         it('return result from reduction', async () => {
-          const iter = getIter([1, 2, 3])
-          const pushToAcc = getFn((acc: Array<[number, number]>, cur: number, index: number) => {
+          const iter = createIter([1, 2, 3])
+          const pushToAcc = createFn((acc: Array<[number, number]>, cur: number, index: number) => {
             acc.push([cur, index])
             return acc
           })

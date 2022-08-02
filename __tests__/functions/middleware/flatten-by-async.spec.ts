@@ -14,10 +14,10 @@ describe(`
   describe.each([
     testIterable('Iterable<unknown>')
   , testAsyncIterable('AsyncIterable<unknown>')
-  ])('%s', (_, getIter) => {
+  ])('%s', (_, createIter) => {
     describe('fn is called', () => {
       it('called with [element,level]', async () => {
-        const iter = getIter([0, [1]])
+        const iter = createIter([0, [1]])
         const fn = jest.fn().mockReturnValue(true)
 
         const result = flattenByAsync(iter, fn)
@@ -33,7 +33,7 @@ describe(`
 
     it('lazy and partial evaluation', async () => {
       const mock = new MockIterable([1, 2, 3])
-      const iter = getIter(mock)
+      const iter = createIter(mock)
       const fn = () => false
 
       const result = flattenByAsync(iter, fn)
@@ -48,14 +48,14 @@ describe(`
     describe.each([
       testFunction('fn return non-promise')
     , testAsyncFunction('fn return promiselike')
-    ])('%s', (_, getFn) => {
+    ])('%s', (_, createFn) => {
       describe('call', () => {
         it('return flat iterable', async () => {
-          const iter = getIter([
+          const iter = createIter([
             'one', ['two']
           , 0, [1]
           ])
-          const exceptString = getFn((x: unknown) => !isString(x))
+          const exceptString = createFn((x: unknown) => !isString(x))
 
           const result = flattenByAsync(iter, exceptString)
           const arrResult = await toArrayAsync(result)
@@ -70,8 +70,8 @@ describe(`
 
       describe('fn return false on level zero', () => {
         it('return iterable copy', async () => {
-          const iter = getIter([0, [1]])
-          const alwaysFalse = getFn(() => false)
+          const iter = createIter([0, [1]])
+          const alwaysFalse = createFn(() => false)
 
           const result = flattenByAsync(iter, alwaysFalse)
           const arrResult = await toArrayAsync(result)
@@ -84,8 +84,8 @@ describe(`
 
       describe('iterable is empty', () => {
         it('return empty iterable', async () => {
-          const iter = getIter([])
-          const fn = getFn(() => true)
+          const iter = createIter([])
+          const fn = createFn(() => true)
 
           const result = flattenByAsync(iter, fn)
           const arrResult = await toArrayAsync(result)
@@ -98,7 +98,7 @@ describe(`
       describe('iterable is string', () => {
         it('return iterable<char>', async () => {
           const iter = '123'
-          const fn = getFn(() => true)
+          const fn = createFn(() => true)
 
           const result = flattenByAsync(iter, fn)
           const arrResult = await toArrayAsync(result)
@@ -111,8 +111,8 @@ describe(`
       describe('fn throw error', () => {
         it('throw error when consume', async () => {
           const customError = new Error('CustomError')
-          const iter = getIter([[1]])
-          const fn = getFn(() => { throw customError })
+          const iter = createIter([[1]])
+          const fn = createFn(() => { throw customError })
 
           const result = flattenByAsync(iter, fn)
           const err = await getErrorPromise(toArrayAsync(result))

@@ -28,10 +28,10 @@ describe(`
   describe.each([
     testIterable('Iterable<T>')
   , testAsyncIterable('AsyncIterable<T>')
-  ])('%s', (_, getIter) => {
+  ])('%s', (_, createIter) => {
     describe('fn is called', () => {
       it('called with [element,index]', async () => {
-        const iter = getIter([1, 2, 3])
+        const iter = createIter([1, 2, 3])
         const fn = jest.fn()
 
         const result = tapAsync(iter, fn)
@@ -50,12 +50,12 @@ describe(`
     describe.each([
       testFunction('fn return non-promise')
     , testAsyncFunction('fn return promise')
-    ])('%s', (_, getFn) => {
+    ])('%s', (_, createFn) => {
       describe('call', () => {
         it('lazy and partial evaluation', async () => {
           const mock = new MockIterable([1, 2, 3])
-          const iter = getIter(mock)
-          const fn = getFn(jest.fn())
+          const iter = createIter(mock)
+          const fn = createFn(jest.fn())
 
           const result = tapAsync(iter, fn)
           const isLazy = mock.nextIndex === 0
@@ -67,9 +67,9 @@ describe(`
         })
 
         it('call fn and return iterable', async () => {
-          const iter = getIter([1, 2, 3])
+          const iter = createIter([1, 2, 3])
           const sideResult: Array<[number, number]> = []
-          const pushToSideResult = getFn((x: number, i: number) => sideResult.push([x, i]))
+          const pushToSideResult = createFn((x: number, i: number) => sideResult.push([x, i]))
 
           const result = tapAsync(iter, pushToSideResult)
           const isSideResultEmptyInStage1 = !sideResult.length
@@ -85,7 +85,7 @@ describe(`
       describe('fn throw error', () => {
         it('throw error when consume', async () => {
           const customError = new Error('CustomError')
-          const iter = getIter([1, 2, 3])
+          const iter = createIter([1, 2, 3])
           const justThrow = () => { throw customError }
 
           const result = tapAsync(iter, justThrow)

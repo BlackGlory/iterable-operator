@@ -38,14 +38,14 @@ describe(`
   describe.each([
     testIterable('Iterable<T>')
   , testAsyncIterable('AsyncIterable<T>')
-  ])('%s', (_, getIter) => {
+  ])('%s', (_, createIter) => {
     describe.each([
       testFunction('fn return non-promise')
     , testAsyncFunction('fn return promise')
-    ])('%s', (_, getFn) => {
+    ])('%s', (_, createFn) => {
       describe('fn is called', () => {
         it('called with [element,index]', async () => {
-          const iter = getIter([1, 2, 3])
+          const iter = createIter([1, 2, 3])
           const fn = jest.fn()
 
           const result = splitByAsync(iter, fn)
@@ -64,8 +64,8 @@ describe(`
       describe('fn return true', () => {
         describe('separator is first', () => {
           it('return splited iterable', async () => {
-            const iter = getIter([1, 2, 3, 4, 5])
-            const atThree = getFn((x: number) =>  x === 1)
+            const iter = createIter([1, 2, 3, 4, 5])
+            const atThree = createFn((x: number) =>  x === 1)
 
             const result = splitByAsync(iter, atThree)
             const arrResult = await toArrayAsync(result)
@@ -77,8 +77,8 @@ describe(`
 
         describe('separator is middle', () => {
           it('return splited iterable', async () => {
-            const iter = getIter([1, 2, 3, 4, 5])
-            const atThree = getFn((x: number) =>  x === 3)
+            const iter = createIter([1, 2, 3, 4, 5])
+            const atThree = createFn((x: number) =>  x === 3)
 
             const result = splitByAsync(iter, atThree)
             const arrResult = await toArrayAsync(result)
@@ -90,8 +90,8 @@ describe(`
 
         describe('separator is last', () => {
           it('return splited iterable', async () => {
-            const iter = getIter([1, 2, 3, 4, 5])
-            const atThree = getFn((x: number) =>  x === 5)
+            const iter = createIter([1, 2, 3, 4, 5])
+            const atThree = createFn((x: number) =>  x === 5)
 
             const result = splitByAsync(iter, atThree)
             const arrResult = await toArrayAsync(result)
@@ -104,8 +104,8 @@ describe(`
 
       describe('fn always return false', () => {
         it('return splited iterable', async () => {
-          const iter = getIter([1, 2, 3, 4, 5])
-          const alwaysFalse = getFn(() => false)
+          const iter = createIter([1, 2, 3, 4, 5])
+          const alwaysFalse = createFn(() => false)
 
           const result = splitByAsync(iter, alwaysFalse)
           const arrResult = await toArrayAsync(result)
@@ -117,8 +117,8 @@ describe(`
 
       it('lazy and partial evaluation', async () => {
         const mock = new MockIterable([1, 2, 3])
-        const iter = getIter(mock)
-        const fn = getFn(() => true)
+        const iter = createIter(mock)
+        const fn = createFn(() => true)
 
         const result = splitByAsync(iter, fn)
         const isLazy = mock.nextIndex === 0
@@ -132,7 +132,7 @@ describe(`
       describe('fn throw error', () => {
         it('throw error when consume', async () => {
           const customError = new Error('CustomError')
-          const iter = getIter([1, 2, 3, 4, 5])
+          const iter = createIter([1, 2, 3, 4, 5])
           const fn = () => { throw customError }
 
           const result = splitByAsync(iter, fn)

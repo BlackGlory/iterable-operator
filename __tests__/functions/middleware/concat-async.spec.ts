@@ -31,12 +31,12 @@ describe(`
   describe.each([
     testIterable('concatAsync<T>(...iterables: Array<Iterable<unknown>>): AsyncIterable<T>')
   , testAsyncIterable('(...iterables: Array<AsyncIterable<unknown>>): AsyncIterable<T>')
-  ])('%s', (_, getIter) => {
+  ])('%s', (_, createIter) => {
     describe('call', () => {
       it('lazy evaluation', async () => {
         const mock = new MockIterable([1, 2, 3])
-        const iter1 = getIter(mock)
-        const iter2 = getIter([])
+        const iter1 = createIter(mock)
+        const iter2 = createIter([])
 
         const result = concatAsync(iter1, iter2)
         const isLazy = mock.nextIndex === 0
@@ -48,7 +48,7 @@ describe(`
       })
 
       it('return concated iterable', async () => {
-        const iter1 = getIter([1, 2, 3])
+        const iter1 = createIter([1, 2, 3])
         const iter2 = toIterable(['a', 'b', 'c'])
         const iter3 = toAsyncIterable(['d', 'e', 'f'])
 

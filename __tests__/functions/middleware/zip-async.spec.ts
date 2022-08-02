@@ -66,11 +66,11 @@ describe(`
   describe.each([
     testIterable('Array<Iterable<unknown>>')
   , testAsyncIterable('Array<AsyncIterable<unknown>>')
-  ])('%s', (_, getIter) => {
+  ])('%s', (_, createIter) => {
     it('lazy evaluation', async () => {
       const mock = new MockIterable([1, 2, 3])
-      const iter1 = getIter(mock)
-      const iter2 = getIter([])
+      const iter1 = createIter(mock)
+      const iter2 = createIter([])
 
       const result = zipAsync(iter1, iter2)
       const isLazy = mock.nextIndex === 0
@@ -83,8 +83,8 @@ describe(`
 
     describe('iterables have same size', () => {
       it('return zipped iterable', async () => {
-        const iter1 = getIter([1, 2, 3])
-        const iter2 = getIter(['a', 'b', 'c'])
+        const iter1 = createIter([1, 2, 3])
+        const iter2 = createIter(['a', 'b', 'c'])
 
         const result = zipAsync(iter1, iter2)
         const arrResult = await toArrayAsync(result)
@@ -96,8 +96,8 @@ describe(`
 
     describe('iterables dont have same size', () => {
       it('return zipped iterable by the shortest iterable', async () => {
-        const iter1 = getIter([1, 2, 3])
-        const iter2 = getIter(['a', 'b'])
+        const iter1 = createIter([1, 2, 3])
+        const iter2 = createIter(['a', 'b'])
 
         const result = zipAsync(iter1, iter2)
         const arrResult = await toArrayAsync(result)

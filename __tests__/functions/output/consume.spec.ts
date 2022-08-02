@@ -12,10 +12,10 @@ describe(`
   describe.each([
     testIterable('Iterable<T>')
   , testAsyncIterable('AsyncIterable<T>')
-  ])('%s', (_, getIter) => {
+  ])('%s', (_, createIter) => {
     describe('call', () => {
       it('return result from consumer', async () => {
-        const iter = getIter([1, 2, 3])
+        const iter = createIter([1, 2, 3])
         const sum = async (iterable: Iterable<number> | AsyncIterable<number>) => {
           let result = 0
           for await (const value of iterable) {
@@ -35,7 +35,7 @@ describe(`
     describe('consumer throw error', () => {
       it('throw error', () => {
         const customError = new Error('CustomError')
-        const iter = getIter([1, 2, 3])
+        const iter = createIter([1, 2, 3])
         const fn = () => { throw customError }
 
         const err = getError(() => consume(iter as any, fn))

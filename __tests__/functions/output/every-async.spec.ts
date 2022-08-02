@@ -28,10 +28,10 @@ describe(`
   describe.each([
     testIterable('Iterable<T>')
   , testAsyncIterable('AsyncIterable<T>')
-  ])('%s', (_, getIter) => {
+  ])('%s', (_, createIter) => {
     describe('fn is called', () => {
       it('called with [element,index]', async () => {
-        const iter = getIter([1, 2, 3])
+        const iter = createIter([1, 2, 3])
         const fn = jest.fn().mockReturnValue(true)
 
         await everyAsync(iter, fn)
@@ -44,7 +44,7 @@ describe(`
 
       describe('fn return false on first element', () => {
         it('fn is called once', async () => {
-          const iter = getIter([1, 2, 3])
+          const iter = createIter([1, 2, 3])
           const fn = jest.fn().mockReturnValueOnce(false)
 
           await everyAsync(iter, fn)
@@ -57,11 +57,11 @@ describe(`
     describe.each([
       testFunction('fn return non-promise')
     , testAsyncFunction('fn return promiselike')
-    ])('%s', (_, getFn) => {
+    ])('%s', (_, createFn) => {
       describe('fn return true every time', () => {
         it('return true', async () => {
-          const iter = getIter([1, 2, 3])
-          const isNumber = getFn(() => true)
+          const iter = createIter([1, 2, 3])
+          const isNumber = createFn(() => true)
 
           const result = everyAsync(iter, isNumber)
           const proResult = await result
@@ -73,8 +73,8 @@ describe(`
 
       describe('fn return true not every time', () => {
         it('return false', async () => {
-          const iter = getIter([1, 2, 3])
-          const fn = getFn(() => false)
+          const iter = createIter([1, 2, 3])
+          const fn = createFn(() => false)
 
           const result = everyAsync(iter, fn)
           const proResult = await result
@@ -87,8 +87,8 @@ describe(`
       describe('fn throw error', () => {
         it('throw error', async () => {
           const customError = new Error('CustomError')
-          const iter = getIter([1, 2, 3])
-          const fn = getFn(() => { throw customError })
+          const iter = createIter([1, 2, 3])
+          const fn = createFn(() => { throw customError })
 
           const err = await getErrorPromise(everyAsync(iter, fn))
 

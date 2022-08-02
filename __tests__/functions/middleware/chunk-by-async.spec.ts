@@ -38,10 +38,10 @@ describe(`
   describe.each([
     testIterable('Iterable<T>')
   , testAsyncIterable('AsyncIterable<T>')
-  ])('%s', (_, getIter) => {
+  ])('%s', (_, createIter) => {
     describe('fn is called', () => {
       it('called with [element,index]', async () => {
-        const iter = getIter([1, 2, 3])
+        const iter = createIter([1, 2, 3])
         const fn = jest.fn()
 
         const result = chunkByAsync(iter, fn)
@@ -59,7 +59,7 @@ describe(`
 
     it('lazy and partial evaluation', async () => {
       const mock = new MockIterable([1, 2, 3])
-      const iter = getIter(mock)
+      const iter = createIter(mock)
       const fn = () => true
 
       const result = chunkByAsync(iter, fn)
@@ -74,12 +74,12 @@ describe(`
     describe.each([
       testFunction('fn return non-promise')
     , testAsyncFunction('fn return promiselike')
-    ])('%s', (_, getFn) => {
+    ])('%s', (_, createFn) => {
       describe('fn return true', () => {
         describe('chunk at middle', () => {
           it('return chunked iterable', async () => {
-            const iter = getIter([1, 2, 3])
-            const atTwo = getFn((x: number) => x === 2)
+            const iter = createIter([1, 2, 3])
+            const atTwo = createFn((x: number) => x === 2)
 
             const result = chunkByAsync(iter, atTwo)
             const arrResult = await toArrayAsync(result)
@@ -91,8 +91,8 @@ describe(`
 
         describe('chunk at last', () => {
           it('return chunked iterable', async () => {
-            const iter = getIter([1, 2, 3])
-            const atThree = getFn((x: number) => x === 3)
+            const iter = createIter([1, 2, 3])
+            const atThree = createFn((x: number) => x === 3)
 
             const result = chunkByAsync(iter, atThree)
             const arrResult = await toArrayAsync(result)
@@ -105,8 +105,8 @@ describe(`
 
       describe('fn always return false', () => {
         it('return chunked iterable', async () => {
-          const iter = getIter([1, 2, 3])
-          const alwaysFalse = getFn(() => false)
+          const iter = createIter([1, 2, 3])
+          const alwaysFalse = createFn(() => false)
 
           const result = chunkByAsync(iter, alwaysFalse)
           const arrResult = await toArrayAsync(result)
@@ -119,8 +119,8 @@ describe(`
       describe('fn throw error', () => {
         it('throw error when consume', async () => {
           const customError = new Error('CustomError')
-          const iter = getIter([1, 2, 3])
-          const fn = getFn(() => { throw customError })
+          const iter = createIter([1, 2, 3])
+          const fn = createFn(() => { throw customError })
 
           const result = chunkByAsync(iter, fn)
           const err = await getErrorPromise(toArrayAsync(result))

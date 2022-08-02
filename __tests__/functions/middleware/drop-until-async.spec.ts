@@ -62,7 +62,7 @@ describe(`
   describe.each([
     testIterable('Iterable<T>')
   , testAsyncIterable('AsyncIterable<T>')
-  ])('%s', (_, getIter) => {
+  ])('%s', (_, createIter) => {
     describe('fn is called', () => {
       it('called with [element,index]', async () => {
         const iter = [1, 2, 3]
@@ -98,7 +98,7 @@ describe(`
 
     it('lazy and partial evaluation', async () => {
       const mock = new MockIterable([1, 2, 3])
-      const iter = getIter(mock)
+      const iter = createIter(mock)
       const fn = (x: number) => x === 2
 
       const result = dropUntilAsync(iter, fn)
@@ -113,11 +113,11 @@ describe(`
     describe.each([
       testFunction('fn return non-promise')
     , testAsyncFunction('fn return promise')
-    ])('%s', (_, getFn) => {
+    ])('%s', (_, createFn) => {
       describe('call', () => {
         it('return itreable that drop elements until fn return true', async () => {
-          const iter = getIter([1, 2, 3])
-          const atTwo = getFn((x: number) => x === 2)
+          const iter = createIter([1, 2, 3])
+          const atTwo = createFn((x: number) => x === 2)
 
           const result = dropUntilAsync(iter, atTwo)
           const arrResult = await toArrayAsync(result)
@@ -130,7 +130,7 @@ describe(`
       describe('fn throw error', () => {
         it('throw error when consume', async () => {
           const customError = new Error('CustomError')
-          const iter = getIter([1, 2, 3])
+          const iter = createIter([1, 2, 3])
           const fn = () => { throw customError }
 
           const result = dropUntilAsync(iter, fn)
