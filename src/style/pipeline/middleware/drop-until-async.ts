@@ -4,7 +4,7 @@ import { Awaitable } from 'justypes'
 
 export function dropUntilAsync<T>(
   predicate: (element: T, index: number) => Awaitable<unknown>
-): (iterable: Iterable<T> | AsyncIterable<T>) => AsyncIterable<T>
+): (iterable: Iterable<T> | AsyncIterable<T>) => AsyncIterableIterator<T>
 export function dropUntilAsync(...args: unknown[]) {
   return getPipelineProxy(target, args)
 }

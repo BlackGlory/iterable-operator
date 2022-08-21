@@ -5,7 +5,7 @@ describe(`
   zipAsync<T, U extends Array<Iterable<unknown> | AsyncIterable<unknown>>>(
     this: Iterable<Awaitable<T>> | AsyncIterable<T>
   , ...iterables: U
-  ): AsyncIterable<[T, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]>
+  ): AsyncIterableIterator<[T, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]>
 `, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'zipAsync')

@@ -15,7 +15,7 @@ export function everyAsync<T>(
 async function everyIterable<T>(
   iterable: Iterable<T>
 , predicate: (element: T, index: number) => Awaitable<unknown>
-) {
+): Promise<boolean> {
   let index = 0
   for (const element of iterable) {
     if (!await predicate(element, index)) return false
@@ -27,7 +27,7 @@ async function everyIterable<T>(
 async function everyAsyncIterable<T>(
   iterable: AsyncIterable<T>
 , predicate: (element: T, index: number) => Awaitable<unknown>
-) {
+): Promise<boolean> {
   let index = 0
   for await (const element of iterable) {
     if (!await predicate(element, index)) return false

@@ -3,7 +3,7 @@ import { getError } from 'return-style'
 import { repeat } from '@middleware/repeat'
 import '@blackglory/jest-matchers'
 
-describe('repeat<T>(iterable: Iterable<T>, times: number): Iterable<T>', () => {
+describe('repeat<T>(iterable: Iterable<T>, times: number): IterableIteartor<T>', () => {
   it('lazy and partial evaluation', () => {
     const iter = new MockIterable([1, 2, 3])
     const times = 2

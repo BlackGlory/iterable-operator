@@ -3,7 +3,7 @@ import { consume, toArray, MockIterable, take } from '@test/utils'
 import { chunk } from '@middleware/chunk'
 import '@blackglory/jest-matchers'
 
-describe('chunk<T>(iterable: Iterable<T>, size: number): Iterable<T[]>', () => {
+describe('chunk<T>(iterable: Iterable<T>, size: number): IterableIterator<T[]>', () => {
   it('lazy and partial evaluation', () => {
     const iter = new MockIterable([1, 2, 3])
     const size = 1

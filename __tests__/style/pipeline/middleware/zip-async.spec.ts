@@ -6,7 +6,7 @@ describe(`
     ...iterables: U
   ): (
     iterable: Iterable<Awaitable<T>> | AsyncIterable<T>
-  ) => AsyncIterable<[T, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]>
+  ) => AsyncIterableIterator<[T, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]>
 `, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'zipAsync')

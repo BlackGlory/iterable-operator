@@ -4,7 +4,7 @@ import { Awaitable } from 'justypes'
 
 export function filterAsync<T, U extends T = T>(
   predicate: (element: T, index: number) => Awaitable<unknown>
-): (iterable: Iterable<T> | AsyncIterable<T>) => AsyncIterable<U>
+): (iterable: Iterable<T> | AsyncIterable<T>) => AsyncIterableIterator<U>
 export function filterAsync(...args: unknown[]) {
   return getPipelineProxy(target, args)
 }

@@ -4,7 +4,7 @@ import { Awaitable } from 'justypes'
 export function chunkByAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
 , predicate: (element: T, index: number) => Awaitable<unknown>
-): AsyncIterable<T[]> {
+): AsyncIterableIterator<T[]> {
   if (isAsyncIterable(iterable)) {
     return chunkByAsyncIterable(iterable, predicate)
   } else {
@@ -15,7 +15,7 @@ export function chunkByAsync<T>(
 async function* chunkByAsyncIterable<T>(
   iterable: AsyncIterable<T>
 , predicate: (element: T, index: number) => Awaitable<unknown>
-) {
+): AsyncIterableIterator<T[]> {
   let buffer: T[] = []
   let index = 0
 
@@ -34,7 +34,7 @@ async function* chunkByAsyncIterable<T>(
 async function* chunkByIterable<T>(
   iterable: Iterable<T>
 , predicate: (element: T, index: number) => Awaitable<unknown>
-) {
+): AsyncIterableIterator<T[]> {
   let buffer: T[] = []
   let index = 0
 

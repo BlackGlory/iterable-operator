@@ -6,7 +6,7 @@ describe(`
   sliceAsync<T>(
     start: number
   , end: number
-  ): (iterable: AsyncIterable<T>) => AsyncIterable<T>
+  ): (iterable: AsyncIterable<T>) => AsyncIterableIterator<T>
 `, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'sliceAsync')

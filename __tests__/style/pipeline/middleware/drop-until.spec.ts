@@ -5,7 +5,7 @@ import '@blackglory/jest-matchers'
 describe(`
   dropUntil<T>(
     predicate: (element: T, index: number) => unknown
-  ): (iterable: Iterable<T>) => Iterable<T>
+  ): (iterable: Iterable<T>) => IterableIterator<T>
 `, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'dropUntil')

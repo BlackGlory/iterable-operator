@@ -8,7 +8,7 @@ describe(`
   zip<T, U extends Array<Iterable<unknown>>>(
     iterable: Iterable<T>
   , ...otherIterables: U
-  ): Iterable<[T, ...ExtractTypeTupleFromIterableTuple<U>]>
+  ): IterableIterator<[T, ...ExtractTypeTupleFromIterableTuple<U>]>
 ` , () => {
   test('close unexhausted iterator', () => {
     const iter = new MockIterable(go(function* () {

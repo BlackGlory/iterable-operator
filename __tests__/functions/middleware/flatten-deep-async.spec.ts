@@ -8,7 +8,7 @@ describe(`
   flattenDeepAsync<T>(
     iterable: AsyncIterable<unknown>
   , depth: number
-  ): AsyncIterable<T>
+  ): AsyncIterableIterator<T>
 `, () => {
   it('lazy and partial evaluation', async () => {
     const iter = new MockAsyncIterable([1, 2, 3])

@@ -9,7 +9,7 @@ describe(`
     iterable: AsyncIterable<T>
   , start: number
   , end: number
-  ): AsyncIterable<T>
+  ): AsyncIterableIteartor<T>
 `, () => {
   it('lazy and partial evaluation', async () => {
     const iter = new MockAsyncIterable([1, 2, 3])

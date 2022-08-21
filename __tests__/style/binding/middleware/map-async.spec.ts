@@ -5,7 +5,7 @@ describe(`
   mapAsync<T, U>(
     this: Iterable<T> | AsyncIterable<T>
   , fn: (element: T, index: number) => Awaitable<U>
-  ): AsyncIterable<U>
+  ): AsyncIterableIterator<U>
 `, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'mapAsync')

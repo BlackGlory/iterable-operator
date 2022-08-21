@@ -5,7 +5,7 @@ describe(`
   uniqByAsync<T, U>(
     this: Iterable<T> | AsyncIterable<T>
   , fn: (element: T, index: number) => Awaitable<U>
-  ): AsyncIterable<T>
+  ): AsyncIterableIterator<T>
 `, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'uniqByAsync')

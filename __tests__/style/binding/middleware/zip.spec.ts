@@ -6,7 +6,7 @@ describe(`
   zip<T, U extends Array<Iterable<unknown>>>(
     this: Iterable<T>
   , ...iterables: U
-  ): Iterable<[T, ...ExtractTypeTupleFromIterableTuple<U>]>
+  ): IterableIterator<[T, ...ExtractTypeTupleFromIterableTuple<U>]>
 `, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'zip')

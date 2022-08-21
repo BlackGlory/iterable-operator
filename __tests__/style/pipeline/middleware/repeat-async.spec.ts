@@ -3,7 +3,9 @@ import { repeatAsync } from '@style/pipeline/middleware/repeat-async'
 import { toAsyncIterable } from '@test/utils'
 
 describe(`
-  repeatAsync<T>(times: number): (iterable: AsyncIterable<T>) => AsyncIterable<T>
+  repeatAsync<T>(
+    times: number
+  ): (iterable: AsyncIterable<T>) => AsyncIterableIterator<T>
 `, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'repeatAsync')

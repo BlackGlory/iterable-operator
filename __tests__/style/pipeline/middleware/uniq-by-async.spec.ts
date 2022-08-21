@@ -4,7 +4,7 @@ import { uniqByAsync } from '@style/pipeline/middleware/uniq-by-async'
 describe(`
   uniqByAsync<T, U>(
     fn: (element: T, index: number) => Awaitable<U>
-  ): (iterable: Iterable<T> | AsyncIterable<T>) => AsyncIterable<T>
+  ): (iterable: Iterable<T> | AsyncIterable<T>) => AsyncIterableIterator<T>
 `, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'uniqByAsync')

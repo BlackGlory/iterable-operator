@@ -5,7 +5,7 @@ import { Awaitable } from 'justypes'
 export function concatAsync<T, U>(
   iterable: Iterable<Awaitable<T>> | AsyncIterable<T>
 , ...otherIterables: Array<Iterable<Awaitable<U>> | AsyncIterable<U>>
-): AsyncIterable<T | U> {
+): AsyncIterableIterator<T | U> {
   return go(async function* () {
     for (const iter of [iterable, ...otherIterables]) {
       if (isAsyncIterable(iter)) {

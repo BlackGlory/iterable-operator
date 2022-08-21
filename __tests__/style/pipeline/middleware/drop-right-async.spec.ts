@@ -3,7 +3,9 @@ import { dropRightAsync } from '@style/pipeline/middleware/drop-right-async'
 import { toAsyncIterable } from '@test/utils'
 
 describe(`
-  dropRightAsync<T>(count: number): (iterable: AsyncIterable<T>) => AsyncIterable<T>
+  dropRightAsync<T>(
+    count: number
+  ): (iterable: AsyncIterable<T>) => AsyncIterableIterator<T>
 `, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'dropRightAsync')

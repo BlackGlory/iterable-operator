@@ -4,7 +4,7 @@ import { Awaitable } from 'justypes'
 
 export function flattenByAsync<T>(
   predicate: (element: unknown, level: number) => Awaitable<unknown>
-): (iterable: Iterable<unknown> | AsyncIterable<unknown>) => AsyncIterable<T>
+): (iterable: Iterable<unknown> | AsyncIterable<unknown>) => AsyncIterableIterator<T>
 export function flattenByAsync(...args: unknown[]) {
   return getPipelineProxy(target, args)
 }

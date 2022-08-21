@@ -2,7 +2,9 @@ import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsy
 import { flattenAsync } from '@middleware/flatten-async'
 import '@blackglory/jest-matchers'
 
-describe('flattenAsync<T, U>(iterable: AsyncIterable<T>): AsyncIterable<U>', () => {
+describe(`
+  flattenAsync<T, U>(iterable: AsyncIterable<T>): AsyncIterableIterator<U>
+`, () => {
   it('lazy and partial evaluation', async () => {
     const iter = new MockAsyncIterable([1, 2, 3])
 

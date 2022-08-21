@@ -3,7 +3,9 @@ import { concat } from '@style/pipeline/middleware/concat'
 import '@blackglory/jest-matchers'
 
 describe(`
-  concat<T, U>(...iterables: Array<Iterable<U>>): (iterable: Iterable<T>) => Iterable<T | U>
+  concat<T, U>(
+    ...iterables: Array<Iterable<U>>
+  ): (iterable: Iterable<T>) => IterableIterator<T | U>
 `, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'concat')

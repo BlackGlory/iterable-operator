@@ -10,7 +10,7 @@ describe(`
   dropUntilAsync<T>(
     iterable: Iterable<T> | AsyncIterable<T>
   , predicate: (element: T, index: number) => Awaitable<unknown>
-  ): AsyncIterable<T>
+  ): AsyncIterableIterator<T>
 `, () => {
   describe('close unexhausted iterator', () => {
     test('iterable', async () => {

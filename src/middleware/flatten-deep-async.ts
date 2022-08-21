@@ -3,15 +3,15 @@ import { assert } from '@blackglory/errors'
 
 export function flattenDeepAsync<T>(
   iterable: AsyncIterable<unknown>
-): AsyncIterable<T>
+): AsyncIterableIterator<T>
 export function flattenDeepAsync<T>(
   iterable: AsyncIterable<unknown>
 , depth: number
-): AsyncIterable<T>
+): AsyncIterableIterator<T>
 export function flattenDeepAsync<T>(
   iterable: AsyncIterable<unknown>
 , depth: number = Infinity
-): AsyncIterable<T> {
+): AsyncIterableIterator<T> {
   assert(
     depth === Infinity || Number.isInteger(depth)
   , 'The parameter depth must be an integer')

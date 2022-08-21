@@ -16,7 +16,7 @@ describe(`
   zipAsync<T, U extends Array<Iterable<unknown> | AsyncIterable<unknown>>>(
     iterable: Iterable<Awaitable<T>> | AsyncIterable<T>
   , ...otherIterables: U
-  ): AsyncIterable<[T, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]>
+  ): AsyncIterableIterator<[T, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]>
 `, () => {
   describe('close unexhausted iterator', () => {
     test('iterable', async () => {

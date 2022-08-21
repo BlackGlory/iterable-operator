@@ -5,7 +5,7 @@ describe(`
   flattenByAsync<T>(
     this: Iterable<unknown> | AsyncIterable<unknown>
   , predicate: (element: unknown, level: number) => Awaitable<unknown>
-  ): AsyncIterable<T>
+  ): AsyncIterableIterator<T>
 `, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'flattenByAsync')

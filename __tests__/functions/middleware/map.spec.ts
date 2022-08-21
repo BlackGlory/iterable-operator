@@ -7,7 +7,7 @@ describe(`
   map<T, U>(
     iterable: Iterable<T>
   , fn: (element: T, index: number) => U
-  ): Iterable<U>
+  ): IterableIterator<U>
 `, () => {
   describe('fn called', () => {
     it('called with [element,index]', () => {

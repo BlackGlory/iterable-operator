@@ -14,7 +14,7 @@ export function someAsync<T>(
 async function someIterable<T>(
   iterable: Iterable<T>
 , predicate: (element: T, index: number) => Promise<unknown>
-) {
+): Promise<boolean> {
   let index = 0
 
   for (const element of iterable) {
@@ -28,7 +28,7 @@ async function someIterable<T>(
 async function someAsyncIterable<T>(
   iterable: AsyncIterable<T>
 , predicate: (element: T, index: number) => Promise<unknown>
-) {
+): Promise<boolean> {
   let index = 0
 
   for await (const element of iterable) {

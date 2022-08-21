@@ -12,7 +12,7 @@ export function zipAsync<
 >(
   this: Iterable<Awaitable<T>> | AsyncIterable<T>
 , ...iterables: U
-): AsyncIterable<[T, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]>
+): AsyncIterableIterator<[T, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]>
 export function zipAsync(this: any, ...args: unknown[]) {
   return applyBinding(this, target, args)
 }

@@ -1,15 +1,15 @@
 import { flattenBy } from './flatten-by'
 import { assert } from '@blackglory/errors'
 
-export function flattenDeep<T>(iterable: Iterable<unknown>): Iterable<T>
+export function flattenDeep<T>(iterable: Iterable<unknown>): IterableIterator<T>
 export function flattenDeep<T>(
   iterable: Iterable<unknown>
 , depth: number
-): Iterable<T>
+): IterableIterator<T>
 export function flattenDeep<T>(
   iterable: Iterable<unknown>
 , depth: number = Infinity
-): Iterable<T> {
+): IterableIterator<T> {
   assert(
     depth === Infinity || Number.isInteger(depth)
   , 'The parameter depth must be an integer'

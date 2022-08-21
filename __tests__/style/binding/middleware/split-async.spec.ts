@@ -2,7 +2,12 @@ import * as middleware from '@middleware/split-async'
 import { splitAsync } from '@style/binding/middleware/split-async'
 import { toAsyncIterable } from '@test/utils'
 
-describe('splitAsync<T>(this: AsyncIterable<T>, separator: T): AsyncIterable<T[]>', () => {
+describe(`
+  splitAsync<T>(
+    this: AsyncIterable<T>
+  , separator: T
+  ): AsyncIterableIterator<T[]>
+`, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'splitAsync')
     const iter = toAsyncIterable([1, 2, 3])

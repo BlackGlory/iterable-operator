@@ -4,7 +4,7 @@ import { filterAsync } from '@style/pipeline/middleware/filter-async'
 describe(`
   filterAsync<T, U extends T = T>(
     predicate: (element: T, index: number) => Awaitable<unknown>
-  ): (iterable: Iterable<T> | AsyncIterable<T>) => AsyncIterable<U>
+  ): (iterable: Iterable<T> | AsyncIterable<T>) => AsyncIterableIterator<U>
 `, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'filterAsync')

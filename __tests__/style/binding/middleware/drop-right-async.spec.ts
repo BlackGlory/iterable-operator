@@ -3,7 +3,7 @@ import { dropRightAsync } from '@style/binding/middleware/drop-right-async'
 import { toAsyncIterable } from '@test/utils'
 
 describe(`
-  dropRightAsync<T>(this: AsyncIterable<T>, count: number): AsyncIterable<T>
+  dropRightAsync<T>(this: AsyncIterable<T>, count: number): AsyncIterableIterator<T>
 `, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'dropRightAsync')

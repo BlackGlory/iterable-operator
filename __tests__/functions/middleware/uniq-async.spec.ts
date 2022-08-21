@@ -2,7 +2,7 @@ import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsy
 import { uniqAsync } from '@middleware/uniq-async'
 import '@blackglory/jest-matchers'
 
-describe('uniqAsync<T>(iterable: AsyncIterable<T>): AsyncIterable<T>', () => {
+describe('uniqAsync<T>(iterable: AsyncIterable<T>): AsyncIterableIterator<T>', () => {
   describe('call', () => {
     it('return uniqed iterable', async () => {
       const iter = toAsyncIterable([1, 1, 2, 2, 3, 3])

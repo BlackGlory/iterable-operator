@@ -7,12 +7,12 @@ describe(`
   concatAsync<T, U>(
     iterable: Iterable<Awaitalbe<T>> | AsyncIterable<T>
   , ...otherIterables: Array<Iterable<Awaitable<U>> | AsyncIterable<U>>
-  ): AsyncIterable<T | U>
+  ): AsyncIterableIterator<T | U>
 `, () => {
   describe(`
     concatAsync<PromiseLike<T>>(
       ...iterables: Array<Iterable<PromiseLike<T>>>
-    ): AsyncIterable<T>
+    ): AsyncIterableIterator<T>
   `, () => {
     describe('call', () => {
       it('return concated AsyncIterable', async () => {
@@ -29,8 +29,16 @@ describe(`
   })
 
   describe.each([
-    testIterable('concatAsync<T>(...iterables: Array<Iterable<unknown>>): AsyncIterable<T>')
-  , testAsyncIterable('(...iterables: Array<AsyncIterable<unknown>>): AsyncIterable<T>')
+    testIterable(`
+      concatAsync<T>(
+        ...iterables: Array<Iterable<unknown>>
+      ): AsyncIterableIterator<T>
+    `)
+  , testAsyncIterable(`
+      concatAsync<T>(
+        ...iterables: Array<AsyncIterable<unknown>>
+      ): AsyncIterableIterator<T>
+    `)
   ])('%s', (_, createIter) => {
     describe('call', () => {
       it('lazy evaluation', async () => {

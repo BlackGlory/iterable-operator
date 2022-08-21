@@ -6,7 +6,7 @@ describe(`
   transform<T, U>(
     this: Iterable<T>
   , transformer: (iterable: Iterable<T>) => Iterable<U>
-  ): Iterable<U>
+  ): IterableIterator<U>
 `, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'transform')

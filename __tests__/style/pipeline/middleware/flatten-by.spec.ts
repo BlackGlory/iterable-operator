@@ -5,7 +5,7 @@ import '@blackglory/jest-matchers'
 describe(`
   flattenBy<T>(
     predicate: (element: unknown, level: number) => unknown
-  ): (iterable: Iterable<unknown>) => Iterable<T>
+  ): (iterable: Iterable<unknown>) => IterableIterator<T>
 `, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'flattenBy')

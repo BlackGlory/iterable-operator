@@ -6,7 +6,7 @@ describe(`
     ...iterables: Array<Iterable<Awaitable<U>> | AsyncIterable<U>>
   ): (
     ...iterables: Array<Iterable<Awaitable<T>> | AsyncIterable<T>>
-  ) => AsyncIterable<T | U>
+  ) => AsyncIterableIterator<T | U>
 `, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'concatAsync')

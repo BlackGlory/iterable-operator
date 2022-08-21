@@ -4,7 +4,7 @@ import { Awaitable } from 'justypes'
 
 export function mapAsync<T, U>(
   fn: (element: T, index: number) => Awaitable<U>
-): (iterable: Iterable<T> | AsyncIterable<T>) => AsyncIterable<U>
+): (iterable: Iterable<T> | AsyncIterable<T>) => AsyncIterableIterator<U>
 export function mapAsync(...args: unknown[]) {
   return getPipelineProxy(target, args)
 }

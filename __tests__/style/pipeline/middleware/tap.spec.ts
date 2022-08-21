@@ -5,7 +5,7 @@ import '@blackglory/jest-matchers'
 describe(`
   tap<T>(
     fn: (element: T, index: number) => unknown
-  ): (iterable: Iterable<T>) => Iterable<T>
+  ): (iterable: Iterable<T>) => IterableIterator<T>
 `, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'tap')

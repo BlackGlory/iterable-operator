@@ -4,7 +4,7 @@ import { mapAsync } from '@style/pipeline/middleware/map-async'
 describe(`
   mapAsync<T, U>(
     fn: (element: T, index: number) => Awaitable<U>
-  ): (iterable: Iterable<T> | AsyncIterable<T>) => AsyncIterable<U>
+  ): (iterable: Iterable<T> | AsyncIterable<T>) => AsyncIterableIterator<U>
 `, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'mapAsync')

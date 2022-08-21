@@ -6,7 +6,7 @@ describe(`
   transformAsync<T, U>(
     this: Iterable<T>
   , transformer: (iterable: Iterable<T>) => AsyncIterable<U>
-  ): AsyncIterable<U>
+  ): AsyncIterableIterator<U>
 `, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'transformAsync')
@@ -25,7 +25,7 @@ describe(`
   transformAsync<T, U>(
     this: AsyncIterable<T>
   , transformer: (iterable: AsyncIterable<T>) => AsyncIterable<U>
-  ): AsyncIterable<U>
+  ): AsyncIterableIterator<U>
 `, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'transformAsync')

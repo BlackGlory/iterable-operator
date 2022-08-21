@@ -5,7 +5,7 @@ import '@blackglory/jest-matchers'
 describe(`
   transform<T, U>(
     transformer: (iterable: Iterable<T>) => Iterable<U>
-  ): (iterable: Iterable<T>) => Iterable<U>
+  ): (iterable: Iterable<T>) => IterableIterator<U>
 `, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'transform')

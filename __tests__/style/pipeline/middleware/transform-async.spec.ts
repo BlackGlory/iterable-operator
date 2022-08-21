@@ -5,7 +5,7 @@ import { toAsyncIterable } from '@test/utils'
 describe(`
   transformAsync<T, U>(
     transformer: (iterable: Iterable<T>) => AsyncIterable<U>
-  ): (iterable: Iterable<T>) => AsyncIterable<U>
+  ): (iterable: Iterable<T>) => AsyncIterableIterator<U>
 `, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'transformAsync')
@@ -23,7 +23,7 @@ describe(`
 describe(`
   transformAsync<T, U>(
     transformer: (iterable: AsyncIterable<T>) => AsyncIterable<U>
-  ): (iterable: AsyncIterable<T>) => AsyncIterable<U>
+  ): (iterable: AsyncIterable<T>) => AsyncIterableIterator<U>
 `, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'transformAsync')

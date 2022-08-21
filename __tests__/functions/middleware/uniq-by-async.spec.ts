@@ -8,7 +8,7 @@ describe(`
   uniqByAsync<T, U>(
     iterable: Iterable<T> | AsyncIterable<T>
   , fn: (element: T, index: number) => Awaitable<U>
-  ): AsyncIterable<T>
+  ): AsyncIterableIterator<T>
 `, () => {
   describe('T is PromiseLike<unknown>', () => {
     it('called with [element(promise),index]', async () => {

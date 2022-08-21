@@ -8,7 +8,7 @@ export function zipAsync<
 , U extends Array<Iterable<unknown> | AsyncIterable<unknown>>
 >(...iterables: U): (
   iterable: Iterable<Awaitable<T>> | AsyncIterable<T>
-) => AsyncIterable<[T, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]>
+) => AsyncIterableIterator<[T, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]>
 export function zipAsync(...args: unknown[]) {
   return getPipelineProxy(target, args)
 }

@@ -4,7 +4,10 @@ import { uniqBy } from '@middleware/uniq-by'
 import '@blackglory/jest-matchers'
 
 describe(`
-  uniqBy<T, U>(iterable: Iterable<T>, fn: (element: T, index: number) => U): Iterable<T>
+  uniqBy<T, U>(
+    iterable: Iterable<T>
+  , fn: (element: T, index: number) => U
+  ): IterableIterator<T>
 `, () => {
   describe('fn called', () => {
     it('called with [element,index]', () => {

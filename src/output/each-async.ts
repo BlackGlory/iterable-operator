@@ -15,7 +15,7 @@ export function eachAsync<T>(
 async function eachAsyncIterable<T>(
   iterable: AsyncIterable<T>
 , fn: (element: T, index: number) => Awaitable<unknown>
-) {
+): Promise<void> {
   let index = 0
 
   for await (const element of iterable) {
@@ -27,7 +27,7 @@ async function eachAsyncIterable<T>(
 async function eachIterable<T>(
   iterable: Iterable<T>
 , fn: (element: T, index: number) => Awaitable<unknown>
-) {
+): Promise<void> {
   let index = 0
 
   for (const element of iterable) {

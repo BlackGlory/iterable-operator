@@ -6,7 +6,7 @@ describe(`
   chunkBy<T>(
     this: Iterable<T>
   , predicate: (element: T, index: number) => unknown
-  ): Iterable<T[]>
+  ): IterableIterator<T[]>
 `, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'chunkBy')

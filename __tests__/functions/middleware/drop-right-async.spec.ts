@@ -4,7 +4,7 @@ import { dropRightAsync } from '@middleware/drop-right-async'
 import '@blackglory/jest-matchers'
 
 describe(`
-  dropRightAsync<T>(iterable: AsyncIterable<T>, count: number): AsyncIterable<T>
+  dropRightAsync<T>(iterable: AsyncIterable<T>, count: number): AsyncIterableIterator<T>
 `, () => {
   it('lazy evaluation', async () => {
     const iter = new MockAsyncIterable([1, 2, 3])

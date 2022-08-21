@@ -4,7 +4,7 @@ import { assert } from '@blackglory/errors'
 export function chunkAsync<T>(
   iterable: AsyncIterable<T>
 , size: number
-): AsyncIterable<T[]> {
+): AsyncIterableIterator<T[]> {
   assert(Number.isInteger(size), 'The parameter size must be an integer')
   assert(size > 0, 'The parameter size must be greater than 0')
 

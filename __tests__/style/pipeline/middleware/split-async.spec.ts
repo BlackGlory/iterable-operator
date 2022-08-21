@@ -3,7 +3,9 @@ import { splitAsync } from '@style/pipeline/middleware/split-async'
 import { toAsyncIterable } from '@test/utils'
 
 describe(`
-  splitAsync<T>(separator: T): (iterable: AsyncIterable<T>) => AsyncIterable<T[]>
+  splitAsync<T>(
+    separator: T
+  ): (iterable: AsyncIterable<T>) => AsyncIterableIterator<T[]>
 `, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'splitAsync')

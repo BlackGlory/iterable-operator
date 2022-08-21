@@ -9,7 +9,7 @@ describe(`
   flattenByAsync<T>(
     iterable: Iterable<unknown> | AsyncIterable<unknown>
   , predicate: (element: unknown, level: number) => Awaitable<unknown>
-  ): AsyncIterable<T>
+  ): AsyncIterableIterator<T>
 `, () => {
   describe.each([
     testIterable('Iterable<unknown>')

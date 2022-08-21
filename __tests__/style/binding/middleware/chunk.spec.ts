@@ -2,7 +2,7 @@ import * as middleware from '@middleware/chunk'
 import { chunk } from '@style/binding/middleware/chunk'
 import '@blackglory/jest-matchers'
 
-describe('chunk<T>(this: Iterable<T>, size: number): Iterable<T[]>', () => {
+describe('chunk<T>(this: Iterable<T>, size: number): IterableIterator<T[]>', () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'chunk')
     const iter = [1, 2, 3]

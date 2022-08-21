@@ -1,7 +1,7 @@
 import { go } from '@blackglory/go'
 import { assert } from '@blackglory/errors'
 
-export function repeat<T>(iterable: Iterable<T>, times: number): Iterable<T> {
+export function repeat<T>(iterable: Iterable<T>, times: number): IterableIterator<T> {
   assert(
     times === Infinity || Number.isInteger(times)
   , 'The parameter times must be an integer'

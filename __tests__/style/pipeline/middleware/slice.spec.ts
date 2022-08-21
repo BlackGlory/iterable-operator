@@ -2,7 +2,9 @@ import * as middleware from '@middleware/slice'
 import { slice } from '@style/pipeline/middleware/slice'
 import '@blackglory/jest-matchers'
 
-describe('slice<T>(start: number, end: number): (iterable: Iterable<T>) => Iterable<T>', () => {
+describe(`
+  slice<T>(start: number, end: number): (iterable: Iterable<T>) => IterableIterator<T>
+`, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'slice')
     const iter = [1, 2, 3]

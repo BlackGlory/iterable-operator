@@ -35,7 +35,7 @@ function reduceAsyncWithInitialValue<T, U>(
     return reduceIterable(iterable)
   }
 
-  async function reduceIterable(iterable: Iterable<T>) {
+  async function reduceIterable(iterable: Iterable<T>): Promise<U> {
     let result: U = initialValue
       , index = 0
     for (const currentValue of iterable) {
@@ -44,7 +44,7 @@ function reduceAsyncWithInitialValue<T, U>(
     return result
   }
 
-  async function reduceAsyncIterable(iterable: AsyncIterable<T>) {
+  async function reduceAsyncIterable(iterable: AsyncIterable<T>): Promise<U> {
     let result: U = initialValue
       , index = 0
     for await (const currentValue of iterable) {
@@ -64,7 +64,7 @@ function reduceAsyncWithoutInitialValue<T>(
     return reduceIterable(iterable)
   }
 
-  async function reduceAsyncIterable(iterable: AsyncIterable<T>) {
+  async function reduceAsyncIterable(iterable: AsyncIterable<T>): Promise<T> {
     const iterator = iterable[Symbol.asyncIterator]()
     let done: boolean | undefined
 
@@ -92,7 +92,7 @@ function reduceAsyncWithoutInitialValue<T>(
     }
   }
 
-  async function reduceIterable(iterable: Iterable<T>) {
+  async function reduceIterable(iterable: Iterable<T>): Promise<T> {
     const iterator = iterable[Symbol.iterator]()
     let done: boolean | undefined
 

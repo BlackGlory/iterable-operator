@@ -15,7 +15,7 @@ export function reduce<T, U>(
     ((accumulator: T, currentValue: T, index: number) => T)
   & ((accumulator: U, currentValue: T, index: number) => U)
 , initialValue?: U
-) {
+): T | U {
   if (isUndefined(initialValue)) {
     return reduceWithoutInitialValue<T>(iterable, fn)
   } else {

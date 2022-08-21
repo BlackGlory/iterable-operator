@@ -4,7 +4,7 @@ import { Awaitable } from 'justypes'
 export function dropUntilAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
 , predicate: (element: T, index: number) => Awaitable<unknown>
-): AsyncIterable<T> {
+): AsyncIterableIterator<T> {
   if (isAsyncIterable(iterable)) {
     return dropUntilAsyncIterable(iterable, predicate)
   } else {
@@ -15,7 +15,7 @@ export function dropUntilAsync<T>(
 async function* dropUntilAsyncIterable<T>(
   iterable: AsyncIterable<T>
 , predicate: (element: T, index: number) => Awaitable<unknown>
-) {
+): AsyncIterableIterator<T> {
   const iterator = iterable[Symbol.asyncIterator]()
   let done: boolean | undefined
 
@@ -38,7 +38,7 @@ async function* dropUntilAsyncIterable<T>(
 async function* dropUntilIterable<T>(
   iterable: Iterable<T>
 , predicate: (element: T, index: number) => Awaitable<unknown>
-) {
+): AsyncIterableIterator<T> {
   const iterator = iterable[Symbol.iterator]()
   let done: boolean | undefined
 

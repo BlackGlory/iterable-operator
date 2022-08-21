@@ -2,7 +2,9 @@ import * as middleware from '@middleware/flatten-deep'
 import { flattenDeep } from '@style/pipeline/middleware/flatten-deep'
 import '@blackglory/jest-matchers'
 
-describe('flattenDeep<T>(depth: number): (iterable: Iterable<unknown>) => Iterable<T>', () => {
+describe(`
+  flattenDeep<T>(depth: number): (iterable: Iterable<unknown>) => IterableIterator<T>
+`, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'flattenDeep')
     const iter = [1, 2, 3]

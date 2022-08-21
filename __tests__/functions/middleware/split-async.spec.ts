@@ -2,7 +2,9 @@ import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsy
 import { splitAsync } from '@middleware/split-async'
 import '@blackglory/jest-matchers'
 
-describe('splitAsync<T>(iterable: AsyncIterable<T>, separator: T): AsyncIterable<T[]>', () => {
+describe(`
+  splitAsync<T>(iterable: AsyncIterable<T>, separator: T): AsyncIterableIterator<T[]>
+`, () => {
   describe('separator in iterable', () => {
     describe('separator is first', () => {
       it('return splited iterable', async () => {

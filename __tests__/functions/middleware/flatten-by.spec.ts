@@ -8,7 +8,7 @@ describe(`
   flattenBy<T>(
     iterable: Iterable<unknown>
   , predicate: (element: unknown, level: number) => unknown
-  ): Iterable<T>
+  ): IterableIterator<T>
 `, () => {
   describe('fn is called', () => {
     it('called with [element,level]', () => {

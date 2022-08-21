@@ -5,7 +5,7 @@ import { go } from '@blackglory/go'
 import '@blackglory/jest-matchers'
 import { pass } from '@blackglory/pass'
 
-describe('drop<T>(iterable: Iterable<T>, count: number): Iterable<T>', () => {
+describe('drop<T>(iterable: Iterable<T>, count: number): IterableIterator<T>', () => {
   test('close unexhausted iterator', () => {
     const iter = new MockIterable(go(function* () {
       throw new Error()

@@ -5,7 +5,7 @@ describe(`
   takeUntil<T>(
     this: Iterable<T>
   , fn: (element: T, index: number) => unknown
-  ): Iterable<T>
+  ): IterableIterator<T>
 `, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'takeUntil')

@@ -6,7 +6,7 @@ describe(`
   flattenBy<T>(
     this: Iterable<unknown>
   , predicate: (element: unknown, level: number) => unknown
-  ): Iterable<T>
+  ): IterableIterator<T>
 `, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'flattenBy')

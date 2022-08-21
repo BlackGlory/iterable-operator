@@ -8,7 +8,7 @@ describe(`
   chunkAsync<T>(
     iterable: AsyncIterable<T>
   , size: number
-  ): AsyncIterable<T[]>
+  ): AsyncIterableIterator<T[]>
 `, () => {
   it('lazy and evaluation', async () => {
     const iter = new MockAsyncIterable([1, 2, 3])

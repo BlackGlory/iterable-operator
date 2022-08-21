@@ -3,7 +3,9 @@ import { takeRightAsync } from '@style/pipeline/middleware/take-right-async'
 import { toAsyncIterable } from '@test/utils'
 
 describe(`
-  takeRightAsync<T>(count: number): (iterable: AsyncIterable<T>) => AsyncIterable<T>
+  takeRightAsync<T>(
+    count: number
+  ): (iterable: AsyncIterable<T>) => AsyncIterableIterator<T>
 `, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'takeRightAsync')

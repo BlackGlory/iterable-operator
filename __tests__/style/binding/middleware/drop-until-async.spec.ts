@@ -5,7 +5,7 @@ describe(`
   dropUntilAsync<T>(
     this: Iterable<T> | AsyncIterable<T>
   , predicate: (element: T, index: number) => Awaitable<unknown>
-  ): AsyncIterable<T>
+  ): AsyncIterableIterator<T>
 `, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'dropUntilAsync')

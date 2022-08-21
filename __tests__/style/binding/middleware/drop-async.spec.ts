@@ -2,7 +2,9 @@ import * as middleware from '@middleware/drop-async'
 import { dropAsync } from '@style/binding/middleware/drop-async'
 import { toAsyncIterable } from '@test/utils'
 
-describe('dropAsync<T>(this: AsyncIterable<T>, count: number): AsyncIterable<T>', () => {
+describe(`
+  dropAsync<T>(this: AsyncIterable<T>, count: number): AsyncIterableIterator<T>
+`, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'dropAsync')
     const iter = toAsyncIterable([1, 2, 3])

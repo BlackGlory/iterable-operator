@@ -3,7 +3,9 @@ import { uniqBy } from '@style/pipeline/middleware/uniq-by'
 import '@blackglory/jest-matchers'
 
 describe(`
-  uniqBy<T, U>(fn: (element: T, index: number) => U): (iterable: Iterable<T>) => Iterable<T>
+  uniqBy<T, U>(
+    fn: (element: T, index: number) => U
+  ): (iterable: Iterable<T>) => IterableIterator<T>
 `, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'uniqBy')

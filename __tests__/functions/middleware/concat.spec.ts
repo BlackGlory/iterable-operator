@@ -6,7 +6,7 @@ describe(`
   concat<T, U>(
     iterable: Iterable<T>
   , ...otherIterables: Iterable<U>[]
-  ): Iterable<T | U>
+  ): IterableIterator<T | U>
 `, () => {
   it('lazy and partial evaluation', () => {
     const iter1 = new MockIterable([1, 2, 3])

@@ -1,7 +1,7 @@
 import { go } from '@blackglory/go'
 import { assert } from '@blackglory/errors'
 
-export function chunk<T>(iterable: Iterable<T>, size: number): Iterable<T[]> {
+export function chunk<T>(iterable: Iterable<T>, size: number): IterableIterator<T[]> {
   assert(Number.isInteger(size), 'The parameter size must be an integer')
   assert(size > 0, 'The parameter size must be greater than 0')
 

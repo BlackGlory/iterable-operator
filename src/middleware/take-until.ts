@@ -1,7 +1,7 @@
 export function* takeUntil<T>(
   iterable: Iterable<T>
 , predicate: (element: T, index: number) => unknown
-): Iterable<T> {
+): IterableIterator<T> {
   let index = 0
 
   for (const element of iterable) {

@@ -4,7 +4,7 @@ import { dropAsync as target } from '@middleware/drop-async'
 export function dropAsync<T>(
   this: AsyncIterable<T>
 , count: number
-): AsyncIterable<T>
+): AsyncIterableIterator<T>
 export function dropAsync(this: any, ...args: unknown[]) {
   return applyBinding(this, target, args)
 }

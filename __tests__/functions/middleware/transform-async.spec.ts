@@ -7,7 +7,7 @@ describe(`
   transformAsync<T, U>(
     iterable: Iterable<T>
   , transformer: (iterable: Iterable<T>) => AsyncIterable<U>
-  ): AsyncIterable<U>
+  ): AsyncIterableIterator<U>
 `, () => {
   describe('call', () => {
     it('return result from transformer', async () => {

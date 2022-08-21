@@ -8,7 +8,7 @@ describe(`
   mapAsync<T, U>(
     iterable: Iterable<T> | AsyncIterable<T>
   , fn: (element: T, index: number) => Awaitable<U>
-  ): AsyncIterable<U>
+  ): AsyncIterableIterator<U>
 `, () => {
   describe('T is PromiseLike<T>', () => {
     it('called with [element(promise),index]', async () => {

@@ -5,7 +5,7 @@ describe(`
   filterAsync<T, U extends T = T>(
     this: Iterable<T> | AsyncIterable<T>
   , predicate: (element: T, index: number) => Awaitable<unknown>
-  ): AsyncIterable<U>
+  ): AsyncIterableIterator<U>
 `, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'filterAsync')

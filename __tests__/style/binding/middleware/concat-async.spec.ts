@@ -5,7 +5,7 @@ describe(`
   concatAsync<T, U>(
     this: Iterable<Awaitable<T>> | AsyncIterable<T>
   , ...iterables: Array<Iterable<Awaitable<U>> | AsyncIterable<U>>
-  ): AsyncIterable<T | U>
+  ): AsyncIterableIterator<T | U>
 `, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'concatAsync')

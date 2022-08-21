@@ -7,7 +7,7 @@ describe(`
   transform<T, U>(
     iterable: Iterable<T>
   , transformer: (iterable: Iterable<T>) => Iterable<U>
-  ): Iterable<U>
+  ): IterableIterator<U>
 `, () => {
   describe('call', () => {
     it('return result from transformer', () => {

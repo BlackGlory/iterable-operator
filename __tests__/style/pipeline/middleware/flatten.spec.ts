@@ -2,7 +2,7 @@ import * as middleware from '@middleware/flatten'
 import { flatten } from '@style/pipeline/middleware/flatten'
 import '@blackglory/jest-matchers'
 
-describe('flatten<T>(): (iterable: Iterable<unknown>) => Iterable<T>', () => {
+describe('flatten<T>(): (iterable: Iterable<unknown>) => IterableIterator<T>', () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'flatten')
     const iter = [1, 2, 3]

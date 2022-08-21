@@ -9,7 +9,7 @@ describe(`
   dropUntil<T>(
     iterable: Iterable<T>
   , predicate: (element: T, index: number) => unknown
-  ): Iterable<T>
+  ): IterableIterator<T>
 `, () => {
   test('close unexhausted iterator', () => {
     const iter = new MockIterable(go(function* () {

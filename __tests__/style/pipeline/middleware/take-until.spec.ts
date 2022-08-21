@@ -4,7 +4,7 @@ import { takeUntil } from '@style/pipeline/middleware/take-until'
 describe(`
   takeUntil<T>(
     predicate: (element: T, index: number) => unknown
-  ): (iterable: Iterable<T>) => Iterable<T>
+  ): (iterable: Iterable<T>) => IterableIterator<T>
 `, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'takeUntil')

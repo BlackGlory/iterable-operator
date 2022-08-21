@@ -5,7 +5,7 @@ import { Awaitable } from 'justypes'
 export function dropUntilAsync<T>(
   this: Iterable<T> | AsyncIterable<T>
 , predicate: (element: T, index: number) => Awaitable<unknown>
-): AsyncIterable<T>
+): AsyncIterableIterator<T>
 export function dropUntilAsync(this: any, ...args: unknown[]) {
   return applyBinding(this, target, args)
 }

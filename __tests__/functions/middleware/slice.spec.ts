@@ -4,7 +4,7 @@ import { slice } from '@middleware/slice'
 import '@blackglory/jest-matchers'
 
 describe(`
-  slice<T>(iterable: Iterable<T>, start: number, end: number): Iterable<T>
+  slice<T>(iterable: Iterable<T>, start: number, end: number): IterableIterator<T>
 `, () => {
   it('lazy and partial evaluation', () => {
     const iter = new MockIterable([1, 2, 3])

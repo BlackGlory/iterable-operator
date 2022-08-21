@@ -2,7 +2,7 @@ import { consume, toArray, MockIterable, take } from '@test/utils'
 import { uniq } from '@middleware/uniq'
 import '@blackglory/jest-matchers'
 
-describe('uniq<T>(iterable: Iterable<T>): Iterable<T>', () => {
+describe('uniq<T>(iterable: Iterable<T>): IterableIterator<T>', () => {
   describe('call', () => {
     it('return unique iterable', () => {
       const iter = [1, 1, 2, 2, 3, 3]

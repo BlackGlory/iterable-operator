@@ -2,7 +2,13 @@ import * as middleware from '@middleware/slice'
 import { slice } from '@style/binding/middleware/slice'
 import '@blackglory/jest-matchers'
 
-describe('slice<T>(this: Iterable<T>, start: number, end: number): Iterable<T>', () => {
+describe(`
+  slice<T>(
+    this: Iterable<T>
+  , start: number
+  , end: number
+  ): IterableIterator<T>
+`, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'slice')
     const iter = [1, 2, 3]

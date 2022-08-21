@@ -2,7 +2,7 @@ import * as middleware from '@middleware/take'
 import { take } from '@style/binding/middleware/take'
 import '@blackglory/jest-matchers'
 
-describe('take<T>(this: Iterable<T>, count: number): Iterable<T>', () => {
+describe('take<T>(this: Iterable<T>, count: number): IterableIterator<T>', () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'take')
     const iter = [1, 2, 3]

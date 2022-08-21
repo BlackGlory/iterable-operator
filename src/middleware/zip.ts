@@ -7,11 +7,14 @@ export type ExtractTypeTupleFromIterableTuple<T> = {
 export function zip<T, U extends Array<Iterable<unknown>>>(
   iterable: Iterable<T>
 , ...otherIterables: U
-): Iterable<[T, ...ExtractTypeTupleFromIterableTuple<U>]> {
-  return zipWithSize(iterable, ...otherIterables) as Iterable<[T, ...ExtractTypeTupleFromIterableTuple<U>]>
+): IterableIterator<[T, ...ExtractTypeTupleFromIterableTuple<U>]> {
+  return zipWithSize(
+    iterable
+  , ...otherIterables
+  ) as IterableIterator<[T, ...ExtractTypeTupleFromIterableTuple<U>]>
 }
 
-function* zipWithSize<T>(...iterables: Array<Iterable<T>>): Iterable<T[]> {
+function* zipWithSize<T>(...iterables: Array<Iterable<T>>): IterableIterator<T[]> {
   const length = iterables.length
   const iterators = iterables.map(iterable => iterable[Symbol.iterator]())
   const dones = iterators.map(() => false)

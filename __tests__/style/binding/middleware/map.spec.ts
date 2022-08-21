@@ -3,7 +3,10 @@ import { map } from '@style/binding/middleware/map'
 import '@blackglory/jest-matchers'
 
 describe(`
-  map<T, U>(this: Iterable<T>, fn: (element: T, index: number) => U): Iterable<U>
+  map<T, U>(
+    this: Iterable<T>
+  , fn: (element: T, index: number) => U
+  ): IterableIterator<U>
 `, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'map')

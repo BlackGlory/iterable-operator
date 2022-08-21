@@ -8,7 +8,7 @@ describe(`
   filterAsync<T, U extends T = T>(
     iterable: Iterable<T> | AsyncIterable<T>
   , predicate: (element: T, index: number) => Awaitable<unknown>
-  ): AsyncIterable<U>
+  ): AsyncIterableIterator<U>
 `, () => {
   describe('T is PromiseLike<T>', () => {
     it('called with [element(promise),index]', async () => {
@@ -27,7 +27,7 @@ describe(`
 
   describe.each([
     testIterable('Iterable<T>')
-  , testAsyncIterable('AsyncIterable<T.')
+  , testAsyncIterable('AsyncIterable<T>')
   ])('%s', (_, createIter) => {
     describe('fn is called', () => {
       it('called with [element,index]', async () => {

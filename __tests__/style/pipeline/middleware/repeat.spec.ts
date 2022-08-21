@@ -2,7 +2,9 @@ import * as middleware from '@middleware/repeat'
 import { repeat } from '@style/pipeline/middleware/repeat'
 import '@blackglory/jest-matchers'
 
-describe('repeat<T>(times: number): (iterable: Iterable<T>) => Iterable<T>', () => {
+describe(`
+  repeat<T>(times: number): (iterable: Iterable<T>) => IterableIterator<T>
+`, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'repeat')
     const iter = [1, 2, 3]

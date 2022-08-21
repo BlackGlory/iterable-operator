@@ -4,7 +4,7 @@ import { Awaitable } from 'justypes'
 export function splitByAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
 , predicate: (element: T, index: number) => Awaitable<unknown>
-): AsyncIterable<T[]> {
+): AsyncIterableIterator<T[]> {
   if (isAsyncIterable(iterable)) {
     return splitByAsyncIterable(iterable, predicate)
   } else {
@@ -15,7 +15,7 @@ export function splitByAsync<T>(
 async function* splitByIterable<T>(
   iterable: Iterable<T>
 , predicate: (element: T, index: number) => Awaitable<unknown>
-) {
+): AsyncIterableIterator<T[]> {
   let buffer: T[] = []
   let index = 0
 
@@ -35,7 +35,7 @@ async function* splitByIterable<T>(
 async function* splitByAsyncIterable<T>(
   iterable: AsyncIterable<T>
 , predicate: (element: T, index: number) => Awaitable<unknown>
-) {
+): AsyncIterableIterator<T[]> {
   let buffer: T[] = []
   let index = 0
 

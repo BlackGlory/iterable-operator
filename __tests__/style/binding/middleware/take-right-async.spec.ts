@@ -3,7 +3,7 @@ import { takeRightAsync } from '@style/binding/middleware/take-right-async'
 import { toAsyncIterable } from '@test/utils'
 
 describe(`
-  takeRightAsync<T>(this: AsyncIterable<T>, count: number): AsyncIterable<T>
+  takeRightAsync<T>(this: AsyncIterable<T>, count: number): AsyncIterableIterator<T>
 `, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'takeRightAsync')

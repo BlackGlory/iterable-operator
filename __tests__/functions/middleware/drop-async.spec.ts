@@ -7,7 +7,7 @@ import { go } from '@blackglory/go'
 import { pass } from '@blackglory/pass'
 
 describe(`
-  dropAsync<T>(iterable: AsyncIterable<T>, count: number): AsyncIterable<T>
+  dropAsync<T>(iterable: AsyncIterable<T>, count: number): AsyncIterableIterator<T>
 `, () => {
   test('close unexhausted iterator', async () => {
     const iter = new MockAsyncIterable(go(function* () {

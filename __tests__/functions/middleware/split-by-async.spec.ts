@@ -8,7 +8,7 @@ describe(`
   splitByAsync<T>(
     iterable: Iterable<T> | AsyncIterable<T>
   , predicate: (element: T, index: number) => Awaitable<unknown>
-  ): AsyncIterable<T[]>
+  ): AsyncIterableIterator<T[]>
 `, () => {
   describe('T is PromiseLike<T>', () => {
     it('called with [element(promise),index]', async () => {

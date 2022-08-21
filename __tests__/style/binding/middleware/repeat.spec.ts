@@ -2,7 +2,7 @@ import * as middleware from '@middleware/repeat'
 import { repeat } from '@style/binding/middleware/repeat'
 import '@blackglory/jest-matchers'
 
-describe('repeat<T>(this: Iterable<T>, times: number): Iterable<T>', () => {
+describe('repeat<T>(this: Iterable<T>, times: number): IterableIterator<T>', () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'repeat')
     const iter = [1, 2, 3]

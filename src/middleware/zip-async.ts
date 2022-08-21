@@ -20,13 +20,16 @@ export function zipAsync<
 >(
   iterable: Iterable<Awaitable<T>> | AsyncIterable<T>
 , ...otherIterables: U
-): AsyncIterable<[T, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]> {
-  return zipWithSize(iterable, ...otherIterables) as AsyncIterable<[T, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]>
+): AsyncIterableIterator<[T, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]> {
+  return zipWithSize(
+    iterable
+  , ...otherIterables
+  ) as AsyncIterableIterator<[T, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]>
 }
 
 async function* zipWithSize<T>(
   ...iterables: Array<Iterable<Awaitable<T>> | AsyncIterable<T>>
-): AsyncIterable<T[]> {
+): AsyncIterableIterator<T[]> {
   const length = iterables.length
   const iterators = iterables.map(iterable => {
     if (isAsyncIterable(iterable)) {

@@ -6,7 +6,7 @@ describe(`
   concat<T, U>(
     this: Iterable<T>
   , ...iterables: Iterable<U>[]
-  ): Iterable<T | U>
+  ): IterableIterator<T | U>
 `, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'concat')

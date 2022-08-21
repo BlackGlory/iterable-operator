@@ -4,7 +4,7 @@ import { assert } from '@blackglory/errors'
 export function repeatAsync<T>(
   iterable: AsyncIterable<T>
 , times: number
-): AsyncIterable<T> {
+): AsyncIterableIterator<T> {
   assert(
     times === Infinity || Number.isInteger(times)
   , 'The parameter times must be an integer'

@@ -3,7 +3,7 @@ import { getError } from 'return-style'
 import { take } from '@middleware/take'
 import '@blackglory/jest-matchers'
 
-describe('take<T>(iterable: Iterable<T>, count: number): Iterable<T>', () => {
+describe('take<T>(iterable: Iterable<T>, count: number): IterableIterator<T>', () => {
   it('lazy and partial evaluation', () => {
     const iter = new MockIterable([1, 2, 3])
     const count = 2

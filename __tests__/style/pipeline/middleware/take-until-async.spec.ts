@@ -4,7 +4,7 @@ import { takeUntilAsync } from '@style/pipeline/middleware/take-until-async'
 describe(`
   takeUntilAsync<T>(
     predicate: (element: T, index: number) => Awaitable<unknown>
-  ): (iterable: Iterable<T> | AsyncIterable<T>) => AsyncIterable<T>
+  ): (iterable: Iterable<T> | AsyncIterable<T>) => AsyncIterableIterator<T>
 `, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'takeUntilAsync')

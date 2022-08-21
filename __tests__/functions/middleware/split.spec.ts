@@ -2,7 +2,7 @@ import { consume, toArray, MockIterable, take } from '@test/utils'
 import { split } from '@middleware/split'
 import '@blackglory/jest-matchers'
 
-describe('split<T>(iterable: Iterable<T>, separator: T): Iterable<T[]>', () => {
+describe('split<T>(iterable: Iterable<T>, separator: T): IterableIterator<T[]>', () => {
   describe('separator in iterable', () => {
     describe('separator is first', () => {
       it('return splited iterable', () => {

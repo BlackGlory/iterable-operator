@@ -4,7 +4,10 @@ import { tap } from '@middleware/tap'
 import '@blackglory/jest-matchers'
 
 describe(`
-  tap<T>(iterable: Iterable<T>, fn: (element: T, index: number) => unknown): Iterable<T>
+  tap<T>(
+    iterable: Iterable<T>
+  , fn: (element: T, index: number) => unknown
+  ): IterableIterator<T>
 `, () => {
   describe('fn is called', () => {
     it('called with [element,index]', () => {

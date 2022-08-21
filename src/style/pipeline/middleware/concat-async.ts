@@ -4,7 +4,7 @@ import { Awaitable } from 'justypes'
 
 export function concatAsync<T, U>(
   ...iterables: Array<Iterable<Awaitable<U>> | AsyncIterable<U>>
-): (iterable: Iterable<Awaitable<T>> | AsyncIterable<T>) => AsyncIterable<T | U>
+): (iterable: Iterable<Awaitable<T>> | AsyncIterable<T>) => AsyncIterableIterator<T | U>
 export function concatAsync(...args: unknown[]) {
   return getPipelineProxy(target, args)
 }

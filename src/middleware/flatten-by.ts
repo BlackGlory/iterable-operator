@@ -3,7 +3,7 @@ import { isIterable, isntChar } from '@blackglory/types'
 export function flattenBy<T>(
   iterable: Iterable<unknown>
 , predicate: (element: unknown, level: number) => unknown
-): Iterable<T> {
+): IterableIterator<T> {
   return flatten(iterable, predicate, 1)
 }
 
@@ -11,7 +11,7 @@ function* flatten<T>(
   iterable: Iterable<unknown>
 , predicate: (element: unknown, level: number) => unknown
 , level: number
-): Iterable<T> {
+): IterableIterator<T> {
   for (const element of iterable) {
     if (isFiniteIterable(element) && predicate(element, level)) {
       yield* flatten<T>(element, predicate, level + 1)

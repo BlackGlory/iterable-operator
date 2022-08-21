@@ -3,7 +3,10 @@ import { flattenDeepAsync } from '@style/binding/middleware/flatten-deep-async'
 import { toAsyncIterable } from '@test/utils'
 
 describe(`
-  flattenDeepAsync<T>(this: AsyncIterable<unknown>, depth: number): AsyncIterable<T>
+  flattenDeepAsync<T>(
+    this: AsyncIterable<unknown>
+  , depth: number
+  ): AsyncIterableIterator<T>
 `, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'flattenDeepAsync')

@@ -63,11 +63,11 @@ There are two kinds of operators:
 function chunk<T>(
   iterable: Iterable<T>
 , size: number // size > 0
-): Iterable<T[]>
+): IterableIterator<T[]>
 function chunkAsync<T>(
   iterable: AsyncIterable<T>
 , size: number // size > 0
-): AsyncIterable<T[]>
+): AsyncIterableIterator<T[]>
 ```
 
 ```js
@@ -85,11 +85,11 @@ The memory usage of this function depends on `size`.
 function chunkBy<T>(
   iterable: Iterable<T>
 , predicate: (element: T, index: number) => unknown
-): Iterable<T[]>
+): IterableIterator<T[]>
 function chunkByAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
 , predicate: (element: T, index: number) => Awaitable<unknown>
-): AsyncIterable<T[]>
+): AsyncIterableIterator<T[]>
 ```
 
 ```js
@@ -105,11 +105,11 @@ The memory usage of this function depends on `iterable` and `predicate`.
 function concat<T, U>(
   iterable: Iterable<T>
 , ...otherIterables: Iterable<U>[]
-): Iterable<T | U> {
+): IterableIterator<T | U> {
 function concatAsync<T, U>(
   iterable: Iterable<Awaitable<T>> | AsyncIterable<T>
 , ...otherIterables: Array<Iterable<Awaitable<U>> | AsyncIterable<U>>
-): AsyncIterable<T | U> {
+): AsyncIterableIterator<T | U> {
 ```
 
 ```js
@@ -122,11 +122,11 @@ concat([1, 2, 3], ['a', 'b', 'c']) // [1, 2, 3, 'a', 'b', 'c']
 function drop<T>(
   iterable: Iterable<T>
 , count: number // count >= 0
-): Iterable<T>
+): IterableIterator<T>
 function dropAsync<T>(
   iterable: AsyncIterable<T>
 , count: number // count >= 0
-): AsyncIterable<T>
+): AsyncIterableIterator<T>
 ```
 
 ```js
@@ -142,11 +142,11 @@ drop([1, 2, 3], -1) // throw Error
 function dropRight<T>(
   iterable: Iterable<T>
 , count: number // count >= 0
-): Iterable<T>
+): IterableIterator<T>
 function dropRightAsync<T>(
   iterable: AsyncIterable<T>
 , count: number // count >= 0
-): AsyncIterable<T>
+): AsyncIterableIterator<T>
 ```
 
 ```js
@@ -164,11 +164,11 @@ The memory usage of this function depends on `iterable`.
 function dropUntil<T>(
   iterable: Iterable<T>
 , predicate: (element: T, index: number) => unknown
-): Iterable<T>
+): IterableIterator<T>
 function dropUntilAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
 , predicate: (element: T, index: number) => Awaitable<boolean>
-): AsyncIterable<T>
+): AsyncIterableIterator<T>
 ```
 
 ```js
@@ -182,11 +182,11 @@ The memory usage of this function depends on `iterable` and `predicate`.
 function filter<T, U extends T = T>(
   iterable: Iterable<T>
 , predicate: (element: T, index: number) => unknown
-): Iterable<U>
+): IterableIterator<U>
 function filterAsync<T, U extends T = T>(
   iterable: Iterable<T> | AsyncIterable<T>
 , predicate: (element: T, index: number) => Awaitable<unknown>
-): AsyncIterable<U>
+): AsyncIterableIterator<U>
 ```
 
 ```js
@@ -195,8 +195,8 @@ filter([1, 2, 3], x => x % 2 === 1) // [1, 3]
 
 #### flatten, flattenAsync
 ```ts
-function flatten<T>(iterable: Iterable<unknown>): Iterable<T>
-function flattenAsync<T>(iterable: AsyncIterable<unknown>): AsyncIterable<T>
+function flatten<T>(iterable: Iterable<unknown>): IterableIterator<T>
+function flattenAsync<T>(iterable: AsyncIterable<unknown>): AsyncIterableIterator<T>
 ```
 
 ```js
@@ -210,11 +210,11 @@ flatten(['one', ['two'], 0, [1, [2]]]) // ['o', 'n', 'e', 'two', 0, 1, [2]]
 function flattenDeep<T>(
   iterable: Iterable<unknown>
 , depth: number = Infinity // depth >= 0
-): Iterable<T>
+): IterableIterator<T>
 function flattenDeepAsync<T>(
   iterable: AsyncIterable<unknown>
 , depth: number = Infinity // depth >= 0
-): AsyncIterable<T>
+): AsyncIterableIterator<T>
 ```
 
 ```js
@@ -230,11 +230,11 @@ flattenDeep(['one', ['two', ['three']], 0, [1, [2, [3]]]], 2) // ['o', 'n', 'e',
 function flattenBy<T>(
   iterable: Iterable<unknown>
 , predicate: (element: unknown, level: number) => boolean
-): Iterable<T>
+): IterableIterator<T>
 function flattenByAsync<T>(
   iterable: Iterable<unknown> | AsyncIterable<unknown>
 , predicate: (element: unknown, level: number) => Awaitable<unknown>
-): AsyncIterable<T>
+): AsyncIterableIterator<T>
 ```
 
 ```js
@@ -248,11 +248,11 @@ flattenBy('123', () => true) // ['1', '2', '3']
 function map<T, U>(
   iterable: Iterable<T>
 , fn: (element: T, index: number) => U
-): Iterable<U>
+): IterableIterator<U>
 function mapAsync<T, U>(
   iterable: Iterable<T> | AsyncIterable<T>
 , fn: (element: T, index: number) => Awaitable<U>
-): AsyncIterable<U>
+): AsyncIterableIterator<U>
 ```
 
 ```js
@@ -264,11 +264,11 @@ map([1, 2, 3], x => x * 2) // [2, 4, 6]
 function repeat<T>(
   iterable: Iterable<T>
 , times: number // times >= 0
-): Iterable<T>
+): IterableIterator<T>
 function repeatAsync<T>(
   iterable: AsyncIterable<T>
 , times: number // times >= 0
-): AsyncIterable<T>
+): AsyncIterableIterator<T>
 ```
 
 ```js
@@ -285,12 +285,12 @@ function slice<T>(
   iterable: Iterable<T>
 , start: number // start >= 0
 , end: number = Infinity // end >= start
-): Iterable<T>
+): IterableIterator<T>
 function sliceAsync<T>(
   iterable: AsyncIterable<T>
 , start: number // start >= 0
 , end: number = Infinity // end >= start
-): AsyncIterable<T>
+): AsyncIterableIterator<T>
 ```
 
 ```js
@@ -303,11 +303,11 @@ slice([1, 2, 3], 2, 1) // throw Error
 
 #### split, splitAsync
 ```ts
-function split<T>(iterable: Iterable<T>, separator: T): Iterable<T[]>
+function split<T>(iterable: Iterable<T>, separator: T): IterableIterator<T[]>
 function splitAsync<T>(
   iterable: AsyncIterable<T>
 , separator: T
-): AsyncIterable<T[]>
+): AsyncIterableIterator<T[]>
 ```
 
 ```js
@@ -324,11 +324,11 @@ The memory usage of this function depends on `iterable` and `separator`.
 function splitBy<T>(
   iterable: Iterable<T>
 , predicate: (element: T, index: number) => unknown
-): Iterable<T[]>
+): IterableIterator<T[]>
 function splitByAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
 , predicate: (element: T, index: number) => Awaitable<unknown>
-): AsyncIterable<T[]>
+): AsyncIterableIterator<T[]>
 ```
 
 ```js
@@ -342,8 +342,11 @@ The memory usage of this function depends on `iterable` and `predicate`.
 
 #### take, takeAsync
 ```ts
-function take<T>(iterable: Iterable<T>, count: number): Iterable<T>
-function takeAsync<T>(iterable: AsyncIterable<T>, count: number): AsyncIterable<T>
+function take<T>(iterable: Iterable<T>, count: number): IterableIterator<T>
+function takeAsync<T>(
+  iterable: AsyncIterable<T>
+, count: number
+): AsyncIterableIterator<T>
 ```
 
 ```js
@@ -355,11 +358,11 @@ take([1, 2, 3], -1) // throw Error
 
 #### takeRight, takeRightAsync
 ```ts
-function takeRight<T>(iterable: Iterable<T>, count: number): Iterable<T>
+function takeRight<T>(iterable: Iterable<T>, count: number): IterableIterator<T>
 function takeRightAsync<T>(
   iterable: AsyncIterable<T>
 , count: number
-): AsyncIterable<T>
+): AsyncIterableIterator<T>
 ```
 
 ```js
@@ -376,11 +379,11 @@ The memory usage of this function depends on `count`.
 function takeUntil<T>(
   iterable: Iterable<T>
 , predicate: (element: T, index: number) => unknown
-): Iterable<T>
+): IterableIterator<T>
 function takeUntilAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
 , predicate: (element: T, index: number) => Awaitable<unknown>
-): AsyncIterable<T>
+): AsyncIterableIterator<T>
 ```
 
 ```js
@@ -392,11 +395,11 @@ takeUntil([1, 2, 3], x => x === 2) // [1]
 function tap<T>(
   iterable: Iterable<T>
 , fn: (element: T, index: number) => unknown
-): Iterable<T> {
+): IterableIterator<T> {
 function tapAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
 , fn: (element: T, index: number) => Awaitable<unknown>
-): AsyncIterable<T>
+): AsyncIterableIterator<T>
 ```
 
 ```js
@@ -405,7 +408,7 @@ tap([1, 2, 3], x => console.log(x)) // [1, 2, 3]
 
 #### toAsyncIterable
 ```ts
-function toAsyncIterable<T>(iterable: Iterable<Awaitable<T>>): AsyncIterable<T>
+function toAsyncIterable<T>(iterable: Iterable<Awaitable<T>>): AsyncIterableIterator<T>
 ```
 
 ```js
@@ -417,15 +420,15 @@ toAsyncIterable([1, 2, 3]) // AsyncIterable [1, 2, 3]
 function transform<T, U>(
   iterable: Iterable<T>
 , transformer: (iterable: Iterable<T>) => Iterable<U>
-): Iterable<U>
+): IterableIterator<U>
 function transformAsync<T, U>(
   iterable: Iterable<T>
 , transformer: (iterable: Iterable<T>) => AsyncIterable<U>
-): AsyncIterable<U>
+): AsyncIterableIterator<U>
 function transformAsync<T, U>(
   iterable: AsyncIterable<T>
 , transformer: (iterable: AsyncIterable<T>) => AsyncIterable<U>
-): AsyncIterable<U>
+): AsyncIterableIterator<U>
 ```
 
 ```js
@@ -438,8 +441,8 @@ transform([1, 2, 3], function* double(iter) {
 
 #### uniq, uniqAsync
 ```ts
-function uniq<T>(iterable: Iterable<T>): Iterable<T>
-function uniqAsync<T>(iterable: AsyncIterable<T>): AsyncIterable<T>
+function uniq<T>(iterable: Iterable<T>): IterableIterator<T>
+function uniqAsync<T>(iterable: AsyncIterable<T>): AsyncIterableIterator<T>
 ```
 
 ```js
@@ -453,11 +456,11 @@ The memory usage of this function depends on `iterable`.
 function uniqBy<T, U>(
   iterable: Iterable<T>
 , fn: (element: T, index: number) => U
-): Iterable<T> {
+): IterableIterator<T> {
 function uniqByAsync<T, U>(
   iterable: Iterable<T> | AsyncIterable<T>
 , fn: (element: T, index: number) => Awaitable<U>
-): AsyncIterable<T>
+): AsyncIterableIterator<T>
 ```
 
 ```js
@@ -471,11 +474,11 @@ The memory usage of this function depends on `fn`.
 function zip<T, U extends Array<Iterable<unknown>>>(
   iterable: Iterable<T>
 , ...otherIterables: U
-): Iterable<[T, ...ExtractTypeTupleFromIterableTuple<U>]> {
+): IterableIterator<[T, ...ExtractTypeTupleFromIterableTuple<U>]> {
 function zipAsync<T, U extends Array<Iterable<unknown> | AsyncIterable<unknown>>>(
   iterable: Iterable<Awaitable<T>> | AsyncIterable<T>
 , ...otherIterables: U
-): AsyncIterable<[T, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]> {
+): AsyncIterableIterator<[T, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]>
 ```
 
 ```js

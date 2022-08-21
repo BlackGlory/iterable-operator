@@ -4,7 +4,7 @@ import { splitAsync as target } from '@middleware/split-async'
 export function splitAsync<T>(
   this: AsyncIterable<T>
 , separator: T
-): AsyncIterable<T[]>
+): AsyncIterableIterator<T[]>
 export function splitAsync(this: any, ...args: unknown[]) {
   return applyBinding(this, target, args)
 }

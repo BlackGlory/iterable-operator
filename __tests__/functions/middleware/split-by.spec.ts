@@ -7,7 +7,7 @@ describe(`
   splitBy<T>(
     iterable: Iterable<T>
   , predicate: (element: T, index: number) => unknown
-  ): Iterable<T[]>
+  ): IterableIterator<T[]>
 `, () => {
   describe('fn is called', () => {
     it('called with [element,index]', () => {

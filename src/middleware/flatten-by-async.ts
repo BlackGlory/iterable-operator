@@ -4,32 +4,32 @@ import { Awaitable } from 'justypes'
 export function flattenByAsync<T>(
   iterable: Iterable<unknown> | AsyncIterable<unknown>
 , predicate: (element: unknown, level: number) => Awaitable<unknown>
-): AsyncIterable<T> {
+): AsyncIterableIterator<T> {
   if (isAsyncIterable(iterable)) {
-    return flattenByAsyncIterable(iterable, predicate) as AsyncIterable<T>
+    return flattenByAsyncIterable(iterable, predicate)
   } else {
-    return flattenByIterable(iterable, predicate) as AsyncIterable<T>
+    return flattenByIterable(iterable, predicate)
   }
 }
 
-async function* flattenByAsyncIterable(
+async function* flattenByAsyncIterable<T>(
   iterable: AsyncIterable<unknown>
 , predicate: (element: unknown, level: number) => Awaitable<unknown>
-) {
+): AsyncIterableIterator<T> {
   const level = 1
   for await (const element of iterable) {
     if (isFiniteIterable(element) && await predicate(element, level)) {
       yield* flatten(element, predicate, level + 1)
     } else {
-      yield element
+      yield element as T
     }
   }
 }
 
-function flattenByIterable(
+function flattenByIterable<T>(
   iterable: Iterable<unknown>
 , predicate: (element: unknown, level: number) => Awaitable<unknown>
-) {
+): AsyncIterableIterator<T> {
   return flatten(iterable, predicate, 1)
 }
 
@@ -37,7 +37,7 @@ async function* flatten<T>(
   iterable: Iterable<unknown>
 , predicate: (element: unknown, level: number) => Awaitable<unknown>
 , level: number
-): AsyncIterable<T> {
+): AsyncIterableIterator<T> {
   for (const element of iterable) {
     if (isFiniteIterable(element) && await predicate(element, level)) {
       yield* flatten<T>(element, predicate, level + 1)

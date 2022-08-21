@@ -5,7 +5,7 @@ import '@blackglory/jest-matchers'
 describe(`
   zip<T, U extends Array<Iterable<unknown>>>(
     ...iterables: U
-  ): (iterable: T) => Iterable<[T, ...ExtractTypeTupleFromIterableTuple<U>]>
+  ): (iterable: T) => IterableIterator<[T, ...ExtractTypeTupleFromIterableTuple<U>]>
 `, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'zip')

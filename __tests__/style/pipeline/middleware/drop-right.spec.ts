@@ -2,7 +2,7 @@ import * as middleware from '@middleware/drop-right'
 import { dropRight } from '@style/pipeline/middleware/drop-right'
 import '@blackglory/jest-matchers'
 
-describe('dropRight<T>(count: number): (iterable: T) => Iterable<T>', () => {
+describe('dropRight<T>(count: number): (iterable: T) => IterableIterator<T>', () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'dropRight')
     const iter = [1, 2, 3]

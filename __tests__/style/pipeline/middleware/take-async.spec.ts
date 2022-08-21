@@ -2,7 +2,9 @@ import * as middleware from '@middleware/take-async'
 import { takeAsync } from '@style/pipeline/middleware/take-async'
 import { toAsyncIterable } from '@test/utils'
 
-describe('takeAsync<T>(count: number): (iterable: AsyncIterable<T>) => AsyncIterable<T>', () => {
+describe(`
+  takeAsync<T>(count: number): (iterable: AsyncIterable<T>) => AsyncIterableIterator<T>
+`, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'takeAsync')
     const iter = toAsyncIterable([1, 2, 3])

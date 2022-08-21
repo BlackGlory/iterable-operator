@@ -6,7 +6,7 @@ describe(`
   filter<T, U extends T = T>(
     this: Iterable<T>
   , predicate: (element: T, index: number) => unknown
-  ): Iterable<U>
+  ): IterableIterator<U>
 `, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'filter')

@@ -5,7 +5,7 @@ describe(`
   tapAsync<T>(
     this: Iterable<T> | AsyncIterable<T>
   , fn: (element: T, index: number) => Awaitable<unknown>
-  ): AsyncIterable<T>
+  ): AsyncIterableIterator<T>
 `, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'tapAsync')

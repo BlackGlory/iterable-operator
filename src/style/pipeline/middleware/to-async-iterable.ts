@@ -4,7 +4,7 @@ import { Awaitable } from 'justypes'
 
 export function toAsyncIterable<T>(): (
   iterable: Iterable<Awaitable<T>>
-) => AsyncIterable<T>
+) => AsyncIterableIterator<T>
 export function toAsyncIterable(...args: unknown[]) {
   return getPipelineProxy(target, args)
 }

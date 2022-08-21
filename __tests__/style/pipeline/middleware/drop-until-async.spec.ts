@@ -4,7 +4,7 @@ import { dropUntilAsync } from '@style/pipeline/middleware/drop-until-async'
 describe(`
   dropUntilAsync<T>(
     predicate: (element: T, index: number) => Awaitable<unknown>
-  ): (iterable: Iterable<T> | AsyncIterable<T>) => AsyncIterable<T>
+  ): (iterable: Iterable<T> | AsyncIterable<T>) => AsyncIterableIterator<T>
 `, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'dropUntilAsync')

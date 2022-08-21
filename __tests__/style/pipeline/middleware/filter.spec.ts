@@ -5,7 +5,7 @@ import '@blackglory/jest-matchers'
 describe(`
   filter<T, U extends T = T>(
     predicate: (element: T, index: number) => unknown
-  ): (iterable: Iterable<T>) => Iterable<U>
+  ): (iterable: Iterable<T>) => IterableIterator<U>
 `, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'filter')

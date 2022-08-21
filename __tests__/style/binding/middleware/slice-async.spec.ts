@@ -7,7 +7,7 @@ describe(`
     this: AsyncIterable<T>
   , start: number
   , end: number
-  ): AsyncIterable<T>
+  ): AsyncIterableIterator<T>
 `, () => {
   it('is binding style', () => {
     const spy = jest.spyOn(middleware, 'sliceAsync')

@@ -5,7 +5,7 @@ import { toAsyncIterable } from '@test/utils'
 describe(`
   flattenDeepAsync<T>(
     depth: number
-  ): (iterable: AsyncIterable<unknown>) => AsyncIterable<T>
+  ): (iterable: AsyncIterable<unknown>) => AsyncIterableIterator<T>
 `, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'flattenDeepAsync')

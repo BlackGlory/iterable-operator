@@ -3,7 +3,9 @@ import { consume, toArray, MockIterable } from '@test/utils'
 import { dropRight } from '@middleware/drop-right'
 import '@blackglory/jest-matchers'
 
-describe('dropRight<T>(iterable: Iterable<T>, count: number): Iterable<T>', () => {
+describe(`
+  dropRight<T>(iterable: Iterable<T>, count: number): IterableIterator<T>
+`, () => {
   it('lazy evaluation', () => {
     const iter = new MockIterable([1, 2, 3])
     const count = 1

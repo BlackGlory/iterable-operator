@@ -4,7 +4,7 @@ import { chunkBy as target } from '@middleware/chunk-by'
 export function chunkBy<T>(
   this: Iterable<T>
 , predicate: (element: T, index: number) => unknown
-): Iterable<T[]>
+): IterableIterator<T[]>
 export function chunkBy(this: any, ...args: unknown[]) {
   return applyBinding(this, target, args)
 }

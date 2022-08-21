@@ -4,7 +4,7 @@ import { Awaitable } from 'justypes'
 
 export function uniqByAsync<T, U>(
   fn: (element: T, index: number) => Awaitable<U>
-): (iterable: Iterable<T> | AsyncIterable<T>) => AsyncIterable<T>
+): (iterable: Iterable<T> | AsyncIterable<T>) => AsyncIterableIterator<T>
 export function uniqByAsync(...args: unknown[]) {
   return getPipelineProxy(target, args)
 }

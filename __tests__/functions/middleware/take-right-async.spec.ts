@@ -9,7 +9,7 @@ describe(`
   takeRightAsync<T>(
     iterable: AsyncIterable<T>
   , count: number
-  ): AsyncIterable<T>
+  ): AsyncIterableIterator<T>
 `, () => {
   test('close unexhausted iterator', async () => {
     const iter = new MockAsyncIterable(go(function* () {

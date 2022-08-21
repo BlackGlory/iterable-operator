@@ -2,7 +2,9 @@ import * as middleware from '@middleware/chunk'
 import { chunk } from '@style/pipeline/middleware/chunk'
 import '@blackglory/jest-matchers'
 
-describe('chunk<T>(size: number): (iterable: Iterable<T>) => Iterable<T[]>', () => {
+describe(`
+  chunk<T>(size: number): (iterable: Iterable<T>) => IterableIterator<T[]>
+`, () => {
   it('is pipeline style', () => {
     const spy = jest.spyOn(middleware, 'chunk')
     const iter = [1, 2, 3]

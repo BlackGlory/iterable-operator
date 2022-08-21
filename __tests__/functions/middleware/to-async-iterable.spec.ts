@@ -2,7 +2,7 @@ import { consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils
 import { toAsyncIterable } from '@middleware/to-async-iterable'
 import '@blackglory/jest-matchers'
 
-describe('toAsyncIterable<T>(iterable: Iterable<T>): AsyncIterable<T>', () => {
+describe('toAsyncIterable<T>(iterable: Iterable<T>): AsyncIterableIterator<T>', () => {
   describe('T is PromiseLike<T>', () => {
     describe('call', () => {
       it('return AsyncIterable', async () => {
