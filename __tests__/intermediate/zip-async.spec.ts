@@ -1,4 +1,4 @@
-import { testIterable, testAsyncIterable } from '@test/test-fixtures'
+import { testIterable, testAsyncIterable, testIterablePromises } from '@test/test-fixtures'
 import {
   consumeAsync
 , toArrayAsync
@@ -12,16 +12,11 @@ import '@blackglory/jest-matchers'
 import { go } from '@blackglory/go'
 import { pass } from '@blackglory/pass'
 
-describe(`
-  zipAsync<T, U extends Array<Iterable<unknown> | AsyncIterable<unknown>>>(
-    iterable: Iterable<Awaitable<T>> | AsyncIterable<T>
-  , ...otherIterables: U
-  ): AsyncIterableIterator<[T, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]>
-`, () => {
-  describe('close unexhausted iterator', () => {
-    test('iterable', async () => {
+describe('zipAsync', () => {
+  describe('close the unexhausted iterator', () => {
+    test('Iterable', async () => {
       const iter = new MockIterable(go(function* () {
-        throw new Error()
+       throw new Error()
       }))
 
       try {
@@ -34,9 +29,9 @@ describe(`
       expect(iter.done).toBeTruthy()
     })
 
-    test('async iterable', async () => {
+    test('AsyncIterable', async () => {
       const iter = new MockAsyncIterable(go(function* () {
-        throw new Error()
+       throw new Error()
       }))
 
       try {
@@ -47,27 +42,15 @@ describe(`
 
       expect(iter.returnCalled).toBeTruthy()
       expect(iter.done).toBeTruthy()
-    })
-  })
-
-  describe('T is PromiseLike<T>', () => {
-    it('return AsyncIterable<Array<PromiseLike<T>>>', async () => {
-      const iter1 = [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)]
-      const iter2 = [Promise.resolve('a'), Promise.resolve('b'), Promise.resolve('c')]
-
-      const result = zipAsync(iter1, iter2)
-      const arrResult = await toArrayAsync(result)
-
-      expect(result).toBeAsyncIterable()
-      expect(arrResult).toEqual([[iter1[0], iter2[0]], [iter1[1], iter2[1]], [iter1[2], iter2[2]]])
     })
   })
 
   describe.each([
-    testIterable('Array<Iterable<unknown>>')
-  , testAsyncIterable('Array<AsyncIterable<unknown>>')
+    testIterable('Iterable')
+  , testIterablePromises('IterablePromises')
+  , testAsyncIterable('AsyncIterable')
   ])('%s', (_, createIter) => {
-    it('lazy evaluation', async () => {
+    test('lazy evaluation', async () => {
       const mock = new MockIterable([1, 2, 3])
       const iter1 = createIter(mock)
       const iter2 = createIter([])
@@ -82,7 +65,7 @@ describe(`
     })
 
     describe('iterables have same size', () => {
-      it('return zipped iterable', async () => {
+      it('returns the zipped iterable', async () => {
         const iter1 = createIter([1, 2, 3])
         const iter2 = createIter(['a', 'b', 'c'])
 
@@ -95,7 +78,7 @@ describe(`
     })
 
     describe('iterables dont have same size', () => {
-      it('return zipped iterable by the shortest iterable', async () => {
+      it('returns the zipped iterable by the shortest iterable', async () => {
         const iter1 = createIter([1, 2, 3])
         const iter2 = createIter(['a', 'b'])
 
@@ -108,8 +91,8 @@ describe(`
     })
   })
 
-  describe('Array<Iterable<unknown> | AsyncIterable<unknown>>', () => {
-    it('return zipped iterable', async () => {
+  describe('Iterable and AsyncIterable', () => {
+    it('returns the zipped iterable', async () => {
       const iter1 = toIterable([1, 2, 3])
       const iter2 = toAsyncIterable(['a', 'b', 'c'])
 

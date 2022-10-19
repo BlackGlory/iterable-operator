@@ -16,7 +16,7 @@ describe('difference', () => {
     expect(isPartial).toBe(true)
   })
 
-  it('returns difference iterable', () => {
+  it('returns the difference iterable', () => {
     const leftIter = [1, 2]
     const rightIter = [2, 3]
 

@@ -4,15 +4,10 @@ import '@blackglory/jest-matchers'
 import { go } from '@blackglory/go'
 import { pass } from '@blackglory/pass'
 
-describe(`
-  zip<T, U extends Array<Iterable<unknown>>>(
-    iterable: Iterable<T>
-  , ...otherIterables: U
-  ): IterableIterator<[T, ...ExtractTypeTupleFromIterableTuple<U>]>
-` , () => {
-  test('close unexhausted iterator', () => {
+describe('zip' , () => {
+  test('close the unexhausted iterator', () => {
     const iter = new MockIterable(go(function* () {
-      throw new Error()
+     throw new Error()
     }))
 
     try {
@@ -25,7 +20,7 @@ describe(`
     expect(iter.done).toBeTruthy()
   })
 
-  it('lazy evaluation', () => {
+  test('lazy evaluation', () => {
     const iter1 = new MockIterable([1, 2, 3])
     const iter2: unknown[] = []
 
@@ -39,7 +34,7 @@ describe(`
   })
 
   describe('iterables have same size', () => {
-    it('return zipped iterable', () => {
+    it('returns the zipped iterable', () => {
       const iter1 = [1, 2, 3]
       const iter2 = ['a', 'b', 'c']
 
@@ -52,7 +47,7 @@ describe(`
   })
 
   describe('iterables have not same size', () => {
-    it('return zipped iterable by the shortest iterable', () => {
+    it('returns the zipped iterable by the shortest iterable', () => {
       const iter1 = [1, 2, 3]
       const iter2 = ['a', 'b']
 

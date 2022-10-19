@@ -2,9 +2,9 @@ import { toAsyncIterable } from '@test/utils'
 import { firstAsync } from '@terminal/first-async'
 import '@blackglory/jest-matchers'
 
-describe('firstAsync<T>(iterable: AsyncIterable<T>): Promise<T | undefined>', () => {
+describe('firstAsync', () => {
   describe('iterable is empty', () => {
-    it('return undefined', async () => {
+    it('returns undefined', async () => {
       const iter = toAsyncIterable([])
 
       const result = firstAsync(iter)
@@ -16,7 +16,7 @@ describe('firstAsync<T>(iterable: AsyncIterable<T>): Promise<T | undefined>', ()
   })
 
   describe('iterable isnt empty', () => {
-    it('return the first element in the iterable', async () => {
+    it('returns the first element in the iterable', async () => {
       const iter = toAsyncIterable([1, 2, 3])
 
       const result = firstAsync(iter)

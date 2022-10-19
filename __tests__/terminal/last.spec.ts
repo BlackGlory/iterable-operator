@@ -3,10 +3,10 @@ import { MockIterable } from '@test/utils'
 import { go } from '@blackglory/go'
 import { pass } from '@blackglory/pass'
 
-describe('last<T>(iterable: Iterable<T>): T | undefined', () => {
-  test('close unexhausted iterator', () => {
+describe('last', () => {
+  test('close the unexhausted iterator', () => {
     const iter = new MockIterable(go(function* () {
-      throw new Error()
+     throw new Error()
     }))
 
     try {
@@ -20,7 +20,7 @@ describe('last<T>(iterable: Iterable<T>): T | undefined', () => {
   })
 
   describe('iterable is empty', () => {
-    it('return undefined', () => {
+    it('returns undefined', () => {
       const iter: number[] = []
 
       const result = last(iter)
@@ -30,7 +30,7 @@ describe('last<T>(iterable: Iterable<T>): T | undefined', () => {
   })
 
   describe('iterable isnt empty', () => {
-    it('return the last element in the iterable', () => {
+    it('returns the last element in the iterable', () => {
       const iter = [1, 2, 3]
 
       const result = last(iter)

@@ -45,17 +45,17 @@ async function* zipWithSize<T>(
       const result = new Array<T>(length)
       for (let i = 0; i < length; i++) {
         const [kind, iterator] = iterators[i]
-        let temp: IteratorResult<T>
+        let temp: IteratorResult<Awaitable<T>>
         if (kind === Kind.Async) {
           temp = await (iterator as AsyncIterator<T>).next()
         } else {
-          temp = (iterator as Iterator<T>).next()
+          temp = (iterator as Iterator<Awaitable<T>>).next()
         }
         if (temp.done) {
           dones[i] = true
           return
         }
-        result[i] = temp.value
+        result[i] = await temp.value
       }
       yield result
     }

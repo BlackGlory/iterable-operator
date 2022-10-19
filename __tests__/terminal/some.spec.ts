@@ -1,37 +1,32 @@
 import { getError } from 'return-style'
 import { some } from '@terminal/some'
 
-describe(`
-  some<T>(iterable: Iterable<T>, predicate: (element: T, index: number) => unknown): boolean
-`, () => {
-  describe('fn is called', () => {
-    it('called with [element,index]', () => {
+describe('some', () => {
+  it('called fn with [element, index]', () => {
+    const iter = [1, 2, 3]
+    const fn = jest.fn().mockReturnValue(false)
+
+    some(iter, fn)
+
+    expect(fn).toBeCalledTimes(3)
+    expect(fn).nthCalledWith(1, 1, 0)
+    expect(fn).nthCalledWith(2, 2, 1)
+    expect(fn).nthCalledWith(3, 3, 2)
+  })
+
+  describe('fn returns true on first element', () => {
+    it('called fn only once', () => {
       const iter = [1, 2, 3]
-      const fn = jest.fn().mockReturnValue(false)
+      const fn = jest.fn().mockReturnValueOnce(true)
 
       some(iter, fn)
 
-      expect(fn).toBeCalledTimes(3)
-      expect(fn).nthCalledWith(1, 1, 0)
-      expect(fn).nthCalledWith(2, 2, 1)
-      expect(fn).nthCalledWith(3, 3, 2)
+      expect(fn).toBeCalledTimes(1)
     })
-
-    describe('fn return true on first element', () => {
-      it('called once', () => {
-        const iter = [1, 2, 3]
-        const fn = jest.fn().mockReturnValueOnce(true)
-
-        some(iter, fn)
-
-        expect(fn).toBeCalledTimes(1)
-      })
-    })
-
   })
 
-  describe('fn return true', () => {
-    it('return true', () => {
+  describe('fn returns true', () => {
+    it('returns true', () => {
       const iter = [1, 2, 3]
       const fn = () => true
 
@@ -41,8 +36,8 @@ describe(`
     })
   })
 
-  describe('fn return false every time', () => {
-    it('return false', () => {
+  describe('fn returns false every time', () => {
+    it('returns false', () => {
       const iter = [1, 2, 3]
       const fn =  () => false
 
@@ -52,8 +47,8 @@ describe(`
     })
   })
 
-  describe('fn throw error', () => {
-    it('throw error', () => {
+  describe('fn throws an error', () => {
+    it('throws an error', () => {
       const customError = new Error('CustomError')
       const iter = [1, 2, 3]
       const fn = () => { throw customError }

@@ -3,14 +3,9 @@ import { transformAsync } from '@intermediate/transform-async'
 import { getErrorPromise } from 'return-style'
 import '@blackglory/jest-matchers'
 
-describe(`
-  transformAsync<T, U>(
-    iterable: Iterable<T>
-  , transformer: (iterable: Iterable<T>) => AsyncIterable<U>
-  ): AsyncIterableIterator<U>
-`, () => {
-  describe('call', () => {
-    it('return result from transformer', async () => {
+describe('transformAsync', () => {
+  describe('Iterable', () => {
+    it('returns the iterable from transformer', async () => {
       const iter = [1, 2, 3]
       const double = async function* (iterable: Iterable<number>): AsyncIterable<number> {
         for await (const element of iterable) {
@@ -25,7 +20,7 @@ describe(`
       expect(arrResult).toEqual([2, 4, 6])
     })
 
-    it('lazy evaluation', async () => {
+    test('lazy evaluation', async () => {
       const iter = new MockIterable([1, 2, 3])
       const fn = async function* (iterable: Iterable<number>) {
         yield* iterable
@@ -37,31 +32,24 @@ describe(`
 
       expect(isLazy).toBe(true)
     })
-  })
 
-  describe('transformer throw error', () => {
-    it('throw error', async () => {
-      const customError = new Error('CustomError')
-      const iter = [1, 2, 3]
-      const fn = async function* () { throw customError }
+    describe('transformer throws an error', () => {
+      it('throws an error', async () => {
+        const customError = new Error('CustomError')
+        const iter = [1, 2, 3]
+        const fn = async function* () { throw customError }
 
-      const result = transformAsync(iter, fn)
-      const err = await getErrorPromise(toArrayAsync(result))
+        const result = transformAsync(iter, fn)
+        const err = await getErrorPromise(toArrayAsync(result))
 
-      expect(result).toBeAsyncIterable()
-      expect(err).toBe(customError)
+        expect(result).toBeAsyncIterable()
+        expect(err).toBe(customError)
+      })
     })
   })
-})
 
-describe(`
-  transformAsync<T, U>(
-    iterable: AsyncIterable<T>
-  , transformer: (iterable: AsyncIterable<T>) => AsyncIterable<T>
-  ): AsyncIterable<U>
-`, () => {
-  describe('call', () => {
-    it('return result from transformer', async () => {
+  describe('AsyncIterable', () => {
+    it('returns the iterable from transformer', async () => {
       const iter = toAsyncIterable([1, 2, 3])
       const double = async function* (iterable: AsyncIterable<number>): AsyncIterable<number> {
         for await (const element of iterable) {
@@ -76,7 +64,7 @@ describe(`
       expect(arrResult).toEqual([2, 4, 6])
     })
 
-    it('lazy evaluation', async () => {
+    test('lazy evaluation', async () => {
       const iter = new MockAsyncIterable([1, 2, 3])
       const fn = async function* (iterable: AsyncIterable<number>) {
         yield* iterable
@@ -88,19 +76,19 @@ describe(`
 
       expect(isLazy).toBe(true)
     })
-  })
 
-  describe('transformer throw error', () => {
-    it('throw error', async () => {
-      const customError = new Error('CustomError')
-      const iter = toAsyncIterable([1, 2, 3])
-      const fn = async function* () { throw customError }
+    describe('transformer throws an error', () => {
+      it('throws an error', async () => {
+        const customError = new Error('CustomError')
+        const iter = toAsyncIterable([1, 2, 3])
+        const fn = async function* () { throw customError }
 
-      const result = transformAsync(iter as any, fn)
-      const err = await getErrorPromise(toArrayAsync(result))
+        const result = transformAsync(iter as any, fn)
+        const err = await getErrorPromise(toArrayAsync(result))
 
-      expect(result).toBeAsyncIterable()
-      expect(err).toBe(customError)
+        expect(result).toBeAsyncIterable()
+        expect(err).toBe(customError)
+      })
     })
   })
 })

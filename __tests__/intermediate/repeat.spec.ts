@@ -3,8 +3,8 @@ import { getError } from 'return-style'
 import { repeat } from '@intermediate/repeat'
 import '@blackglory/jest-matchers'
 
-describe('repeat<T>(iterable: Iterable<T>, times: number): IterableIteartor<T>', () => {
-  it('lazy and partial evaluation', () => {
+describe('repeat', () => {
+  test('lazy and partial evaluation', () => {
     const iter = new MockIterable([1, 2, 3])
     const times = 2
 
@@ -18,7 +18,7 @@ describe('repeat<T>(iterable: Iterable<T>, times: number): IterableIteartor<T>',
   })
 
   describe('times > 0', () => {
-    it('return repeated iterable', () => {
+    it('returns the repeated iterable', () => {
       const iter = [1, 2, 3]
       const times = 2
 
@@ -31,7 +31,7 @@ describe('repeat<T>(iterable: Iterable<T>, times: number): IterableIteartor<T>',
   })
 
   describe('times = 0', () => {
-    it('return empty iterable', () => {
+    it('returns the empty iterable', () => {
       const iter = [1, 2, 3]
       const times = 0
 
@@ -44,7 +44,7 @@ describe('repeat<T>(iterable: Iterable<T>, times: number): IterableIteartor<T>',
   })
 
   describe('times < 0', () => {
-    it('throw InvalidArgumentError', () => {
+    it('throws InvalidArgumentError', () => {
       const iter = [1, 2, 3]
       const times = -1
 

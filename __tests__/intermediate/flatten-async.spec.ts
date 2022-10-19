@@ -2,10 +2,8 @@ import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsy
 import { flattenAsync } from '@intermediate/flatten-async'
 import '@blackglory/jest-matchers'
 
-describe(`
-  flattenAsync<T, U>(iterable: AsyncIterable<T>): AsyncIterableIterator<U>
-`, () => {
-  it('lazy and partial evaluation', async () => {
+describe('flattenAsync', () => {
+  test('lazy and partial evaluation', async () => {
     const iter = new MockAsyncIterable([1, 2, 3])
 
     const result = flattenAsync(iter)
@@ -18,7 +16,7 @@ describe(`
   })
 
   describe('iterable is empty', () => {
-    it('return empty iterable', async () => {
+    it('returns an empty iterable', async () => {
       const iter = toAsyncIterable([])
 
       const result = flattenAsync(iter)
@@ -30,7 +28,7 @@ describe(`
   })
 
   describe('iterable isnt empty', () => {
-    it('return flat iterable', async () => {
+    it('returns the flat iterable', async () => {
       const iter = toAsyncIterable([
         'one', ['two']
       , 0, [1, [2]]

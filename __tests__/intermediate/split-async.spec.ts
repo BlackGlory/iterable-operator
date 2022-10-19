@@ -2,12 +2,10 @@ import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsy
 import { splitAsync } from '@intermediate/split-async'
 import '@blackglory/jest-matchers'
 
-describe(`
-  splitAsync<T>(iterable: AsyncIterable<T>, separator: T): AsyncIterableIterator<T[]>
-`, () => {
+describe('splitAsync', () => {
   describe('separator in iterable', () => {
     describe('separator is first', () => {
-      it('return splited iterable', async () => {
+      it('returns the splited iterable', async () => {
         const iter = toAsyncIterable([1, 2, 3, 4, 5])
         const sep = 1
 
@@ -20,7 +18,7 @@ describe(`
     })
 
     describe('separator is middle', () => {
-      it('return splited iterable', async () => {
+      it('returns the splited iterable', async () => {
         const iter = toAsyncIterable([1, 2, 3, 4, 5])
         const sep = 3
 
@@ -33,7 +31,7 @@ describe(`
     })
 
     describe('separator is last', () => {
-      it('return splited iterable', async () => {
+      it('returns the splited iterable', async () => {
         const iter = toAsyncIterable([1, 2, 3, 4, 5])
         const sep = 5
 
@@ -47,7 +45,7 @@ describe(`
   })
 
   describe('separator not in iterable', () => {
-    it('return splited iterable', async () => {
+    it('returns the splited iterable', async () => {
       const iter = toAsyncIterable([1, 2, 3, 4, 5])
       const sep = 0
 
@@ -59,7 +57,7 @@ describe(`
     })
   })
 
-  it('lazy and partial evaluation', async () => {
+  test('lazy and partial evaluation', async () => {
     const iter = new MockAsyncIterable([1, 2, 3])
     const sep = 1
 

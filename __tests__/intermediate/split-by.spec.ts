@@ -3,33 +3,26 @@ import { splitBy } from '@intermediate/split-by'
 import { getError } from 'return-style'
 import '@blackglory/jest-matchers'
 
-describe(`
-  splitBy<T>(
-    iterable: Iterable<T>
-  , predicate: (element: T, index: number) => unknown
-  ): IterableIterator<T[]>
-`, () => {
-  describe('fn is called', () => {
-    it('called with [element,index]', () => {
-      const iter = [1, 2, 3]
-      const fn = jest.fn()
+describe('splitBy', () => {
+  test('called fn with [element, index]', () => {
+    const iter = [1, 2, 3]
+    const fn = jest.fn()
 
-      const result = splitBy(iter, fn)
-      const calledTimesBeforeConsume = getCalledTimes(fn)
-      consume(result)
-      const calledTimesAfterConsume = getCalledTimes(fn)
+    const result = splitBy(iter, fn)
+    const calledTimesBeforeConsume = getCalledTimes(fn)
+    consume(result)
+    const calledTimesAfterConsume = getCalledTimes(fn)
 
-      expect(calledTimesBeforeConsume).toBe(0)
-      expect(calledTimesAfterConsume).toBe(3)
-      expect(fn).nthCalledWith(1, 1, 0)
-      expect(fn).nthCalledWith(2, 2, 1)
-      expect(fn).nthCalledWith(3, 3, 2)
-    })
+    expect(calledTimesBeforeConsume).toBe(0)
+    expect(calledTimesAfterConsume).toBe(3)
+    expect(fn).nthCalledWith(1, 1, 0)
+    expect(fn).nthCalledWith(2, 2, 1)
+    expect(fn).nthCalledWith(3, 3, 2)
   })
 
-  describe('fn return true', () => {
+  describe('fn returns true', () => {
     describe('separator is first', () => {
-      it('return splited iterable', () => {
+      it('returns the splited iterable', () => {
         const iter = [1, 2, 3, 4, 5]
         const atThree = (x: number) => x === 1
 
@@ -42,7 +35,7 @@ describe(`
     })
 
     describe('separator is middle', () => {
-      it('return splited iterable', () => {
+      it('returns the splited iterable', () => {
         const iter = [1, 2, 3, 4, 5]
         const atThree = (x: number) => x === 3
 
@@ -55,7 +48,7 @@ describe(`
     })
 
     describe('separator is last', () => {
-      it('return splited iterable', () => {
+      it('returns the splited iterable', () => {
         const iter = [1, 2, 3, 4, 5]
         const atThree = (x: number) => x === 5
 
@@ -68,8 +61,8 @@ describe(`
     })
   })
 
-  describe('fn always return false', () => {
-    it('return splited iterable', () => {
+  describe('fn alwasy returns false', () => {
+    it('returns the splited iterable', () => {
       const iter = [1, 2, 3, 4, 5]
       const alwaysFalse = () => false
 
@@ -81,7 +74,7 @@ describe(`
     })
   })
 
-  it('lazy and partial evaluation', () => {
+  test('lazy and partial evaluation', () => {
     const iter = new MockIterable([1, 2, 3])
     const fn = () => true
 
@@ -94,8 +87,8 @@ describe(`
     expect(isPartial).toBe(true)
   })
 
-  describe('fn throw error', () => {
-    it('throw error when consume', () => {
+  describe('fn throws an error', () => {
+    it('throws an error when consume', () => {
       const customError = new Error('CustomError')
       const iter = [1, 2, 3, 4, 5]
       const fn = () => { throw customError }

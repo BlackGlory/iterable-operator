@@ -1,8 +1,8 @@
 import { first } from '@terminal/first'
 
-describe('first<T>(iterable: Iterable<T>): T | undefined', () => {
+describe('first', () => {
   describe('iterable is empty', () => {
-    it('return undefined', () => {
+    it('returns undefined', () => {
       const iter: number[] = []
 
       const result = first(iter)
@@ -12,7 +12,7 @@ describe('first<T>(iterable: Iterable<T>): T | undefined', () => {
   })
 
   describe('iterable isnt empty', () => {
-    it('return the first element in the iterable', () => {
+    it('returns the first element in the iterable', () => {
       const iter = [1, 2, 3]
 
       const result = first(iter)

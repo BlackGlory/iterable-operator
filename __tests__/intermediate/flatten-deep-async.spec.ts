@@ -4,13 +4,8 @@ import { getError } from 'return-style'
 import { flattenDeepAsync } from '@intermediate/flatten-deep-async'
 import '@blackglory/jest-matchers'
 
-describe(`
-  flattenDeepAsync<T>(
-    iterable: AsyncIterable<unknown>
-  , depth: number
-  ): AsyncIterableIterator<T>
-`, () => {
-  it('lazy and partial evaluation', async () => {
+describe('flattenDeepAsync', () => {
+  test('lazy and partial evaluation', async () => {
     const iter = new MockAsyncIterable([1, 2, 3])
     const depth = Infinity
 
@@ -24,7 +19,7 @@ describe(`
   })
 
   describe('iterable is empty', () => {
-    it('return empty iterable', async () => {
+    it('returns the empty iterable', async () => {
       const iter = toAsyncIterable([])
       const depth = Infinity
 
@@ -38,7 +33,7 @@ describe(`
 
   describe('iterable isnt empty', () => {
     describe('depth < 0', () => {
-      it('throw Error', () => {
+      it('throws an error', () => {
         const iter = toAsyncIterable([])
         const depth = -1
 
@@ -50,7 +45,7 @@ describe(`
     })
 
     describe('depth = 0', () => {
-      it('return iterable copy', async () => {
+      it('returns the iterable copy', async () => {
         const iter = toAsyncIterable([0, [1]])
         const depth = 0
 
@@ -64,7 +59,7 @@ describe(`
     })
 
     describe('depth > 0', () => {
-      it('return flat iterable', async () => {
+      it('returns the flat iterable', async () => {
         const iter = toAsyncIterable([
           'one', ['two', ['three']]
         , 0, [1, [2, [3]]]

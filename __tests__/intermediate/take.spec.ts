@@ -3,8 +3,8 @@ import { getError } from 'return-style'
 import { take } from '@intermediate/take'
 import '@blackglory/jest-matchers'
 
-describe('take<T>(iterable: Iterable<T>, count: number): IterableIterator<T>', () => {
-  it('lazy and partial evaluation', () => {
+describe('take', () => {
+  test('lazy and partial evaluation', () => {
     const iter = new MockIterable([1, 2, 3])
     const count = 2
 
@@ -18,7 +18,7 @@ describe('take<T>(iterable: Iterable<T>, count: number): IterableIterator<T>', (
   })
 
   describe('count > size(iterable)', () => {
-    it('return iterable copy', () => {
+    it('returns the iterable copy', () => {
       const iter = [1, 2, 3]
       const count = 5
 
@@ -31,7 +31,7 @@ describe('take<T>(iterable: Iterable<T>, count: number): IterableIterator<T>', (
   })
 
   describe('0 < count < size(iterable)', () => {
-    it('return iterable that take first count elements', () => {
+    it('returns the iterable that take first count elements', () => {
       const iter = [1, 2, 3]
       const count = 2
 
@@ -44,7 +44,7 @@ describe('take<T>(iterable: Iterable<T>, count: number): IterableIterator<T>', (
   })
 
   describe('count = 0', () => {
-    it('return empty iterable', () => {
+    it('returns the empty iterable', () => {
       const iter = [1, 2, 3]
       const count = 0
 
@@ -57,7 +57,7 @@ describe('take<T>(iterable: Iterable<T>, count: number): IterableIterator<T>', (
   })
 
   describe('count < 0', () => {
-    it('throw Error', () => {
+    it('throws an error', () => {
       const iter: number[] = []
       const count = -1
 

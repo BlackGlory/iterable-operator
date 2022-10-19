@@ -5,10 +5,10 @@ import { go } from '@blackglory/go'
 import '@blackglory/jest-matchers'
 import { pass } from '@blackglory/pass'
 
-describe('drop<T>(iterable: Iterable<T>, count: number): IterableIterator<T>', () => {
-  test('close unexhausted iterator', () => {
+describe('drop', () => {
+  test('close the unexhausted iterator', () => {
     const iter = new MockIterable(go(function* () {
-      throw new Error()
+     throw new Error()
     }))
 
     try {
@@ -21,7 +21,7 @@ describe('drop<T>(iterable: Iterable<T>, count: number): IterableIterator<T>', (
     expect(iter.done).toBeTruthy()
   })
 
-  it('lazy and partial evaluation', () => {
+  test('lazy and partial evaluation', () => {
     const iter = new MockIterable([1, 2, 3])
     const count = 1
 
@@ -36,7 +36,7 @@ describe('drop<T>(iterable: Iterable<T>, count: number): IterableIterator<T>', (
 
   describe('count > 0', () => {
     describe('count > size(iterable)', () => {
-      it('return empty iterable', () => {
+      it('returns an empty iterable', () => {
         const iter = [1, 2, 3]
         const count = 5
 
@@ -49,7 +49,7 @@ describe('drop<T>(iterable: Iterable<T>, count: number): IterableIterator<T>', (
     })
 
     describe('count = size(iterable)', () => {
-      it('return emtpy iterable', () => {
+      it('returns an emtpy iterable', () => {
         const iter = [1, 2, 3]
         const count = 3
 
@@ -62,7 +62,7 @@ describe('drop<T>(iterable: Iterable<T>, count: number): IterableIterator<T>', (
     })
 
     describe('count < size(iterable)', () => {
-      it('return iterable that dropped the first count elements', () => {
+      it('returns the iterable that dropped the first count elements', () => {
         const iter = [1, 2, 3]
         const count = 2
 
@@ -76,7 +76,7 @@ describe('drop<T>(iterable: Iterable<T>, count: number): IterableIterator<T>', (
   })
 
   describe('count = 0', () => {
-    it('return iterable copy', () => {
+    it('returns the iterable copy', () => {
       const iter = [1, 2, 3]
       const count = 0
 
@@ -90,7 +90,7 @@ describe('drop<T>(iterable: Iterable<T>, count: number): IterableIterator<T>', (
   })
 
   describe('count < 0', () => {
-    it('throw Error', () => {
+    it('throws an error', () => {
       const iter = [1, 2, 3]
       const count = -1
 

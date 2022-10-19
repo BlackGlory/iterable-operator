@@ -3,10 +3,8 @@ import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable } from '
 import { dropRightAsync } from '@intermediate/drop-right-async'
 import '@blackglory/jest-matchers'
 
-describe(`
-  dropRightAsync<T>(iterable: AsyncIterable<T>, count: number): AsyncIterableIterator<T>
-`, () => {
-  it('lazy evaluation', async () => {
+describe('dropRightAsync', () => {
+  test('lazy evaluation', async () => {
     const iter = new MockAsyncIterable([1, 2, 3])
     const count = 1
 
@@ -19,7 +17,7 @@ describe(`
 
   describe('count > 0', () => {
     describe('count > size(iterable)', () => {
-      it('return empty iterable', async () => {
+      it('returns an empty iterable', async () => {
         const iter = toAsyncIterable([1, 2, 3])
         const count = 5
 
@@ -32,7 +30,7 @@ describe(`
     })
 
     describe('count = size(iterable)', () => {
-      it('return empty iterable', async () => {
+      it('returns an empty iterable', async () => {
         const iter = toAsyncIterable([1, 2, 3])
         const count = 3
 
@@ -45,7 +43,7 @@ describe(`
     })
 
     describe('count < size(iterable)', () => {
-      it('return iterable that dropped the last count elements', async () => {
+      it('returns the iterable that dropped the last count elements', async () => {
         const iter = toAsyncIterable([1, 2, 3])
         const count = 2
 
@@ -59,7 +57,7 @@ describe(`
   })
 
   describe('count = 0', () => {
-    it('return iterable copy', async () => {
+    it('returns the iterable copy', async () => {
       const iter = toAsyncIterable([1, 2, 3])
       const count = 0
 
@@ -73,7 +71,7 @@ describe(`
   })
 
   describe('count < 0', () => {
-    it('throw Error', () => {
+    it('throws an error', () => {
       const iter = toAsyncIterable([1, 2, 3])
       const count = -1
 

@@ -2,12 +2,10 @@ import { toAsyncIterable } from '@test/utils'
 import { matchAsync } from '@terminal/match-async'
 import '@blackglory/jest-matchers'
 
-describe(`
-  matchAsync<T>(iterable: AsyncItreable<T>, sequence: ArrayLike<T>): Promise<boolean>
-`, () => {
+describe('matchAsync', () => {
   describe('sequence isnt empty', () => {
     describe('sequence is matched', () => {
-      it('return true', async () => {
+      it('returns true', async () => {
         const iter = toAsyncIterable([1, 2, 3])
         const seq = [2, 3]
 
@@ -20,7 +18,7 @@ describe(`
     })
 
     describe('sequence isnt matched', () => {
-      it('return false', async () => {
+      it('returns false', async () => {
         const iter = toAsyncIterable([1, 2, 3])
         const seq = [3, 2]
 
@@ -34,7 +32,7 @@ describe(`
   })
 
   describe('sequence is empty', () => {
-    it('return true', async () => {
+    it('returns true', async () => {
       const iter = toAsyncIterable([1, 2, 3])
       const seq: number[] = []
 

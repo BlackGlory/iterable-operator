@@ -3,10 +3,8 @@ import { consume, toArray, MockIterable } from '@test/utils'
 import { dropRight } from '@intermediate/drop-right'
 import '@blackglory/jest-matchers'
 
-describe(`
-  dropRight<T>(iterable: Iterable<T>, count: number): IterableIterator<T>
-`, () => {
-  it('lazy evaluation', () => {
+describe('dropRight', () => {
+  test('lazy evaluation', () => {
     const iter = new MockIterable([1, 2, 3])
     const count = 1
 
@@ -19,7 +17,7 @@ describe(`
 
   describe('count > 0', () => {
     describe('count > size(iterable)', () => {
-      it('return empty iterable', () => {
+      it('returns an empty iterable', () => {
         const iter = [1, 2, 3]
         const count = 5
 
@@ -32,7 +30,7 @@ describe(`
     })
 
     describe('count = size(iterable)', () => {
-      it('return empty iterable', () => {
+      it('returns an empty iterable', () => {
         const iter = [1, 2, 3]
         const count = 3
 
@@ -45,7 +43,7 @@ describe(`
     })
 
     describe('count < size(iterable)', () => {
-      it('return iterable that dropped the last count elements', () => {
+      it('returns the iterable that dropped the last count elements', () => {
         const iter = [1, 2, 3]
         const count = 2
 
@@ -59,7 +57,7 @@ describe(`
   })
 
   describe('count = 0', () => {
-    it('return iterable copy', () => {
+    it('returns the iterable copy', () => {
       const iter = [1, 2, 3]
       const count = 0
 
@@ -73,7 +71,7 @@ describe(`
   })
 
   describe('count < 0', () => {
-    it('throw Error', () => {
+    it('throws an error', () => {
       const iter = [1, 2, 3]
       const count = -1
 

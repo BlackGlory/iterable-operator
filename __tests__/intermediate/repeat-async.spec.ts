@@ -4,13 +4,8 @@ import { consumeAsync, toArrayAsync, toAsyncIterable, MockAsyncIterable, takeAsy
 import { repeatAsync } from '@intermediate/repeat-async'
 import '@blackglory/jest-matchers'
 
-describe(`
-  repeatAsync<T>(
-    iterable: AsyncIterable<T>
-  , times: number
-  ): AsyncIterableIterator<T>
-`, () => {
-  it('lazy and partial evaluation', async () => {
+describe('repeatAsync', () => {
+  test('lazy and partial evaluation', async () => {
     const iter = new MockAsyncIterable([1, 2, 3])
     const times = 2
 
@@ -24,7 +19,7 @@ describe(`
   })
 
   describe('times > 0', () => {
-    it('return repeated iterable', async () => {
+    it('returns the repeated iterable', async () => {
       const iter = toAsyncIterable([1, 2, 3])
       const times = 2
 
@@ -37,7 +32,7 @@ describe(`
   })
 
   describe('times = 0', () => {
-    it('return empty iterable', async () => {
+    it('returns the empty iterable', async () => {
       const iter = toAsyncIterable([1, 2, 3])
       const times = 0
 
@@ -50,7 +45,7 @@ describe(`
   })
 
   describe('times < 0', () => {
-    it('throw Error', () => {
+    it('throws an error', () => {
       const iter = toAsyncIterable([1, 2, 3])
       const times = -1
 

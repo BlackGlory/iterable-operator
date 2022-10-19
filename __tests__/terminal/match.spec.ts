@@ -1,9 +1,9 @@
 import { match } from '@terminal/match'
 
-describe('match<T>(iterable: Iterable<T>, sequence: ArrayLike<T>): boolean', () => {
+describe('match', () => {
   describe('sequence isnt empty', () => {
     describe('sequence is matched', () => {
-      it('return true', () => {
+      it('returns true', () => {
         const iter = [1, 2, 3]
         const seq = [2, 3]
 
@@ -14,7 +14,7 @@ describe('match<T>(iterable: Iterable<T>, sequence: ArrayLike<T>): boolean', () 
     })
 
     describe('sequence isnt matched', () => {
-      it('return false', () => {
+      it('returns false', () => {
         const iter = [1, 2, 3]
         const seq = [3, 2]
 
@@ -26,7 +26,7 @@ describe('match<T>(iterable: Iterable<T>, sequence: ArrayLike<T>): boolean', () 
   })
 
   describe('sequence is empty', () => {
-    it('return true', () => {
+    it('returns true', () => {
       const iter = [1, 2, 3]
       const seq: number[] = []
 

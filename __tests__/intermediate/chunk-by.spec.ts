@@ -3,33 +3,26 @@ import { chunkBy } from '@intermediate/chunk-by'
 import { getError } from 'return-style'
 import '@blackglory/jest-matchers'
 
-describe(`
-  chunkBy<T>(
-    iterable: Iterable<T>
-  , predicate: (element: T, index: number) => unknown
-  ): IterableIterator<T[]>
-`, () => {
-  describe('fn is called', () => {
-    it('called with [element,index]', () => {
-      const iter = [1, 2, 3]
-      const fn = jest.fn()
+describe('chunkBy', () => {
+  test('called fn with [element, index]', () => {
+    const iter = [1, 2, 3]
+    const fn = jest.fn()
 
-      const result = chunkBy(iter, fn)
-      const calledTimesBeforeConsume = getCalledTimes(fn)
-      consume(result)
-      const calledTimesAfterConsume = getCalledTimes(fn)
+    const result = chunkBy(iter, fn)
+    const calledTimesBeforeConsume = getCalledTimes(fn)
+    consume(result)
+    const calledTimesAfterConsume = getCalledTimes(fn)
 
-      expect(calledTimesBeforeConsume).toBe(0)
-      expect(calledTimesAfterConsume).toBe(3)
-      expect(fn).nthCalledWith(1, 1, 0)
-      expect(fn).nthCalledWith(2, 2, 1)
-      expect(fn).nthCalledWith(3, 3, 2)
-    })
+    expect(calledTimesBeforeConsume).toBe(0)
+    expect(calledTimesAfterConsume).toBe(3)
+    expect(fn).nthCalledWith(1, 1, 0)
+    expect(fn).nthCalledWith(2, 2, 1)
+    expect(fn).nthCalledWith(3, 3, 2)
   })
 
-  describe('fn return true', () => {
+  describe('fn returns true', () => {
     describe('chunk at middle', () => {
-      it('return chunked iterable', () => {
+      it('returns the chunked iterable', () => {
         const iter = [1, 2, 3]
         const atTwo = (x: number) => x === 2
 
@@ -42,7 +35,7 @@ describe(`
     })
 
     describe('chunk at last', () => {
-      it('return chunked iterable', () => {
+      it('returns the chunked iterable', () => {
         const iter = [1, 2, 3]
         const atThree = (x: number) => x === 3
 
@@ -55,8 +48,8 @@ describe(`
     })
   })
 
-  describe('fn always return false', () => {
-    it('return chunked iterable', () => {
+  describe('fn always returns false', () => {
+    it('returns the chunked iterable', () => {
       const iter = [1, 2, 3]
       const alwaysFalse = () => false
 
@@ -81,8 +74,8 @@ describe(`
     expect(isPartial).toBe(true)
   })
 
-  describe('fn throw error', () => {
-    it('throw error when consume', () => {
+  describe('fn throws an error', () => {
+    it('throws an error when consuming iterable', () => {
       const customError = new Error('CustomError')
       const iter = [1, 2, 3]
       const fn = () => { throw customError }

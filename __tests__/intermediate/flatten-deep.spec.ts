@@ -3,10 +3,8 @@ import { consume, toArray, MockIterable, take } from '@test/utils'
 import { flattenDeep } from '@intermediate/flatten-deep'
 import '@blackglory/jest-matchers'
 
-describe(`
-  flattenDeep<T>(iterable: Iterable<unknown>, depth: number): IterableIterator<T>
-`, () => {
-  it('lazy and partial evaluation', () => {
+describe('flattenDeep', () => {
+  test('lazy and partial evaluation', () => {
     const iter = new MockIterable([1, 2, 3])
     const depth = Infinity
 
@@ -20,7 +18,7 @@ describe(`
   })
 
   describe('iterable is empty', () => {
-    it('return empty iterable', () => {
+    it('returns the empty iterable', () => {
       const iter: number[] = []
       const depth = Infinity
 
@@ -34,7 +32,7 @@ describe(`
 
   describe('iterable isnt empty', () => {
     describe('iterable is string', () => {
-      it('return iterable<char>', () => {
+      it('returns the iterable chars', () => {
         const iter = '123'
         const depth = Infinity
 
@@ -48,7 +46,7 @@ describe(`
 
     describe('iterable isnt string', () => {
       describe('depth < 0', () => {
-        it('throw Error', () => {
+        it('throws an error', () => {
           const iter: number[] = []
           const depth = -1
 
@@ -60,7 +58,7 @@ describe(`
       })
 
       describe('depth = 0', () => {
-        it('return iterable copy', () => {
+        it('returns the iterable copy', () => {
           const iter = [0, [1]]
           const depth = 0
 
@@ -74,7 +72,7 @@ describe(`
       })
 
       describe('depth > 0', () => {
-        it('return flat iterable', () => {
+        it('returns the flat iterable', () => {
           const iter = [
             'one', ['two', ['three']]
           , 0, [1, [2, [3]]]

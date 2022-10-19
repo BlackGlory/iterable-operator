@@ -4,60 +4,28 @@ import { chunkByAsync } from '@intermediate/chunk-by-async'
 import { getErrorPromise } from 'return-style'
 import '@blackglory/jest-matchers'
 
-describe(`
-  chunkByAsync<T>(
-    iterable: Iterable<T> | AsyncIterable<T>
-  , predicate: (element: T, index: number) => Awaitable<unknown>
-  ): AsyncIterableIterator<T[]>
-`, () => {
-  describe('T is PromiseLike<unknown>', () => {
-    it('called with [element(promise),index]', async () => {
-      const iter = [Promise.resolve(), Promise.resolve(), Promise.resolve()]
-      const fn = jest.fn().mockReturnValue(true)
-
-      const result = chunkByAsync(iter, fn)
-      await consumeAsync(result)
-
-      expect(fn).toBeCalledTimes(3)
-      expect(fn).nthCalledWith(1, iter[0], 0)
-      expect(fn).nthCalledWith(2, iter[1], 1)
-      expect(fn).nthCalledWith(3, iter[2], 2)
-    })
-
-    it('return AsyncIterable<Array<PromiseLike<T>>>', async () => {
-      const iter = [Promise.resolve(), Promise.resolve(), Promise.resolve()]
-      const fn = jest.fn().mockReturnValue(false)
-
-      const result = chunkByAsync(iter, fn)
-      const arrResult = await toArrayAsync(result)
-
-      expect(arrResult).toEqual([iter])
-    })
-  })
-
+describe('chunkByAsync(', () => {
   describe.each([
-    testIterable('Iterable<T>')
-  , testAsyncIterable('AsyncIterable<T>')
+    testIterable('Iterable')
+  , testAsyncIterable('AsyncIterable')
   ])('%s', (_, createIter) => {
-    describe('fn is called', () => {
-      it('called with [element,index]', async () => {
-        const iter = createIter([1, 2, 3])
-        const fn = jest.fn()
+    test('called fn with [element, index]', async () => {
+      const iter = createIter([1, 2, 3])
+      const fn = jest.fn()
 
-        const result = chunkByAsync(iter, fn)
-        const calledTimesBeforeConsume = getCalledTimes(fn)
-        await consumeAsync(result)
-        const calledTimesAfterConsume = getCalledTimes(fn)
+      const result = chunkByAsync(iter, fn)
+      const calledTimesBeforeConsume = getCalledTimes(fn)
+      await consumeAsync(result)
+      const calledTimesAfterConsume = getCalledTimes(fn)
 
-        expect(calledTimesBeforeConsume).toBe(0)
-        expect(calledTimesAfterConsume).toBe(3)
-        expect(fn).nthCalledWith(1, 1, 0)
-        expect(fn).nthCalledWith(2, 2, 1)
-        expect(fn).nthCalledWith(3, 3, 2)
-      })
+      expect(calledTimesBeforeConsume).toBe(0)
+      expect(calledTimesAfterConsume).toBe(3)
+      expect(fn).nthCalledWith(1, 1, 0)
+      expect(fn).nthCalledWith(2, 2, 1)
+      expect(fn).nthCalledWith(3, 3, 2)
     })
 
-    it('lazy and partial evaluation', async () => {
+    test('lazy and partial evaluation', async () => {
       const mock = new MockIterable([1, 2, 3])
       const iter = createIter(mock)
       const fn = () => true
@@ -72,12 +40,12 @@ describe(`
     })
 
     describe.each([
-      testFunction('fn return non-promise')
-    , testAsyncFunction('fn return promiselike')
+      testFunction('fn returns NonPromiseLike')
+    , testAsyncFunction('fn returns PromiseLike')
     ])('%s', (_, createFn) => {
-      describe('fn return true', () => {
+      describe('fn returns true', () => {
         describe('chunk at middle', () => {
-          it('return chunked iterable', async () => {
+          it('returns the chunked iterable', async () => {
             const iter = createIter([1, 2, 3])
             const atTwo = createFn((x: number) => x === 2)
 
@@ -90,7 +58,7 @@ describe(`
         })
 
         describe('chunk at last', () => {
-          it('return chunked iterable', async () => {
+          it('returns the chunked iterable', async () => {
             const iter = createIter([1, 2, 3])
             const atThree = createFn((x: number) => x === 3)
 
@@ -103,8 +71,8 @@ describe(`
         })
       })
 
-      describe('fn always return false', () => {
-        it('return chunked iterable', async () => {
+      describe('fn alwasy returns false', () => {
+        it('returns the chunked iterable', async () => {
           const iter = createIter([1, 2, 3])
           const alwaysFalse = createFn(() => false)
 
@@ -116,8 +84,8 @@ describe(`
         })
       })
 
-      describe('fn throw error', () => {
-        it('throw error when consume', async () => {
+      describe('fn throws an error', () => {
+        it('throws an error when consuming iterable', async () => {
           const customError = new Error('CustomError')
           const iter = createIter([1, 2, 3])
           const fn = createFn(() => { throw customError })

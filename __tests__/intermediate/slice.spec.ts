@@ -3,9 +3,7 @@ import { consume, toArray, MockIterable, take } from '@test/utils'
 import { slice } from '@intermediate/slice'
 import '@blackglory/jest-matchers'
 
-describe(`
-  slice<T>(iterable: Iterable<T>, start: number, end: number): IterableIterator<T>
-`, () => {
+describe('slice', () => {
   it('lazy and partial evaluation', () => {
     const iter = new MockIterable([1, 2, 3])
     const start = 0
@@ -21,7 +19,7 @@ describe(`
   })
 
   describe('start < 0', () => {
-    it('throw Error', () => {
+    it('throws an error', () => {
       const iter = [1, 2, 3]
       const start = -1
       const end = 1
@@ -35,7 +33,7 @@ describe(`
 
   describe('start >= 0', () => {
     describe('start >= size(iterable)', () => {
-      it('return empty iterable', () => {
+      it('returns the empty iterable', () => {
         const iter = [1, 2, 3]
         const start = 3
         const end = 5
@@ -50,7 +48,7 @@ describe(`
 
     describe('start < size(iterable)', () => {
       describe('start < end', () => {
-        it('return iterable[start:end-1]', () => {
+        it('returns the iterable [start:end-1]', () => {
           const iter = [1, 2, 3]
           const start = 1
           const end = 2
@@ -64,7 +62,7 @@ describe(`
       })
 
       describe('start = end', () => {
-        it('return empty iterable', () => {
+        it('returns the empty iterable', () => {
           const iter = [1, 2, 3]
           const start = 1
           const end = 1
@@ -78,7 +76,7 @@ describe(`
       })
 
       describe('start > end', () => {
-        it('throw Error', () => {
+        it('throws an error', () => {
           const iter = [1, 2, 3]
           const start = 2
           const end = 1

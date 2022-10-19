@@ -2,10 +2,10 @@ import { consume, toArray, MockIterable, take } from '@test/utils'
 import { split } from '@intermediate/split'
 import '@blackglory/jest-matchers'
 
-describe('split<T>(iterable: Iterable<T>, separator: T): IterableIterator<T[]>', () => {
+describe('split', () => {
   describe('separator in iterable', () => {
     describe('separator is first', () => {
-      it('return splited iterable', () => {
+      it('returns the splited iterable', () => {
         const iter = [1, 2, 3, 4, 5]
         const sep = 1
 
@@ -18,7 +18,7 @@ describe('split<T>(iterable: Iterable<T>, separator: T): IterableIterator<T[]>',
     })
 
     describe('separator is middle', () => {
-      it('return splited iterable', () => {
+      it('returns the splited iterable', () => {
         const iter = [1, 2, 3, 4, 5]
         const sep = 3
 
@@ -31,7 +31,7 @@ describe('split<T>(iterable: Iterable<T>, separator: T): IterableIterator<T[]>',
     })
 
     describe('separator is last', () => {
-      it('return splited iterable', () => {
+      it('returns the splited iterable', () => {
         const iter = [1, 2, 3, 4, 5]
         const sep = 5
 
@@ -45,7 +45,7 @@ describe('split<T>(iterable: Iterable<T>, separator: T): IterableIterator<T[]>',
   })
 
   describe('separator not in iterable', () => {
-    it('return splited iterable', () => {
+    it('returns the splited iterable', () => {
       const iter = [1, 2, 3, 4, 5]
       const sep = 0
 
@@ -57,7 +57,7 @@ describe('split<T>(iterable: Iterable<T>, separator: T): IterableIterator<T[]>',
     })
   })
 
-  it('lazy and partial evaluation', () => {
+  test('lazy and partial evaluation', () => {
     const iter = new MockIterable([1, 2, 3])
     const sep = 1
 

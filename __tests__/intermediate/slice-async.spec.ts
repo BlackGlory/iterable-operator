@@ -4,14 +4,8 @@ import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsy
 import { sliceAsync } from '@intermediate/slice-async'
 import '@blackglory/jest-matchers'
 
-describe(`
-  sliceAsync<T>(
-    iterable: AsyncIterable<T>
-  , start: number
-  , end: number
-  ): AsyncIterableIteartor<T>
-`, () => {
-  it('lazy and partial evaluation', async () => {
+describe('sliceAsync', () => {
+  test('lazy and partial evaluation', async () => {
     const iter = new MockAsyncIterable([1, 2, 3])
     const start = 0
     const end = 10
@@ -26,7 +20,7 @@ describe(`
   })
 
   describe('start < 0', () => {
-    it('throw Error', () => {
+    it('throws an error', () => {
       const iter = toAsyncIterable([1, 2, 3])
       const start = -1
       const end = 1
@@ -40,7 +34,7 @@ describe(`
 
   describe('start >= 0', () => {
     describe('start >= size(iterable', () => {
-      it('return empty iterable', async () => {
+      it('returns the empty iterable', async () => {
         const iter = toAsyncIterable([1, 2, 3])
         const start = 3
         const end = 5
@@ -55,7 +49,7 @@ describe(`
 
     describe('start < size(iterable)', () => {
       describe('start < end', () => {
-        it('return iterable[start:end-1]', async () => {
+        it('returns the iterable [start:end-1]', async () => {
           const iter = toAsyncIterable([1, 2, 3])
           const start = 1
           const end = 2
@@ -69,7 +63,7 @@ describe(`
       })
 
       describe('start = end', () => {
-        it('return empty iterable', async () => {
+        it('returns the empty iterable', async () => {
           const iter = toAsyncIterable([1, 2, 3])
           const start = 1
           const end = 1
@@ -83,7 +77,7 @@ describe(`
       })
 
       describe('start > end', () => {
-        it('throw Error', async () => {
+        it('throws an error', async () => {
           const iter = toAsyncIterable([1, 2, 3])
           const start = 2
           const end = 1

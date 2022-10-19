@@ -1,38 +1,34 @@
 import { getError } from 'return-style'
 import { every } from '@terminal/every'
 
-describe(`
-  every<T>(itearble: Iterable<T>, predicate: (element: T, index: number) => unknown): boolean
-`, () => {
-  describe('fn is called', () => {
-    describe('fn return false on first element', () => {
-      it('called once', () => {
-        const iter = [1, 2, 3]
-        const fn = jest.fn().mockReturnValueOnce(false)
+describe('every', () => {
+  describe('fn returns false on first element', () => {
+    it('called fn only once', () => {
+      const iter = [1, 2, 3]
+      const fn = jest.fn().mockReturnValueOnce(false)
 
-        every(iter, fn)
+      every(iter, fn)
 
-        expect(fn).toBeCalledTimes(1)
-      })
-    })
-
-    describe('fn return true', () => {
-      it('called with [element,index]', () => {
-        const iter = [1, 2, 3]
-        const fn = jest.fn().mockReturnValue(true)
-
-        every(iter, fn)
-
-        expect(fn).toBeCalledTimes(3)
-        expect(fn).nthCalledWith(1, 1, 0)
-        expect(fn).nthCalledWith(2, 2, 1)
-        expect(fn).nthCalledWith(3, 3, 2)
-      })
+      expect(fn).toBeCalledTimes(1)
     })
   })
 
-  describe('fn return true every time', () => {
-    it('return true', () => {
+  describe('fn returns true', () => {
+    it('called fn with [element, index]', () => {
+      const iter = [1, 2, 3]
+      const fn = jest.fn().mockReturnValue(true)
+
+      every(iter, fn)
+
+      expect(fn).toBeCalledTimes(3)
+      expect(fn).nthCalledWith(1, 1, 0)
+      expect(fn).nthCalledWith(2, 2, 1)
+      expect(fn).nthCalledWith(3, 3, 2)
+    })
+  })
+
+  describe('fn returns true every time', () => {
+    it('returns true', () => {
       const iter = [1, 2, 3]
       const fn = () => true
 
@@ -42,8 +38,8 @@ describe(`
     })
   })
 
-  describe('fn return true not every time', () => {
-    it('return false', () => {
+  describe('fn returns true not every time', () => {
+    it('returns false', () => {
       const iter = [1, 2, 3]
       const isntNumber = () => false
 
@@ -53,8 +49,8 @@ describe(`
     })
   })
 
-  describe('fn throw error', () => {
-    it('throw error', () => {
+  describe('fn throws an error', () => {
+    it('throws an error', () => {
       const customError = new Error('CustomError')
       const iter = [1, 2, 3]
       const fn = () => { throw customError }

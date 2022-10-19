@@ -3,8 +3,8 @@ import { consume, toArray, MockIterable, take } from '@test/utils'
 import { chunk } from '@intermediate/chunk'
 import '@blackglory/jest-matchers'
 
-describe('chunk<T>(iterable: Iterable<T>, size: number): IterableIterator<T[]>', () => {
-  it('lazy and partial evaluation', () => {
+describe('chunk', () => {
+  test('lazy and partial evaluation', () => {
     const iter = new MockIterable([1, 2, 3])
     const size = 1
 
@@ -19,7 +19,7 @@ describe('chunk<T>(iterable: Iterable<T>, size: number): IterableIterator<T[]>',
 
   describe('size > 0', () => {
     describe('size = size(iterable)', () => {
-      it('return chunked iterable', () => {
+      it('returns the chunked iterable', () => {
         const iter = [1, 2, 3]
         const size = 3
 
@@ -32,7 +32,7 @@ describe('chunk<T>(iterable: Iterable<T>, size: number): IterableIterator<T[]>',
     })
 
     describe('size < size(iterable)', () => {
-      it('return chunked iterable', () => {
+      it('returns the chunked iterable', () => {
         const iter = [1, 2, 3]
         const size = 2
 
@@ -45,7 +45,7 @@ describe('chunk<T>(iterable: Iterable<T>, size: number): IterableIterator<T[]>',
     })
 
     describe('size > size(iterable)', () => {
-      it('return chunked iterable', () => {
+      it('returns the chunked iterable', () => {
         const iter = [1, 2, 3]
         const size = 5
 
@@ -59,7 +59,7 @@ describe('chunk<T>(iterable: Iterable<T>, size: number): IterableIterator<T[]>',
   })
 
   describe('size = 0', () => {
-    it('throw Error', () => {
+    it('throws an error', () => {
       const iter = [1, 2, 3]
       const size = 0
 
@@ -71,7 +71,7 @@ describe('chunk<T>(iterable: Iterable<T>, size: number): IterableIterator<T[]>',
   })
 
   describe('size < 0', () => {
-    it('throw Error', () => {
+    it('throws an error', () => {
       const iter = [1, 2, 3]
       const size = -1
 

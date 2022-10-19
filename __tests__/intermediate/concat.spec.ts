@@ -2,12 +2,7 @@ import { consume, toArray, MockIterable, take } from '@test/utils'
 import { concat } from '@intermediate/concat'
 import '@blackglory/jest-matchers'
 
-describe(`
-  concat<T, U>(
-    iterable: Iterable<T>
-  , ...otherIterables: Iterable<U>[]
-  ): IterableIterator<T | U>
-`, () => {
+describe('concat', () => {
   it('lazy and partial evaluation', () => {
     const iter1 = new MockIterable([1, 2, 3])
     const iter2: number[] = []
@@ -21,7 +16,7 @@ describe(`
     expect(isPartial).toBe(true)
   })
 
-  it('return concated iterable', () => {
+  it('returns the concated iterable', () => {
     const iter1 = [1, 2, 3]
     const iter2 = ['a', 'b', 'c']
 

@@ -1,42 +1,35 @@
 import { getError } from 'return-style'
 import { find } from '@terminal/find'
 
-describe(`
-  find<T>(
-    iterable: Iterable<T>
-  , predicate: (element: T, index: number) => unknown
-  ): T | undefined
-`, () => {
-  describe('fn is called', () => {
-    it('called with [element,index]', () => {
+describe('find', () => {
+  it('called fn with [element, index]', () => {
+    const iter = [1, 2, 3]
+    const fn = jest.fn()
+      .mockReturnValueOnce(false)
+      .mockReturnValueOnce(false)
+      .mockReturnValueOnce(true)
+
+    find(iter, fn)
+
+    expect(fn).toBeCalledTimes(3)
+    expect(fn).nthCalledWith(1, 1, 0)
+    expect(fn).nthCalledWith(2, 2, 1)
+    expect(fn).nthCalledWith(3, 3, 2)
+  })
+
+  describe('fn returns true on first time', () => {
+    it('called fn only once', () => {
       const iter = [1, 2, 3]
-      const fn = jest.fn()
-        .mockReturnValueOnce(false)
-        .mockReturnValueOnce(false)
-        .mockReturnValueOnce(true)
+      const fn = jest.fn().mockReturnValueOnce(true)
 
       find(iter, fn)
 
-      expect(fn).toBeCalledTimes(3)
-      expect(fn).nthCalledWith(1, 1, 0)
-      expect(fn).nthCalledWith(2, 2, 1)
-      expect(fn).nthCalledWith(3, 3, 2)
-    })
-
-    describe('fn return true on first time', () => {
-      it('fn is called once', () => {
-        const iter = [1, 2, 3]
-        const fn = jest.fn().mockReturnValueOnce(true)
-
-        find(iter, fn)
-
-        expect(fn).toBeCalledTimes(1)
-      })
+      expect(fn).toBeCalledTimes(1)
     })
   })
 
-  describe('fn return true', () => {
-    it('return first element in the iterable that fn return true', () => {
+  describe('fn returns true', () => {
+    it('returns first element in the iterable that fn returns true', () => {
       const iter = [1, 2, 3]
       const isTwo = (x: number) => x === 2
 
@@ -46,8 +39,8 @@ describe(`
     })
   })
 
-  describe('fn return false every time', () => {
-    it('return undefined', () => {
+  describe('fn returns false every time', () => {
+    it('returns undefined', () => {
       const iter = [1, 2, 3]
       const isFour = (x: number) => x === 4
 
@@ -57,8 +50,8 @@ describe(`
     })
   })
 
-  describe('throw error', () => {
-    it('throw error', () => {
+  describe('fn throws an error', () => {
+    it('throws an error', () => {
       const customError = new Error('CustomError')
       const iter = [1, 2, 3]
       const fn = () => { throw customError }

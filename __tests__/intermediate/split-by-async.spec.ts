@@ -4,66 +4,34 @@ import { getErrorPromise } from 'return-style'
 import { splitByAsync } from '@intermediate/split-by-async'
 import '@blackglory/jest-matchers'
 
-describe(`
-  splitByAsync<T>(
-    iterable: Iterable<T> | AsyncIterable<T>
-  , predicate: (element: T, index: number) => Awaitable<unknown>
-  ): AsyncIterableIterator<T[]>
-`, () => {
-  describe('T is PromiseLike<T>', () => {
-    it('called with [element(promise),index]', async () => {
-      const iter = [Promise.resolve(), Promise.resolve(), Promise.resolve()]
-      const fn = jest.fn()
-
-      const result = splitByAsync(iter, fn)
-      await consumeAsync(result)
-
-      expect(fn).toBeCalledTimes(3)
-      expect(fn).nthCalledWith(1, iter[0], 0)
-      expect(fn).nthCalledWith(2, iter[1], 1)
-      expect(fn).nthCalledWith(3, iter[2], 2)
-    })
-
-    it('return AsyncIterable<Array<PromiseLike<T>>>', async () => {
-      const iter = [Promise.resolve(), Promise.resolve(), Promise.resolve()]
-      const fn = jest.fn().mockReturnValue(false)
-
-      const result = splitByAsync(iter, fn)
-      const arrResult = await toArrayAsync(result)
-
-      expect(arrResult).toEqual([iter])
-    })
-  })
-
+describe('splitByAsync', () => {
   describe.each([
-    testIterable('Iterable<T>')
-  , testAsyncIterable('AsyncIterable<T>')
+    testIterable('Iterable')
+  , testAsyncIterable('AsyncIterable')
   ])('%s', (_, createIter) => {
     describe.each([
-      testFunction('fn return non-promise')
-    , testAsyncFunction('fn return promise')
+      testFunction('fn returns NonPromiseLike')
+    , testAsyncFunction('fn returns PromiseLike')
     ])('%s', (_, createFn) => {
-      describe('fn is called', () => {
-        it('called with [element,index]', async () => {
-          const iter = createIter([1, 2, 3])
-          const fn = jest.fn()
+      test('called fn with [element, index]', async () => {
+        const iter = createIter([1, 2, 3])
+        const fn = jest.fn()
 
-          const result = splitByAsync(iter, fn)
-          const calledTimesBeforeConsume = getCalledTimes(fn)
-          await consumeAsync(result)
-          const calledTimesAfterConsume = getCalledTimes(fn)
+        const result = splitByAsync(iter, fn)
+        const calledTimesBeforeConsume = getCalledTimes(fn)
+        await consumeAsync(result)
+        const calledTimesAfterConsume = getCalledTimes(fn)
 
-          expect(calledTimesBeforeConsume).toBe(0)
-          expect(calledTimesAfterConsume).toBe(3)
-          expect(fn).nthCalledWith(1, 1, 0)
-          expect(fn).nthCalledWith(2, 2, 1)
-          expect(fn).nthCalledWith(3, 3, 2)
-        })
+        expect(calledTimesBeforeConsume).toBe(0)
+        expect(calledTimesAfterConsume).toBe(3)
+        expect(fn).nthCalledWith(1, 1, 0)
+        expect(fn).nthCalledWith(2, 2, 1)
+        expect(fn).nthCalledWith(3, 3, 2)
       })
 
-      describe('fn return true', () => {
+      describe('fn returns true', () => {
         describe('separator is first', () => {
-          it('return splited iterable', async () => {
+          it('returns the splited iterable', async () => {
             const iter = createIter([1, 2, 3, 4, 5])
             const atThree = createFn((x: number) =>  x === 1)
 
@@ -76,7 +44,7 @@ describe(`
         })
 
         describe('separator is middle', () => {
-          it('return splited iterable', async () => {
+          it('returns the splited iterable', async () => {
             const iter = createIter([1, 2, 3, 4, 5])
             const atThree = createFn((x: number) =>  x === 3)
 
@@ -89,7 +57,7 @@ describe(`
         })
 
         describe('separator is last', () => {
-          it('return splited iterable', async () => {
+          it('returns the splited iterable', async () => {
             const iter = createIter([1, 2, 3, 4, 5])
             const atThree = createFn((x: number) =>  x === 5)
 
@@ -102,8 +70,8 @@ describe(`
         })
       })
 
-      describe('fn always return false', () => {
-        it('return splited iterable', async () => {
+      describe('fn alwasy returns false', () => {
+        it('returns the splited iterable', async () => {
           const iter = createIter([1, 2, 3, 4, 5])
           const alwaysFalse = createFn(() => false)
 
@@ -129,8 +97,8 @@ describe(`
         expect(isPartial).toBe(true)
       })
 
-      describe('fn throw error', () => {
-        it('throw error when consume', async () => {
+      describe('fn throws an error', () => {
+        it('throws an error when consume', async () => {
           const customError = new Error('CustomError')
           const iter = createIter([1, 2, 3, 4, 5])
           const fn = () => { throw customError }

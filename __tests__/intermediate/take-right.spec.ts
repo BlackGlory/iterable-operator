@@ -5,12 +5,10 @@ import '@blackglory/jest-matchers'
 import { go } from '@blackglory/go'
 import { pass } from '@blackglory/pass'
 
-describe(`
-  takeRight<T>(iterable: Iterable<T>, count: number): IterableIterator<T>
-`, () => {
-  test('close unexhausted iterator', () => {
+describe('takeRight', () => {
+  test('close the unexhausted iterator', () => {
     const iter = new MockIterable(go(function* () {
-      throw new Error()
+     throw new Error()
     }))
 
     try {
@@ -23,7 +21,7 @@ describe(`
     expect(iter.done).toBeTruthy()
   })
 
-  it('lazy evaluation', () => {
+  test('lazy evaluation', () => {
     const iter = new MockIterable([1, 2, 3])
     const count = 5
 
@@ -35,7 +33,7 @@ describe(`
   })
 
   describe('count > size(iterable)', () => {
-    it('return iterable copy', () => {
+    it('returns the iterable copy', () => {
       const iter = [1, 2, 3]
       const count = 5
 
@@ -49,7 +47,7 @@ describe(`
   })
 
   describe('0 < count < size(iterable)', () => {
-    it('return iterable that taken last count elements', () => {
+    it('returns the iterable that taken last count elements', () => {
       const iter = [1, 2, 3]
       const count = 2
 
@@ -62,7 +60,7 @@ describe(`
   })
 
   describe('count = 0', () => {
-    it('throw empty iterable', () => {
+    it('returns the empty iterable', () => {
       const iter = [1, 2, 3]
       const count = 0
 
@@ -75,7 +73,7 @@ describe(`
   })
 
   describe('count < 0', () => {
-    it('throw Error', () => {
+    it('throws an error', () => {
       const iter: number[] = []
       const count = -1
 

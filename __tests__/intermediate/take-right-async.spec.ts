@@ -5,15 +5,10 @@ import '@blackglory/jest-matchers'
 import { go } from '@blackglory/go'
 import { pass } from '@blackglory/pass'
 
-describe(`
-  takeRightAsync<T>(
-    iterable: AsyncIterable<T>
-  , count: number
-  ): AsyncIterableIterator<T>
-`, () => {
-  test('close unexhausted iterator', async () => {
+describe('takeRightAsync', () => {
+  test('close the unexhausted iterator', async () => {
     const iter = new MockAsyncIterable(go(function* () {
-      throw new Error()
+     throw new Error()
     }))
 
     try {
@@ -26,7 +21,7 @@ describe(`
     expect(iter.done).toBeTruthy()
   })
 
-  it('lazy evaluation', async () => {
+  test('lazy evaluation', async () => {
     const iter = new MockAsyncIterable()
     const count = 5
 
@@ -38,7 +33,7 @@ describe(`
   })
 
   describe('count > size(iterable)', () => {
-    it('return iterable copy', async () => {
+    it('returns the iterable copy', async () => {
       const iter = toAsyncIterable([1, 2, 3])
       const count = 5
 
@@ -52,7 +47,7 @@ describe(`
   })
 
   describe('0 < count < size(iterable)', () => {
-    it('return iterable that taken the first count elements', async () => {
+    it('returns the iterable that taken the first count elements', async () => {
       const iter = toAsyncIterable([1, 2, 3])
       const count = 2
 
@@ -65,7 +60,7 @@ describe(`
   })
 
   describe('count = 0', () => {
-    it('throw empty iterable', async () => {
+    it('returns the empty iterable', async () => {
       const iter = toAsyncIterable([1, 2, 3])
       const count = 0
 
@@ -78,7 +73,7 @@ describe(`
   })
 
   describe('count < 0', () => {
-    it('throw Error', () => {
+    it('throws an error', () => {
       const iter = toAsyncIterable([])
       const count = -1
 

@@ -4,15 +4,13 @@ import { testFunction, testAsyncFunction, testIterable, testAsyncIterable }
 import { findAsync } from '@terminal/find-async'
 import '@blackglory/jest-matchers'
 
-describe(`
-  findAsync<T>(
-    iterable: Iterable<T> | AsyncIterable<T>
-  , predicate: (element: T, index: number) => Awaitable<unknown>
-  ): Promise<T | undefined>
-`, () => {
-  describe('T is PromiseLike<T>', () => {
-    it('called with [element(promise),index]', async () => {
-      const iter = [Promise.resolve(), Promise.resolve(), Promise.resolve()]
+describe('findAsync', () => {
+  describe.each([
+    testIterable('Iterable')
+  , testAsyncIterable('AsyncIterable')
+  ])('%s', (_, createIter) => {
+    it('called fn with [element, index]', async () => {
+      const iter = createIter([1, 2, 3])
       const fn = jest.fn()
         .mockReturnValueOnce(false)
         .mockReturnValueOnce(false)
@@ -21,50 +19,28 @@ describe(`
       await findAsync(iter, fn)
 
       expect(fn).toBeCalledTimes(3)
-      expect(fn).nthCalledWith(1, iter[0], 0)
-      expect(fn).nthCalledWith(2, iter[1], 1)
-      expect(fn).nthCalledWith(3, iter[2], 2)
+      expect(fn).nthCalledWith(1, 1, 0)
+      expect(fn).nthCalledWith(2, 2, 1)
+      expect(fn).nthCalledWith(3, 3, 2)
     })
-  })
 
-  describe.each([
-    testIterable('Iterable<T>')
-  , testAsyncIterable('AsyncIterable<T>')
-  ])('%s', (_, createIter) => {
-    describe('fn is called', () => {
-      it('called with [element,index]', async () => {
+    describe('fn returns true on first element', () => {
+      it('called fn only once', async () => {
         const iter = createIter([1, 2, 3])
-        const fn = jest.fn()
-          .mockReturnValueOnce(false)
-          .mockReturnValueOnce(false)
-          .mockReturnValueOnce(true)
+        const fn = jest.fn().mockReturnValueOnce(true)
 
         await findAsync(iter, fn)
 
-        expect(fn).toBeCalledTimes(3)
-        expect(fn).nthCalledWith(1, 1, 0)
-        expect(fn).nthCalledWith(2, 2, 1)
-        expect(fn).nthCalledWith(3, 3, 2)
-      })
-
-      describe('fn return true on first element', () => {
-        it('fn is called once', async () => {
-          const iter = createIter([1, 2, 3])
-          const fn = jest.fn().mockReturnValueOnce(true)
-
-          await findAsync(iter, fn)
-
-          expect(fn).toBeCalledTimes(1)
-        })
+        expect(fn).toBeCalledTimes(1)
       })
     })
 
     describe.each([
-      testFunction('fn return non-promise')
-    , testAsyncFunction('fn return PromiseLike')
+      testFunction('fn returns NonPromiseLike')
+    , testAsyncFunction('fn returns PromiseLike')
     ])('%s', (_, createFn) => {
-      describe('fn return true', () => {
-        it('return first element in the iterable that fn return true', async () => {
+      describe('fn returns true', () => {
+        it('returns first element in the iterable that fn returns true', async () => {
           const iter = createIter([1, 2, 3])
           const isTwo = createFn((x: number) => x === 2)
 
@@ -76,8 +52,8 @@ describe(`
         })
       })
 
-      describe('fn return false every time', () => {
-        it('return undefined', async () => {
+      describe('fn returns false every time', () => {
+        it('returns undefined', async () => {
           const iter = createIter([1, 2, 3])
           const isFour = createFn((x: number) => x === 4)
 
@@ -87,8 +63,8 @@ describe(`
         })
       })
 
-      describe('throw error', () => {
-        it('throw error', async () => {
+      describe('fn throws an error', () => {
+        it('throws an error', async () => {
           const customError = new Error('CustomError')
           const iter = createIter([1, 2, 3])
           const fn = createFn(() => { throw customError })

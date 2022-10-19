@@ -45,6 +45,12 @@ export function* toIterable<T>(iterable: Iterable<T>): Iterable<T> {
   }
 }
 
+export function* toIterablePromises<T>(iterable: Iterable<T>): Iterable<Promise<T>> {
+  for (const element of iterable) {
+    yield Promise.resolve(element)
+  }
+}
+
 export async function* toAsyncIterable<T>(iterable: Iterable<T>): AsyncIterable<T> {
   for (const element of iterable) {
     yield element

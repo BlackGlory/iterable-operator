@@ -2,8 +2,8 @@ import { consume, toArray, MockIterable, take } from '@test/utils'
 import { flatten } from '@intermediate/flatten'
 import '@blackglory/jest-matchers'
 
-describe('flatten<T, U>(iterable: Iterable<T>): IterableIterator<U>', () => {
-  it('lazy and partial evaluation', () => {
+describe('flatten', () => {
+  test('lazy and partial evaluation', () => {
     const iter = new MockIterable([1, 2, 3])
 
     const result = flatten(iter)
@@ -16,7 +16,7 @@ describe('flatten<T, U>(iterable: Iterable<T>): IterableIterator<U>', () => {
   })
 
   describe('iterable is empty', () => {
-    it('return empty iterable', () => {
+    it('returns the empty iterable', () => {
       const iter: number[] = []
 
       const result = flatten(iter)
@@ -28,7 +28,7 @@ describe('flatten<T, U>(iterable: Iterable<T>): IterableIterator<U>', () => {
   })
 
   describe('iterable is string', () => {
-    it('return iterable<char>', () => {
+    it('returns the iterable chars', () => {
       const iter = '123'
 
       const result = flatten(iter)
@@ -40,7 +40,7 @@ describe('flatten<T, U>(iterable: Iterable<T>): IterableIterator<U>', () => {
   })
 
   describe('iterable isnt string', () => {
-    it('return flat iterable', () => {
+    it('returns the flat iterable', () => {
       const iter = [
         'one', ['two']
       , 0, [1, [2]]

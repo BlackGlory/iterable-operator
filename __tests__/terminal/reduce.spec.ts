@@ -3,29 +3,24 @@ import { reduce } from '@terminal/reduce'
 import { MockIterable } from '@test/utils'
 import { pass } from '@blackglory/pass'
 
-describe(`
-  reduce<T>(
-    iterable: Iterable<T>
-  , fn: (accumulator: T, currentValue: T, index: number) => T)
-  ): T
-`, () => {
-  test('close unexhausted iterator', () => {
-    const iter = new MockIterable([1, 2, 3])
+describe('reduce', () => {
+  describe('without initialValue', () => {
+    test('close the unexhausted iterator', () => {
+      const iter = new MockIterable([1, 2, 3])
 
-    try {
-      reduce(iter, () => {
+      try {
+        reduce(iter, () => {
         throw new Error()
-      })
-    } catch {
-      pass()
-    }
+        })
+      } catch {
+        pass()
+      }
 
-    expect(iter.returnCalled).toBeTruthy()
-    expect(iter.done).toBeTruthy()
-  })
+      expect(iter.returnCalled).toBeTruthy()
+      expect(iter.done).toBeTruthy()
+    })
 
-  describe('fn is called', () => {
-    it('called with [accumulator,currentValue,index]', () => {
+    test('called fn with [accumulator, currentValue, index]', () => {
       const iter = [1, 2, 3]
       const fn = jest.fn()
         .mockReturnValueOnce(1 + 2)
@@ -37,11 +32,9 @@ describe(`
       expect(fn).nthCalledWith(1, 1, 2, 1)
       expect(fn).nthCalledWith(2, 1 + 2, 3, 2)
     })
-  })
 
-  describe('size(iterable) = 0', () => {
-    describe('call', () => {
-      it('throw Error', () => {
+    describe('size(iterable) = 0', () => {
+      it('throws an error', () => {
         const iter: number[] = []
         const fn = (acc: number, cur: number) => acc + cur
 
@@ -50,11 +43,9 @@ describe(`
         expect(err).toBeInstanceOf(Error)
       })
     })
-  })
 
-  describe('size(iterable) = 1', () => {
-    describe('call', () => {
-      it('return the element without calling fn', () => {
+    describe('size(iterable) = 1', () => {
+      it('returns the element without calling fn', () => {
         const iter: number[] = [1]
         const fn = jest.fn()
 
@@ -64,11 +55,9 @@ describe(`
         expect(result).toBe(1)
       })
     })
-  })
 
-  describe('size(iterable) > 1', () => {
-    describe('call', () => {
-      it('return result from reduction', () => {
+    describe('size(iterable) > 1', () => {
+      it('returns result from reduction', () => {
         const iter = [1, 2, 3]
         const fn = (acc: number, cur: number) => acc + cur
 
@@ -76,47 +65,39 @@ describe(`
 
         expect(result).toBe(6)
       })
-    })
 
-    describe('fn throw error', () => {
-      it('throw error', () => {
-        const customError = new Error('CustomError')
-        const iter = [1, 2, 3]
-        const fn = () => { throw customError }
+      describe('fn throws an error', () => {
+        it('throws an error', () => {
+          const customError = new Error('CustomError')
+          const iter = [1, 2, 3]
+          const fn = () => { throw customError }
 
-        const err = getError(() => reduce(iter, fn))
+          const err = getError(() => reduce(iter, fn))
 
-        expect(err).toBeInstanceOf(Error)
-        expect(err!.message).toBe('CustomError')
+          expect(err).toBeInstanceOf(Error)
+          expect(err!.message).toBe('CustomError')
+        })
       })
     })
   })
-})
 
-describe(`
-  reduce(
-    iterable: Iterable<T>
-  , fn: (accumulator: U, currentValue: T, index: number) => U
-  , initalValue: U
-  ) => U
-`, () => {
-  test('close unexhausted iterator', () => {
-    const iter = new MockIterable([1, 2, 3])
+  describe('with initialValue', () => {
+    test('close the unexhausted iterator', () => {
+      const iter = new MockIterable([1, 2, 3])
 
-    try {
-      reduce(iter, () => {
+      try {
+        reduce(iter, () => {
         throw new Error()
-      }, 1)
-    } catch {
-      pass()
-    }
+        }, 1)
+      } catch {
+        pass()
+      }
 
-    expect(iter.returnCalled).toBeTruthy()
-    expect(iter.done).toBeTruthy()
-  })
+      expect(iter.returnCalled).toBeTruthy()
+      expect(iter.done).toBeTruthy()
+    })
 
-  describe('fn is called', () => {
-    it('called with [accumulator,currentValue,index]', () => {
+    test('called fn with [accumulator,currentValue,index]', () => {
       const iter = [1, 2, 3]
       const fn = jest.fn()
         .mockReturnValueOnce(0 + 1)
@@ -131,10 +112,8 @@ describe(`
       expect(fn).nthCalledWith(2, 0 + 1, 2, 1)
       expect(fn).nthCalledWith(3, 0 + 1 + 2, 3, 2)
     })
-  })
 
-  describe('call', () => {
-    it('return result from reduction', () => {
+    it('returns the result from reduction', () => {
       const iter = [1, 2, 3]
       const pushToAcc = (acc: Array<[number, number]>, cur: number, index: number) => {
         acc.push([cur, index])

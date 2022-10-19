@@ -4,13 +4,8 @@ import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsy
 import { chunkAsync } from '@intermediate/chunk-async'
 import '@blackglory/jest-matchers'
 
-describe(`
-  chunkAsync<T>(
-    iterable: AsyncIterable<T>
-  , size: number
-  ): AsyncIterableIterator<T[]>
-`, () => {
-  it('lazy and evaluation', async () => {
+describe('chunkAsync', () => {
+  test('lazy and evaluation', async () => {
     const iter = new MockAsyncIterable([1, 2, 3])
     const size = 1
 
@@ -25,7 +20,7 @@ describe(`
 
   describe('size > 0', () => {
     describe('size = size(iterable)', () => {
-      it('return chunked iterable', async () => {
+      it('returns the chunked iterable', async () => {
         const iter = toAsyncIterable([1, 2, 3])
         const size = 3
 
@@ -38,7 +33,7 @@ describe(`
     })
 
     describe('size < size(iterable)', () => {
-      it('return chunked iterable', async () => {
+      it('returns the chunked iterable', async () => {
         const iter = toAsyncIterable([1, 2, 3])
         const size = 2
 
@@ -51,7 +46,7 @@ describe(`
     })
 
     describe('size > size(iterable)', () => {
-      it('return chunked iterable', async () => {
+      it('returns the chunked iterable', async () => {
         const iter = toAsyncIterable([1, 2, 3])
         const size = 5
 
@@ -65,7 +60,7 @@ describe(`
   })
 
   describe('size = 0', () => {
-    it('throw Error', () => {
+    it('throws an error', () => {
       const iter = toAsyncIterable([1, 2, 3])
       const size = 0
 
@@ -77,7 +72,7 @@ describe(`
   })
 
   describe('size < 0', () => {
-    it('throw Error', () => {
+    it('throws an error', () => {
       const iter = toAsyncIterable([1, 2, 3])
       const size = -1
 

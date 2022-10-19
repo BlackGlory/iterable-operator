@@ -4,10 +4,10 @@ import '@blackglory/jest-matchers'
 import { go } from '@blackglory/go'
 import { pass } from '@blackglory/pass'
 
-describe('lastAsync<T>(iterable: AsyncIterable<T>): Promise<T | undefined>', () => {
-  test('close unexhausted iterator', async () => {
+describe('lastAsync', () => {
+  test('close the unexhausted iterator', async () => {
     const iter = new MockAsyncIterable(go(function* () {
-      throw new Error()
+     throw new Error()
     }))
 
     try {
@@ -21,7 +21,7 @@ describe('lastAsync<T>(iterable: AsyncIterable<T>): Promise<T | undefined>', () 
   })
 
   describe('iterable is empty', () => {
-    it('return undefined', async () => {
+    it('returns undefined', async () => {
       const iter = toAsyncIterable([])
 
       const result = lastAsync(iter)
@@ -33,7 +33,7 @@ describe('lastAsync<T>(iterable: AsyncIterable<T>): Promise<T | undefined>', () 
   })
 
   describe('iterable isnt empty', () => {
-    it('return the last element in the iterable', async () => {
+    it('returns the last element in the iterable', async () => {
       const iter = toAsyncIterable([1, 2, 3])
 
       const result = lastAsync(iter)

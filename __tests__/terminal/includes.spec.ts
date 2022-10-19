@@ -1,8 +1,8 @@
 import { includes } from '@terminal/includes'
 
-describe('includes<T>(iterable: Iterable<T>, value: T): boolean', () => {
+describe('includes', () => {
   describe('value is included in the iterable', () => {
-    it('return true', () => {
+    it('returns true', () => {
       const iter = [1, 2, 3]
 
       const result = includes(iter, 2)
@@ -12,7 +12,7 @@ describe('includes<T>(iterable: Iterable<T>, value: T): boolean', () => {
   })
 
   describe('value isnt included in the iterable', () => {
-    it('return false', () => {
+    it('returns false', () => {
       const iter = [1, 2, 3]
 
       const result = includes(iter, 4)
