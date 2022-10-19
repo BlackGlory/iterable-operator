@@ -17,45 +17,12 @@ const doubleIter = map(iter, x => x * 2)
 const result = toArray(doubleIter)
 ```
 
-### Chaining
-```js
-import { IterableOperator } from 'iterable-operator/lib/es2018/style/chaining'
-
-const result = new IterableOperator([1, 2, 3])
-  .map(x => x * 2)
-  .toArray()
-```
-
-### Binding
-It is prepared for [bind-operator].
-
-[bind-operator]: https://github.com/tc39/proposal-bind-operator
-
-```js
-import { map, toArray } from 'iterable-operator/lib/es2018/style/binding'
-
-const result = [1, 2, 3]
-  ::map(x => x * 2)
-  ::toArray()
-```
-
-### Pipeline
-It is prepared for [pipeline-operator].
-
-[pipeline-operator]: https://github.com/tc39/proposal-pipeline-operator
-
-```js
-import { map, toArray } from 'iterable-operator/lib/es2018/style/pipeline'
-
-const result = [1, 2, 3]
-  |> map(x => x * 2)
-  |> toArray()
-```
-
 ## API
 There are two kinds of operators:
-- Intermediate operation(middleware): lazy, the first parameter is Iterable, the return value is Iterable(Iterable in, Iterable out)
-- Terminal operation(output): the first parameter is Iterable
+- Intermediate operation (middleware):
+  lazy, the first parameter is `Iterable`, the return value is `Iterable`.
+- Terminal operation (output):
+  the first parameter is `Iterable`.
 
 ### Middleware
 #### chunk, chunkAsync
@@ -105,11 +72,11 @@ The memory usage of this function depends on `iterable` and `predicate`.
 function concat<T, U>(
   iterable: Iterable<T>
 , ...otherIterables: Iterable<U>[]
-): IterableIterator<T | U> {
+): IterableIterator<T | U>
 function concatAsync<T, U>(
   iterable: Iterable<Awaitable<T>> | AsyncIterable<T>
 , ...otherIterables: Array<Iterable<Awaitable<U>> | AsyncIterable<U>>
-): AsyncIterableIterator<T | U> {
+): AsyncIterableIterator<T | U>
 ```
 
 ```js
@@ -395,7 +362,7 @@ takeUntil([1, 2, 3], x => x === 2) // [1]
 function tap<T>(
   iterable: Iterable<T>
 , fn: (element: T, index: number) => unknown
-): IterableIterator<T> {
+): IterableIterator<T>
 function tapAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
 , fn: (element: T, index: number) => Awaitable<unknown>
@@ -456,7 +423,7 @@ The memory usage of this function depends on `iterable`.
 function uniqBy<T, U>(
   iterable: Iterable<T>
 , fn: (element: T, index: number) => U
-): IterableIterator<T> {
+): IterableIterator<T>
 function uniqByAsync<T, U>(
   iterable: Iterable<T> | AsyncIterable<T>
 , fn: (element: T, index: number) => Awaitable<U>
@@ -474,7 +441,7 @@ The memory usage of this function depends on `fn`.
 function zip<T, U extends Array<Iterable<unknown>>>(
   iterable: Iterable<T>
 , ...otherIterables: U
-): IterableIterator<[T, ...ExtractTypeTupleFromIterableTuple<U>]> {
+): IterableIterator<[T, ...ExtractTypeTupleFromIterableTuple<U>]>
 function zipAsync<T, U extends Array<Iterable<unknown> | AsyncIterable<unknown>>>(
   iterable: Iterable<Awaitable<T>> | AsyncIterable<T>
 , ...otherIterables: U

@@ -1,9 +1,0 @@
-import { getPipelineProxy } from '@style/utils'
-import { takeAsync as target } from '@middleware/take-async'
-
-export function takeAsync<T>(
-  count: number
-): (iterable: AsyncIterable<T>) => AsyncIterableIterator<T>
-export function takeAsync(...args: unknown[]) {
-  return getPipelineProxy(target, args)
-}
