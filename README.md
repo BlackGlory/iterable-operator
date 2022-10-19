@@ -18,13 +18,7 @@ const result = toArray(doubleIter)
 ```
 
 ## API
-There are two kinds of operators:
-- Intermediate operation (middleware):
-  lazy, the first parameter is `Iterable`, the return value is `Iterable`.
-- Terminal operation (output):
-  the first parameter is `Iterable`.
-
-### Middleware
+### Intermediate Operations
 #### chunk, chunkAsync
 ```ts
 function chunk<T>(
@@ -82,6 +76,19 @@ function concatAsync<T, U>(
 ```js
 concat([1, 2, 3]) // [1, 2, 3]
 concat([1, 2, 3], ['a', 'b', 'c']) // [1, 2, 3, 'a', 'b', 'c']
+```
+
+#### difference, differenceAsync
+```ts
+function difference<T>(left: Iterable<T>, right: Iterable<T>): IterableIterator<T>
+function differenceAsync<T>(
+  left: AsyncIterable<T>
+, right: Iterable<Awaitable<T>> | AsyncIterable<T>
+): AsyncIterableIterator<T>
+```
+
+```js
+difference([1, 2, 3], [3, 4, 5]) // [1, 2]
 ```
 
 #### drop, dropAsync
@@ -454,11 +461,11 @@ zip([1, 2, 3], ['a', 'b']) // [[1, 'a'], [2, 'b']
 zip([1, 2, 3], ['a', 'b'], ['i', 'ii', 'iii']) // [[1, 'a', 'i'], [2, 'b', 'ii']]
 ```
 
-### Output
-#### consume
+### Terminal Operations
+#### consume, consumerAsync
 ```ts
 function consume<T, U>(iterable: Iterable<T>, consumer: (iterable: Iterable<T>) => U): U
-function consume<T, U>(
+function consumeAsync<T, U>(
   iterable: AsyncIterable<T>
 , consumer: (iterable: AsyncIterable<T>) => U
 ): U

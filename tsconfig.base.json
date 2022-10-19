@@ -7,11 +7,9 @@
   , "noUnusedParameters": true
   , "baseUrl": "."
   , "paths": {
-      "@input/*": ["src/input/*"]
-    , "@middleware/*": ["src/middleware/*"]
-    , "@output/*": ["src/output/*"]
-    , "@style/*": ["src/style/*"]
-    , "@src/*": ["src/*"]
+      "@src/*": ["src/*"]
+    , "@intermediate/*": ["src/intermediate/*"]
+    , "@terminal/*": ["src/terminal/*"]
     , "@test/*": ["__tests__/*"]
     }
   }
