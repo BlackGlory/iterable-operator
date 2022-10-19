@@ -82,7 +82,7 @@ concat([1, 2, 3], ['a', 'b', 'c']) // [1, 2, 3, 'a', 'b', 'c']
 ```ts
 function difference<T>(left: Iterable<T>, right: Iterable<T>): IterableIterator<T>
 function differenceAsync<T>(
-  left: AsyncIterable<T>
+  left: Iterable<Awaitable<T>> | AsyncIterable<T>
 , right: Iterable<Awaitable<T>> | AsyncIterable<T>
 ): AsyncIterableIterator<T>
 ```
@@ -90,6 +90,8 @@ function differenceAsync<T>(
 ```js
 difference([1, 2, 3], [3, 4, 5]) // [1, 2]
 ```
+
+The memory usage of this function depends on `right`.
 
 #### drop, dropAsync
 ```ts
@@ -449,7 +451,7 @@ function zip<T, U extends Array<Iterable<unknown>>>(
   iterable: Iterable<T>
 , ...otherIterables: U
 ): IterableIterator<[T, ...ExtractTypeTupleFromIterableTuple<U>]>
-function zipAsync<T, U extends Array<Iterable<unknown> | AsyncIterable<unknown>>>(
+function zipAsync<T, U extends Array<Iterable<Awaitable<unknown>> | AsyncIterable<unknown>>>(
   iterable: Iterable<Awaitable<T>> | AsyncIterable<T>
 , ...otherIterables: U
 ): AsyncIterableIterator<[T, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]>
@@ -466,9 +468,13 @@ zip([1, 2, 3], ['a', 'b'], ['i', 'ii', 'iii']) // [[1, 'a', 'i'], [2, 'b', 'ii']
 ```ts
 function consume<T, U>(iterable: Iterable<T>, consumer: (iterable: Iterable<T>) => U): U
 function consumeAsync<T, U>(
+  iterable: Iterable<T>
+, consumer: (iterable: Iterable<T>) => Awaitable<U>
+): Promise<U>
+function consumeAsync<T, U>(
   iterable: AsyncIterable<T>
-, consumer: (iterable: AsyncIterable<T>) => U
-): U
+, consumer: (iterable: AsyncIterable<T>) => Awaitable<U>
+): Promise<U>
 ```
 
 ```js

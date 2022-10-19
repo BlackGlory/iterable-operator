@@ -1,6 +1,6 @@
 import { toAsyncIterable } from '@test/utils'
 import { consumeAsync } from '@terminal/consume-async'
-import { getError } from 'return-style'
+import { getErrorAsync } from 'return-style'
 import '@blackglory/jest-matchers'
 
 describe(`
@@ -29,12 +29,12 @@ describe(`
   })
 
   describe('consumer throw error', () => {
-    it('throw error', () => {
+    it('throw error', async () => {
       const customError = new Error('CustomError')
       const iter = toAsyncIterable([1, 2, 3])
       const fn = () => { throw customError }
 
-      const err = getError(() => consumeAsync(iter, fn))
+      const err = await getErrorAsync(() => consumeAsync(iter, fn))
 
       expect(err).toBe(customError)
     })

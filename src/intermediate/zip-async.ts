@@ -16,7 +16,7 @@ export type ExtractTypeTupleFromAsyncLikeIterableTuple<T> = {
 
 export function zipAsync<
   T
-, U extends Array<Iterable<unknown> | AsyncIterable<unknown>>
+, U extends Array<Iterable<Awaitable<unknown>> | AsyncIterable<unknown>>
 >(
   iterable: Iterable<Awaitable<T>> | AsyncIterable<T>
 , ...otherIterables: U
