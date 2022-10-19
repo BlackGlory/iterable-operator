@@ -66,8 +66,6 @@ test('Index', () => {
   , 'firstAsync'
   , 'includes'
   , 'includesAsync'
-  , 'match'
-  , 'matchAsync'
   , 'reduce'
   , 'reduceAsync'
   , 'some'

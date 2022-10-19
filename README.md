@@ -564,21 +564,6 @@ last([1, 2, 3]) // 3
 last([]) // undefined
 ```
 
-#### match, matchAsync
-```ts
-function match<T>(iterable: Iterable<T>, sequence: ArrayLike<T>): boolean
-function matchAsync<T>(
-  iterable: AsyncIterable<T>
-, sequence: ArrayLike<T>
-): Promise<boolean>
-```
-
-```js
-match([1, 2, 3], [2, 3]) // true
-match([1, 2, 3], [3, 2]) // false
-match([1, 2, 3], []) // true
-```
-
 #### reduce, reduceAsync
 ```ts
 function reduce<T>(
