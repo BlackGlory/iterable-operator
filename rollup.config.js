@@ -41,57 +41,8 @@ function createOptions({ directory, target }) {
       ]
     }
   , {
-      input: 'src/style/pipeline/index.ts'
-    , output: createOutput('pipeline')
-    , plugins: [
-        ...commonPlugins
-      , analyze({ summaryOnly: true })
-      ]
-    }
-  , {
-      input: 'src/style/binding/index.ts'
-    , output: createOutput('binding')
-    , plugins: [
-        ...commonPlugins
-      , analyze({ summaryOnly: true })
-      ]
-    }
-  , {
-      input: 'src/style/chaining/index.ts'
-    , output: createOutput('chaining')
-    , plugins: [
-        ...commonPlugins
-      , analyze({ summaryOnly: true })
-      ]
-    }
-
-  , {
       input: 'src/index.ts'
     , output: createMinification('index')
-    , plugins: [
-        ...commonPlugins
-      , terser()
-      ]
-    }
-  , {
-      input: 'src/style/pipeline/index.ts'
-    , output: createMinification('pipeline')
-    , plugins: [
-        ...commonPlugins
-      , terser()
-      ]
-    }
-  , {
-      input: 'src/style/binding/index.ts'
-    , output: createMinification('binding')
-    , plugins: [
-        ...commonPlugins
-      , terser()
-      ]
-    }
-  , {
-      input: 'src/style/chaining/index.ts'
-    , output: createMinification('chaining')
     , plugins: [
         ...commonPlugins
       , terser()
