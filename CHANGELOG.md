@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/BlackGlory/iterable-operator/compare/v1.2.1...v2.0.0) (2022-10-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* Removed `match`, `matchAsync`
+* The signature of `consume` changed
+* The three styles of operators have been removed due to increasing maintenance costs.
+The pipeline style seems to be the only promising style that will be implemented directly in operators in future commits.
+
+### Features
+
+* add `difference`, `differenceAsync`, `consumeAsync` ([b0610f1](https://github.com/BlackGlory/iterable-operator/commit/b0610f1d54ecc3a3121294bf73b97637eed2090e))
+* remove `match`, `matchAsync` ([8260fb6](https://github.com/BlackGlory/iterable-operator/commit/8260fb6983f3c1085f119e11d9a634fb78ce6b77))
+
+
+* remove styles ([1b8a6da](https://github.com/BlackGlory/iterable-operator/commit/1b8a6da38abd4abdde0672084051c51a85155790))
+
 ### [1.2.1](https://github.com/BlackGlory/iterable-operator/compare/v1.2.0...v1.2.1) (2022-08-21)
 
 ## [1.2.0](https://github.com/BlackGlory/iterable-operator/compare/v1.1.0...v1.2.0) (2022-08-02)
