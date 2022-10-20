@@ -1,9 +1,9 @@
 import { consumeAsync, toArrayAsync, MockIterable, toIterable, toAsyncIterable, takeAsync } from '@test/utils'
 import { testIterable, testAsyncIterable, testIterablePromises } from '@test/test-fixtures'
-import { differenceAsync } from '@intermediate/difference-async'
+import { intersectionAsync } from '@intermediate/intersection-async'
 import '@blackglory/jest-matchers'
 
-describe('differenceAsync', () => {
+describe('intersectionAsync', () => {
   describe.each([
     testIterable('Iterable')
   , testIterablePromises('IterablePromises')
@@ -12,9 +12,9 @@ describe('differenceAsync', () => {
     test('lazy and partial evaluation', async () => {
       const mock = new MockIterable([1, 2])
       const leftIter = createIter(mock)
-      const rightIter = createIter([2, 3])
+      const rightIter = createIter([1, 2])
 
-      const result = differenceAsync(leftIter, rightIter)
+      const result = intersectionAsync(leftIter, rightIter)
       const isLazy = mock.nextIndex === 0
       await consumeAsync(takeAsync(result, 1))
       const isPartial = mock.nextIndex === 1
@@ -23,28 +23,28 @@ describe('differenceAsync', () => {
       expect(isPartial).toBe(true)
     })
 
-    it('returns the difference iterable', async () => {
+    it('returns the intersection iterable', async () => {
       const leftIter = createIter([1, 2])
       const rightIter = createIter([2, 3])
 
-      const result = differenceAsync(leftIter, rightIter)
+      const result = intersectionAsync(leftIter, rightIter)
       const arrResult = await toArrayAsync(result)
 
       expect(result).toBeAsyncIterable()
-      expect(arrResult).toStrictEqual([1])
+      expect(arrResult).toStrictEqual([2])
     })
   })
 
   describe('Iterable and AsyncIterable', () => {
-    it('returns the difference itearble', async () => {
+    it('returns the intersection itearble', async () => {
       const leftIter = toIterable([1, 2])
       const rightIter = toAsyncIterable([2, 3])
 
-      const result = differenceAsync(leftIter, rightIter)
+      const result = intersectionAsync(leftIter, rightIter)
       const arrResult = await toArrayAsync(result)
 
       expect(result).toBeAsyncIterable()
-      expect(arrResult).toStrictEqual([1])
+      expect(arrResult).toStrictEqual([2])
     })
   })
 })

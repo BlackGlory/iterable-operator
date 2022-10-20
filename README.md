@@ -219,6 +219,17 @@ flattenBy([], () => true) // []
 flattenBy('123', () => true) // ['1', '2', '3']
 ```
 
+#### intersection
+```ts
+function intersection<T>(left: Iterable<T>, right: Iterable<T>): IterableIterator<T>
+function intersectionAsync<T>(
+  left: Iterable<Awaitable<T>> | AsyncIterable<T>
+, right: Iterable<Awaitable<T>> | AsyncIterable<T>
+): AsyncIterableIterator<T>
+```
+
+The memory usage of this function depends on `right`.
+
 #### map, mapAsync
 ```ts
 function map<T, U>(

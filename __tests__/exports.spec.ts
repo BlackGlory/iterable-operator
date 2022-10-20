@@ -25,6 +25,8 @@ test('Index', () => {
   , 'flattenByAsync'
   , 'flattenDeep'
   , 'flattenDeepAsync'
+  , 'intersection'
+  , 'intersectionAsync'
   , 'map'
   , 'mapAsync'
   , 'repeat'
