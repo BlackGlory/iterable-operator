@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/BlackGlory/iterable-operator/compare/v2.0.0...v2.1.0) (2022-10-20)
+
+
+### Features
+
+* add `intersection`, `intersectionAsync` ([b91fd89](https://github.com/BlackGlory/iterable-operator/commit/b91fd89a6e3ad970fcbf9d92e664b45671af479f))
+
 ## [2.0.0](https://github.com/BlackGlory/iterable-operator/compare/v1.2.1...v2.0.0) (2022-10-19)
 
 
