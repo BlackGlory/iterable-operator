@@ -2,8 +2,14 @@ import * as Index from '@src/index'
 
 test('Index', () => {
   const expectedExports: string[] = [
+    // utils
+    'isIterable'
+  , 'isntIterable'
+  , 'isAsyncIterable'
+  , 'isntAsyncIterable'
+
     // intermediate
-    'chunk'
+  , 'chunk'
   , 'chunkAsync'
   , 'chunkBy'
   , 'chunkByAsync'

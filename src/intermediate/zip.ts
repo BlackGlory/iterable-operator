@@ -1,4 +1,4 @@
-import { GetTypeOfIterable } from '@src/utils'
+import { GetTypeOfIterable } from './utils'
 
 export type ExtractTypeTupleFromIterableTuple<T> = {
   [K in keyof T]: GetTypeOfIterable<T[K]>

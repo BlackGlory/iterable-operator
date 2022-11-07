@@ -1,5 +1,5 @@
 import { go } from '@blackglory/go'
-import { copyIterable } from '../utils'
+import { copyIterable } from './utils'
 import { assert } from '@blackglory/errors'
 
 export function drop<T>(iterable: Iterable<T>, count: number): IterableIterator<T> {

@@ -18,6 +18,21 @@ const result = toArray(doubleIter)
 ```
 
 ## API
+### Utils
+#### isIterable
+```ts
+function isIterable<T>(val: unknown): val is Iterable<T>
+function isntIterable<T>(val: T): val is Exclude<T, Iterable<unknown>>
+```
+
+#### isAsyncIterable
+```ts
+function isAsyncIterable<T>(val: unknown): val is AsyncIterable<T>
+function isntAsyncIterable<T>(
+  val: T
+): val is Exclude<T, AsyncIterable<unknown>>
+```
+
 ### Intermediate Operations
 #### chunk, chunkAsync
 ```ts

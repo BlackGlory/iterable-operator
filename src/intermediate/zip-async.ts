@@ -1,5 +1,5 @@
 import { isAsyncIterable } from '@blackglory/types'
-import { GetTypeOfIterable } from '@src/utils'
+import { GetTypeOfIterable } from './utils'
 import { Awaitable } from 'justypes'
 
 enum Kind {

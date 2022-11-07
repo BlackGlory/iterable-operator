@@ -1,5 +1,5 @@
 import { go } from '@blackglory/go'
-import { copyAsyncIterable } from '../utils'
+import { copyAsyncIterable } from './utils'
 import { assert } from '@blackglory/errors'
 import { toArrayAsync } from '@terminal/to-array-async'
 
