@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/BlackGlory/iterable-operator/compare/v2.1.0...v2.2.0) (2022-11-07)
+
+
+### Features
+
+* add `isIterable`, `isAsyncIterable`, `isntIterable`, `isntAsyncIterable` ([5562349](https://github.com/BlackGlory/iterable-operator/commit/5562349290cd44be1a452c8d50015509209e81b4))
+
 ## [2.1.0](https://github.com/BlackGlory/iterable-operator/compare/v2.0.0...v2.1.0) (2022-10-20)
 
 
