@@ -670,7 +670,7 @@ function countAsync(iterable: AsyncIterable<unknown>): Promise<number>
 count([1, 2, 3]) // 3
 ```
 
-#### groupBy
+#### groupBy, groupByAsync
 ```ts
 function groupBy<T, U>(
   iterable: Iterable<T>
