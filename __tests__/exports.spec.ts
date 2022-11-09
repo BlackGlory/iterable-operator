@@ -2,13 +2,10 @@ import * as Index from '@src/index'
 
 test('Index', () => {
   const expectedExports: string[] = [
-    // utils
     'isIterable'
   , 'isntIterable'
   , 'isAsyncIterable'
   , 'isntAsyncIterable'
-
-    // intermediate
   , 'chunk'
   , 'chunkAsync'
   , 'chunkBy'
@@ -60,8 +57,6 @@ test('Index', () => {
   , 'uniqBy'
   , 'zip'
   , 'zipAsync'
-
-    // terminal
   , 'consume'
   , 'consumeAsync'
   , 'each'
@@ -70,6 +65,7 @@ test('Index', () => {
   , 'everyAsync'
   , 'find'
   , 'findAsync'
+  , 'findAllIndexes'
   , 'first'
   , 'firstAsync'
   , 'includes'

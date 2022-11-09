@@ -558,6 +558,18 @@ find([1, 2, 3], x => x === 2) // 2
 find([1, 2, 3], x => x === 4) // undefined
 ```
 
+### findAllIndexes
+```ts
+function findAllIndexes<T>(
+  iterable: Iterable<T>
+, predicate: (value: T, index: number) => unknown
+): IterableIterator<number>
+```
+
+```js
+findAllIndexes([1, 2, 3], x => x % 2 === 1) // [0, 2]
+```
+
 ### first, firstAsync
 ```ts
 function first<T>(iterable: Iterable<T>): T | undefined

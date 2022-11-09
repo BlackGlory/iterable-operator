@@ -86,6 +86,7 @@
     "@blackglory/errors": "^2.3.0",
     "@blackglory/go": "^1.1.2",
     "@blackglory/types": "^1.4.0",
+    "extra-utils": "^3.3.0",
     "justypes": "^3.0.0"
   }
 }
