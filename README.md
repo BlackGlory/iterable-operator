@@ -18,14 +18,13 @@ const result = toArray(doubleIter)
 ```
 
 ## API
-### Utils
-#### isIterable
+### isIterable
 ```ts
 function isIterable<T>(val: unknown): val is Iterable<T>
 function isntIterable<T>(val: T): val is Exclude<T, Iterable<unknown>>
 ```
 
-#### isAsyncIterable
+### isAsyncIterable
 ```ts
 function isAsyncIterable<T>(val: unknown): val is AsyncIterable<T>
 function isntAsyncIterable<T>(
@@ -33,8 +32,7 @@ function isntAsyncIterable<T>(
 ): val is Exclude<T, AsyncIterable<unknown>>
 ```
 
-### Intermediate Operations
-#### chunk, chunkAsync
+### chunk, chunkAsync
 ```ts
 function chunk<T>(
   iterable: Iterable<T>
@@ -56,7 +54,7 @@ chunk([1, 2, 3], -1) // throw Error
 
 The memory usage of this function depends on `size`.
 
-#### chunkBy, chunkByAsync
+### chunkBy, chunkByAsync
 ```ts
 function chunkBy<T>(
   iterable: Iterable<T>
@@ -76,7 +74,7 @@ chunkBy([1, 2, 3], x => x === 5) // [[1, 2, 3]]
 
 The memory usage of this function depends on `iterable` and `predicate`.
 
-#### concat, concatAsync
+### concat, concatAsync
 ```ts
 function concat<T, U>(
   iterable: Iterable<T>
@@ -93,7 +91,7 @@ concat([1, 2, 3]) // [1, 2, 3]
 concat([1, 2, 3], ['a', 'b', 'c']) // [1, 2, 3, 'a', 'b', 'c']
 ```
 
-#### difference, differenceAsync
+### difference, differenceAsync
 ```ts
 function difference<T>(left: Iterable<T>, right: Iterable<T>): IterableIterator<T>
 function differenceAsync<T>(
@@ -108,7 +106,7 @@ difference([1, 2, 3], [3, 4, 5]) // [1, 2]
 
 The memory usage of this function depends on `right`.
 
-#### drop, dropAsync
+### drop, dropAsync
 ```ts
 function drop<T>(
   iterable: Iterable<T>
@@ -128,7 +126,7 @@ drop([1, 2, 3], 5) // []
 drop([1, 2, 3], -1) // throw Error
 ```
 
-#### dropRight, dropRightAsync
+### dropRight, dropRightAsync
 ```ts
 function dropRight<T>(
   iterable: Iterable<T>
@@ -150,7 +148,7 @@ dropRight([1, 2, 3], -1) // throw Error
 
 The memory usage of this function depends on `iterable`.
 
-#### dropUntil, dropUntilAsync
+### dropUntil, dropUntilAsync
 ```ts
 function dropUntil<T>(
   iterable: Iterable<T>
@@ -168,7 +166,7 @@ dropUntil([1, 2, 3], x => x === 2) // [2, 3]
 
 The memory usage of this function depends on `iterable` and `predicate`.
 
-#### filter, filterAsync
+### filter, filterAsync
 ```ts
 function filter<T, U extends T = T>(
   iterable: Iterable<T>
@@ -184,7 +182,7 @@ function filterAsync<T, U extends T = T>(
 filter([1, 2, 3], x => x % 2 === 1) // [1, 3]
 ```
 
-#### flatten, flattenAsync
+### flatten, flattenAsync
 ```ts
 function flatten<T>(iterable: Iterable<unknown>): IterableIterator<T>
 function flattenAsync<T>(iterable: AsyncIterable<unknown>): AsyncIterableIterator<T>
@@ -196,7 +194,7 @@ flatten('123') // ['1', '2', '3']
 flatten(['one', ['two'], 0, [1, [2]]]) // ['o', 'n', 'e', 'two', 0, 1, [2]]
 ```
 
-#### flattenDeep, flattenDeepAsync
+### flattenDeep, flattenDeepAsync
 ```ts
 function flattenDeep<T>(
   iterable: Iterable<unknown>
@@ -216,7 +214,7 @@ flattenDeep([0, [1]], 0) // [0, [1]]
 flattenDeep(['one', ['two', ['three']], 0, [1, [2, [3]]]], 2) // ['o', 'n', 'e', 't', 'w', 'o', 'three', 0, 1, 2, [3]]
 ```
 
-#### flattenBy, flattenByAsync
+### flattenBy, flattenByAsync
 ```ts
 function flattenBy<T>(
   iterable: Iterable<unknown>
@@ -234,7 +232,7 @@ flattenBy([], () => true) // []
 flattenBy('123', () => true) // ['1', '2', '3']
 ```
 
-#### intersection, intersectionAsync
+### intersection, intersectionAsync
 ```ts
 function intersection<T>(left: Iterable<T>, right: Iterable<T>): IterableIterator<T>
 function intersectionAsync<T>(
@@ -245,7 +243,7 @@ function intersectionAsync<T>(
 
 The memory usage of this function depends on `right`.
 
-#### map, mapAsync
+### map, mapAsync
 ```ts
 function map<T, U>(
   iterable: Iterable<T>
@@ -261,7 +259,7 @@ function mapAsync<T, U>(
 map([1, 2, 3], x => x * 2) // [2, 4, 6]
 ```
 
-#### repeat, repeatAsync
+### repeat, repeatAsync
 ```ts
 function repeat<T>(
   iterable: Iterable<T>
@@ -281,7 +279,7 @@ repeat([1, 2, 3], -1) // throw Error
 
 The memory usage of this function depends on `iterable`.
 
-#### slice, sliceAsync
+### slice, sliceAsync
 ```ts
 function slice<T>(
   iterable: Iterable<T>
@@ -303,7 +301,7 @@ slice([1, 2, 3], 1, 1) // []
 slice([1, 2, 3], 2, 1) // throw Error
 ```
 
-#### split, splitAsync
+### split, splitAsync
 ```ts
 function split<T>(iterable: Iterable<T>, separator: T): IterableIterator<T[]>
 function splitAsync<T>(
@@ -321,7 +319,7 @@ split([1, 2, 3, 4, 5], 0) // [[1, 2, 3, 4, 5]]
 
 The memory usage of this function depends on `iterable` and `separator`.
 
-#### splitBy, splitByAsync
+### splitBy, splitByAsync
 ```ts
 function splitBy<T>(
   iterable: Iterable<T>
@@ -342,7 +340,7 @@ splitBy([1, 2, 3, 4, 5], x => x === 0) // [[1, 2, 3, 4, 5]]
 
 The memory usage of this function depends on `iterable` and `predicate`.
 
-#### take, takeAsync
+### take, takeAsync
 ```ts
 function take<T>(iterable: Iterable<T>, count: number): IterableIterator<T>
 function takeAsync<T>(
@@ -358,7 +356,7 @@ take([1, 2, 3], 0) // []
 take([1, 2, 3], -1) // throw Error
 ```
 
-#### takeRight, takeRightAsync
+### takeRight, takeRightAsync
 ```ts
 function takeRight<T>(iterable: Iterable<T>, count: number): IterableIterator<T>
 function takeRightAsync<T>(
@@ -376,7 +374,7 @@ takeRight([1, 2, 3], -1) // throw Error
 
 The memory usage of this function depends on `count`.
 
-#### takeUntil, takeUntilAsync
+### takeUntil, takeUntilAsync
 ```ts
 function takeUntil<T>(
   iterable: Iterable<T>
@@ -392,7 +390,7 @@ function takeUntilAsync<T>(
 takeUntil([1, 2, 3], x => x === 2) // [1]
 ```
 
-#### tap, tapAsync
+### tap, tapAsync
 ```ts
 function tap<T>(
   iterable: Iterable<T>
@@ -408,7 +406,7 @@ function tapAsync<T>(
 tap([1, 2, 3], x => console.log(x)) // [1, 2, 3]
 ```
 
-#### toAsyncIterable
+### toAsyncIterable
 ```ts
 function toAsyncIterable<T>(iterable: Iterable<Awaitable<T>>): AsyncIterableIterator<T>
 ```
@@ -417,7 +415,7 @@ function toAsyncIterable<T>(iterable: Iterable<Awaitable<T>>): AsyncIterableIter
 toAsyncIterable([1, 2, 3]) // AsyncIterable [1, 2, 3]
 ```
 
-#### transform, transformAsync
+### transform, transformAsync
 ```ts
 function transform<T, U>(
   iterable: Iterable<T>
@@ -441,7 +439,7 @@ transform([1, 2, 3], function* double(iter) {
 }) // [2, 4, 6]
 ```
 
-#### uniq, uniqAsync
+### uniq, uniqAsync
 ```ts
 function uniq<T>(iterable: Iterable<T>): IterableIterator<T>
 function uniqAsync<T>(iterable: AsyncIterable<T>): AsyncIterableIterator<T>
@@ -453,7 +451,7 @@ uniq([1, 1, 2, 2, 3, 3]) // [1, 2, 3]
 
 The memory usage of this function depends on `iterable`.
 
-#### uniqBy, uniqByAsync
+### uniqBy, uniqByAsync
 ```ts
 function uniqBy<T, U>(
   iterable: Iterable<T>
@@ -471,7 +469,7 @@ uniqBy([1, 2, 3], x => x % 2) // [1, 2]
 
 The memory usage of this function depends on `fn`.
 
-#### zip, zipAsync
+### zip, zipAsync
 ```ts
 function zip<T, U extends Array<Iterable<unknown>>>(
   iterable: Iterable<T>
@@ -489,8 +487,7 @@ zip([1, 2, 3], ['a', 'b']) // [[1, 'a'], [2, 'b']
 zip([1, 2, 3], ['a', 'b'], ['i', 'ii', 'iii']) // [[1, 'a', 'i'], [2, 'b', 'ii']]
 ```
 
-### Terminal Operations
-#### consume, consumerAsync
+### consume, consumerAsync
 ```ts
 function consume<T, U>(iterable: Iterable<T>, consumer: (iterable: Iterable<T>) => U): U
 function consumeAsync<T, U>(
@@ -507,7 +504,7 @@ function consumeAsync<T, U>(
 consume([1, 2, 3], xs => new Set(xs)) // Set [1, 2, 3]
 ```
 
-#### each, eachAsync
+### each, eachAsync
 ```ts
 function each<T>(
   iterable: Iterable<T>
@@ -523,7 +520,7 @@ function eachAsync<T>(
 each([1, 2, 3], x => console.log(x)) // void
 ```
 
-#### every, everyAsync
+### every, everyAsync
 ```ts
 function every<T>(
   iterable: Iterable<T>
@@ -540,7 +537,7 @@ every([1, 2, 3], x => x < 5) // true
 every([1, 2, 3], x => x <= 2) // false
 ```
 
-#### find, findAsync
+### find, findAsync
 ```ts
 function find<T>(
   iterable: Iterable<T>
@@ -557,7 +554,7 @@ find([1, 2, 3], x => x === 2) // 2
 find([1, 2, 3], x => x === 4) // undefined
 ```
 
-#### first, firstAsync
+### first, firstAsync
 ```ts
 function first<T>(iterable: Iterable<T>): T | undefined
 function firstAsync<T>(iterable: AsyncIterable<T>): Promise<T | undefined>
@@ -568,7 +565,7 @@ first([1, 2, 3]) // 1
 first([]) // undefined
 ```
 
-#### includes, includesAsync
+### includes, includesAsync
 ```ts
 function includes<T>(iterable: Iterable<T>, value: T): boolean
 function includesAsync<T>(iterable: AsyncIterable<T>, value: T): Promise<boolean>
@@ -579,7 +576,7 @@ includes([1, 2, 3], 2) // true
 includes([1, 2, 3], 4) // false
 ```
 
-#### last, lastAsync
+### last, lastAsync
 ```ts
 function last<T>(iterable: Iterable<T>): T | undefined
 function lastAsync<T>(iterable: AsyncIterable<T>): Promise<T | undefined>
@@ -590,7 +587,7 @@ last([1, 2, 3]) // 3
 last([]) // undefined
 ```
 
-#### reduce, reduceAsync
+### reduce, reduceAsync
 ```ts
 function reduce<T>(
   iterable: Iterable<T>
@@ -623,7 +620,7 @@ reduce([1, 2, 3], (acc, cur, index) => {
 }) // [[1, 0], [2, 1], [3, 2]]
 ```
 
-#### some, someAsync
+### some, someAsync
 ```ts
 function some<T>(
   iterable: Iterable<T>
@@ -640,7 +637,7 @@ some([1, 2, 3], x => x === 2) // true
 some([1, 2, 3], x => x === 4) // false
 ```
 
-#### toArray, toArrayAsync
+### toArray, toArrayAsync
 ```ts
 function toArray<T>(iterable: Iterable<T>): T[]
 function toArrayAsync<T>(iterable: AsyncIterable<T>): Promise<T[]>
@@ -650,7 +647,7 @@ function toArrayAsync<T>(iterable: AsyncIterable<T>): Promise<T[]>
 toArray([1, 2, 3]) // Array [1, 2, 3]
 ```
 
-#### toSet, toSetAsync
+### toSet, toSetAsync
 ```ts
 function toSet<T>(iterable: Iterable<T>): Set<T>
 function toSetAsync<T>(iterable: AsyncIterable<T>): Promise<Set<T>>
@@ -660,7 +657,7 @@ function toSetAsync<T>(iterable: AsyncIterable<T>): Promise<Set<T>>
 toSet([1, 1, 2, 2, 3, 3]) // Set [1, 2, 3]
 ```
 
-#### count, countAsync
+### count, countAsync
 ```ts
 function count(iterable: Iterable<unknown>): number
 function countAsync(iterable: AsyncIterable<unknown>): Promise<number>
@@ -670,7 +667,7 @@ function countAsync(iterable: AsyncIterable<unknown>): Promise<number>
 count([1, 2, 3]) // 3
 ```
 
-#### groupBy, groupByAsync
+### groupBy, groupByAsync
 ```ts
 function groupBy<T, U>(
   iterable: Iterable<T>

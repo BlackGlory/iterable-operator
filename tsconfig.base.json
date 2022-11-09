@@ -8,9 +8,6 @@
   , "baseUrl": "."
   , "paths": {
       "@src/*": ["src/*"]
-    , "@utils/*": ["src/utils/*"]
-    , "@intermediate/*": ["src/intermediate/*"]
-    , "@terminal/*": ["src/terminal/*"]
     , "@test/*": ["__tests__/*"]
     }
   }
