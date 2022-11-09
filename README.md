@@ -17,6 +17,10 @@ const doubleIter = map(iter, x => x * 2)
 const result = toArray(doubleIter)
 ```
 
+You may need [a pipe function].
+
+[a pipe function]: https://github.com/BlackGlory/extra-utils
+
 ## API
 ### isIterable
 ```ts
