@@ -9,7 +9,7 @@ yarn add iterable-operator
 ```
 
 ## Usage
-```js
+```ts
 import { map, toArray } from 'iterable-operator'
 
 const iter = [1, 2, 3]
@@ -48,7 +48,7 @@ function chunkAsync<T>(
 ): AsyncIterableIterator<T[]>
 ```
 
-```js
+```ts
 chunk([1, 2, 3], 2) // [[1, 2], [3]]
 chunk([1, 2, 3], 3) // [[1, 2, 3]]
 chunk([1, 2, 3], 5) // [[1, 2, 3]]
@@ -70,7 +70,7 @@ function chunkByAsync<T>(
 ): AsyncIterableIterator<T[]>
 ```
 
-```js
+```ts
 chunkBy([1, 2, 3], x => x === 2) // [[1, 2], [3]]
 chunkBy([1, 2, 3], x => x === 3) // [[1, 2, 3]]
 chunkBy([1, 2, 3], x => x === 5) // [[1, 2, 3]]
@@ -90,7 +90,7 @@ function concatAsync<T, U>(
 ): AsyncIterableIterator<T | U>
 ```
 
-```js
+```ts
 concat([1, 2, 3]) // [1, 2, 3]
 concat([1, 2, 3], ['a', 'b', 'c']) // [1, 2, 3, 'a', 'b', 'c']
 ```
@@ -104,7 +104,7 @@ function differenceAsync<T>(
 ): AsyncIterableIterator<T>
 ```
 
-```js
+```ts
 difference([1, 2, 3], [3, 4, 5]) // [1, 2]
 ```
 
@@ -122,7 +122,7 @@ function dropAsync<T>(
 ): AsyncIterableIterator<T>
 ```
 
-```js
+```ts
 drop([1, 2, 3], 0) // [1, 2, 3]
 drop([1, 2, 3], 2) // [3]
 drop([1, 2, 3], 3) // []
@@ -142,7 +142,7 @@ function dropRightAsync<T>(
 ): AsyncIterableIterator<T>
 ```
 
-```js
+```ts
 dropRight([1, 2, 3], 0) // [1, 2, 3]
 dropRight([1, 2, 3], 2) // [1]
 dropRight([1, 2, 3], 3) // []
@@ -164,7 +164,7 @@ function dropUntilAsync<T>(
 ): AsyncIterableIterator<T>
 ```
 
-```js
+```ts
 dropUntil([1, 2, 3], x => x === 2) // [2, 3]
 ```
 
@@ -182,7 +182,7 @@ function filterAsync<T, U extends T = T>(
 ): AsyncIterableIterator<U>
 ```
 
-```js
+```ts
 filter([1, 2, 3], x => x % 2 === 1) // [1, 3]
 ```
 
@@ -192,7 +192,7 @@ function flatten<T>(iterable: Iterable<unknown>): IterableIterator<T>
 function flattenAsync<T>(iterable: AsyncIterable<unknown>): AsyncIterableIterator<T>
 ```
 
-```js
+```ts
 flatten([]) // []
 flatten('123') // ['1', '2', '3']
 flatten(['one', ['two'], 0, [1, [2]]]) // ['o', 'n', 'e', 'two', 0, 1, [2]]
@@ -210,7 +210,7 @@ function flattenDeepAsync<T>(
 ): AsyncIterableIterator<T>
 ```
 
-```js
+```ts
 flattenDeep([]) // []
 flattenDeep('123') // ['1', '2', '3']
 flattenDeep([], -1) // throw Error
@@ -230,7 +230,7 @@ function flattenByAsync<T>(
 ): AsyncIterableIterator<T>
 ```
 
-```js
+```ts
 flattenBy(['one', ['two'], 0, [1]], x => typeof x !== 'string') // ['one', 'two', 0, 1]
 flattenBy([], () => true) // []
 flattenBy('123', () => true) // ['1', '2', '3']
@@ -263,7 +263,7 @@ function mapAsync<T, U>(
 ): AsyncIterableIterator<U>
 ```
 
-```js
+```ts
 map([1, 2, 3], x => x * 2) // [2, 4, 6]
 ```
 
@@ -279,7 +279,7 @@ function repeatAsync<T>(
 ): AsyncIterableIterator<T>
 ```
 
-```js
+```ts
 repeat([1, 2, 3], 2) // [1, 2, 3, 1, 2, 3]
 repeat([1, 2, 3], 0) // []
 repeat([1, 2, 3], -1) // throw Error
@@ -301,12 +301,25 @@ function sliceAsync<T>(
 ): AsyncIterableIterator<T>
 ```
 
-```js
+```ts
 slice([1, 2, 3], -1, 1) // throw Error
 slice([1, 2, 3], 3, 5) // []
 slice([1, 2, 3], 1, 2) // [2]
 slice([1, 2, 3], 1, 1) // []
 slice([1, 2, 3], 2, 1) // throw Error
+```
+
+### join, joinAsync
+```ts
+function join<T, U = T>(iterable: Iterable<T>, separator: U): IterableIterator<T | U>
+function joinAsync<T, U = T>(
+  iterable: AsyncIterable<T>
+, separator: U
+): AsyncIterableIterator<T | U>
+```
+
+```ts
+join([1, 2, 3], '+') // [1, '+', 2, '+', 3]
 ```
 
 ### split, splitAsync
@@ -318,7 +331,7 @@ function splitAsync<T>(
 ): AsyncIterableIterator<T[]>
 ```
 
-```js
+```ts
 split([1, 2, 3, 4, 5], 3) // [[1, 2], [4, 5]]
 split([1, 2, 3, 4, 5], 1) // [[], [2, 3, 4, 5]]
 split([1, 2, 3, 4, 5], 5) // [[1, 2, 3, 4], []]
@@ -339,7 +352,7 @@ function splitByAsync<T>(
 ): AsyncIterableIterator<T[]>
 ```
 
-```js
+```ts
 splitBy([1, 2, 3, 4, 5], x => x === 3) // [[1, 2], [4, 5]]
 splitBy([1, 2, 3, 4, 5], x => x === 1) // [[], [2, 3, 4, 5]]
 splitBy([1, 2, 3, 4, 5], x => x === 5) // [[1, 2, 3, 4], []]
@@ -357,7 +370,7 @@ function takeAsync<T>(
 ): AsyncIterableIterator<T>
 ```
 
-```js
+```ts
 take([1, 2, 3], 5) // [1, 2, 3]
 take([1, 2, 3], 2) // [1, 2]
 take([1, 2, 3], 0) // []
@@ -373,7 +386,7 @@ function takeRightAsync<T>(
 ): AsyncIterableIterator<T>
 ```
 
-```js
+```ts
 takeRight([1, 2, 3], 2) // [2, 3]
 takeRight([1, 2, 3], 5) // [1, 2, 3]
 takeRight([1, 2, 3], 0) // []
@@ -394,7 +407,7 @@ function takeUntilAsync<T>(
 ): AsyncIterableIterator<T>
 ```
 
-```js
+```ts
 takeUntil([1, 2, 3], x => x === 2) // [1]
 ```
 
@@ -410,7 +423,7 @@ function tapAsync<T>(
 ): AsyncIterableIterator<T>
 ```
 
-```js
+```ts
 tap([1, 2, 3], x => console.log(x)) // [1, 2, 3]
 ```
 
@@ -419,7 +432,7 @@ tap([1, 2, 3], x => console.log(x)) // [1, 2, 3]
 function toAsyncIterable<T>(iterable: Iterable<Awaitable<T>>): AsyncIterableIterator<T>
 ```
 
-```js
+```ts
 toAsyncIterable([1, 2, 3]) // AsyncIterable [1, 2, 3]
 ```
 
@@ -439,7 +452,7 @@ function transformAsync<T, U>(
 ): AsyncIterableIterator<U>
 ```
 
-```js
+```ts
 transform([1, 2, 3], function* double(iter) {
   for (const element of iter) {
     yield element * 2
@@ -453,7 +466,7 @@ function uniq<T>(iterable: Iterable<T>): IterableIterator<T>
 function uniqAsync<T>(iterable: AsyncIterable<T>): AsyncIterableIterator<T>
 ```
 
-```js
+```ts
 uniq([1, 1, 2, 2, 3, 3]) // [1, 2, 3]
 ```
 
@@ -471,7 +484,7 @@ function uniqByAsync<T, U>(
 ): AsyncIterableIterator<T>
 ```
 
-```js
+```ts
 uniqBy([1, 2, 3], x => x % 2) // [1, 2]
 ```
 
@@ -489,7 +502,7 @@ function zipAsync<T, U extends Array<Iterable<Awaitable<unknown>> | AsyncIterabl
 ): AsyncIterableIterator<[T, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]>
 ```
 
-```js
+```ts
 zip([1, 2, 3], ['a', 'b', 'c']) // [[1, 'a'], [2, 'b'], [3, 'c']]
 zip([1, 2, 3], ['a', 'b']) // [[1, 'a'], [2, 'b']
 zip([1, 2, 3], ['a', 'b'], ['i', 'ii', 'iii']) // [[1, 'a', 'i'], [2, 'b', 'ii']]
@@ -508,7 +521,7 @@ function consumeAsync<T, U>(
 ): Promise<U>
 ```
 
-```js
+```ts
 consume([1, 2, 3], xs => new Set(xs)) // Set [1, 2, 3]
 ```
 
@@ -524,7 +537,7 @@ function eachAsync<T>(
 ): Promise<void>
 ```
 
-```js
+```ts
 each([1, 2, 3], x => console.log(x)) // void
 ```
 
@@ -540,7 +553,7 @@ function everyAsync<T>(
 ): Promise<boolean>
 ```
 
-```js
+```ts
 every([1, 2, 3], x => x < 5) // true
 every([1, 2, 3], x => x <= 2) // false
 ```
@@ -557,7 +570,7 @@ function findAsync<T>(
 ): Promise<T | undefined>
 ```
 
-```js
+```ts
 find([1, 2, 3], x => x === 2) // 2
 find([1, 2, 3], x => x === 4) // undefined
 ```
@@ -570,7 +583,7 @@ function findAllIndexes<T>(
 ): IterableIterator<number>
 ```
 
-```js
+```ts
 findAllIndexes([1, 2, 3], x => x % 2 === 1) // [0, 2]
 ```
 
@@ -580,7 +593,7 @@ function first<T>(iterable: Iterable<T>): T | undefined
 function firstAsync<T>(iterable: AsyncIterable<T>): Promise<T | undefined>
 ```
 
-```js
+```ts
 first([1, 2, 3]) // 1
 first([]) // undefined
 ```
@@ -591,7 +604,7 @@ function includes<T>(iterable: Iterable<T>, value: T): boolean
 function includesAsync<T>(iterable: AsyncIterable<T>, value: T): Promise<boolean>
 ```
 
-```js
+```ts
 includes([1, 2, 3], 2) // true
 includes([1, 2, 3], 4) // false
 ```
@@ -602,7 +615,7 @@ function last<T>(iterable: Iterable<T>): T | undefined
 function lastAsync<T>(iterable: AsyncIterable<T>): Promise<T | undefined>
 ```
 
-```js
+```ts
 last([1, 2, 3]) // 3
 last([]) // undefined
 ```
@@ -629,7 +642,7 @@ function reduceAsync<T, U>(
 ): Promise<U>
 ```
 
-```js
+```ts
 reduce([], (acc, cur) => acc + cur) // throw Error
 reduce([1], (acc, cur) => acc + cur) // 1
 reduce([1, 2, 3], (acc, cur) => acc + cur) // 6
@@ -652,7 +665,7 @@ function someAsync<T>(
 ): Promise<boolean>
 ```
 
-```js
+```ts
 some([1, 2, 3], x => x === 2) // true
 some([1, 2, 3], x => x === 4) // false
 ```
@@ -663,7 +676,7 @@ function toArray<T>(iterable: Iterable<T>): T[]
 function toArrayAsync<T>(iterable: AsyncIterable<T>): Promise<T[]>
 ```
 
-```js
+```ts
 toArray([1, 2, 3]) // Array [1, 2, 3]
 ```
 
@@ -673,7 +686,7 @@ function toSet<T>(iterable: Iterable<T>): Set<T>
 function toSetAsync<T>(iterable: AsyncIterable<T>): Promise<Set<T>>
 ```
 
-```js
+```ts
 toSet([1, 1, 2, 2, 3, 3]) // Set [1, 2, 3]
 ```
 
@@ -683,7 +696,7 @@ function count(iterable: Iterable<unknown>): number
 function countAsync(iterable: AsyncIterable<unknown>): Promise<number>
 ```
 
-```js
+```ts
 count([1, 2, 3]) // 3
 ```
 
@@ -699,6 +712,6 @@ function groupByAsync<T, U>(
 ): Promise<Map<U, T[]>>
 ```
 
-```js
+```ts
 groupBy([1, 2, 3], x => x % 2) // { 1: [1, 3], 0: [2] }
 ```

@@ -36,6 +36,8 @@ test('Index', () => {
   , 'repeatAsync'
   , 'slice'
   , 'sliceAsync'
+  , 'join'
+  , 'joinAsync'
   , 'splitBy'
   , 'splitByAsync'
   , 'split'
