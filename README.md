@@ -247,6 +247,10 @@ function intersectionAsync<T>(
 
 The memory usage of this function depends on `right`.
 
+```ts
+intersection([1, 2], [2, 3]) // [2]
+```
+
 ### map, mapAsync
 ```ts
 function map<T, U>(
