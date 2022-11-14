@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.4.0](https://github.com/BlackGlory/iterable-operator/compare/v2.3.0...v2.4.0) (2022-11-14)
+
+
+### Features
+
+* add `join`, `joinAsync` ([edd411e](https://github.com/BlackGlory/iterable-operator/commit/edd411eae033f41a27a5ecfc572982d34bb6bfc2))
+
 ## [2.3.0](https://github.com/BlackGlory/iterable-operator/compare/v2.2.0...v2.3.0) (2022-11-09)
 
 
