@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.5.0](https://github.com/BlackGlory/iterable-operator/compare/v2.4.0...v2.5.0) (2022-11-15)
+
+
+### Features
+
+* add `flatMap`, `flatMapAsync` ([17ebd65](https://github.com/BlackGlory/iterable-operator/commit/17ebd6532f3918b9a4202e30cfd79aed170a556f))
+
 ## [2.4.0](https://github.com/BlackGlory/iterable-operator/compare/v2.3.0...v2.4.0) (2022-11-14)
 
 
