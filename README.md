@@ -267,6 +267,22 @@ function mapAsync<T, U>(
 map([1, 2, 3], x => x * 2) // [2, 4, 6]
 ```
 
+### flatMap, flatMapAsync
+```ts
+function flatMap<T, U>(
+  iterable: Iterable<T>
+, fn: (element: T, index: number) => Iterable<U>
+): IterableIterator<U>
+function flatMapAsync<T, U>(
+  iterable: Iterable<T> | AsyncIterable<T>
+, fn: (element: T, index: number) => Iterable<U> | AsyncIterable<U>
+): AsyncIterableIterator<U>
+```
+
+```ts
+map([1, 2, 3], x => [x, x * 2]) // [1, 2, 2, 4, 3, 6]
+```
+
 ### repeat, repeatAsync
 ```ts
 function repeat<T>(

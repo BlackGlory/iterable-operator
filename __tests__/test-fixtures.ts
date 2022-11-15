@@ -1,4 +1,10 @@
-import { toIterablePromises, toIterable, toAsyncIterable, toFunction, toAsyncFunction } from './utils'
+import {
+  toIterablePromises
+, toIterable
+, toAsyncIterable
+, toFunction
+, toAsyncFunction
+} from './utils'
 
 type AnyFunction = (...args: any[]) => any
 
