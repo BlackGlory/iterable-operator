@@ -1,7 +1,6 @@
 import { consumeAsync, toArrayAsync, toIterable, toAsyncIterable, MockIterable, takeAsync } from '@test/utils'
 import { testIterable, testIterablePromises, testAsyncIterable } from '@test/test-fixtures'
 import { concatAsync } from '@src/concat-async'
-import '@blackglory/jest-matchers'
 
 describe('concatAsync', () => {
   describe.each([
@@ -31,7 +30,6 @@ describe('concatAsync', () => {
       const result = concatAsync(iter1, iter2, iter3)
       const arrResult = await toArrayAsync(result)
 
-      expect(result).toBeAsyncIterable()
       expect(arrResult).toEqual([1, 2, 3, 'a', 'b', 'c', 'd', 'e', 'f'])
     })
   })

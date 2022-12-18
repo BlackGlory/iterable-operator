@@ -1,6 +1,5 @@
 import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils'
 import { flattenAsync } from '@src/flatten-async'
-import '@blackglory/jest-matchers'
 
 describe('flattenAsync', () => {
   test('lazy and partial evaluation', async () => {
@@ -22,7 +21,6 @@ describe('flattenAsync', () => {
       const result = flattenAsync(iter)
       const arrResult = await toArrayAsync(result)
 
-      expect(result).toBeAsyncIterable()
       expect(arrResult).toEqual([])
     })
   })
@@ -37,7 +35,6 @@ describe('flattenAsync', () => {
       const result = flattenAsync(iter)
       const arrResult = await toArrayAsync(result)
 
-      expect(result).toBeAsyncIterable()
       expect(arrResult).toEqual([
         'o','n','e', 'two'
       , 0, 1, [2]

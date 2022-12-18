@@ -1,7 +1,6 @@
 import { getError } from 'return-style'
 import { consume, toArray, MockIterable } from '@test/utils'
 import { dropRight } from '@src/drop-right'
-import '@blackglory/jest-matchers'
 
 describe('dropRight', () => {
   test('lazy evaluation', () => {
@@ -24,7 +23,6 @@ describe('dropRight', () => {
         const result = dropRight(iter, count)
         const arrResult = toArray(result)
 
-        expect(result).toBeIterable()
         expect(arrResult).toEqual([])
       })
     })
@@ -37,7 +35,6 @@ describe('dropRight', () => {
         const result = dropRight(iter, count)
         const arrResult = toArray(result)
 
-        expect(result).toBeIterable()
         expect(arrResult).toEqual([])
       })
     })
@@ -50,7 +47,6 @@ describe('dropRight', () => {
         const result = dropRight(iter, count)
         const arrResult = toArray(result)
 
-        expect(result).toBeIterable()
         expect(arrResult).toEqual([1])
       })
     })
@@ -64,7 +60,6 @@ describe('dropRight', () => {
       const result = dropRight(iter, count)
       const arrResult = toArray(result)
 
-        expect(result).toBeIterable()
       expect(result).not.toBe(iter)
       expect(arrResult).toEqual([1, 2, 3])
     })

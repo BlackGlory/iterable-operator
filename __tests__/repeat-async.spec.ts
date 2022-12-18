@@ -2,7 +2,6 @@ import { getError } from 'return-style'
 import { consumeAsync, toArrayAsync, toAsyncIterable, MockAsyncIterable, takeAsync }
   from '@test/utils'
 import { repeatAsync } from '@src/repeat-async'
-import '@blackglory/jest-matchers'
 
 describe('repeatAsync', () => {
   test('lazy and partial evaluation', async () => {
@@ -26,7 +25,6 @@ describe('repeatAsync', () => {
       const result = repeatAsync(iter, times)
       const arrResult = await toArrayAsync(result)
 
-      expect(result).toBeAsyncIterable()
       expect(arrResult).toEqual([1, 2, 3, 1, 2, 3])
     })
   })
@@ -39,7 +37,6 @@ describe('repeatAsync', () => {
       const result = repeatAsync(iter, times)
       const arrResult = await toArrayAsync(result)
 
-      expect(result).toBeAsyncIterable()
       expect(arrResult).toEqual([])
     })
   })
@@ -65,9 +62,8 @@ describe('repeatAsync', () => {
         const iter = toAsyncIterable([1, 2, 3])
 
         try {
-          const result = repeatAsync(iter, Infinity)
+          repeatAsync(iter, Infinity)
 
-          expect(result).toBeAsyncIterable()
           expect(console.warn).toHaveBeenCalledTimes(0)
         } finally {
           spy.mockRestore()
@@ -84,9 +80,8 @@ describe('repeatAsync', () => {
         const iter = toAsyncIterable([1, 2, 3])
 
         try {
-          const result = repeatAsync(iter, Infinity)
+          repeatAsync(iter, Infinity)
 
-          expect(result).toBeAsyncIterable()
           expect(console.warn).toHaveBeenCalledTimes(1)
         } finally {
           spy.mockRestore()

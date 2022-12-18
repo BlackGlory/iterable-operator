@@ -1,7 +1,6 @@
 import { getError } from 'return-style'
 import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils'
 import { tap } from '@src/tap'
-import '@blackglory/jest-matchers'
 
 describe('tap', () => {
   test('called fn with [element, index]', () => {
@@ -29,7 +28,6 @@ describe('tap', () => {
     const isSideResultEmptyInStage1 = !sideResult.length
     const arrResult = toArray(result)
 
-    expect(result).toBeIterable()
     expect(isSideResultEmptyInStage1).toBe(true)
     expect(arrResult).toEqual([1, 2, 3])
     expect(sideResult).toEqual([[1, 0], [2, 1], [3, 2]])
@@ -56,7 +54,6 @@ describe('tap', () => {
       const result = tap(iter, justThrow)
       const err = getError(() => toArray(result))
 
-      expect(result).toBeIterable()
       expect(err).toBeInstanceOf(Error)
       expect(err!.message).toMatch('CustomError')
     })

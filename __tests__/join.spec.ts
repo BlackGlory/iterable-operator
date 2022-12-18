@@ -1,6 +1,5 @@
 import { consume, toArray, MockIterable, take } from '@test/utils'
 import { join } from '@src/join'
-import '@blackglory/jest-matchers'
 
 describe('join', () => {
   test('lazy and partial evaluation', () => {
@@ -22,7 +21,6 @@ describe('join', () => {
     const result = join(iter, '+')
     const arrResult = toArray(result)
 
-    expect(result).toBeIterable()
     expect(arrResult).toEqual([1, '+', 2, '+', 3])
   })
 })

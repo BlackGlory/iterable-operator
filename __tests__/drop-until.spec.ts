@@ -1,7 +1,6 @@
 import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils'
 import { dropUntil } from '@src/drop-until'
 import { getError } from 'return-style'
-import '@blackglory/jest-matchers'
 import { go } from '@blackglory/go'
 import { pass } from '@blackglory/pass'
 
@@ -59,7 +58,6 @@ describe('dropUntil', () => {
     const result = dropUntil(iter, atTwo)
     const arrResult = toArray(result)
 
-    expect(result).toBeIterable()
     expect(arrResult).toEqual([2, 3])
   })
 
@@ -85,7 +83,6 @@ describe('dropUntil', () => {
       const result = dropUntil(iter, fn)
       const err = getError(() => toArray(result))
 
-      expect(result).toBeIterable()
       expect(err).toBe(customError)
     })
   })

@@ -2,7 +2,6 @@ import { isString } from '@blackglory/types'
 import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils'
 import { flattenBy } from '@src/flatten-by'
 import { getError } from 'return-style'
-import '@blackglory/jest-matchers'
 
 describe('flattenBy', () => {
   test('called fn with [element, level]', () => {
@@ -29,7 +28,6 @@ describe('flattenBy', () => {
     const result = flattenBy(iter, exceptString)
     const arrResult = toArray(result)
 
-    expect(result).toBeIterable()
     expect(arrResult).toEqual([
       'one', 'two'
     , 0, 1
@@ -57,7 +55,6 @@ describe('flattenBy', () => {
       const result = flattenBy(iter, fn)
       const arrResult = toArray(result)
 
-      expect(result).toBeIterable()
       expect(arrResult).toEqual([])
     })
   })
@@ -70,7 +67,6 @@ describe('flattenBy', () => {
       const result = flattenBy(iter, fn)
       const arrResult = toArray(result)
 
-      expect(result).toBeIterable()
       expect(arrResult).toEqual(['1', '2', '3'])
     })
   })
@@ -84,7 +80,6 @@ describe('flattenBy', () => {
       const result = flattenBy(iter, fn)
       const err = getError(() => toArray(result))
 
-      expect(result).toBeIterable()
       expect(err).toBe(customError)
     })
   })

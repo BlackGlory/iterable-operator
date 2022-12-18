@@ -2,7 +2,6 @@ import { getErrorPromise } from 'return-style'
 import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures'
 import { toArrayAsync, consumeAsync, getCalledTimes, MockIterable, takeAsync } from '@test/utils'
 import { filterAsync } from '@src/filter-async'
-import '@blackglory/jest-matchers'
 
 describe('filterAsync', () => {
   describe.each([
@@ -51,7 +50,6 @@ describe('filterAsync', () => {
           const result = filterAsync(iter, odd)
           const arrResult = await toArrayAsync(result)
 
-          expect(result).toBeAsyncIterable()
           expect(arrResult).toEqual([1, 3])
         })
       })
@@ -65,7 +63,6 @@ describe('filterAsync', () => {
           const result = filterAsync(iter, fn)
           const err = await getErrorPromise(toArrayAsync(result))
 
-          expect(result).toBeAsyncIterable()
           expect(err).toBe(customError)
         })
       })

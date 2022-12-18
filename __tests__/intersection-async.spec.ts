@@ -1,7 +1,6 @@
 import { consumeAsync, toArrayAsync, MockIterable, toIterable, toAsyncIterable, takeAsync } from '@test/utils'
 import { testIterable, testAsyncIterable, testIterablePromises } from '@test/test-fixtures'
 import { intersectionAsync } from '@src/intersection-async'
-import '@blackglory/jest-matchers'
 
 describe('intersectionAsync', () => {
   describe.each([
@@ -30,7 +29,6 @@ describe('intersectionAsync', () => {
       const result = intersectionAsync(leftIter, rightIter)
       const arrResult = await toArrayAsync(result)
 
-      expect(result).toBeAsyncIterable()
       expect(arrResult).toStrictEqual([2])
     })
   })
@@ -43,7 +41,6 @@ describe('intersectionAsync', () => {
       const result = intersectionAsync(leftIter, rightIter)
       const arrResult = await toArrayAsync(result)
 
-      expect(result).toBeAsyncIterable()
       expect(arrResult).toStrictEqual([2])
     })
   })

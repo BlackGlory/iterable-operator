@@ -2,7 +2,6 @@ import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } f
 import { testIterable, testAsyncIterable, testAsyncFunction, testFunction } from '@test/test-fixtures'
 import { getErrorPromise } from 'return-style'
 import { splitByAsync } from '@src/split-by-async'
-import '@blackglory/jest-matchers'
 
 describe('splitByAsync', () => {
   describe.each([
@@ -38,7 +37,6 @@ describe('splitByAsync', () => {
             const result = splitByAsync(iter, atThree)
             const arrResult = await toArrayAsync(result)
 
-            expect(result).toBeAsyncIterable()
             expect(arrResult).toEqual([[], [2, 3, 4, 5]])
           })
         })
@@ -51,7 +49,6 @@ describe('splitByAsync', () => {
             const result = splitByAsync(iter, atThree)
             const arrResult = await toArrayAsync(result)
 
-            expect(result).toBeAsyncIterable()
             expect(arrResult).toEqual([[1, 2], [4, 5]])
           })
         })
@@ -64,7 +61,6 @@ describe('splitByAsync', () => {
             const result = splitByAsync(iter, atThree)
             const arrResult = await toArrayAsync(result)
 
-            expect(result).toBeAsyncIterable()
             expect(arrResult).toEqual([[1, 2, 3, 4], []])
           })
         })
@@ -78,7 +74,6 @@ describe('splitByAsync', () => {
           const result = splitByAsync(iter, alwaysFalse)
           const arrResult = await toArrayAsync(result)
 
-          expect(result).toBeAsyncIterable()
           expect(arrResult).toEqual([[1, 2, 3, 4, 5]])
         })
       })
@@ -106,7 +101,6 @@ describe('splitByAsync', () => {
           const result = splitByAsync(iter, fn)
           const err = await getErrorPromise(toArrayAsync(result))
 
-          expect(result).toBeAsyncIterable()
           expect(err).toBe(customError)
         })
       })

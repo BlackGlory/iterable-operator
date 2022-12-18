@@ -1,7 +1,6 @@
 import { getError } from 'return-style'
 import { consume, toArray, MockIterable, take } from '@test/utils'
 import { flattenDeep } from '@src/flatten-deep'
-import '@blackglory/jest-matchers'
 
 describe('flattenDeep', () => {
   test('lazy and partial evaluation', () => {
@@ -25,7 +24,6 @@ describe('flattenDeep', () => {
       const result = flattenDeep(iter, depth)
       const arrResult = toArray(result)
 
-      expect(result).toBeIterable()
       expect(arrResult).toEqual([])
     })
   })
@@ -39,7 +37,6 @@ describe('flattenDeep', () => {
         const result = flattenDeep(iter, depth)
         const arrResult = toArray(result)
 
-        expect(result).toBeIterable()
         expect(arrResult).toEqual(['1', '2', '3'])
       })
     })
@@ -65,7 +62,6 @@ describe('flattenDeep', () => {
           const result = flattenDeep(iter, depth)
           const arrResult = toArray(result)
 
-          expect(result).toBeIterable()
           expect(result).not.toBe(iter)
           expect(arrResult).toEqual([0, [1]])
         })
@@ -82,7 +78,6 @@ describe('flattenDeep', () => {
           const result = flattenDeep(iter, depth)
           const arrResult = toArray(result)
 
-          expect(result).toBeIterable()
           expect(arrResult).toEqual([
             'o','n','e', 't','w','o', 'three'
           , 0, 1, 2, [3]

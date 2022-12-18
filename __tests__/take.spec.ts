@@ -1,7 +1,6 @@
 import { consume, toArray, MockIterable, take as testTake } from '@test/utils'
 import { getError } from 'return-style'
 import { take } from '@src/take'
-import '@blackglory/jest-matchers'
 
 describe('take', () => {
   test('lazy and partial evaluation', () => {
@@ -25,7 +24,6 @@ describe('take', () => {
       const result = take(iter, count)
       const arrResult = toArray(result)
 
-      expect(result).toBeIterable()
       expect(arrResult).toEqual([1, 2, 3])
     })
   })
@@ -38,7 +36,6 @@ describe('take', () => {
       const result = take(iter, count)
       const arrResult = toArray(result)
 
-      expect(result).toBeIterable()
       expect(arrResult).toEqual([1, 2])
     })
   })
@@ -51,7 +48,6 @@ describe('take', () => {
       const result = take(iter, count)
       const arrResult = toArray(result)
 
-      expect(result).toBeIterable()
       expect(arrResult).toEqual([])
     })
   })

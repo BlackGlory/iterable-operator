@@ -2,7 +2,6 @@ import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from
 import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils'
 import { getErrorPromise } from 'return-style'
 import { uniqByAsync } from '@src/uniq-by-async'
-import '@blackglory/jest-matchers'
 
 describe('uniqByAsync', () => {
   describe.each([
@@ -51,7 +50,6 @@ describe('uniqByAsync', () => {
           const result = uniqByAsync(iter, modTwo)
           const arrResult = await toArrayAsync(result)
 
-          expect(result).toBeAsyncIterable()
           expect(arrResult).toEqual([1, 2])
         })
       })
@@ -65,7 +63,6 @@ describe('uniqByAsync', () => {
           const result = uniqByAsync(iter, fn)
           const err = await getErrorPromise(toArrayAsync(result))
 
-          expect(result).toBeAsyncIterable()
           expect(err).toBe(customError)
         })
       })

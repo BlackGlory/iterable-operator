@@ -1,7 +1,6 @@
 import { consume, toArray, MockIterable } from '@test/utils'
 import { getError } from 'return-style'
 import { takeRight } from '@src/take-right'
-import '@blackglory/jest-matchers'
 import { go } from '@blackglory/go'
 import { pass } from '@blackglory/pass'
 
@@ -40,7 +39,6 @@ describe('takeRight', () => {
       const result = takeRight(iter, count)
       const arrResult = toArray(result)
 
-      expect(result).toBeIterable()
       expect(result).not.toBe(iter)
       expect(arrResult).toEqual([1, 2, 3])
     })
@@ -54,7 +52,6 @@ describe('takeRight', () => {
       const result = takeRight(iter, count)
       const arrResult = toArray(result)
 
-      expect(result).toBeIterable()
       expect(arrResult).toEqual([2, 3])
     })
   })
@@ -67,7 +64,6 @@ describe('takeRight', () => {
       const result = takeRight(iter, count)
       const arrResult = toArray(result)
 
-      expect(result).toBeIterable()
       expect(arrResult).toEqual([])
     })
   })

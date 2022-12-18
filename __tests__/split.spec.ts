@@ -1,6 +1,5 @@
 import { consume, toArray, MockIterable, take } from '@test/utils'
 import { split } from '@src/split'
-import '@blackglory/jest-matchers'
 
 describe('split', () => {
   describe('separator in iterable', () => {
@@ -12,7 +11,6 @@ describe('split', () => {
         const result = split(iter, sep)
         const arrResult = toArray(result)
 
-        expect(result).toBeIterable()
         expect(arrResult).toEqual([[], [2, 3, 4, 5]])
       })
     })
@@ -25,7 +23,6 @@ describe('split', () => {
         const result = split(iter, sep)
         const arrResult = toArray(result)
 
-        expect(result).toBeIterable()
         expect(arrResult).toEqual([[1, 2], [4, 5]])
       })
     })
@@ -38,7 +35,6 @@ describe('split', () => {
         const result = split(iter, sep)
         const arrResult = toArray(result)
 
-        expect(result).toBeIterable()
         expect(arrResult).toEqual([[1, 2, 3, 4], []])
       })
     })
@@ -52,7 +48,6 @@ describe('split', () => {
       const result = split(iter, sep)
       const arrResult = toArray(result)
 
-      expect(result).toBeIterable()
       expect(arrResult).toEqual([[1, 2, 3, 4, 5]])
     })
   })

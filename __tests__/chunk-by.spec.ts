@@ -1,7 +1,6 @@
 import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils'
 import { chunkBy } from '@src/chunk-by'
 import { getError } from 'return-style'
-import '@blackglory/jest-matchers'
 
 describe('chunkBy', () => {
   test('called fn with [element, index]', () => {
@@ -29,7 +28,6 @@ describe('chunkBy', () => {
         const result = chunkBy(iter, atTwo)
         const arrResult = toArray(result)
 
-        expect(result).toBeIterable()
         expect(arrResult).toEqual([[1, 2], [3]])
       })
     })
@@ -42,7 +40,6 @@ describe('chunkBy', () => {
         const result = chunkBy(iter, atThree)
         const arrResult = toArray(result)
 
-        expect(result).toBeIterable()
         expect(arrResult).toEqual([[1, 2, 3]])
       })
     })
@@ -56,7 +53,6 @@ describe('chunkBy', () => {
       const result = chunkBy(iter, alwaysFalse)
       const arrResult = toArray(result)
 
-      expect(result).toBeIterable()
       expect(arrResult).toEqual([[1, 2, 3]])
     })
   })
@@ -83,7 +79,6 @@ describe('chunkBy', () => {
       const result = chunkBy(iter, fn)
       const err = getError(() => toArray(result))
 
-      expect(result).toBeIterable()
       expect(err).toBe(customError)
     })
   })

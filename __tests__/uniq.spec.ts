@@ -1,6 +1,5 @@
 import { consume, toArray, MockIterable, take } from '@test/utils'
 import { uniq } from '@src/uniq'
-import '@blackglory/jest-matchers'
 
 describe('uniq', () => {
   it('returns the unique iterable', () => {
@@ -9,7 +8,6 @@ describe('uniq', () => {
     const result = uniq(iter)
     const arrResult = toArray(result)
 
-    expect(result).toBeIterable()
     expect(arrResult).toEqual([1, 2, 3])
   })
 

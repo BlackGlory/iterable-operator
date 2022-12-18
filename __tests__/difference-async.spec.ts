@@ -1,7 +1,6 @@
 import { consumeAsync, toArrayAsync, MockIterable, toIterable, toAsyncIterable, takeAsync } from '@test/utils'
 import { testIterable, testAsyncIterable, testIterablePromises } from '@test/test-fixtures'
 import { differenceAsync } from '@src/difference-async'
-import '@blackglory/jest-matchers'
 
 describe('differenceAsync', () => {
   describe.each([
@@ -30,7 +29,6 @@ describe('differenceAsync', () => {
       const result = differenceAsync(leftIter, rightIter)
       const arrResult = await toArrayAsync(result)
 
-      expect(result).toBeAsyncIterable()
       expect(arrResult).toStrictEqual([1])
     })
   })
@@ -43,7 +41,6 @@ describe('differenceAsync', () => {
       const result = differenceAsync(leftIter, rightIter)
       const arrResult = await toArrayAsync(result)
 
-      expect(result).toBeAsyncIterable()
       expect(arrResult).toStrictEqual([1])
     })
   })

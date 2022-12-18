@@ -2,7 +2,6 @@ import { getError } from 'return-style'
 import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync }
   from '@test/utils'
 import { chunkAsync } from '@src/chunk-async'
-import '@blackglory/jest-matchers'
 
 describe('chunkAsync', () => {
   test('lazy and evaluation', async () => {
@@ -27,7 +26,6 @@ describe('chunkAsync', () => {
         const result = chunkAsync(iter, size)
         const arrResult = await toArrayAsync(result)
 
-        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([[1, 2, 3]])
       })
     })
@@ -40,7 +38,6 @@ describe('chunkAsync', () => {
         const result = chunkAsync(iter, size)
         const arrResult = await toArrayAsync(result)
 
-        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([[1, 2], [3]])
       })
     })
@@ -53,7 +50,6 @@ describe('chunkAsync', () => {
         const result = chunkAsync(iter, size)
         const arrResult = await toArrayAsync(result)
 
-        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([[1, 2, 3]])
       })
     })

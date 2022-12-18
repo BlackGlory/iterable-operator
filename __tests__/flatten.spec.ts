@@ -1,6 +1,5 @@
 import { consume, toArray, MockIterable, take } from '@test/utils'
 import { flatten } from '@src/flatten'
-import '@blackglory/jest-matchers'
 
 describe('flatten', () => {
   test('lazy and partial evaluation', () => {
@@ -22,7 +21,6 @@ describe('flatten', () => {
       const result = flatten(iter)
       const arrResult = toArray(result)
 
-      expect(result).toBeIterable()
       expect(arrResult).toEqual([])
     })
   })
@@ -34,7 +32,6 @@ describe('flatten', () => {
       const result = flatten(iter)
       const arrResult = toArray(result)
 
-      expect(result).toBeIterable()
       expect(arrResult).toEqual(['1', '2', '3'])
     })
   })
@@ -49,7 +46,6 @@ describe('flatten', () => {
       const result = flatten(iter)
       const arrResult = toArray(result)
 
-      expect(result).toBeIterable()
       expect(arrResult).toEqual([
         'o','n','e', 'two'
       , 0, 1, [2]

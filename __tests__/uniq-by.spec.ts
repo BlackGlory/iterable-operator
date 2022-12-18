@@ -1,7 +1,6 @@
 import { getError } from 'return-style'
 import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils'
 import { uniqBy } from '@src/uniq-by'
-import '@blackglory/jest-matchers'
 
 describe('uniqBy<T, U>(', () => {
   test('called fn with [element, index]', () => {
@@ -27,7 +26,6 @@ describe('uniqBy<T, U>(', () => {
     const result = uniqBy(iter, modTwo)
     const arrResult = toArray(result)
 
-    expect(result).toBeIterable()
     expect(arrResult).toEqual([1, 2])
   })
 
@@ -52,7 +50,6 @@ describe('uniqBy<T, U>(', () => {
       const result = uniqBy(iter, fn)
       const err = getError(() => toArray(result))
 
-      expect(result).toBeIterable()
       expect(err).toBeInstanceOf(Error)
       expect(err!.message).toMatch('CustomError')
     })

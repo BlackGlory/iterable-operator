@@ -1,7 +1,6 @@
 import { getErrorPromise } from 'return-style'
 import { testFunction, testAsyncFunction, testIterable, testAsyncIterable } from '@test/test-fixtures'
 import { someAsync } from '@src/some-async'
-import '@blackglory/jest-matchers'
 
 describe('someAsync', () => {
   describe.each([
@@ -40,11 +39,9 @@ describe('someAsync', () => {
           const iter = createIter([1, 2, 3])
           const fn = createFn(() => true)
 
-          const result = someAsync(iter, fn)
-          const proResult = await result
+          const result = await someAsync(iter, fn)
 
-          expect(result).toBePromise()
-          expect(proResult).toBe(true)
+          expect(result).toBe(true)
         })
       })
 
@@ -53,11 +50,9 @@ describe('someAsync', () => {
           const iter = createIter([1, 2, 3])
           const fn = createFn(() => false)
 
-          const result = someAsync(iter, fn)
-          const proResult = await result
+          const result = await someAsync(iter, fn)
 
-          expect(result).toBePromise()
-          expect(proResult).toBe(false)
+          expect(result).toBe(false)
         })
       })
 

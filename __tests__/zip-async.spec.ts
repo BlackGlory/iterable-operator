@@ -8,7 +8,6 @@ import {
 , MockAsyncIterable
 } from '@test/utils'
 import { zipAsync } from '@src/zip-async'
-import '@blackglory/jest-matchers'
 import { go } from '@blackglory/go'
 import { pass } from '@blackglory/pass'
 
@@ -72,7 +71,6 @@ describe('zipAsync', () => {
         const result = zipAsync(iter1, iter2)
         const arrResult = await toArrayAsync(result)
 
-        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([[1, 'a'], [2, 'b'], [3, 'c']])
       })
     })
@@ -85,7 +83,6 @@ describe('zipAsync', () => {
         const result = zipAsync(iter1, iter2)
         const arrResult = await toArrayAsync(result)
 
-        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([[1, 'a'], [2, 'b']])
       })
     })
@@ -99,7 +96,6 @@ describe('zipAsync', () => {
       const result = zipAsync(iter1, iter2)
       const arrResult = await toArrayAsync(result)
 
-      expect(result).toBeAsyncIterable()
       expect(arrResult).toEqual([[1, 'a'], [2, 'b'], [3, 'c']])
     })
   })

@@ -2,7 +2,6 @@ import { getErrorPromise } from 'return-style'
 import { testIterable, testAsyncIterable } from '@test/test-fixtures'
 import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils'
 import { flatMapAsync } from '@src/flat-map-async'
-import '@blackglory/jest-matchers'
 
 describe('mapAsync', () => {
   describe.each([
@@ -47,7 +46,6 @@ describe('mapAsync', () => {
         const result = flatMapAsync(iter, double)
         const arrResult = await toArrayAsync(result)
 
-        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([1, 2, 2, 4, 3, 6])
       })
     })
@@ -61,7 +59,6 @@ describe('mapAsync', () => {
         const result = flatMapAsync(iter, fn)
         const err = await getErrorPromise(toArrayAsync(result))
 
-        expect(result).toBeAsyncIterable()
         expect(err).toBe(customError)
       })
     })

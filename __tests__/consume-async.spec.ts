@@ -1,7 +1,6 @@
 import { toAsyncIterable } from '@test/utils'
 import { consumeAsync } from '@src/consume-async'
 import { getErrorAsync } from 'return-style'
-import '@blackglory/jest-matchers'
 
 describe('consumeAsync', () => {
   it('returns the result from consumer', async () => {
@@ -14,11 +13,9 @@ describe('consumeAsync', () => {
       return result
     }
 
-    const result = consumeAsync(iter, sum)
-    const proResult = await result
+    const result = await consumeAsync(iter, sum)
 
-    expect(result).toBePromise()
-    expect(proResult).toEqual(6)
+    expect(result).toEqual(6)
   })
 
   describe('consumer throws an error', () => {

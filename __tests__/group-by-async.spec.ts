@@ -2,7 +2,6 @@ import { getErrorPromise } from 'return-style'
 import { testFunction, testAsyncFunction, testIterable, testAsyncIterable } from '@test/test-fixtures'
 import { toArray } from '@test/utils'
 import { groupByAsync } from '@src/group-by-async'
-import '@blackglory/jest-matchers'
 
 describe('groupByAsync', () => {
   describe.each([
@@ -29,12 +28,11 @@ describe('groupByAsync', () => {
         const iter = createIter([1, 2, 3])
         const fn = (x: number) => x % 2
 
-        const result = groupByAsync(iter, fn)
-        const proResult = await result
+        const result = await groupByAsync(iter, fn)
+        const arrResult = toArray(result)
 
-        expect(result).toBePromise()
-        expect(proResult).toBeInstanceOf(Map)
-        expect(toArray(proResult)).toEqual([
+        expect(result).toBeInstanceOf(Map)
+        expect(arrResult).toEqual([
           [1, [1, 3]]
         , [0, [2]]
         ])

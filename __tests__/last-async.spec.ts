@@ -1,6 +1,5 @@
 import { toAsyncIterable, MockAsyncIterable } from '@test/utils'
 import { lastAsync } from '@src/last-async'
-import '@blackglory/jest-matchers'
 import { go } from '@blackglory/go'
 import { pass } from '@blackglory/pass'
 
@@ -24,11 +23,9 @@ describe('lastAsync', () => {
     it('returns undefined', async () => {
       const iter = toAsyncIterable([])
 
-      const result = lastAsync(iter)
-      const proResult = await result
+      const result = await lastAsync(iter)
 
-      expect(result).toBePromise()
-      expect(proResult).toBeUndefined()
+      expect(result).toBeUndefined()
     })
   })
 
@@ -36,11 +33,9 @@ describe('lastAsync', () => {
     it('returns the last element in the iterable', async () => {
       const iter = toAsyncIterable([1, 2, 3])
 
-      const result = lastAsync(iter)
-      const proResult = await result
+      const result = await lastAsync(iter)
 
-      expect(result).toBePromise()
-      expect(proResult).toBe(3)
+      expect(result).toBe(3)
     })
   })
 })

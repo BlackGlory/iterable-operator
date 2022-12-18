@@ -1,7 +1,6 @@
 import { getError } from 'return-style'
 import { consume, toArray, MockIterable, take } from '@test/utils'
 import { chunk } from '@src/chunk'
-import '@blackglory/jest-matchers'
 
 describe('chunk', () => {
   test('lazy and partial evaluation', () => {
@@ -26,7 +25,6 @@ describe('chunk', () => {
         const result = chunk(iter, size)
         const arrResult = toArray(result)
 
-        expect(result).toBeIterable()
         expect(arrResult).toEqual([[1, 2, 3]])
       })
     })
@@ -39,7 +37,6 @@ describe('chunk', () => {
         const result = chunk(iter, size)
         const arrResult = toArray(result)
 
-        expect(result).toBeIterable()
         expect(arrResult).toEqual([[1, 2], [3]])
       })
     })
@@ -52,7 +49,6 @@ describe('chunk', () => {
         const result = chunk(iter, size)
         const arrResult = toArray(result)
 
-        expect(result).toBeIterable()
         expect(arrResult).toEqual([[1, 2, 3]])
       })
     })

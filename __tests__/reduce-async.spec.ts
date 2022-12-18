@@ -3,7 +3,6 @@ import { testIterable, testAsyncIterable, testFunction, testAsyncFunction }
   from '@test/test-fixtures'
 import { reduceAsync } from '@src/reduce-async'
 import { getCalledTimes, MockIterable, MockAsyncIterable } from '@test/utils'
-import '@blackglory/jest-matchers'
 import { pass } from '@blackglory/pass'
 
 describe('reduceAsync', () => {
@@ -77,12 +76,10 @@ describe('reduceAsync', () => {
             const iter = createIter([1])
             const fn = jest.fn()
 
-            const result = reduceAsync(iter, fn)
-            const proResult = await result
+            const result = await reduceAsync(iter, fn)
 
-            expect(result).toBePromise()
             expect(getCalledTimes(fn)).toBe(0) // skip
-            expect(proResult).toBe(1)
+            expect(result).toBe(1)
           })
         })
 
@@ -91,11 +88,9 @@ describe('reduceAsync', () => {
             const iter = createIter([1, 2, 3])
             const fn = createFn((acc: number, cur: number ) => acc + cur)
 
-            const result = reduceAsync(iter, fn)
-            const proResult = await result
+            const result = await reduceAsync(iter, fn)
 
-            expect(result).toBePromise()
-            expect(proResult).toBe(6)
+            expect(result).toBe(6)
           })
 
           describe('fn throws an error', () => {
@@ -180,11 +175,9 @@ describe('reduceAsync', () => {
             })
             const initalValue: Array<[number, number]> = []
 
-            const result = reduceAsync(iter, pushToAcc, initalValue)
-            const proResult = await result
+            const result = await reduceAsync(iter, pushToAcc, initalValue)
 
-            expect(result).toBePromise()
-            expect(proResult).toEqual([[1, 0], [2, 1], [3, 2]])
+            expect(result).toEqual([[1, 0], [2, 1], [3, 2]])
           })
         })
       })

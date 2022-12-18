@@ -1,6 +1,5 @@
 import { consume, toArray, MockIterable } from '@test/utils'
 import { zip } from '@src/zip'
-import '@blackglory/jest-matchers'
 import { go } from '@blackglory/go'
 import { pass } from '@blackglory/pass'
 
@@ -41,7 +40,6 @@ describe('zip' , () => {
       const result = zip(iter1, iter2)
       const arrResult = toArray(result)
 
-      expect(result).toBeIterable()
       expect(arrResult).toEqual([[1, 'a'], [2, 'b'], [3, 'c']])
     })
   })
@@ -54,7 +52,6 @@ describe('zip' , () => {
       const result = zip(iter1, iter2)
       const arrResult = toArray(result)
 
-      expect(result).toBeIterable()
       expect(arrResult).toEqual([[1, 'a'], [2, 'b']])
     })
   })

@@ -1,7 +1,6 @@
 import { getError } from 'return-style'
 import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils'
 import { flatMap } from '@src/flat-map'
-import '@blackglory/jest-matchers'
 
 describe('flatMap', () => {
   test('called fn with [element, index]', () => {
@@ -27,7 +26,6 @@ describe('flatMap', () => {
     const result = flatMap(iter, double)
     const arrResult = toArray(result)
 
-    expect(result).toBeIterable()
     expect(arrResult).toEqual([1, 2, 2, 4, 3, 6])
   })
 
@@ -52,7 +50,6 @@ describe('flatMap', () => {
       const result = flatMap(iter, fn)
       const err = getError(() => toArray(result))
 
-      expect(result).toBeIterable()
       expect(err).toBeInstanceOf(Error)
       expect(err!.message).toMatch('CustomError')
     })

@@ -1,7 +1,6 @@
 import { getError } from 'return-style'
 import { consume, toArray, MockIterable, take } from '@test/utils'
 import { slice } from '@src/slice'
-import '@blackglory/jest-matchers'
 
 describe('slice', () => {
   it('lazy and partial evaluation', () => {
@@ -41,7 +40,6 @@ describe('slice', () => {
         const result = slice(iter, start, end)
         const arrResult = toArray(result)
 
-        expect(result).toBeIterable()
         expect(arrResult).toEqual([])
       })
     })
@@ -56,7 +54,6 @@ describe('slice', () => {
           const result = slice(iter, start, end)
           const arrResult = toArray(result)
 
-          expect(result).toBeIterable()
           expect(arrResult).toEqual([2])
         })
       })
@@ -70,7 +67,6 @@ describe('slice', () => {
           const result = slice(iter, start, end)
           const arrResult = toArray(result)
 
-          expect(result).toBeIterable()
           expect(arrResult).toEqual([])
         })
       })

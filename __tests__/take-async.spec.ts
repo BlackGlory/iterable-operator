@@ -1,7 +1,6 @@
 import { consumeAsync, toArrayAsync, toAsyncIterable, MockAsyncIterable, takeAsync as testTakeAsync } from '@test/utils'
 import { getError } from 'return-style'
 import { takeAsync } from '@src/take-async'
-import '@blackglory/jest-matchers'
 
 describe('takeAsync', () => {
   it('lazy and partial evaluation', async () => {
@@ -25,7 +24,6 @@ describe('takeAsync', () => {
       const result = takeAsync(iter, count)
       const arrResult = await toArrayAsync(result)
 
-      expect(result).toBeAsyncIterable()
       expect(result).not.toBe(iter)
       expect(arrResult).toEqual([1, 2, 3])
     })
@@ -39,7 +37,6 @@ describe('takeAsync', () => {
       const result = takeAsync(iter, count)
       const arrResult = await toArrayAsync(result)
 
-      expect(result).toBeAsyncIterable()
       expect(arrResult).toEqual([1, 2])
     })
   })
@@ -52,7 +49,6 @@ describe('takeAsync', () => {
       const result = takeAsync(iter, count)
       const arrResult = await toArrayAsync(result)
 
-      expect(result).toBeAsyncIterable()
       expect(arrResult).toEqual([])
     })
   })

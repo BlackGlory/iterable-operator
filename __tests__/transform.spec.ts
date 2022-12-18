@@ -1,7 +1,6 @@
 import { consume, toArray, MockIterable } from '@test/utils'
 import { transform } from '@src/transform'
 import { getError } from 'return-style'
-import '@blackglory/jest-matchers'
 
 describe('transform', () => {
   it('returns the iterable from transformer', () => {
@@ -15,7 +14,6 @@ describe('transform', () => {
     const result = transform(iter, double)
     const arrResult = toArray(result)
 
-    expect(result).toBeIterable()
     expect(arrResult).toEqual([2, 4, 6])
   })
 

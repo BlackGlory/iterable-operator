@@ -1,6 +1,5 @@
 import { consume } from '@src/consume'
 import { getError } from 'return-style'
-import '@blackglory/jest-matchers'
 
 describe('consume', () => {
   it('returns the result from consumer', async () => {
@@ -13,11 +12,9 @@ describe('consume', () => {
       return result
     }
 
-    const result = consume(iter as any, sum)
-    const proResult = await result
+    const result = await consume(iter as any, sum)
 
-    expect(result).toBePromise()
-    expect(proResult).toEqual(6)
+    expect(result).toEqual(6)
   })
 
   describe('consumer throw error', () => {

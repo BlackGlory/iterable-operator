@@ -2,7 +2,6 @@ import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from
 import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils'
 import { chunkByAsync } from '@src/chunk-by-async'
 import { getErrorPromise } from 'return-style'
-import '@blackglory/jest-matchers'
 
 describe('chunkByAsync(', () => {
   describe.each([
@@ -52,7 +51,6 @@ describe('chunkByAsync(', () => {
             const result = chunkByAsync(iter, atTwo)
             const arrResult = await toArrayAsync(result)
 
-            expect(result).toBeAsyncIterable()
             expect(arrResult).toEqual([[1, 2], [3]])
           })
         })
@@ -65,7 +63,6 @@ describe('chunkByAsync(', () => {
             const result = chunkByAsync(iter, atThree)
             const arrResult = await toArrayAsync(result)
 
-            expect(result).toBeAsyncIterable()
             expect(arrResult).toEqual([[1, 2, 3]])
           })
         })
@@ -79,7 +76,6 @@ describe('chunkByAsync(', () => {
           const result = chunkByAsync(iter, alwaysFalse)
           const arrResult = await toArrayAsync(result)
 
-          expect(result).toBeAsyncIterable()
           expect(arrResult).toEqual([[1, 2, 3]])
         })
       })
@@ -93,7 +89,6 @@ describe('chunkByAsync(', () => {
           const result = chunkByAsync(iter, fn)
           const err = await getErrorPromise(toArrayAsync(result))
 
-          expect(result).toBeAsyncIterable()
           expect(err).toBe(customError)
         })
       })

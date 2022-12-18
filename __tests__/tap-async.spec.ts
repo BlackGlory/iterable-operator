@@ -2,7 +2,6 @@ import { toArrayAsync, consumeAsync, getCalledTimes, MockIterable, takeAsync } f
 import { getErrorPromise } from 'return-style'
 import { testFunction, testAsyncFunction, testIterable, testAsyncIterable } from '@test/test-fixtures'
 import { tapAsync } from '@src/tap-async'
-import '@blackglory/jest-matchers'
 
 describe('tapAsync', () => {
   describe.each([
@@ -52,7 +51,6 @@ describe('tapAsync', () => {
         const isSideResultEmptyInStage1 = !sideResult.length
         const arrResult = await toArrayAsync(result)
 
-        expect(result).toBeAsyncIterable()
         expect(isSideResultEmptyInStage1).toBe(true)
         expect(arrResult).toEqual([1, 2, 3])
         expect(sideResult).toEqual([[1, 0], [2, 1], [3, 2]])
@@ -67,7 +65,6 @@ describe('tapAsync', () => {
           const result = tapAsync(iter, justThrow)
           const err = await getErrorPromise(toArrayAsync(result))
 
-          expect(result).toBeAsyncIterable()
           expect(err).toBe(customError)
         })
       })

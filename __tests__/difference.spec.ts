@@ -1,6 +1,5 @@
 import { consume, toArray, MockIterable, take } from '@test/utils'
 import { difference } from '@src/difference'
-import '@blackglory/jest-matchers'
 
 describe('difference', () => {
   test('lazy and partial evaluation', () => {
@@ -23,7 +22,6 @@ describe('difference', () => {
     const result = difference(leftIter, rightIter)
     const arrResult = toArray(result)
 
-    expect(result).toBeIterable()
     expect(arrResult).toStrictEqual([1])
   })
 })

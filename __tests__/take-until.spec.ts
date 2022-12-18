@@ -1,7 +1,6 @@
 import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils'
 import { takeUntil } from '@src/take-until'
 import { getError } from 'return-style'
-import '@blackglory/jest-matchers'
 
 describe('takeUntil', () => {
   test('called fn with [element, index]', () => {
@@ -42,7 +41,6 @@ describe('takeUntil', () => {
     const result = takeUntil(iter, atTwo)
     const arrResult = toArray(result)
 
-    expect(result).toBeIterable()
     expect(arrResult).toEqual([1])
   })
 
@@ -68,7 +66,6 @@ describe('takeUntil', () => {
       const result = takeUntil(iter, fn)
       const err = getError(() => toArray(result))
 
-      expect(result).toBeIterable()
       expect(err).toBe(customError)
     })
   })

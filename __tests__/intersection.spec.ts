@@ -1,6 +1,5 @@
 import { consume, toArray, MockIterable, take } from '@test/utils'
 import { intersection } from '@src/intersection'
-import '@blackglory/jest-matchers'
 
 describe('intersection', () => {
   test('lazy and partial evaluation', () => {
@@ -23,7 +22,6 @@ describe('intersection', () => {
     const result = intersection(leftIter, rightIter)
     const arrResult = toArray(result)
 
-    expect(result).toBeIterable()
     expect(arrResult).toStrictEqual([2])
   })
 })

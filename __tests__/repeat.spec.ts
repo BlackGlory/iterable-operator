@@ -1,7 +1,6 @@
 import { consume, toArray, MockIterable, take } from '@test/utils'
 import { getError } from 'return-style'
 import { repeat } from '@src/repeat'
-import '@blackglory/jest-matchers'
 
 describe('repeat', () => {
   test('lazy and partial evaluation', () => {
@@ -25,7 +24,6 @@ describe('repeat', () => {
       const result = repeat(iter, times)
       const arrResult = toArray(result)
 
-      expect(result).toBeIterable()
       expect(arrResult).toEqual([1, 2, 3, 1, 2, 3])
     })
   })
@@ -38,7 +36,6 @@ describe('repeat', () => {
       const result = repeat(iter, times)
       const arrResult = toArray(result)
 
-      expect(result).toBeIterable()
       expect(arrResult).toEqual([])
     })
   })
@@ -64,9 +61,8 @@ describe('repeat', () => {
         const iter: number[] = [1, 2, 3]
 
         try {
-          const result = repeat(iter, Infinity)
+          repeat(iter, Infinity)
 
-          expect(result).toBeIterable()
           expect(console.warn).toHaveBeenCalledTimes(0)
         } finally {
           spy.mockRestore()
@@ -83,9 +79,8 @@ describe('repeat', () => {
         const iter: number[] = [1, 2, 3]
 
         try {
-          const result = repeat(iter, Infinity)
+          repeat(iter, Infinity)
 
-          expect(result).toBeIterable()
           expect(console.warn).toHaveBeenCalledTimes(1)
         } finally {
           spy.mockRestore()

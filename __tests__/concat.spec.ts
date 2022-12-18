@@ -1,6 +1,5 @@
 import { consume, toArray, MockIterable, take } from '@test/utils'
 import { concat } from '@src/concat'
-import '@blackglory/jest-matchers'
 
 describe('concat', () => {
   it('lazy and partial evaluation', () => {
@@ -23,7 +22,6 @@ describe('concat', () => {
     const result = concat(iter1, iter2)
     const arrResult = toArray(result)
 
-    expect(result).toBeIterable()
     expect(arrResult).toEqual([1, 2, 3, 'a', 'b', 'c'])
   })
 })

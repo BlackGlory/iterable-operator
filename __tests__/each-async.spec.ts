@@ -1,7 +1,6 @@
 import { getErrorPromise } from 'return-style'
 import { testFunction, testAsyncFunction, testIterable, testAsyncIterable } from '@test/test-fixtures'
 import { eachAsync } from '@src/each-async'
-import '@blackglory/jest-matchers'
 
 describe('eachAsync', () => {
   describe.each([
@@ -29,11 +28,9 @@ describe('eachAsync', () => {
         const sideResult: Array<[number, number]> = []
         const pushToSideResult = createFn((x: number, i: number) => sideResult.push([x, i]))
 
-        const result = eachAsync(iter, pushToSideResult)
-        const proResult = await result
+        const result = await eachAsync(iter, pushToSideResult)
 
-        expect(result).toBePromise()
-        expect(proResult).toBeUndefined()
+        expect(result).toBeUndefined()
         expect(sideResult).toEqual([[1, 0], [2, 1], [3, 2]])
       })
 

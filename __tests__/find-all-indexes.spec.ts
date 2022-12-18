@@ -1,7 +1,6 @@
 import { getError } from 'return-style'
 import { findAllIndexes } from '@src/find-all-indexes'
 import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils'
-import '@blackglory/jest-matchers'
 
 describe('findAllIndexes', () => {
   test('called fn with [element, index]', () => {
@@ -27,7 +26,6 @@ describe('findAllIndexes', () => {
     const result = findAllIndexes(iter, odd)
     const arrResult = toArray(result)
 
-    expect(result).toBeIterable()
     expect(arrResult).toEqual([0, 2])
   })
 
@@ -52,7 +50,6 @@ describe('findAllIndexes', () => {
       const result = findAllIndexes(iter, fn)
       const err = getError(() => toArray(result))
 
-      expect(result).toBeIterable()
       expect(err).toBeInstanceOf(Error)
       expect(err!.message).toMatch('CustomError')
     })

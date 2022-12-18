@@ -1,7 +1,6 @@
 import { getError } from 'return-style'
 import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable } from '@test/utils'
 import { dropRightAsync } from '@src/drop-right-async'
-import '@blackglory/jest-matchers'
 
 describe('dropRightAsync', () => {
   test('lazy evaluation', async () => {
@@ -24,7 +23,6 @@ describe('dropRightAsync', () => {
         const result = dropRightAsync(iter, count)
         const arrResult = await toArrayAsync(result)
 
-        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([])
       })
     })
@@ -37,7 +35,6 @@ describe('dropRightAsync', () => {
         const result = dropRightAsync(iter, count)
         const arrResult = await toArrayAsync(result)
 
-        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([])
       })
     })
@@ -50,7 +47,6 @@ describe('dropRightAsync', () => {
         const result = dropRightAsync(iter, count)
         const arrResult = await toArrayAsync(result)
 
-        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([1])
       })
     })
@@ -64,7 +60,6 @@ describe('dropRightAsync', () => {
       const result = dropRightAsync(iter, count)
       const arrResult = await toArrayAsync(result)
 
-      expect(result).toBeAsyncIterable()
       expect(result).not.toBe(iter)
       expect(arrResult).toEqual([1, 2, 3])
     })

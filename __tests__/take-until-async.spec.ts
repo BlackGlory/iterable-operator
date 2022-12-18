@@ -2,7 +2,6 @@ import { testIterable, testAsyncIterable, testAsyncFunction, testFunction } from
 import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils'
 import { getErrorPromise } from 'return-style'
 import { takeUntilAsync } from '@src/take-until-async'
-import '@blackglory/jest-matchers'
 
 describe('takeUntilAsync', () => {
   describe.each([
@@ -66,7 +65,6 @@ describe('takeUntilAsync', () => {
           const result = takeUntilAsync(iter, atTwo)
           const arrResult = await toArrayAsync(result)
 
-          expect(result).toBeAsyncIterable()
           expect(arrResult).toEqual([1])
         })
       })
@@ -80,7 +78,6 @@ describe('takeUntilAsync', () => {
           const result = takeUntilAsync(iter, fn)
           const err = await getErrorPromise(toArrayAsync(result))
 
-          expect(result).toBeAsyncIterable()
           expect(err).toBe(customError)
         })
       })

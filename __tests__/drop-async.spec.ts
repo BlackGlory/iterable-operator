@@ -2,7 +2,6 @@ import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsy
   from '@test/utils'
 import { getError } from 'return-style'
 import { dropAsync } from '@src/drop-async'
-import '@blackglory/jest-matchers'
 import { go } from '@blackglory/go'
 import { pass } from '@blackglory/pass'
 
@@ -44,7 +43,6 @@ describe('dropAsync', () => {
         const result = dropAsync(iter, count)
         const arrResult = await toArrayAsync(result)
 
-        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([])
       })
     })
@@ -57,7 +55,6 @@ describe('dropAsync', () => {
         const result = dropAsync(iter, count)
         const arrResult = await toArrayAsync(result)
 
-        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([])
       })
     })
@@ -70,7 +67,6 @@ describe('dropAsync', () => {
         const result = dropAsync(iter, count)
         const arrResult = await toArrayAsync(result)
 
-        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([3])
       })
     })
@@ -84,7 +80,6 @@ describe('dropAsync', () => {
       const result = dropAsync(iter, count)
       const arrResult = await toArrayAsync(result)
 
-      expect(result).toBeAsyncIterable()
       expect(result).not.toBe(iter)
       expect(arrResult).toEqual([1, 2, 3])
     })

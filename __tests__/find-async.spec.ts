@@ -2,7 +2,6 @@ import { getErrorPromise } from 'return-style'
 import { testFunction, testAsyncFunction, testIterable, testAsyncIterable }
   from '@test/test-fixtures'
 import { findAsync } from '@src/find-async'
-import '@blackglory/jest-matchers'
 
 describe('findAsync', () => {
   describe.each([
@@ -44,11 +43,9 @@ describe('findAsync', () => {
           const iter = createIter([1, 2, 3])
           const isTwo = createFn((x: number) => x === 2)
 
-          const result = findAsync(iter, isTwo)
-          const proResult = await result
+          const result = await findAsync(iter, isTwo)
 
-          expect(result).toBePromise()
-          expect(proResult).toBe(2)
+          expect(result).toBe(2)
         })
       })
 

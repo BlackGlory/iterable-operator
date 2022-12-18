@@ -2,7 +2,6 @@ import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from
 import { toArrayAsync, getCalledTimes, consumeAsync, MockIterable, MockAsyncIterable, takeAsync } from '@test/utils'
 import { dropUntilAsync } from '@src/drop-until-async'
 import { getErrorPromise } from 'return-style'
-import '@blackglory/jest-matchers'
 import { go } from '@blackglory/go'
 import { pass } from '@blackglory/pass'
 
@@ -99,7 +98,6 @@ describe('dropUntilAsync', () => {
         const result = dropUntilAsync(iter, atTwo)
         const arrResult = await toArrayAsync(result)
 
-        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([2, 3])
       })
 
@@ -112,7 +110,6 @@ describe('dropUntilAsync', () => {
           const result = dropUntilAsync(iter, fn)
           const err = await getErrorPromise(toArrayAsync(result))
 
-          expect(result).toBeAsyncIterable()
           expect(err).toBe(customError)
         })
       })

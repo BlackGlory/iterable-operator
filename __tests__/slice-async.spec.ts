@@ -2,7 +2,6 @@ import { getError } from 'return-style'
 import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync }
   from '@test/utils'
 import { sliceAsync } from '@src/slice-async'
-import '@blackglory/jest-matchers'
 
 describe('sliceAsync', () => {
   test('lazy and partial evaluation', async () => {
@@ -42,7 +41,6 @@ describe('sliceAsync', () => {
         const result = sliceAsync(iter, start, end)
         const arrResult = await toArrayAsync(result)
 
-        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([])
       })
     })
@@ -57,7 +55,6 @@ describe('sliceAsync', () => {
           const result = sliceAsync(iter, start, end)
           const arrResult = await toArrayAsync(result)
 
-          expect(result).toBeAsyncIterable()
           expect(arrResult).toEqual([2])
         })
       })
@@ -71,7 +68,6 @@ describe('sliceAsync', () => {
           const result = sliceAsync(iter, start, end)
           const arrResult = await toArrayAsync(result)
 
-          expect(result).toBeAsyncIterable()
           expect(arrResult).toEqual([])
         })
       })

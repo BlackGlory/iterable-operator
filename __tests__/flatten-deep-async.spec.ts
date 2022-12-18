@@ -2,7 +2,6 @@ import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsy
   from '@test/utils'
 import { getError } from 'return-style'
 import { flattenDeepAsync } from '@src/flatten-deep-async'
-import '@blackglory/jest-matchers'
 
 describe('flattenDeepAsync', () => {
   test('lazy and partial evaluation', async () => {
@@ -26,7 +25,6 @@ describe('flattenDeepAsync', () => {
       const result = flattenDeepAsync(iter, depth)
       const arrResult = await toArrayAsync(result)
 
-      expect(result).toBeAsyncIterable()
       expect(arrResult).toEqual([])
     })
   })
@@ -52,7 +50,6 @@ describe('flattenDeepAsync', () => {
         const result = flattenDeepAsync(iter, depth)
         const arrResult = await toArrayAsync(result)
 
-        expect(result).toBeAsyncIterable()
         expect(result).not.toBe(iter)
         expect(arrResult).toEqual([0, [1]])
       })
@@ -69,7 +66,6 @@ describe('flattenDeepAsync', () => {
         const result = flattenDeepAsync(iter, depth)
         const arrResult = await toArrayAsync(result)
 
-        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([
           'o','n','e', 't','w','o', 'three'
         , 0, 1, 2, [3]

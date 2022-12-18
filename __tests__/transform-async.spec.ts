@@ -1,7 +1,6 @@
 import { consumeAsync, toArrayAsync, MockIterable, MockAsyncIterable, toAsyncIterable } from '@test/utils'
 import { transformAsync } from '@src/transform-async'
 import { getErrorPromise } from 'return-style'
-import '@blackglory/jest-matchers'
 
 describe('transformAsync', () => {
   describe('Iterable', () => {
@@ -16,7 +15,6 @@ describe('transformAsync', () => {
       const result = transformAsync(iter, double)
       const arrResult = await toArrayAsync(result)
 
-      expect(result).toBeAsyncIterable()
       expect(arrResult).toEqual([2, 4, 6])
     })
 
@@ -42,7 +40,6 @@ describe('transformAsync', () => {
         const result = transformAsync(iter, fn)
         const err = await getErrorPromise(toArrayAsync(result))
 
-        expect(result).toBeAsyncIterable()
         expect(err).toBe(customError)
       })
     })
@@ -60,7 +57,6 @@ describe('transformAsync', () => {
       const result = transformAsync(iter as any, double)
       const arrResult = await toArrayAsync(result)
 
-      expect(result).toBeAsyncIterable()
       expect(arrResult).toEqual([2, 4, 6])
     })
 
@@ -86,7 +82,6 @@ describe('transformAsync', () => {
         const result = transformAsync(iter as any, fn)
         const err = await getErrorPromise(toArrayAsync(result))
 
-        expect(result).toBeAsyncIterable()
         expect(err).toBe(customError)
       })
     })

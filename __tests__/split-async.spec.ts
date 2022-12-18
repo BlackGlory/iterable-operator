@@ -1,6 +1,5 @@
 import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils'
 import { splitAsync } from '@src/split-async'
-import '@blackglory/jest-matchers'
 
 describe('splitAsync', () => {
   describe('separator in iterable', () => {
@@ -12,7 +11,6 @@ describe('splitAsync', () => {
         const result = splitAsync(iter, sep)
         const arrResult = await toArrayAsync(result)
 
-        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([[], [2, 3, 4, 5]])
       })
     })
@@ -25,7 +23,6 @@ describe('splitAsync', () => {
         const result = splitAsync(iter, sep)
         const arrResult = await toArrayAsync(result)
 
-        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([[1, 2], [4, 5]])
       })
     })
@@ -38,7 +35,6 @@ describe('splitAsync', () => {
         const result = splitAsync(iter, sep)
         const arrResult = await toArrayAsync(result)
 
-        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([[1, 2, 3, 4], []])
       })
     })
@@ -52,7 +48,6 @@ describe('splitAsync', () => {
       const result = splitAsync(iter, sep)
       const arrResult = await toArrayAsync(result)
 
-      expect(result).toBeAsyncIterable()
       expect(arrResult).toEqual([[1, 2, 3, 4, 5]])
     })
   })

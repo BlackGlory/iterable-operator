@@ -1,6 +1,5 @@
 import { consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils'
 import { toAsyncIterable } from '@src/to-async-iterable'
-import '@blackglory/jest-matchers'
 
 describe('toAsyncIterable', () => {
   describe('returns AsyncIterable', () => {
@@ -10,7 +9,6 @@ describe('toAsyncIterable', () => {
       const result = toAsyncIterable(iter)
       const arrResult = await toArrayAsync(result)
 
-      expect(result).toBeAsyncIterable()
       expect(arrResult).toEqual([1, 2, 3])
     })
 
@@ -20,7 +18,6 @@ describe('toAsyncIterable', () => {
       const result = toAsyncIterable(iter)
       const arrResult = await toArrayAsync(result)
 
-      expect(result).toBeAsyncIterable()
       expect(arrResult).toEqual([1, 2, 3])
     })
   })

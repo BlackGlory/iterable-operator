@@ -1,6 +1,5 @@
 import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils'
 import { joinAsync } from '@src/join-async'
-import '@blackglory/jest-matchers'
 
 describe('joinAsync', () => {
   test('lazy and partial evaluation', async () => {
@@ -22,7 +21,6 @@ describe('joinAsync', () => {
     const result = joinAsync(iter, '+')
     const arrResult = await toArrayAsync(result)
 
-    expect(result).toBeAsyncIterable()
     expect(arrResult).toEqual([1, '+', 2, '+', 3])
   })
 })

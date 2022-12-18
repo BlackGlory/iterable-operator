@@ -3,7 +3,6 @@ import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } f
 import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures'
 import { getErrorPromise } from 'return-style'
 import { flattenByAsync } from '@src/flatten-by-async'
-import '@blackglory/jest-matchers'
 
 describe('flattenByAsync', () => {
   describe.each([
@@ -52,7 +51,6 @@ describe('flattenByAsync', () => {
         const result = flattenByAsync(iter, exceptString)
         const arrResult = await toArrayAsync(result)
 
-        expect(result).toBeAsyncIterable()
         expect(arrResult).toEqual([
           'one', 'two'
         , 0, 1
@@ -67,7 +65,6 @@ describe('flattenByAsync', () => {
           const result = flattenByAsync(iter, alwaysFalse)
           const arrResult = await toArrayAsync(result)
 
-          expect(result).toBeAsyncIterable()
           expect(result).not.toBe(iter)
           expect(arrResult).toEqual([0, [1]])
         })
@@ -81,7 +78,6 @@ describe('flattenByAsync', () => {
           const result = flattenByAsync(iter, fn)
           const arrResult = await toArrayAsync(result)
 
-          expect(result).toBeAsyncIterable()
           expect(arrResult).toEqual([])
         })
       })
@@ -94,7 +90,6 @@ describe('flattenByAsync', () => {
           const result = flattenByAsync(iter, fn)
           const arrResult = await toArrayAsync(result)
 
-          expect(result).toBeAsyncIterable()
           expect(arrResult).toEqual(['1', '2', '3'])
         })
       })
@@ -108,7 +103,6 @@ describe('flattenByAsync', () => {
           const result = flattenByAsync(iter, fn)
           const err = await getErrorPromise(toArrayAsync(result))
 
-          expect(result).toBeAsyncIterable()
           expect(err).toBe(customError)
         })
       })

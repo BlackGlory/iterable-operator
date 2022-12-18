@@ -1,7 +1,6 @@
 import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable } from '@test/utils'
 import { getError } from 'return-style'
 import { takeRightAsync } from '@src/take-right-async'
-import '@blackglory/jest-matchers'
 import { go } from '@blackglory/go'
 import { pass } from '@blackglory/pass'
 
@@ -40,7 +39,6 @@ describe('takeRightAsync', () => {
       const result = takeRightAsync(iter, count)
       const arrResult = await toArrayAsync(result)
 
-      expect(result).toBeAsyncIterable()
       expect(result).not.toBe(iter)
       expect(arrResult).toEqual([1, 2, 3])
     })
@@ -54,7 +52,6 @@ describe('takeRightAsync', () => {
       const result = takeRightAsync(iter, count)
       const arrResult = await toArrayAsync(result)
 
-      expect(result).toBeAsyncIterable()
       expect(arrResult).toEqual([2, 3])
     })
   })
@@ -67,7 +64,6 @@ describe('takeRightAsync', () => {
       const result = takeRightAsync(iter, count)
       const arrResult = await toArrayAsync(result)
 
-      expect(result).toBeAsyncIterable()
       expect(arrResult).toEqual([])
     })
   })

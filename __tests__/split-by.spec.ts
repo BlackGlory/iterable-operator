@@ -1,7 +1,6 @@
 import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils'
 import { splitBy } from '@src/split-by'
 import { getError } from 'return-style'
-import '@blackglory/jest-matchers'
 
 describe('splitBy', () => {
   test('called fn with [element, index]', () => {
@@ -29,7 +28,6 @@ describe('splitBy', () => {
         const result = splitBy(iter, atThree)
         const arrResult = toArray(result)
 
-        expect(result).toBeIterable()
         expect(arrResult).toEqual([[], [2, 3, 4, 5]])
       })
     })
@@ -42,7 +40,6 @@ describe('splitBy', () => {
         const result = splitBy(iter, atThree)
         const arrResult = toArray(result)
 
-        expect(result).toBeIterable()
         expect(arrResult).toEqual([[1, 2], [4, 5]])
       })
     })
@@ -55,7 +52,6 @@ describe('splitBy', () => {
         const result = splitBy(iter, atThree)
         const arrResult = toArray(result)
 
-        expect(result).toBeIterable()
         expect(arrResult).toEqual([[1, 2, 3, 4], []])
       })
     })
@@ -69,7 +65,6 @@ describe('splitBy', () => {
       const result = splitBy(iter, alwaysFalse)
       const arrResult = toArray(result)
 
-      expect(result).toBeIterable()
       expect(arrResult).toEqual([[1, 2, 3, 4, 5]])
     })
   })
@@ -96,7 +91,6 @@ describe('splitBy', () => {
       const result = splitBy(iter, fn)
       const err = getError(() => toArray(result))
 
-      expect(result).toBeIterable()
       expect(err).toBe(customError)
     })
   })

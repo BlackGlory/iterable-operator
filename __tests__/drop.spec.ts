@@ -2,7 +2,6 @@ import { getError } from 'return-style'
 import { consume, toArray, MockIterable, take } from '@test/utils'
 import { drop } from '@src/drop'
 import { go } from '@blackglory/go'
-import '@blackglory/jest-matchers'
 import { pass } from '@blackglory/pass'
 
 describe('drop', () => {
@@ -43,7 +42,6 @@ describe('drop', () => {
         const result = drop(iter, count)
         const arrResult = toArray(result)
 
-        expect(result).toBeIterable()
         expect(arrResult).toEqual([])
       })
     })
@@ -56,7 +54,6 @@ describe('drop', () => {
         const result = drop(iter, count)
         const arrResult = toArray(result)
 
-        expect(result).toBeIterable()
         expect(arrResult).toEqual([])
       })
     })
@@ -69,7 +66,6 @@ describe('drop', () => {
         const result = drop(iter, count)
         const arrResult = toArray(result)
 
-        expect(result).toBeIterable()
         expect(arrResult).toEqual([3])
       })
     })
@@ -83,7 +79,6 @@ describe('drop', () => {
       const result = drop(iter, count)
       const arrResult = toArray(result)
 
-      expect(result).toBeIterable()
       expect(result).not.toBe(iter)
       expect(arrResult).toEqual([1, 2, 3])
     })
