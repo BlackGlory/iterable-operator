@@ -39,6 +39,9 @@
   "repository": "git@github.com:BlackGlory/iterable-operator.git",
   "author": "BlackGlory <woshenmedoubuzhidao@blackglory.me>",
   "license": "MIT",
+  "engines": {
+    "node": ">=16"
+  },
   "scripts": {
     "lint": "eslint --ext .js,.jsx,.ts,.tsx --quiet src __tests__",
     "test": "jest --runInBand --config jest.config.js",
@@ -83,7 +86,10 @@
   "dependencies": {
     "@blackglory/errors": "^2.4.1",
     "@blackglory/go": "^1.1.2",
+    "@blackglory/structures": "^0.11.6",
     "@blackglory/types": "^1.4.0",
+    "extra-abort": "^0.2.0",
+    "extra-promise": "^4.4.0",
     "extra-utils": "^4.0.0",
     "justypes": "^4.0.0"
   }

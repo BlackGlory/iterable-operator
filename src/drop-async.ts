@@ -16,7 +16,7 @@ export function dropAsync<T>(
 
     try {
       let value: T
-      while ({ value, done} = await iterator.next(), !done) {
+      while ({ value, done } = await iterator.next(), !done) {
         if (count <= 0) break
         count--
       }
