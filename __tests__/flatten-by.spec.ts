@@ -1,4 +1,4 @@
-import { isString } from '@blackglory/types'
+import { isString } from 'extra-utils'
 import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils'
 import { flattenBy } from '@src/flatten-by'
 import { getError } from 'return-style'

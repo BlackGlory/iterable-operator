@@ -1,4 +1,4 @@
-import { isAsyncIterable } from '@blackglory/types'
+import { isAsyncIterable } from '@src/is-async-iterable'
 import { Awaitable } from 'justypes'
 
 export function tapAsync<T>(

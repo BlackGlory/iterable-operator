@@ -1,4 +1,5 @@
-import { isIterable, isntChar } from '@blackglory/types'
+import { isntChar } from 'extra-utils'
+import { isIterable } from '@src/is-iterable'
 
 export function flattenBy<T>(
   iterable: Iterable<unknown>

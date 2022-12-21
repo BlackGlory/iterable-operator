@@ -1,4 +1,6 @@
-import { isAsyncIterable, isIterable, isntChar } from '@blackglory/types'
+import { isntChar } from 'extra-utils'
+import { isAsyncIterable } from '@src/is-async-iterable'
+import { isIterable } from '@src/is-iterable'
 import { Awaitable } from 'justypes'
 
 export function flattenByAsync<T>(

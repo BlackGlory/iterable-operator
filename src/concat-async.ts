@@ -1,4 +1,4 @@
-import { isAsyncIterable } from '@blackglory/types'
+import { isAsyncIterable } from '@src/is-async-iterable'
 import { go } from '@blackglory/go'
 import { Awaitable } from 'justypes'
 

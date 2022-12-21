@@ -1,4 +1,4 @@
-import { isUndefined } from '@blackglory/types'
+import { isUndefined } from 'extra-utils'
 
 export function reduce<T>(
   iterable: Iterable<T>

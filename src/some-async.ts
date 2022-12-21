@@ -1,4 +1,4 @@
-import { isAsyncIterable } from '@blackglory/types'
+import { isAsyncIterable } from '@src/is-async-iterable'
 
 export function someAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>

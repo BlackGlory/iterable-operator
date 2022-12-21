@@ -1,4 +1,4 @@
-import { isString } from '@blackglory/types'
+import { isString } from 'extra-utils'
 import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils'
 import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures'
 import { getErrorPromise } from 'return-style'

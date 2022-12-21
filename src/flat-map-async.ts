@@ -1,4 +1,4 @@
-import { isAsyncIterable } from '@blackglory/types'
+import { isAsyncIterable } from '@src/is-async-iterable'
 
 export function flatMapAsync<T, U>(
   iterable: Iterable<T> | AsyncIterable<T>

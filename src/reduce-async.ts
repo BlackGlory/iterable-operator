@@ -1,4 +1,5 @@
-import { isAsyncIterable, isUndefined } from '@blackglory/types'
+import { isUndefined } from 'extra-utils'
+import { isAsyncIterable } from '@src/is-async-iterable'
 import { Awaitable } from 'justypes'
 
 export function reduceAsync<T>(

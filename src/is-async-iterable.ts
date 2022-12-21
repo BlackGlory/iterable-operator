@@ -1,4 +1,4 @@
-import { isntNull, isntUndefined, isFunction } from '@blackglory/types'
+import { isntNull, isntUndefined, isFunction } from 'extra-utils'
 
 export function isAsyncIterable<T>(val: unknown): val is AsyncIterable<T> {
   return isntNull(val)
