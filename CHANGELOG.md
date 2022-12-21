@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/BlackGlory/iterable-operator/compare/v2.5.0...v3.0.0) (2022-12-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* The minimal version of Node.js is 16.
+
+### Features
+
+* add `prefetch`, `prefetchAsync` ([385aa71](https://github.com/BlackGlory/iterable-operator/commit/385aa719dcad55f3a92408eca5af03e553c34bc5))
+
 ## [2.5.0](https://github.com/BlackGlory/iterable-operator/compare/v2.4.0...v2.5.0) (2022-11-15)
 
 
