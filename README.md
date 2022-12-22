@@ -677,7 +677,7 @@ function some<T>(
 ): boolean
 function someAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
-, predicate: (element: T, index: number) => Promise<unknown>
+, predicate: (element: T, index: number) => Awaitable<unknown>
 ): Promise<boolean>
 ```
 
@@ -735,5 +735,8 @@ groupBy([1, 2, 3], x => x % 2) // { 1: [1, 3], 0: [2] }
 ### prefetch, prefetchAsync
 ```ts
 function prefetch<T>(iterable: Iterable<T>, size: number): AsyncIterableIterator<T>
-function prefetchAsync<T>(iterable: AsyncIterable<T>, size: number): AsyncIterableIterator<T>
+function prefetchAsync<T>(
+  iterable: AsyncIterable<T>
+, size: number
+): AsyncIterableIterator<T>
 ```

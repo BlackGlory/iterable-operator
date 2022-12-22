@@ -1,8 +1,9 @@
 import { isAsyncIterable } from '@src/is-async-iterable'
+import { Awaitable } from 'justypes'
 
 export function someAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
-, predicate: (element: T, index: number) => Promise<unknown>
+, predicate: (element: T, index: number) => Awaitable<unknown>
 ): Promise<boolean> {
   if (isAsyncIterable(iterable)) {
     return someAsyncIterable(iterable, predicate)
@@ -13,7 +14,7 @@ export function someAsync<T>(
 
 async function someIterable<T>(
   iterable: Iterable<T>
-, predicate: (element: T, index: number) => Promise<unknown>
+, predicate: (element: T, index: number) => Awaitable<unknown>
 ): Promise<boolean> {
   let index = 0
 
@@ -27,7 +28,7 @@ async function someIterable<T>(
 
 async function someAsyncIterable<T>(
   iterable: AsyncIterable<T>
-, predicate: (element: T, index: number) => Promise<unknown>
+, predicate: (element: T, index: number) => Awaitable<unknown>
 ): Promise<boolean> {
   let index = 0
 
