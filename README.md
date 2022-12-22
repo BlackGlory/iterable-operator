@@ -740,3 +740,21 @@ function prefetchAsync<T>(
 , size: number
 ): AsyncIterableIterator<T>
 ```
+
+### top, topAsync
+```ts
+function top<T>(
+  iterable: Iterable<T>
+, num: number
+, compare: (a: T, b: T) => number
+): T[]
+function topAsync<T>(
+  iterable: AsyncIterable<T>
+, num: number
+, compare: (a: T, b: T) => number
+): Promise<T[]>
+```
+
+```ts
+top([1, 2, 3], 2, (a, b) => b - a) // [3, 2]
+```
