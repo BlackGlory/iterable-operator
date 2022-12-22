@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.0](https://github.com/BlackGlory/iterable-operator/compare/v3.0.0...v3.1.0) (2022-12-22)
+
+
+### Features
+
+* add `top`, `topAsync` ([c70cc66](https://github.com/BlackGlory/iterable-operator/commit/c70cc6600aa11d3f4809974ba65a2f07874a8ea0))
+
 ## [3.0.0](https://github.com/BlackGlory/iterable-operator/compare/v2.5.0...v3.0.0) (2022-12-21)
 
 
