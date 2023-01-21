@@ -1,5 +1,5 @@
-import { last } from '@src/last'
-import { MockIterable } from '@test/utils'
+import { last } from '@src/last.js'
+import { MockIterable } from '@test/utils.js'
 import { go } from '@blackglory/go'
 import { pass } from '@blackglory/pass'
 

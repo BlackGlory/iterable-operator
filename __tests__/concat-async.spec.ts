@@ -1,6 +1,6 @@
-import { consumeAsync, toArrayAsync, toIterable, toAsyncIterable, MockIterable, takeAsync } from '@test/utils'
-import { testIterable, testIterablePromises, testAsyncIterable } from '@test/test-fixtures'
-import { concatAsync } from '@src/concat-async'
+import { consumeAsync, toArrayAsync, toIterable, toAsyncIterable, MockIterable, takeAsync } from '@test/utils.js'
+import { testIterable, testIterablePromises, testAsyncIterable } from '@test/test-fixtures.js'
+import { concatAsync } from '@src/concat-async.js'
 
 describe('concatAsync', () => {
   describe.each([

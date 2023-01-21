@@ -1,5 +1,5 @@
-import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils'
-import { splitAsync } from '@src/split-async'
+import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils.js'
+import { splitAsync } from '@src/split-async.js'
 
 describe('splitAsync', () => {
   describe('separator in iterable', () => {

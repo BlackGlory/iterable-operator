@@ -1,6 +1,6 @@
 import { getError } from 'return-style'
-import { groupBy } from '@src/group-by'
-import { toArray } from '@test/utils'
+import { groupBy } from '@src/group-by.js'
+import { toArray } from '@test/utils.js'
 
 describe('groupBy', () => {
   it('called fn with [element, index]', () => {

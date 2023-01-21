@@ -1,5 +1,5 @@
-import { consume, toArray, MockIterable } from '@test/utils'
-import { zip } from '@src/zip'
+import { consume, toArray, MockIterable } from '@test/utils.js'
+import { zip } from '@src/zip.js'
 import { go } from '@blackglory/go'
 import { pass } from '@blackglory/pass'
 

@@ -1,6 +1,6 @@
 import { getError } from 'return-style'
-import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable } from '@test/utils'
-import { dropRightAsync } from '@src/drop-right-async'
+import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable } from '@test/utils.js'
+import { dropRightAsync } from '@src/drop-right-async.js'
 
 describe('dropRightAsync', () => {
   test('lazy evaluation', async () => {

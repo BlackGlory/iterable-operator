@@ -1,4 +1,4 @@
-import { count } from '@src/count'
+import { count } from '@src/count.js'
 
 test('count', () => {
   const iter = [1, 2, 3]

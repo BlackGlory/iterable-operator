@@ -1,7 +1,7 @@
-import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils'
-import { testIterable, testAsyncIterable, testAsyncFunction, testFunction } from '@test/test-fixtures'
+import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils.js'
+import { testIterable, testAsyncIterable, testAsyncFunction, testFunction } from '@test/test-fixtures.js'
 import { getErrorPromise } from 'return-style'
-import { splitByAsync } from '@src/split-by-async'
+import { splitByAsync } from '@src/split-by-async.js'
 
 describe('splitByAsync', () => {
   describe.each([

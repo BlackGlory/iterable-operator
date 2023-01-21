@@ -1,6 +1,6 @@
 import { getError } from 'return-style'
-import { reduce } from '@src/reduce'
-import { MockIterable } from '@test/utils'
+import { reduce } from '@src/reduce.js'
+import { MockIterable } from '@test/utils.js'
 import { pass } from '@blackglory/pass'
 
 describe('reduce', () => {

@@ -1,7 +1,7 @@
 import { getErrorPromise } from 'return-style'
-import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures'
-import { toArrayAsync, consumeAsync, getCalledTimes, MockIterable, takeAsync } from '@test/utils'
-import { filterAsync } from '@src/filter-async'
+import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures.js'
+import { toArrayAsync, consumeAsync, getCalledTimes, MockIterable, takeAsync } from '@test/utils.js'
+import { filterAsync } from '@src/filter-async.js'
 
 describe('filterAsync', () => {
   describe.each([

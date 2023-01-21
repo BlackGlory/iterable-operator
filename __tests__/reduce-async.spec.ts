@@ -1,8 +1,8 @@
 import { getErrorPromise } from 'return-style'
 import { testIterable, testAsyncIterable, testFunction, testAsyncFunction }
-  from '@test/test-fixtures'
-import { reduceAsync } from '@src/reduce-async'
-import { getCalledTimes, MockIterable, MockAsyncIterable } from '@test/utils'
+  from '@test/test-fixtures.js'
+import { reduceAsync } from '@src/reduce-async.js'
+import { getCalledTimes, MockIterable, MockAsyncIterable } from '@test/utils.js'
 import { pass } from '@blackglory/pass'
 
 describe('reduceAsync', () => {

@@ -1,6 +1,6 @@
-import { consume, toArray, MockIterable } from '@test/utils'
+import { consume, toArray, MockIterable } from '@test/utils.js'
 import { getError } from 'return-style'
-import { takeRight } from '@src/take-right'
+import { takeRight } from '@src/take-right.js'
 import { go } from '@blackglory/go'
 import { pass } from '@blackglory/pass'
 

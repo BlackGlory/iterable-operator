@@ -1,4 +1,4 @@
-import { top } from '@src/top'
+import { top } from '@src/top.js'
 import { compareNumbersAscending, compareNumbersDescending } from 'extra-sort'
 
 describe('top', () => {

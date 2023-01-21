@@ -1,5 +1,5 @@
-import { consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils'
-import { toAsyncIterable } from '@src/to-async-iterable'
+import { consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils.js'
+import { toAsyncIterable } from '@src/to-async-iterable.js'
 
 describe('toAsyncIterable', () => {
   describe('returns AsyncIterable', () => {

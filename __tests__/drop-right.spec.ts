@@ -1,6 +1,6 @@
 import { getError } from 'return-style'
-import { consume, toArray, MockIterable } from '@test/utils'
-import { dropRight } from '@src/drop-right'
+import { consume, toArray, MockIterable } from '@test/utils.js'
+import { dropRight } from '@src/drop-right.js'
 
 describe('dropRight', () => {
   test('lazy evaluation', () => {

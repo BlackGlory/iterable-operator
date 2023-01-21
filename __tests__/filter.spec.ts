@@ -1,6 +1,6 @@
 import { getError } from 'return-style'
-import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils'
-import { filter } from '@src/filter'
+import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils.js'
+import { filter } from '@src/filter.js'
 
 describe('filter', () => {
   test('called fn with [element, index]', () => {

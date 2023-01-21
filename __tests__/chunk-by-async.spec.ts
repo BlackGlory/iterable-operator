@@ -1,6 +1,6 @@
-import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures'
-import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils'
-import { chunkByAsync } from '@src/chunk-by-async'
+import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures.js'
+import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils.js'
+import { chunkByAsync } from '@src/chunk-by-async.js'
 import { getErrorPromise } from 'return-style'
 
 describe('chunkByAsync(', () => {

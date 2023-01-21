@@ -1,5 +1,5 @@
-import { consume, toArray, MockIterable } from '@test/utils'
-import { transform } from '@src/transform'
+import { consume, toArray, MockIterable } from '@test/utils.js'
+import { transform } from '@src/transform.js'
 import { getError } from 'return-style'
 
 describe('transform', () => {

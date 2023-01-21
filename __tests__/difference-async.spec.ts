@@ -1,6 +1,6 @@
-import { consumeAsync, toArrayAsync, MockIterable, toIterable, toAsyncIterable, takeAsync } from '@test/utils'
-import { testIterable, testAsyncIterable, testIterablePromises } from '@test/test-fixtures'
-import { differenceAsync } from '@src/difference-async'
+import { consumeAsync, toArrayAsync, MockIterable, toIterable, toAsyncIterable, takeAsync } from '@test/utils.js'
+import { testIterable, testAsyncIterable, testIterablePromises } from '@test/test-fixtures.js'
+import { differenceAsync } from '@src/difference-async.js'
 
 describe('differenceAsync', () => {
   describe.each([

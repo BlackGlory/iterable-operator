@@ -1,5 +1,5 @@
-import { toArray } from '@test/utils'
-import { toSet } from '@src/to-set'
+import { toArray } from '@test/utils.js'
+import { toSet } from '@src/to-set.js'
 
 describe('toSet', () => {
   it('returns a set', () => {

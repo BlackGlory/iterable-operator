@@ -1,5 +1,5 @@
-import { consume, toArray, MockIterable, take } from '@test/utils'
-import { intersection } from '@src/intersection'
+import { consume, toArray, MockIterable, take } from '@test/utils.js'
+import { intersection } from '@src/intersection.js'
 
 describe('intersection', () => {
   test('lazy and partial evaluation', () => {

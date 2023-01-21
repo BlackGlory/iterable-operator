@@ -1,5 +1,5 @@
-import { toAsyncIterable, toArray } from '@test/utils'
-import { toSetAsync } from '@src/to-set-async'
+import { toAsyncIterable, toArray } from '@test/utils.js'
+import { toSetAsync } from '@src/to-set-async.js'
 
 describe('toSetAsync', () => {
   it('returns a set', async () => {

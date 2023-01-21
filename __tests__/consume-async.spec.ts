@@ -1,5 +1,5 @@
-import { toAsyncIterable } from '@test/utils'
-import { consumeAsync } from '@src/consume-async'
+import { toAsyncIterable } from '@test/utils.js'
+import { consumeAsync } from '@src/consume-async.js'
 import { getErrorAsync } from 'return-style'
 
 describe('consumeAsync', () => {

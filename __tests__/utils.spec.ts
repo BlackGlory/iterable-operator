@@ -1,4 +1,4 @@
-import { findInsertionIndex, getIntermediateIndex } from '@src/utils'
+import { findInsertionIndex, getIntermediateIndex } from '@src/utils.js'
 import { compareNumbersAscending, compareNumbersDescending } from 'extra-sort'
 
 describe('findInsertionIndex', () => {

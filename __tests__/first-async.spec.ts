@@ -1,5 +1,5 @@
-import { toAsyncIterable } from '@test/utils'
-import { firstAsync } from '@src/first-async'
+import { toAsyncIterable } from '@test/utils.js'
+import { firstAsync } from '@src/first-async.js'
 
 describe('firstAsync', () => {
   describe('iterable is empty', () => {

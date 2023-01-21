@@ -1,6 +1,6 @@
-import { consumeAsync, toArrayAsync, MockIterable, toIterable, toAsyncIterable, takeAsync } from '@test/utils'
-import { testIterable, testAsyncIterable, testIterablePromises } from '@test/test-fixtures'
-import { intersectionAsync } from '@src/intersection-async'
+import { consumeAsync, toArrayAsync, MockIterable, toIterable, toAsyncIterable, takeAsync } from '@test/utils.js'
+import { testIterable, testAsyncIterable, testIterablePromises } from '@test/test-fixtures.js'
+import { intersectionAsync } from '@src/intersection-async.js'
 
 describe('intersectionAsync', () => {
   describe.each([

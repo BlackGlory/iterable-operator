@@ -1,4 +1,4 @@
-import { testIterable, testAsyncIterable, testIterablePromises } from '@test/test-fixtures'
+import { testIterable, testAsyncIterable, testIterablePromises } from '@test/test-fixtures.js'
 import {
   consumeAsync
 , toArrayAsync
@@ -6,8 +6,8 @@ import {
 , toAsyncIterable
 , MockIterable
 , MockAsyncIterable
-} from '@test/utils'
-import { zipAsync } from '@src/zip-async'
+} from '@test/utils.js'
+import { zipAsync } from '@src/zip-async.js'
 import { go } from '@blackglory/go'
 import { pass } from '@blackglory/pass'
 

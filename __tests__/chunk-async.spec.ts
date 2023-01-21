@@ -1,7 +1,7 @@
 import { getError } from 'return-style'
 import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync }
-  from '@test/utils'
-import { chunkAsync } from '@src/chunk-async'
+  from '@test/utils.js'
+import { chunkAsync } from '@src/chunk-async.js'
 
 describe('chunkAsync', () => {
   test('lazy and evaluation', async () => {

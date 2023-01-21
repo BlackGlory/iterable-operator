@@ -1,7 +1,7 @@
 import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync }
-  from '@test/utils'
+  from '@test/utils.js'
 import { getError } from 'return-style'
-import { dropAsync } from '@src/drop-async'
+import { dropAsync } from '@src/drop-async.js'
 import { go } from '@blackglory/go'
 import { pass } from '@blackglory/pass'
 

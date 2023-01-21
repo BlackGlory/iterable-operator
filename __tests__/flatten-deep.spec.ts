@@ -1,6 +1,6 @@
 import { getError } from 'return-style'
-import { consume, toArray, MockIterable, take } from '@test/utils'
-import { flattenDeep } from '@src/flatten-deep'
+import { consume, toArray, MockIterable, take } from '@test/utils.js'
+import { flattenDeep } from '@src/flatten-deep.js'
 
 describe('flattenDeep', () => {
   test('lazy and partial evaluation', () => {

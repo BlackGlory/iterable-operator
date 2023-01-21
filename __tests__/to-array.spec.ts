@@ -1,4 +1,4 @@
-import { toArray } from '@src/to-array'
+import { toArray } from '@src/to-array.js'
 
 describe('toArray', () => {
   it('returns an array', () => {

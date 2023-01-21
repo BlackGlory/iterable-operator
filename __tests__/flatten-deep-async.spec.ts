@@ -1,7 +1,7 @@
 import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync }
-  from '@test/utils'
+  from '@test/utils.js'
 import { getError } from 'return-style'
-import { flattenDeepAsync } from '@src/flatten-deep-async'
+import { flattenDeepAsync } from '@src/flatten-deep-async.js'
 
 describe('flattenDeepAsync', () => {
   test('lazy and partial evaluation', async () => {

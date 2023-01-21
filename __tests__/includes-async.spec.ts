@@ -1,5 +1,5 @@
-import { toAsyncIterable } from '@test/utils'
-import { includesAsync } from '@src/includes-async'
+import { toAsyncIterable } from '@test/utils.js'
+import { includesAsync } from '@src/includes-async.js'
 
 describe('includesAsync', () => {
   describe('value is included in the iterable', () => {

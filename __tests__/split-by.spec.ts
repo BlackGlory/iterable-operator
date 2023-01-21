@@ -1,5 +1,5 @@
-import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils'
-import { splitBy } from '@src/split-by'
+import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils.js'
+import { splitBy } from '@src/split-by.js'
 import { getError } from 'return-style'
 
 describe('splitBy', () => {

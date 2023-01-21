@@ -1,6 +1,6 @@
 import { getError } from 'return-style'
-import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils'
-import { uniqBy } from '@src/uniq-by'
+import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils.js'
+import { uniqBy } from '@src/uniq-by.js'
 
 describe('uniqBy<T, U>(', () => {
   test('called fn with [element, index]', () => {

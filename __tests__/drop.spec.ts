@@ -1,6 +1,6 @@
 import { getError } from 'return-style'
-import { consume, toArray, MockIterable, take } from '@test/utils'
-import { drop } from '@src/drop'
+import { consume, toArray, MockIterable, take } from '@test/utils.js'
+import { drop } from '@src/drop.js'
 import { go } from '@blackglory/go'
 import { pass } from '@blackglory/pass'
 

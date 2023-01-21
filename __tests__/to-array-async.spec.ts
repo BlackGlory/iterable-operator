@@ -1,5 +1,5 @@
-import { toAsyncIterable } from '@test/utils'
-import { toArrayAsync } from '@src/to-array-async'
+import { toAsyncIterable } from '@test/utils.js'
+import { toArrayAsync } from '@src/to-array-async.js'
 
 describe('toArrayAsync', () => {
   it('returns an array', async () => {

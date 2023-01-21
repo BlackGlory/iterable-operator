@@ -1,5 +1,5 @@
-import { consume, toArray, MockIterable, take } from '@test/utils'
-import { split } from '@src/split'
+import { consume, toArray, MockIterable, take } from '@test/utils.js'
+import { split } from '@src/split.js'
 
 describe('split', () => {
   describe('separator in iterable', () => {

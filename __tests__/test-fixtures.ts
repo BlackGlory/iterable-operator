@@ -4,7 +4,7 @@ import {
 , toAsyncIterable
 , toFunction
 , toAsyncFunction
-} from './utils'
+} from './utils.js'
 
 type AnyFunction = (...args: any[]) => any
 

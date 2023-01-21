@@ -1,5 +1,5 @@
-import { consume, toArray, MockIterable, take } from '@test/utils'
-import { uniq } from '@src/uniq'
+import { consume, toArray, MockIterable, take } from '@test/utils.js'
+import { uniq } from '@src/uniq.js'
 
 describe('uniq', () => {
   it('returns the unique iterable', () => {

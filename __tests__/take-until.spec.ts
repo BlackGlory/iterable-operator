@@ -1,5 +1,5 @@
-import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils'
-import { takeUntil } from '@src/take-until'
+import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils.js'
+import { takeUntil } from '@src/take-until.js'
 import { getError } from 'return-style'
 
 describe('takeUntil', () => {

@@ -1,6 +1,6 @@
 import { getError } from 'return-style'
-import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils'
-import { tap } from '@src/tap'
+import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils.js'
+import { tap } from '@src/tap.js'
 
 describe('tap', () => {
   test('called fn with [element, index]', () => {

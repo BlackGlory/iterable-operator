@@ -1,4 +1,4 @@
-import { first } from '@src/first'
+import { first } from '@src/first.js'
 
 describe('first', () => {
   describe('iterable is empty', () => {

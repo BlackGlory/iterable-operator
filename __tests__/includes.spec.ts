@@ -1,4 +1,4 @@
-import { includes } from '@src/includes'
+import { includes } from '@src/includes.js'
 
 describe('includes', () => {
   describe('value is included in the iterable', () => {

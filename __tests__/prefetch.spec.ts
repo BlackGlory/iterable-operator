@@ -1,6 +1,6 @@
-import { prefetch } from '@src/prefetch'
-import { MockIterable } from '@test/utils'
-import { toArrayAsync } from '@src/to-array-async'
+import { prefetch } from '@src/prefetch.js'
+import { MockIterable } from '@test/utils.js'
+import { toArrayAsync } from '@src/to-array-async.js'
 import { delay } from 'extra-promise'
 
 describe('prefetch', () => {

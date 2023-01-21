@@ -1,6 +1,6 @@
 import { getErrorPromise } from 'return-style'
-import { testFunction, testAsyncFunction, testIterable, testAsyncIterable } from '@test/test-fixtures'
-import { eachAsync } from '@src/each-async'
+import { testFunction, testAsyncFunction, testIterable, testAsyncIterable } from '@test/test-fixtures.js'
+import { eachAsync } from '@src/each-async.js'
 
 describe('eachAsync', () => {
   describe.each([

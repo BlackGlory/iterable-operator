@@ -1,7 +1,7 @@
 import { getErrorPromise } from 'return-style'
-import { testFunction, testAsyncFunction, testIterable, testAsyncIterable } from '@test/test-fixtures'
-import { toArray } from '@test/utils'
-import { groupByAsync } from '@src/group-by-async'
+import { testFunction, testAsyncFunction, testIterable, testAsyncIterable } from '@test/test-fixtures.js'
+import { toArray } from '@test/utils.js'
+import { groupByAsync } from '@src/group-by-async.js'
 
 describe('groupByAsync', () => {
   describe.each([

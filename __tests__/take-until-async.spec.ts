@@ -1,7 +1,7 @@
-import { testIterable, testAsyncIterable, testAsyncFunction, testFunction } from '@test/test-fixtures'
-import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils'
+import { testIterable, testAsyncIterable, testAsyncFunction, testFunction } from '@test/test-fixtures.js'
+import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils.js'
 import { getErrorPromise } from 'return-style'
-import { takeUntilAsync } from '@src/take-until-async'
+import { takeUntilAsync } from '@src/take-until-async.js'
 
 describe('takeUntilAsync', () => {
   describe.each([

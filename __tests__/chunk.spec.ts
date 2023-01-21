@@ -1,6 +1,6 @@
 import { getError } from 'return-style'
-import { consume, toArray, MockIterable, take } from '@test/utils'
-import { chunk } from '@src/chunk'
+import { consume, toArray, MockIterable, take } from '@test/utils.js'
+import { chunk } from '@src/chunk.js'
 
 describe('chunk', () => {
   test('lazy and partial evaluation', () => {

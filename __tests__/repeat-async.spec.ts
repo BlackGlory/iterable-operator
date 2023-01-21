@@ -1,7 +1,7 @@
 import { getError } from 'return-style'
 import { consumeAsync, toArrayAsync, toAsyncIterable, MockAsyncIterable, takeAsync }
-  from '@test/utils'
-import { repeatAsync } from '@src/repeat-async'
+  from '@test/utils.js'
+import { repeatAsync } from '@src/repeat-async.js'
 
 describe('repeatAsync', () => {
   test('lazy and partial evaluation', async () => {

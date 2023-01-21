@@ -1,4 +1,4 @@
-import * as Index from '@src/index'
+import * as Index from '@src/index.js'
 
 test('Index', () => {
   const expectedExports: string[] = [

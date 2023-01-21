@@ -1,5 +1,5 @@
 import { getError } from 'return-style'
-import { some } from '@src/some'
+import { some } from '@src/some.js'
 
 describe('some', () => {
   it('called fn with [element, index]', () => {

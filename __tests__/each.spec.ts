@@ -1,5 +1,5 @@
 import { getError } from 'return-style'
-import { each } from '@src/each'
+import { each } from '@src/each.js'
 
 describe('each', () => {
   test('called fn with [element, index]', () => {

@@ -1,6 +1,6 @@
 import { isString } from 'extra-utils'
-import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils'
-import { flattenBy } from '@src/flatten-by'
+import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils.js'
+import { flattenBy } from '@src/flatten-by.js'
 import { getError } from 'return-style'
 
 describe('flattenBy', () => {

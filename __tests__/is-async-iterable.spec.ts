@@ -1,5 +1,5 @@
-import { isAsyncIterable, isntAsyncIterable } from '@src/is-async-iterable'
-import { toIterable, toAsyncIterable } from '@test/utils'
+import { isAsyncIterable, isntAsyncIterable } from '@src/is-async-iterable.js'
+import { toIterable, toAsyncIterable } from '@test/utils.js'
 
 describe('isAsyncIterable', () => {
   test('is AsyncIterable', () => {

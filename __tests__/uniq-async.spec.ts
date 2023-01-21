@@ -1,5 +1,5 @@
-import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils'
-import { uniqAsync } from '@src/uniq-async'
+import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils.js'
+import { uniqAsync } from '@src/uniq-async.js'
 
 describe('uniqAsync', () => {
   it('returns the uniqed iterable', async () => {

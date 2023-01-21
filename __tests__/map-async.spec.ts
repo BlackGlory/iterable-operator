@@ -1,7 +1,7 @@
 import { getErrorPromise } from 'return-style'
-import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures'
-import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils'
-import { mapAsync } from '@src/map-async'
+import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures.js'
+import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils.js'
+import { mapAsync } from '@src/map-async.js'
 
 describe('mapAsync', () => {
   describe.each([

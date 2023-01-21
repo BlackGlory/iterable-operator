@@ -1,5 +1,5 @@
 import { getError } from 'return-style'
-import { find } from '@src/find'
+import { find } from '@src/find.js'
 
 describe('find', () => {
   it('called fn with [element, index]', () => {

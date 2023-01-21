@@ -1,5 +1,5 @@
 import { getError } from 'return-style'
-import { every } from '@src/every'
+import { every } from '@src/every.js'
 
 describe('every', () => {
   describe('fn returns false on first element', () => {

@@ -1,5 +1,5 @@
-import { consume, toArray, MockIterable, take } from '@test/utils'
-import { concat } from '@src/concat'
+import { consume, toArray, MockIterable, take } from '@test/utils.js'
+import { concat } from '@src/concat.js'
 
 describe('concat', () => {
   it('lazy and partial evaluation', () => {

@@ -1,4 +1,4 @@
-import { consume } from '@src/consume'
+import { consume } from '@src/consume.js'
 import { getError } from 'return-style'
 
 describe('consume', () => {

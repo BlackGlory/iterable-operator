@@ -1,6 +1,6 @@
 import { getError } from 'return-style'
-import { findAllIndexes } from '@src/find-all-indexes'
-import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils'
+import { findAllIndexes } from '@src/find-all-indexes.js'
+import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils.js'
 
 describe('findAllIndexes', () => {
   test('called fn with [element, index]', () => {

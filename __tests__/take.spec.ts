@@ -1,6 +1,6 @@
-import { consume, toArray, MockIterable, take as testTake } from '@test/utils'
+import { consume, toArray, MockIterable, take as testTake } from '@test/utils.js'
 import { getError } from 'return-style'
-import { take } from '@src/take'
+import { take } from '@src/take.js'
 
 describe('take', () => {
   test('lazy and partial evaluation', () => {

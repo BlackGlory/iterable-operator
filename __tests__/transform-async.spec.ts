@@ -1,5 +1,5 @@
-import { consumeAsync, toArrayAsync, MockIterable, MockAsyncIterable, toAsyncIterable } from '@test/utils'
-import { transformAsync } from '@src/transform-async'
+import { consumeAsync, toArrayAsync, MockIterable, MockAsyncIterable, toAsyncIterable } from '@test/utils.js'
+import { transformAsync } from '@src/transform-async.js'
 import { getErrorPromise } from 'return-style'
 
 describe('transformAsync', () => {

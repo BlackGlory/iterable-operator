@@ -1,7 +1,7 @@
 import { getError } from 'return-style'
 import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync }
-  from '@test/utils'
-import { sliceAsync } from '@src/slice-async'
+  from '@test/utils.js'
+import { sliceAsync } from '@src/slice-async.js'
 
 describe('sliceAsync', () => {
   test('lazy and partial evaluation', async () => {

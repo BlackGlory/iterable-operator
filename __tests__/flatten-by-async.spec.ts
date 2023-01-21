@@ -1,8 +1,8 @@
 import { isString } from 'extra-utils'
-import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils'
-import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures'
+import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils.js'
+import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures.js'
 import { getErrorPromise } from 'return-style'
-import { flattenByAsync } from '@src/flatten-by-async'
+import { flattenByAsync } from '@src/flatten-by-async.js'
 
 describe('flattenByAsync', () => {
   describe.each([

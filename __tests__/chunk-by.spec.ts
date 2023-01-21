@@ -1,5 +1,5 @@
-import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils'
-import { chunkBy } from '@src/chunk-by'
+import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils.js'
+import { chunkBy } from '@src/chunk-by.js'
 import { getError } from 'return-style'
 
 describe('chunkBy', () => {

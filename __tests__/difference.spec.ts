@@ -1,5 +1,5 @@
-import { consume, toArray, MockIterable, take } from '@test/utils'
-import { difference } from '@src/difference'
+import { consume, toArray, MockIterable, take } from '@test/utils.js'
+import { difference } from '@src/difference.js'
 
 describe('difference', () => {
   test('lazy and partial evaluation', () => {

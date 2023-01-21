@@ -1,7 +1,7 @@
-import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures'
-import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils'
+import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures.js'
+import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils.js'
 import { getErrorPromise } from 'return-style'
-import { uniqByAsync } from '@src/uniq-by-async'
+import { uniqByAsync } from '@src/uniq-by-async.js'
 
 describe('uniqByAsync', () => {
   describe.each([

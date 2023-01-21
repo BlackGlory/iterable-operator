@@ -1,5 +1,5 @@
-import { consume, toArray, MockIterable, take } from '@test/utils'
-import { join } from '@src/join'
+import { consume, toArray, MockIterable, take } from '@test/utils.js'
+import { join } from '@src/join.js'
 
 describe('join', () => {
   test('lazy and partial evaluation', () => {

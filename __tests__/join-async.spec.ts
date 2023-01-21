@@ -1,5 +1,5 @@
-import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils'
-import { joinAsync } from '@src/join-async'
+import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils.js'
+import { joinAsync } from '@src/join-async.js'
 
 describe('joinAsync', () => {
   test('lazy and partial evaluation', async () => {

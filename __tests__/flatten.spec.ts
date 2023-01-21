@@ -1,5 +1,5 @@
-import { consume, toArray, MockIterable, take } from '@test/utils'
-import { flatten } from '@src/flatten'
+import { consume, toArray, MockIterable, take } from '@test/utils.js'
+import { flatten } from '@src/flatten.js'
 
 describe('flatten', () => {
   test('lazy and partial evaluation', () => {

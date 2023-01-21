@@ -1,5 +1,5 @@
-import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils'
-import { dropUntil } from '@src/drop-until'
+import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils.js'
+import { dropUntil } from '@src/drop-until.js'
 import { getError } from 'return-style'
 import { go } from '@blackglory/go'
 import { pass } from '@blackglory/pass'

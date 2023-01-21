@@ -1,5 +1,5 @@
-import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils'
-import { flattenAsync } from '@src/flatten-async'
+import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils.js'
+import { flattenAsync } from '@src/flatten-async.js'
 
 describe('flattenAsync', () => {
   test('lazy and partial evaluation', async () => {

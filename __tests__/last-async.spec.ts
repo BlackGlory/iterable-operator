@@ -1,5 +1,5 @@
-import { toAsyncIterable, MockAsyncIterable } from '@test/utils'
-import { lastAsync } from '@src/last-async'
+import { toAsyncIterable, MockAsyncIterable } from '@test/utils.js'
+import { lastAsync } from '@src/last-async.js'
 import { go } from '@blackglory/go'
 import { pass } from '@blackglory/pass'
 

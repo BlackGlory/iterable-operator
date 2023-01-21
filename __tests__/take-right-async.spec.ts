@@ -1,6 +1,6 @@
-import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable } from '@test/utils'
+import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable } from '@test/utils.js'
 import { getError } from 'return-style'
-import { takeRightAsync } from '@src/take-right-async'
+import { takeRightAsync } from '@src/take-right-async.js'
 import { go } from '@blackglory/go'
 import { pass } from '@blackglory/pass'
 

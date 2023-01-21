@@ -1,6 +1,6 @@
-import { consumeAsync, toArrayAsync, toAsyncIterable, MockAsyncIterable, takeAsync as testTakeAsync } from '@test/utils'
+import { consumeAsync, toArrayAsync, toAsyncIterable, MockAsyncIterable, takeAsync as testTakeAsync } from '@test/utils.js'
 import { getError } from 'return-style'
-import { takeAsync } from '@src/take-async'
+import { takeAsync } from '@src/take-async.js'
 
 describe('takeAsync', () => {
   it('lazy and partial evaluation', async () => {

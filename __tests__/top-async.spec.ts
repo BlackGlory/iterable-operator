@@ -1,6 +1,6 @@
-import { toAsyncIterable } from '@test/utils'
+import { toAsyncIterable } from '@test/utils.js'
 import { compareNumbersAscending, compareNumbersDescending } from 'extra-sort'
-import { topAsync } from '@src/top-async'
+import { topAsync } from '@src/top-async.js'
 
 describe('topAsync', () => {
   test('num > count(iter)', async () => {
