@@ -1,5 +1,5 @@
-import { flattenBy } from './flatten-by'
 import { assert } from '@blackglory/errors'
+import { flattenBy } from './flatten-by.js'
 
 export function flattenDeep<T>(iterable: Iterable<unknown>): IterableIterator<T>
 export function flattenDeep<T>(

@@ -1,6 +1,6 @@
 import { go } from '@blackglory/go'
-import { copyIterable } from './utils'
 import { assert } from '@blackglory/errors'
+import { copyIterable } from './utils.js'
 
 export function drop<T>(iterable: Iterable<T>, count: number): IterableIterator<T> {
   assert(Number.isInteger(count), 'The parameter count must be an integer')

@@ -1,7 +1,7 @@
 import { isntChar } from 'extra-utils'
-import { isAsyncIterable } from '@src/is-async-iterable'
-import { isIterable } from '@src/is-iterable'
 import { Awaitable } from 'justypes'
+import { isAsyncIterable } from '@src/is-async-iterable.js'
+import { isIterable } from '@src/is-iterable.js'
 
 export function flattenByAsync<T>(
   iterable: Iterable<unknown> | AsyncIterable<unknown>

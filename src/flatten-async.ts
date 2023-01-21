@@ -1,4 +1,4 @@
-import { flattenDeepAsync } from './flatten-deep-async'
+import { flattenDeepAsync } from './flatten-deep-async.js'
 
 export function flattenAsync<T>(
   iterable: AsyncIterable<unknown>

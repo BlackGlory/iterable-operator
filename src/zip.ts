@@ -1,4 +1,4 @@
-import { GetTypeOfIterable } from './utils'
+import { GetTypeOfIterable } from './utils.js'
 
 export type ExtractTypeTupleFromIterableTuple<T> = {
   [K in keyof T]: GetTypeOfIterable<T[K]>

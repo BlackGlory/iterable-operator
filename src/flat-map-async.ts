@@ -1,4 +1,4 @@
-import { isAsyncIterable } from '@src/is-async-iterable'
+import { isAsyncIterable } from '@src/is-async-iterable.js'
 
 export function flatMapAsync<T, U>(
   iterable: Iterable<T> | AsyncIterable<T>

@@ -1,4 +1,4 @@
-import { isAsyncIterable } from '@src/is-async-iterable'
+import { isAsyncIterable } from '@src/is-async-iterable.js'
 import { Awaitable } from 'justypes'
 
 export function findAsync<T>(

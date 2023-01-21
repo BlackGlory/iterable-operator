@@ -1,7 +1,7 @@
 import { go } from '@blackglory/go'
-import { copyAsyncIterable } from './utils'
 import { assert } from '@blackglory/errors'
-import { toArrayAsync } from '@src/to-array-async'
+import { copyAsyncIterable } from './utils.js'
+import { toArrayAsync } from '@src/to-array-async.js'
 
 export function dropRightAsync<T>(
   iterable: AsyncIterable<T>

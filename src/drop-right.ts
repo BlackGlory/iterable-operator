@@ -1,6 +1,6 @@
 import { go } from '@blackglory/go'
-import { copyIterable } from './utils'
 import { assert } from '@blackglory/errors'
+import { copyIterable } from './utils.js'
 
 export function dropRight<T>(
   iterable: Iterable<T>

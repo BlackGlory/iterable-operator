@@ -1,5 +1,5 @@
-import { filter } from '@src/filter'
-import { toSet } from '@src/to-set'
+import { filter } from '@src/filter.js'
+import { toSet } from '@src/to-set.js'
 
 export function intersection<T>(left: Iterable<T>, right: Iterable<T>): IterableIterator<T> {
   const rightSet = toSet(right)

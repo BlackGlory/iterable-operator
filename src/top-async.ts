@@ -1,5 +1,5 @@
 import { assert } from '@blackglory/errors'
-import { findInsertionIndex } from './utils'
+import { findInsertionIndex } from './utils.js'
 
 export async function topAsync<T>(
   iterable: AsyncIterable<T>

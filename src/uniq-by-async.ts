@@ -1,5 +1,5 @@
-import { isAsyncIterable } from '@src/is-async-iterable'
 import { Awaitable } from 'justypes'
+import { isAsyncIterable } from '@src/is-async-iterable.js'
 
 export function uniqByAsync<T, U>(
   iterable: Iterable<T> | AsyncIterable<T>

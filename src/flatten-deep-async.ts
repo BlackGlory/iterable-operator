@@ -1,5 +1,5 @@
-import { flattenByAsync } from './flatten-by-async'
 import { assert } from '@blackglory/errors'
+import { flattenByAsync } from './flatten-by-async.js'
 
 export function flattenDeepAsync<T>(
   iterable: AsyncIterable<unknown>

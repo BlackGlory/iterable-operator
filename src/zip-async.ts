@@ -1,6 +1,6 @@
-import { isAsyncIterable } from '@src/is-async-iterable'
-import { GetTypeOfIterable } from './utils'
 import { Awaitable } from 'justypes'
+import { isAsyncIterable } from '@src/is-async-iterable.js'
+import { GetTypeOfIterable } from './utils.js'
 
 enum Kind {
   Sync

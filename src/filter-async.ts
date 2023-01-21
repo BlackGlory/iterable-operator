@@ -1,5 +1,5 @@
-import { isAsyncIterable } from '@src/is-async-iterable'
 import { Awaitable } from 'justypes'
+import { isAsyncIterable } from '@src/is-async-iterable.js'
 
 export function filterAsync<T, U extends T = T>(
   iterable: Iterable<T> | AsyncIterable<T>

@@ -1,5 +1,5 @@
-import { eachAsync } from '@src/each-async'
 import { Awaitable } from 'justypes'
+import { eachAsync } from '@src/each-async.js'
 
 export async function groupByAsync<T, U>(
   iterable: Iterable<T> | AsyncIterable<T>

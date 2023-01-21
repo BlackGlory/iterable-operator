@@ -1,6 +1,6 @@
 import { isUndefined } from 'extra-utils'
-import { isAsyncIterable } from '@src/is-async-iterable'
 import { Awaitable } from 'justypes'
+import { isAsyncIterable } from '@src/is-async-iterable.js'
 
 export function reduceAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>

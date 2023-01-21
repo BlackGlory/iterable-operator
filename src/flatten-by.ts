@@ -1,5 +1,5 @@
 import { isntChar } from 'extra-utils'
-import { isIterable } from '@src/is-iterable'
+import { isIterable } from '@src/is-iterable.js'
 
 export function flattenBy<T>(
   iterable: Iterable<unknown>

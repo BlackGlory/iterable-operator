@@ -1,4 +1,4 @@
-import { each } from '@src/each'
+import { each } from '@src/each.js'
 
 export function groupBy<T, U>(
   iterable: Iterable<T>

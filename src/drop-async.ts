@@ -1,5 +1,5 @@
 import { go } from '@blackglory/go'
-import { copyAsyncIterable } from './utils'
+import { copyAsyncIterable } from './utils.js'
 import { assert } from '@blackglory/errors'
 
 export function dropAsync<T>(

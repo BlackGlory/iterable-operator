@@ -1,5 +1,5 @@
-import { filterAsync } from '@src/filter-async'
-import { toSetAsync } from '@src/to-set-async'
+import { filterAsync } from '@src/filter-async.js'
+import { toSetAsync } from '@src/to-set-async.js'
 import { Awaitable } from 'justypes'
 
 export async function* differenceAsync<T>(

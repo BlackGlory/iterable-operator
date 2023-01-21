@@ -1,6 +1,6 @@
 import { pipe } from 'extra-utils'
-import { map } from '@src/map'
-import { filter } from '@src/filter'
+import { map } from '@src/map.js'
+import { filter } from '@src/filter.js'
 
 export function findAllIndexes<T>(
   iterable: Iterable<T>
