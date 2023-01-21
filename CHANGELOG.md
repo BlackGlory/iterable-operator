@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0](https://github.com/BlackGlory/iterable-operator/compare/v3.1.1...v4.0.0) (2023-01-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* CommonJS => ESM
+
+* commonjs => esm ([584bf16](https://github.com/BlackGlory/iterable-operator/commit/584bf16cc60537f704a474f882ecee15d8b4c55e))
+
 ### [3.1.1](https://github.com/BlackGlory/iterable-operator/compare/v3.1.0...v3.1.1) (2023-01-21)
 
 ## [3.1.0](https://github.com/BlackGlory/iterable-operator/compare/v3.0.0...v3.1.0) (2022-12-22)
