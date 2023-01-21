@@ -44,15 +44,14 @@
     "node": ">=16"
   },
   "scripts": {
+    "prepare": "ts-patch install -s",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx --quiet src __tests__",
     "test": "jest --runInBand --config jest.config.cjs",
     "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand --config jest.config.cjs",
     "test:coverage": "jest --coverage --config jest.config.cjs",
     "prepublishOnly": "run-s clean build",
     "clean": "rimraf lib",
-    "build": "run-s build:*",
-    "build:compile": "tsc --project tsconfig.build.json --outDir lib",
-    "build:patch": "tscpaths -p tsconfig.build.json -s ./src -o ./lib",
+    "build": "tsc --project tsconfig.build.json --outDir lib",
     "release": "standard-version"
   },
   "husky": {
@@ -79,9 +78,10 @@
     "rimraf": "^4.1.1",
     "standard-version": "^9.5.0",
     "ts-jest": "^29.0.5",
-    "tscpaths": "^0.0.9",
+    "ts-patch": "^2.1.0",
     "tslib": "^2.4.1",
-    "typescript": "4.8.4"
+    "typescript": "4.8.4",
+    "typescript-transform-paths": "^3.4.6"
   },
   "dependencies": {
     "@blackglory/errors": "^2.4.2",
