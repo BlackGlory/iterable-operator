@@ -49,7 +49,7 @@
     "test": "jest --runInBand --config jest.config.cjs",
     "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand --config jest.config.cjs",
     "test:coverage": "jest --coverage --config jest.config.cjs",
-    "prepublishOnly": "run-s clean build",
+    "prepublishOnly": "run-s prepare clean build",
     "clean": "rimraf lib",
     "build": "tsc --project tsconfig.build.json --outDir lib",
     "release": "standard-version"
