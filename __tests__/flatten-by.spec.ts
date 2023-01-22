@@ -2,6 +2,7 @@ import { isString } from 'extra-utils'
 import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils.js'
 import { flattenBy } from '@src/flatten-by.js'
 import { getError } from 'return-style'
+import { jest } from '@jest/globals'
 
 describe('flattenBy', () => {
   test('called fn with [element, level]', () => {

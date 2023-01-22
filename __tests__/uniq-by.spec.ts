@@ -1,6 +1,7 @@
 import { getError } from 'return-style'
 import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils.js'
 import { uniqBy } from '@src/uniq-by.js'
+import { jest } from '@jest/globals'
 
 describe('uniqBy<T, U>(', () => {
   test('called fn with [element, index]', () => {

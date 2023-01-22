@@ -2,6 +2,8 @@ import { getError } from 'return-style'
 import { consumeAsync, toArrayAsync, toAsyncIterable, MockAsyncIterable, takeAsync }
   from '@test/utils.js'
 import { repeatAsync } from '@src/repeat-async.js'
+import { jest } from '@jest/globals'
+import { pass } from '@blackglory/pass'
 
 describe('repeatAsync', () => {
   test('lazy and partial evaluation', async () => {
@@ -58,7 +60,7 @@ describe('repeatAsync', () => {
       it('show infinite loop warning', () => {
         const OLD_NODE_ENV = process.env.NODE_ENV
         process.env.NODE_ENV = 'production'
-        const spy = jest.spyOn(console, 'warn').mockImplementation()
+        const spy = jest.spyOn(console, 'warn').mockImplementation(pass)
         const iter = toAsyncIterable([1, 2, 3])
 
         try {
@@ -76,7 +78,7 @@ describe('repeatAsync', () => {
       it('show infinite loop warning', () => {
         const OLD_NODE_ENV = process.env.NODE_ENV
         process.env.NODE_ENV = 'development'
-        const spy = jest.spyOn(console, 'warn').mockImplementation()
+        const spy = jest.spyOn(console, 'warn').mockImplementation(pass)
         const iter = toAsyncIterable([1, 2, 3])
 
         try {

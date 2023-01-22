@@ -1,6 +1,7 @@
 import { getError } from 'return-style'
 import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils.js'
 import { map } from '@src/map.js'
+import { jest } from '@jest/globals'
 
 describe('map', () => {
   test('called fn with [element, index]', () => {

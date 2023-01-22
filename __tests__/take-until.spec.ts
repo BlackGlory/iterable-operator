@@ -1,6 +1,7 @@
 import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils.js'
 import { takeUntil } from '@src/take-until.js'
 import { getError } from 'return-style'
+import { jest } from '@jest/globals'
 
 describe('takeUntil', () => {
   test('called fn with [element, index]', () => {

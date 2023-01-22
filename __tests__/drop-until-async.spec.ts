@@ -4,6 +4,7 @@ import { dropUntilAsync } from '@src/drop-until-async.js'
 import { getErrorPromise } from 'return-style'
 import { go } from '@blackglory/go'
 import { pass } from '@blackglory/pass'
+import { jest } from '@jest/globals'
 
 describe('dropUntilAsync', () => {
   describe('close the unexhausted iterator', () => {

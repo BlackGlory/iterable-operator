@@ -2,6 +2,7 @@ import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from
 import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils.js'
 import { chunkByAsync } from '@src/chunk-by-async.js'
 import { getErrorPromise } from 'return-style'
+import { jest } from '@jest/globals'
 
 describe('chunkByAsync(', () => {
   describe.each([

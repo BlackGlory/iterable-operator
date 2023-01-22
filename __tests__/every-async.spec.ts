@@ -1,6 +1,7 @@
 import { getErrorPromise } from 'return-style'
 import { testFunction, testAsyncFunction, testIterable, testAsyncIterable } from '@test/test-fixtures.js'
 import { everyAsync } from '@src/every-async.js'
+import { jest } from '@jest/globals'
 
 describe('everyAsync', () => {
   describe.each([

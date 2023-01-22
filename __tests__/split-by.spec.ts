@@ -1,6 +1,7 @@
 import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils.js'
 import { splitBy } from '@src/split-by.js'
 import { getError } from 'return-style'
+import { jest } from '@jest/globals'
 
 describe('splitBy', () => {
   test('called fn with [element, index]', () => {

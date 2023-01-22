@@ -1,6 +1,7 @@
 import { getError } from 'return-style'
 import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils.js'
 import { tap } from '@src/tap.js'
+import { jest } from '@jest/globals'
 
 describe('tap', () => {
   test('called fn with [element, index]', () => {

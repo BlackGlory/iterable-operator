@@ -1,5 +1,6 @@
 import { getError } from 'return-style'
 import { find } from '@src/find.js'
+import { jest } from '@jest/globals'
 
 describe('find', () => {
   it('called fn with [element, index]', () => {

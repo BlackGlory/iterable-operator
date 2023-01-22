@@ -1,6 +1,7 @@
 import { getError } from 'return-style'
 import { groupBy } from '@src/group-by.js'
 import { toArray } from '@test/utils.js'
+import { jest } from '@jest/globals'
 
 describe('groupBy', () => {
   it('called fn with [element, index]', () => {

@@ -2,6 +2,7 @@ import { getErrorPromise } from 'return-style'
 import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures.js'
 import { toArrayAsync, consumeAsync, getCalledTimes, MockIterable, takeAsync } from '@test/utils.js'
 import { filterAsync } from '@src/filter-async.js'
+import { jest } from '@jest/globals'
 
 describe('filterAsync', () => {
   describe.each([

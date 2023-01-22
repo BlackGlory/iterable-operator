@@ -1,5 +1,6 @@
 import { getError } from 'return-style'
 import { every } from '@src/every.js'
+import { jest } from '@jest/globals'
 
 describe('every', () => {
   describe('fn returns false on first element', () => {

@@ -3,6 +3,7 @@ import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } f
 import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures.js'
 import { getErrorPromise } from 'return-style'
 import { flattenByAsync } from '@src/flatten-by-async.js'
+import { jest } from '@jest/globals'
 
 describe('flattenByAsync', () => {
   describe.each([

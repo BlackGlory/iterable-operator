@@ -3,6 +3,7 @@ import { dropUntil } from '@src/drop-until.js'
 import { getError } from 'return-style'
 import { go } from '@blackglory/go'
 import { pass } from '@blackglory/pass'
+import { jest } from '@jest/globals'
 
 describe('dropUntil', () => {
   test('close the unexhausted iterator', () => {

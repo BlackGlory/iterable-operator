@@ -1,6 +1,7 @@
 import { getError } from 'return-style'
 import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils.js'
 import { flatMap } from '@src/flat-map.js'
+import { jest } from '@jest/globals'
 
 describe('flatMap', () => {
   test('called fn with [element, index]', () => {

@@ -1,6 +1,7 @@
 import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils.js'
 import { chunkBy } from '@src/chunk-by.js'
 import { getError } from 'return-style'
+import { jest } from '@jest/globals'
 
 describe('chunkBy', () => {
   test('called fn with [element, index]', () => {

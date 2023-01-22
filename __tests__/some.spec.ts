@@ -1,5 +1,6 @@
 import { getError } from 'return-style'
 import { some } from '@src/some.js'
+import { jest } from '@jest/globals'
 
 describe('some', () => {
   it('called fn with [element, index]', () => {

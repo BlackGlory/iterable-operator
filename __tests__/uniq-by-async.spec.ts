@@ -2,6 +2,7 @@ import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from
 import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils.js'
 import { getErrorPromise } from 'return-style'
 import { uniqByAsync } from '@src/uniq-by-async.js'
+import { jest } from '@jest/globals'
 
 describe('uniqByAsync', () => {
   describe.each([

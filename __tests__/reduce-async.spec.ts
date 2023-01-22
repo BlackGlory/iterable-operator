@@ -4,6 +4,7 @@ import { testIterable, testAsyncIterable, testFunction, testAsyncFunction }
 import { reduceAsync } from '@src/reduce-async.js'
 import { getCalledTimes, MockIterable, MockAsyncIterable } from '@test/utils.js'
 import { pass } from '@blackglory/pass'
+import { jest } from '@jest/globals'
 
 describe('reduceAsync', () => {
   describe('without initialValue', () => {

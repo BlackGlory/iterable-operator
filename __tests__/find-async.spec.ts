@@ -2,6 +2,7 @@ import { getErrorPromise } from 'return-style'
 import { testFunction, testAsyncFunction, testIterable, testAsyncIterable }
   from '@test/test-fixtures.js'
 import { findAsync } from '@src/find-async.js'
+import { jest } from '@jest/globals'
 
 describe('findAsync', () => {
   describe.each([

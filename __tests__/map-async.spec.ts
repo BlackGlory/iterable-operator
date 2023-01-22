@@ -2,6 +2,7 @@ import { getErrorPromise } from 'return-style'
 import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures.js'
 import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils.js'
 import { mapAsync } from '@src/map-async.js'
+import { jest } from '@jest/globals'
 
 describe('mapAsync', () => {
   describe.each([

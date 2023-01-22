@@ -1,5 +1,6 @@
 import { getError } from 'return-style'
 import { each } from '@src/each.js'
+import { jest } from '@jest/globals'
 
 describe('each', () => {
   test('called fn with [element, index]', () => {

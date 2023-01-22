@@ -1,6 +1,7 @@
 import { getError } from 'return-style'
 import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils.js'
 import { filter } from '@src/filter.js'
+import { jest } from '@jest/globals'
 
 describe('filter', () => {
   test('called fn with [element, index]', () => {

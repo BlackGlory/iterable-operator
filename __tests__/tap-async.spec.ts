@@ -2,6 +2,7 @@ import { toArrayAsync, consumeAsync, getCalledTimes, MockIterable, takeAsync } f
 import { getErrorPromise } from 'return-style'
 import { testFunction, testAsyncFunction, testIterable, testAsyncIterable } from '@test/test-fixtures.js'
 import { tapAsync } from '@src/tap-async.js'
+import { jest } from '@jest/globals'
 
 describe('tapAsync', () => {
   describe.each([

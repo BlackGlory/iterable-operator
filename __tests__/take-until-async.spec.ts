@@ -2,6 +2,7 @@ import { testIterable, testAsyncIterable, testAsyncFunction, testFunction } from
 import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils.js'
 import { getErrorPromise } from 'return-style'
 import { takeUntilAsync } from '@src/take-until-async.js'
+import { jest } from '@jest/globals'
 
 describe('takeUntilAsync', () => {
   describe.each([

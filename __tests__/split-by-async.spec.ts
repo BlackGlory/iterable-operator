@@ -2,6 +2,7 @@ import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } f
 import { testIterable, testAsyncIterable, testAsyncFunction, testFunction } from '@test/test-fixtures.js'
 import { getErrorPromise } from 'return-style'
 import { splitByAsync } from '@src/split-by-async.js'
+import { jest } from '@jest/globals'
 
 describe('splitByAsync', () => {
   describe.each([
