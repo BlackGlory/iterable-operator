@@ -88,7 +88,7 @@
     "@blackglory/errors": "^2.4.3",
     "@blackglory/go": "^1.1.2",
     "@blackglory/structures": "^0.13.0",
-    "extra-abort": "^0.2.1",
+    "extra-abort": "^0.3.0",
     "extra-promise": "^6.0.1",
     "extra-utils": "^5.0.1",
     "justypes": "^4.1.0"

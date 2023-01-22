@@ -2717,6 +2717,16 @@ extra-abort@^0.2.1:
     iterable-operator "^2.1.0 || ^3.0.0"
     justypes "^3.0.0"
 
+extra-abort@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/extra-abort/-/extra-abort-0.3.0.tgz#0564e438e8ccdb85f70b030ad6d47a63143dab48"
+  integrity sha512-jRCo8o42xa2kvPAjtR0W41Mz8G5lU3ApR9AqPMwdoI6mKeFHefIzoX7hLe8GyfhCcqt3xSPxGf5y9U1NKTs8lA==
+  dependencies:
+    "@blackglory/errors" "^2.4.3"
+    "@blackglory/types" "^1.4.0"
+    iterable-operator "^4.0.1"
+    justypes "^4.1.0"
+
 extra-compatible@^0.1.0:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/extra-compatible/-/extra-compatible-0.1.4.tgz#41b0f3b559ffeb5ea80dcdd8223ca59f3b6c4a66"
@@ -3650,6 +3660,19 @@ iterable-operator@^4.0.0:
     extra-abort "^0.2.1"
     extra-promise "^5.0.0"
     extra-utils "^4.0.0"
+    justypes "^4.1.0"
+
+iterable-operator@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/iterable-operator/-/iterable-operator-4.0.1.tgz#ec3dc7d80c2a147e404b17809e07c3e75c77ec40"
+  integrity sha512-5cGornp2oMu/UgZoicNS4Cf1T2JqMSLGDXnpc0wYSwxIoGs3UmwOKQECEsMGPRqlFSD2uT73MtlSDh3ub1FAlQ==
+  dependencies:
+    "@blackglory/errors" "^2.4.3"
+    "@blackglory/go" "^1.1.2"
+    "@blackglory/structures" "^0.13.0"
+    extra-abort "^0.2.1"
+    extra-promise "^6.0.1"
+    extra-utils "^5.0.1"
     justypes "^4.1.0"
 
 jest-changed-files@^29.2.0:
