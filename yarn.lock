@@ -306,6 +306,14 @@
     "@blackglory/pass" "^1.1.0"
     "@blackglory/types" "^1.4.0"
 
+"@blackglory/errors@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@blackglory/errors/-/errors-3.0.0.tgz#f2d22ea5248326c8c0765cde9abf79664d4062af"
+  integrity sha512-VO8LpQqGCw1v3p5kYiNO5KnNTzXs+jQQHKqRRr33/zL2pfG2LZAYW1I9z844dSap48ebPNZI5XEAtofybKY56A==
+  dependencies:
+    "@blackglory/pass" "^1.1.0"
+    extra-utils "^5.0.1"
+
 "@blackglory/go@^1.1.2":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@blackglory/go/-/go-1.1.2.tgz#bb76676dc5938d2ef28daea82f198e7fee4bcc92"
