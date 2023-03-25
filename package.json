@@ -31,6 +31,7 @@
     "some"
   ],
   "files": [
+    "src",
     "lib"
   ],
   "main": "lib/index.js",
