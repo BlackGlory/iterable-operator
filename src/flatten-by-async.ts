@@ -1,21 +1,9 @@
 import { isntChar } from 'extra-utils'
 import { Awaitable } from 'justypes'
-import { isAsyncIterable } from '@src/is-async-iterable.js'
 import { isIterable } from '@src/is-iterable.js'
 
-export function flattenByAsync<T>(
+export async function* flattenByAsync<T>(
   iterable: Iterable<unknown> | AsyncIterable<unknown>
-, predicate: (element: unknown, level: number) => Awaitable<unknown>
-): AsyncIterableIterator<T> {
-  if (isAsyncIterable(iterable)) {
-    return flattenByAsyncIterable(iterable, predicate)
-  } else {
-    return flattenByIterable(iterable, predicate)
-  }
-}
-
-async function* flattenByAsyncIterable<T>(
-  iterable: AsyncIterable<unknown>
 , predicate: (element: unknown, level: number) => Awaitable<unknown>
 ): AsyncIterableIterator<T> {
   const level = 1
@@ -26,13 +14,6 @@ async function* flattenByAsyncIterable<T>(
       yield element as T
     }
   }
-}
-
-function flattenByIterable<T>(
-  iterable: Iterable<unknown>
-, predicate: (element: unknown, level: number) => Awaitable<unknown>
-): AsyncIterableIterator<T> {
-  return flatten(iterable, predicate, 1)
 }
 
 async function* flatten<T>(
