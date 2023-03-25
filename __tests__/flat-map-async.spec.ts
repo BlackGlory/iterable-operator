@@ -42,7 +42,7 @@ describe('flatMapAsync', () => {
 
       it('returns the flatten mapped iterable', async () => {
         const iter = createIter([1, 2, 3])
-        const double = jest.fn((x: number) => createIter([x, x * 2]))
+        const double = jest.fn(async (x: number) => createIter([x, x * 2]))
 
         const result = flatMapAsync(iter, double)
         const arrResult = await toArrayAsync(result)

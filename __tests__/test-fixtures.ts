@@ -8,17 +8,24 @@ import {
 
 type AnyFunction = (...args: any[]) => any
 
-type ToAwaitable<T> = (iterable: Iterable<T>) => Iterable<T> | AsyncIterable<T>
-
-export function testIterable(signature: string): [string, ToAwaitable<any>] {
+export function testIterable(signature: string): [
+  string
+, (iterable: Iterable<any>) => Iterable<any> | AsyncIterable<any>
+] {
   return [signature, toIterable]
 }
 
-export function testIterablePromises(signature: string): [string, ToAwaitable<any>] {
+export function testIterablePromises(signature: string): [
+  string
+, (iterable: Iterable<any>) => Iterable<any> | AsyncIterable<any>
+] {
   return [signature, toIterablePromises]
 }
 
-export function testAsyncIterable(signature: string): [string, ToAwaitable<any>] {
+export function testAsyncIterable(signature: string): [
+  string
+, (iterable: Iterable<any>) => Iterable<any> | AsyncIterable<any>
+] {
   return [signature, toAsyncIterable]
 }
 

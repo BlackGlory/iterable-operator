@@ -275,7 +275,7 @@ function flatMap<T, U>(
 ): IterableIterator<U>
 function flatMapAsync<T, U>(
   iterable: Iterable<T> | AsyncIterable<T>
-, fn: (element: T, index: number) => Iterable<U> | AsyncIterable<U>
+, fn: (element: T, index: number) => Awaitable<Iterable<U> | AsyncIterable<U>>
 ): AsyncIterableIterator<U>
 ```
 
