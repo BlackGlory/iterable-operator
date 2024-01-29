@@ -344,7 +344,7 @@ function split<T>(iterable: Iterable<T>, separator: T): IterableIterator<T[]>
 function splitAsync<T>(
   iterable: AsyncIterable<T>
 , separator: T
-): AsyncIterableIterator<T[]>
+): AsyncIterableIterator<Array<Awaited<T>>>
 ```
 
 ```ts
