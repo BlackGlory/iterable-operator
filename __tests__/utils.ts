@@ -13,8 +13,8 @@ export function toArray<T>(iterable: Iterable<T>, count: number = Infinity): T[]
 export async function toArrayAsync<T>(
   iterable: AsyncIterable<T>
 , count: number = Infinity
-): Promise<T[]> {
-  const result: T[] = []
+): Promise<Array<Awaited<T>>> {
+  const result: Array<Awaited<T>> = []
   for await (const value of iterable) {
     result.push(value)
     count--
@@ -144,7 +144,7 @@ export function* take<T>(iterable: Iterable<T>, count: number): Iterable<T> {
 
 export async function* takeAsync<T>(
   iterable: AsyncIterable<T>, count: number
-): AsyncIterable<T> {
+): AsyncIterable<Awaited<T>> {
   if (count === 0) return
   for await (const element of iterable) {
     yield element
