@@ -1,12 +1,13 @@
-import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures.js'
+import { testIterable, testIterablePromises, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures.js'
 import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils.js'
 import { chunkByAsync } from '@src/chunk-by-async.js'
 import { getErrorPromise } from 'return-style'
 import { jest } from '@jest/globals'
 
-describe('chunkByAsync(', () => {
+describe('chunkByAsync', () => {
   describe.each([
     testIterable('Iterable')
+  , testIterablePromises('IterablePromises')
   , testAsyncIterable('AsyncIterable')
   ])('%s', (_, createIter) => {
     test('called fn with [element, index]', async () => {

@@ -1,4 +1,4 @@
-import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures.js'
+import { testIterable, testIterablePromises, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures.js'
 import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils.js'
 import { getErrorPromise } from 'return-style'
 import { uniqByAsync } from '@src/uniq-by-async.js'
@@ -7,6 +7,7 @@ import { jest } from '@jest/globals'
 describe('uniqByAsync', () => {
   describe.each([
     testIterable('Iterable')
+  , testIterablePromises('IterablePromises')
   , testAsyncIterable('AsyncIterable')
   ])('%s', (_, createIter) => {
     test('called fn with [element, index]', async () => {

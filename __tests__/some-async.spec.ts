@@ -1,11 +1,12 @@
 import { getErrorPromise } from 'return-style'
-import { testFunction, testAsyncFunction, testIterable, testAsyncIterable } from '@test/test-fixtures.js'
+import { testFunction, testAsyncFunction, testIterable, testIterablePromises, testAsyncIterable } from '@test/test-fixtures.js'
 import { someAsync } from '@src/some-async.js'
 import { jest } from '@jest/globals'
 
 describe('someAsync', () => {
   describe.each([
     testIterable('Iterable')
+  , testIterablePromises('IterablePromises')
   , testAsyncIterable('AsyncIterable')
   ])('%s', (_, createIter) => {
     test('called fn with [element, index]', async () => {

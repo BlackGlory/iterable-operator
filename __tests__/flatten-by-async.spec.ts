@@ -1,6 +1,6 @@
 import { isString } from 'extra-utils'
 import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils.js'
-import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures.js'
+import { testIterable, testIterablePromises, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures.js'
 import { getErrorPromise } from 'return-style'
 import { flattenByAsync } from '@src/flatten-by-async.js'
 import { jest } from '@jest/globals'
@@ -8,6 +8,7 @@ import { jest } from '@jest/globals'
 describe('flattenByAsync', () => {
   describe.each([
     testIterable('Iterable')
+  , testIterablePromises('IterablePromises')
   , testAsyncIterable('AsyncIterable')
   ])('%s', (_, createIter) => {
     test('called fn with [element, level]', async () => {

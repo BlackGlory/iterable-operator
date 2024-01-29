@@ -1,12 +1,13 @@
 import { toArrayAsync, consumeAsync, getCalledTimes, MockIterable, takeAsync } from '@test/utils.js'
 import { getErrorPromise } from 'return-style'
-import { testFunction, testAsyncFunction, testIterable, testAsyncIterable } from '@test/test-fixtures.js'
+import { testFunction, testAsyncFunction, testIterable, testIterablePromises, testAsyncIterable } from '@test/test-fixtures.js'
 import { tapAsync } from '@src/tap-async.js'
 import { jest } from '@jest/globals'
 
 describe('tapAsync', () => {
   describe.each([
     testIterable('Iterable')
+  , testIterablePromises('IterablePromises')
   , testAsyncIterable('AsyncIterable')
   ])('%s', (_, createIter) => {
     test('called fn with [element, index]', async () => {

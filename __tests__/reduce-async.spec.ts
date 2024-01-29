@@ -1,5 +1,5 @@
 import { getErrorPromise } from 'return-style'
-import { testIterable, testAsyncIterable, testFunction, testAsyncFunction }
+import { testIterable, testIterablePromises, testAsyncIterable, testFunction, testAsyncFunction }
   from '@test/test-fixtures.js'
 import { reduceAsync } from '@src/reduce-async.js'
 import { getCalledTimes, MockIterable, MockAsyncIterable } from '@test/utils.js'
@@ -42,6 +42,7 @@ describe('reduceAsync', () => {
 
     describe.each([
       testIterable('Iterable')
+    , testIterablePromises('IterablePromises')
     , testAsyncIterable('AsyncIterable')
     ])('%s', (_, createIter) => {
       test('called fn with [accumulator, currentValue, index]', async () => {
@@ -145,6 +146,7 @@ describe('reduceAsync', () => {
 
     describe.each([
       testIterable('Iterable')
+    , testIterablePromises('IterablePromises')
     , testAsyncIterable('AsyncIterable')
     ])('%s', (_, createIter) => {
       it('called fn with [accumulator, currentValue, index]', async () => {

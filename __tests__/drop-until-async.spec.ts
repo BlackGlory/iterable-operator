@@ -1,4 +1,4 @@
-import { testIterable, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures.js'
+import { testIterable, testIterablePromises, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures.js'
 import { toArrayAsync, getCalledTimes, consumeAsync, MockIterable, MockAsyncIterable, takeAsync } from '@test/utils.js'
 import { dropUntilAsync } from '@src/drop-until-async.js'
 import { getErrorPromise } from 'return-style'
@@ -41,6 +41,7 @@ describe('dropUntilAsync', () => {
 
   describe.each([
     testIterable('Iterable')
+  , testIterablePromises('IterablePromises')
   , testAsyncIterable('AsyncIterable')
   ])('%s', (_, createIter) => {
     test('called fn with [element, index]', async () => {

@@ -1,5 +1,5 @@
 import { getErrorPromise } from 'return-style'
-import { testIterable, testAsyncIterable } from '@test/test-fixtures.js'
+import { testIterable, testIterablePromises, testAsyncIterable } from '@test/test-fixtures.js'
 import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils.js'
 import { flatMapAsync } from '@src/flat-map-async.js'
 import { jest } from '@jest/globals'
@@ -7,6 +7,7 @@ import { jest } from '@jest/globals'
 describe('flatMapAsync', () => {
   describe.each([
     testIterable('Iterable')
+  , testIterablePromises('IterablePromises')
   , testAsyncIterable('AsyncIterable')
   ])('%s', (_, createIter) => {
     test('called fn with element, index', async () => {

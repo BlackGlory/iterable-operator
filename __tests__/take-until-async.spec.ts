@@ -1,4 +1,4 @@
-import { testIterable, testAsyncIterable, testAsyncFunction, testFunction } from '@test/test-fixtures.js'
+import { testIterable, testIterablePromises, testAsyncIterable, testAsyncFunction, testFunction } from '@test/test-fixtures.js'
 import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils.js'
 import { getErrorPromise } from 'return-style'
 import { takeUntilAsync } from '@src/take-until-async.js'
@@ -7,6 +7,7 @@ import { jest } from '@jest/globals'
 describe('takeUntilAsync', () => {
   describe.each([
     testIterable('Iterable')
+  , testIterablePromises('IterablePromises')
   , testAsyncIterable('AsyncIterable')
   ])('%s', (_, createIter) => {
     it('called fn with [element, index]', async () => {
