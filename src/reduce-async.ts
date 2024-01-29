@@ -4,18 +4,26 @@ import { isAsyncIterable } from '@src/is-async-iterable.js'
 
 export function reduceAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
-, fn: (accumulator: T, currentValue: T, index: number) => Awaitable<T>
-): Promise<T>
+, fn: (
+    accumulator: Awaited<T>
+  , currentValue: Awaited<T>
+  , index: number
+  ) => Awaitable<Awaited<T>>
+): Promise<Awaited<T>>
 export function reduceAsync<T, U>(
   iterable: Iterable<T> | AsyncIterable<T>
-, fn: (accumulator: U, currentValue: T, index: number) => Awaitable<U>
+, fn: (accumulator: U, currentValue: Awaited<T>, index: number) => Awaitable<U>
 , initialValue: U
 ): Promise<U>
 export function reduceAsync<T, U>(
   iterable: Iterable<T> | AsyncIterable<T>
 , fn:
-    ((accumulator: T, currentValue: T, index: number) => Awaitable<T>)
-  & ((accumulator: U, currentValue: T, index: number) => Awaitable<U>)
+    ((
+      accumulator: Awaited<T>
+    , currentValue: Awaited<T>
+    , index: number
+    ) => Awaitable<Awaited<T>>)
+  & ((accumulator: U, currentValue: Awaited<T>, index: number) => Awaitable<U>)
 , initialValue?: U
 ) {
   if (isUndefined(initialValue)) {
@@ -27,7 +35,7 @@ export function reduceAsync<T, U>(
 
 async function reduceAsyncWithInitialValue<T, U>(
   iterable: Iterable<T> | AsyncIterable<T>
-, fn: (accumulator: U, currentValue: T, index: number) => Awaitable<U>
+, fn: (accumulator: U, currentValue: Awaited<T>, index: number) => Awaitable<U>
 , initialValue: U
 ): Promise<U> {
   let result: U = initialValue
@@ -40,24 +48,28 @@ async function reduceAsyncWithInitialValue<T, U>(
 
 function reduceAsyncWithoutInitialValue<T>(
   iterable: Iterable<T> | AsyncIterable<T>
-, fn: (accumulator: T, currentValue: T, index: number) => Awaitable<T>
-): Promise<T> {
+, fn: (
+    accumulator: Awaited<T>
+  , currentValue: Awaited<T>
+  , index: number
+  ) => Awaitable<Awaited<T>>
+): Promise<Awaited<T>> {
   if (isAsyncIterable(iterable)) {
     return reduceAsyncIterable(iterable)
   } else {
     return reduceIterable(iterable)
   }
 
-  async function reduceAsyncIterable(iterable: AsyncIterable<T>): Promise<T> {
+  async function reduceAsyncIterable(iterable: AsyncIterable<T>): Promise<Awaited<T>> {
     const iterator = iterable[Symbol.asyncIterator]()
     let done: boolean | undefined
 
     try {
-      let result: T = await readInitialValue(iterator)
+      let result: Awaited<T> = await readInitialValue(iterator)
       let index = 1
       let value: T
       while ({ value, done } = await iterator.next(), !done) {
-        result = await fn(result, value, index++)
+        result = await fn(result, await value, index++)
       }
       return result
     } finally {
@@ -76,16 +88,16 @@ function reduceAsyncWithoutInitialValue<T>(
     }
   }
 
-  async function reduceIterable(iterable: Iterable<T>): Promise<T> {
+  async function reduceIterable(iterable: Iterable<T>): Promise<Awaited<T>> {
     const iterator = iterable[Symbol.iterator]()
     let done: boolean | undefined
 
     try {
-      let result: T = readInitialValue(iterator)
+      let result: Awaited<T> = await readInitialValue(iterator)
       let index = 1
       let value: T
       while ({ value, done } = iterator.next(), !done) {
-        result = await fn(result, value, index++)
+        result = await fn(result, await value, index++)
       }
       return result
     } finally {

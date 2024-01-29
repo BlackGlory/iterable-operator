@@ -659,11 +659,15 @@ function reduce<T, U>(
 ): U
 function reduceAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
-, fn: (accumulator: T, currentValue: T, index: number) => Awaitable<T>
-): Promise<T>
+, fn: (
+    accumulator: Awaited<T>
+  , currentValue: Awaited<T>
+  , index: number
+  ) => Awaitable<Awaited<T>>
+): Promise<Awaited<T>>
 function reduceAsync<T, U>(
   iterable: Iterable<T> | AsyncIterable<T>
-, fn: (accumulator: U, currentValue: T, index: number) => Awaitable<U>
+, fn: (accumulator: U, currentValue: Awaited<T>, index: number) => Awaitable<U>
 , initialValue: U
 ): Promise<U>
 ```
