@@ -399,7 +399,7 @@ function takeRight<T>(iterable: Iterable<T>, count: number): IterableIterator<T>
 function takeRightAsync<T>(
   iterable: AsyncIterable<T>
 , count: number
-): AsyncIterableIterator<T>
+): AsyncIterableIterator<Awaited<T>>
 ```
 
 ```ts

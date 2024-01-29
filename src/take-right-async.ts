@@ -4,7 +4,7 @@ import { assert } from '@blackglory/errors'
 export function takeRightAsync<T>(
   iterable: AsyncIterable<T>
 , count: number
-): AsyncIterableIterator<T> {
+): AsyncIterableIterator<Awaited<T>> {
   assert(Number.isInteger(count), 'The parameter count must be an integer')
   assert(count >= 0, 'The parameter count must be greater than or equal to 0')
 
@@ -13,10 +13,10 @@ export function takeRightAsync<T>(
     let done: boolean | undefined
 
     try {
-      const buffer: T[] = []
+      const buffer: Awaited<T>[] = []
       let value: T
       while ({ value, done } = await iterator.next(), !done) {
-        buffer.push(value)
+        buffer.push(await value)
         if (buffer.length > count) buffer.shift()
       }
       yield* buffer
