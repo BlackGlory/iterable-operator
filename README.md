@@ -463,11 +463,11 @@ function transform<T, U>(
 function transformAsync<T, U>(
   iterable: Iterable<T>
 , transformer: (iterable: Iterable<T>) => AsyncIterable<U>
-): AsyncIterableIterator<U>
+): AsyncIterableIterator<Awaited<U>>
 function transformAsync<T, U>(
   iterable: AsyncIterable<T>
 , transformer: (iterable: AsyncIterable<T>) => AsyncIterable<U>
-): AsyncIterableIterator<U>
+): AsyncIterableIterator<Awaited<U>>
 ```
 
 ```ts
@@ -537,11 +537,11 @@ function consume<T, U>(iterable: Iterable<T>, consumer: (iterable: Iterable<T>) 
 function consumeAsync<T, U>(
   iterable: Iterable<T>
 , consumer: (iterable: Iterable<T>) => Awaitable<U>
-): Promise<U>
+): Promise<Awaited<U>>
 function consumeAsync<T, U>(
   iterable: AsyncIterable<T>
 , consumer: (iterable: AsyncIterable<T>) => Awaitable<U>
-): Promise<U>
+): Promise<Awaited<U>>
 ```
 
 ```ts
