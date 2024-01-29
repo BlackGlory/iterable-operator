@@ -1,6 +1,6 @@
 export async function lastAsync<T>(
   iterable: AsyncIterable<T>
-): Promise<T | undefined> {
+): Promise<Awaited<T> | undefined> {
   const iterator = iterable[Symbol.asyncIterator]()
   let done: boolean | undefined
 
@@ -10,7 +10,7 @@ export async function lastAsync<T>(
     while ({ value, done } = await iterator.next(), !done) {
       result = value
     }
-    return result
+    return await result
   } finally {
     if (!done) await iterator.return?.()
   }

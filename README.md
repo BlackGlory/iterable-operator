@@ -638,7 +638,7 @@ includes([1, 2, 3], 4) // false
 ### last, lastAsync
 ```ts
 function last<T>(iterable: Iterable<T>): T | undefined
-function lastAsync<T>(iterable: AsyncIterable<T>): Promise<T | undefined>
+function lastAsync<T>(iterable: AsyncIterable<T>): Promise<Awaited<T> | undefined>
 ```
 
 ```ts
