@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.0.7](https://github.com/BlackGlory/iterable-operator/compare/v4.0.6...v4.0.7) (2024-01-29)
+
+
+### Bug Fixes
+
+* async methods' signatures (close [#30](https://github.com/BlackGlory/iterable-operator/issues/30)) ([6c3b31a](https://github.com/BlackGlory/iterable-operator/commit/6c3b31a62538b91139b608d2bd8832f928558df2))
+
 ### [4.0.6](https://github.com/BlackGlory/iterable-operator/compare/v4.0.5...v4.0.6) (2023-04-05)
 
 ### [4.0.5](https://github.com/BlackGlory/iterable-operator/compare/v4.0.4...v4.0.5) (2023-03-25)
