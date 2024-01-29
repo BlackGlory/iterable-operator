@@ -12,7 +12,7 @@ describe('consume', () => {
       return result
     }
 
-    const result = await consume(iter as any, sum)
+    const result = await consume(iter, sum)
 
     expect(result).toEqual(6)
   })
@@ -23,7 +23,7 @@ describe('consume', () => {
       const iter = [1, 2, 3]
       const fn = () => { throw customError }
 
-      const err = getError(() => consume(iter as any, fn))
+      const err = getError(() => consume(iter, fn))
 
       expect(err).toBe(customError)
     })

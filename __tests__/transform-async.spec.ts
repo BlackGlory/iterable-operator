@@ -54,7 +54,7 @@ describe('transformAsync', () => {
         }
       }
 
-      const result = transformAsync(iter as any, double)
+      const result = transformAsync(iter, double)
       const arrResult = await toArrayAsync(result)
 
       expect(arrResult).toEqual([2, 4, 6])
@@ -79,7 +79,7 @@ describe('transformAsync', () => {
         const iter = toAsyncIterable([1, 2, 3])
         const fn = async function* () { throw customError }
 
-        const result = transformAsync(iter as any, fn)
+        const result = transformAsync(iter, fn)
         const err = await getErrorPromise(toArrayAsync(result))
 
         expect(err).toBe(customError)
