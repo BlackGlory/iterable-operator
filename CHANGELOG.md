@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0](https://github.com/BlackGlory/iterable-operator/compare/v4.0.7...v5.0.0) (2024-01-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* The function signature of `lastAsync` changed
+* The function signature of `takeRightAsync` changed
+* - The implementation of `dropAsync` was changed to match the new function signature.
+- The implementation of `dropUntilAsync` was changed to match the new function signature.
+* The implementation of the function was changed to match the new function signature.
+* Node.js v16 => Node.js v18.17.0
+
+### Features
+
+* improve `lastAsync` ([ccec217](https://github.com/BlackGlory/iterable-operator/commit/ccec217e51367bec07fbdb2b4cb198693641689d))
+* improve `takeRightAsync` ([417bde3](https://github.com/BlackGlory/iterable-operator/commit/417bde3a9485c256d0d01096464d7928b7bf6d4b))
+
+
+### Bug Fixes
+
+* function signatures ([f82bcbc](https://github.com/BlackGlory/iterable-operator/commit/f82bcbc419823af7a449cfdd1a573fec3c700f5a))
+* function signatures ([5cc42dd](https://github.com/BlackGlory/iterable-operator/commit/5cc42ddba0bfcc4157e4b7834ea5fbdc90ef47be))
+* the function siganture of `uniqAsync` ([0970fa4](https://github.com/BlackGlory/iterable-operator/commit/0970fa432a361cfa4f7082e5aa6a104f6d212670))
+* the function signature of `flatMapAsync` ([736f296](https://github.com/BlackGlory/iterable-operator/commit/736f29692c080b45c7c6766879f4534286a6aef1))
+* the function signature of `reduceAsync` ([064fce8](https://github.com/BlackGlory/iterable-operator/commit/064fce80aa588a92e4b1ccd8b08cb5a93da65eba))
+* the function signature of `reduceAsync` ([c0b64e6](https://github.com/BlackGlory/iterable-operator/commit/c0b64e6f48274ef28584152a6615464f4b54d2a6))
+
+
+* upgrade dependencies ([3c1b941](https://github.com/BlackGlory/iterable-operator/commit/3c1b94143e2e3e5f26e613e633e6ce8d1280acb2))
+
 ### [4.0.7](https://github.com/BlackGlory/iterable-operator/compare/v4.0.6...v4.0.7) (2024-01-29)
 
 
