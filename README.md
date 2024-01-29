@@ -119,7 +119,7 @@ function drop<T>(
 function dropAsync<T>(
   iterable: AsyncIterable<T>
 , count: number // count >= 0
-): AsyncIterableIterator<T>
+): AsyncIterableIterator<Awaited<T>>
 ```
 
 ```ts
@@ -139,7 +139,7 @@ function dropRight<T>(
 function dropRightAsync<T>(
   iterable: AsyncIterable<T>
 , count: number // count >= 0
-): AsyncIterableIterator<T>
+): AsyncIterableIterator<Awaited<T>>
 ```
 
 ```ts
@@ -160,8 +160,8 @@ function dropUntil<T>(
 ): IterableIterator<T>
 function dropUntilAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
-, predicate: (element: T, index: number) => Awaitable<boolean>
-): AsyncIterableIterator<T>
+, predicate: (element: Awaited<T>, index: number) => Awaitable<unknown>
+): AsyncIterableIterator<Awaited<T>>
 ```
 
 ```ts

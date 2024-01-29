@@ -3,8 +3,8 @@ import { isAsyncIterable } from '@src/is-async-iterable.js'
 
 export function dropUntilAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
-, predicate: (element: T, index: number) => Awaitable<unknown>
-): AsyncIterableIterator<T> {
+, predicate: (element: Awaited<T>, index: number) => Awaitable<unknown>
+): AsyncIterableIterator<Awaited<T>> {
   if (isAsyncIterable(iterable)) {
     return dropUntilAsyncIterable(iterable, predicate)
   } else {
@@ -14,8 +14,8 @@ export function dropUntilAsync<T>(
 
 async function* dropUntilAsyncIterable<T>(
   iterable: AsyncIterable<T>
-, predicate: (element: T, index: number) => Awaitable<unknown>
-): AsyncIterableIterator<T> {
+, predicate: (element: Awaited<T>, index: number) => Awaitable<unknown>
+): AsyncIterableIterator<Awaited<T>> {
   const iterator = iterable[Symbol.asyncIterator]()
   let done: boolean | undefined
 
@@ -23,7 +23,7 @@ async function* dropUntilAsyncIterable<T>(
     let index = 0
     let value: T
     while ({ value, done } = await iterator.next(), !done) {
-      if (await predicate(value, index++)) break
+      if (await predicate(await value, index++)) break
     }
 
     while (!done) {
@@ -37,8 +37,8 @@ async function* dropUntilAsyncIterable<T>(
 
 async function* dropUntilIterable<T>(
   iterable: Iterable<T>
-, predicate: (element: T, index: number) => Awaitable<unknown>
-): AsyncIterableIterator<T> {
+, predicate: (element: Awaited<T>, index: number) => Awaitable<unknown>
+): AsyncIterableIterator<Awaited<T>> {
   const iterator = iterable[Symbol.iterator]()
   let done: boolean | undefined
 
@@ -47,7 +47,7 @@ async function* dropUntilIterable<T>(
     let value: T
 
     while ({ value, done } = iterator.next(), !done) {
-      if (await predicate(value, index++)) break
+      if (await predicate(await value, index++)) break
     }
 
     while (!done) {
