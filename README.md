@@ -481,7 +481,7 @@ transform([1, 2, 3], function* double(iter) {
 ### uniq, uniqAsync
 ```ts
 function uniq<T>(iterable: Iterable<T>): IterableIterator<T>
-function uniqAsync<T>(iterable: AsyncIterable<T>): AsyncIterableIterator<T>
+function uniqAsync<T>(iterable: AsyncIterable<T>): AsyncIterableIterator<Awaited<T>>
 ```
 
 ```ts

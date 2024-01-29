@@ -1,7 +1,7 @@
 export async function* uniqAsync<T>(
   iterable: AsyncIterable<T>
-): AsyncIterableIterator<T> {
-  const bucket = new Set<T>()
+): AsyncIterableIterator<Awaited<T>> {
+  const bucket = new Set<Awaited<T>>()
   for await (const element of iterable) {
     if (!bucket.has(element)) {
       yield element
