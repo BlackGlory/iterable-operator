@@ -667,9 +667,9 @@ function reduceAsync<T>(
 ): Promise<Awaited<T>>
 function reduceAsync<T, U>(
   iterable: Iterable<T> | AsyncIterable<T>
-, fn: (accumulator: U, currentValue: Awaited<T>, index: number) => Awaitable<U>
+, fn: (accumulator: Awaited<U>, currentValue: Awaited<T>, index: number) => Awaitable<U>
 , initialValue: U
-): Promise<U>
+): Promise<Awaited<U>>
 ```
 
 ```ts
