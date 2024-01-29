@@ -2,7 +2,7 @@ import { Awaitable } from 'justypes'
 
 export async function someAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
-, predicate: (element: T, index: number) => Awaitable<unknown>
+, predicate: (element: Awaited<T>, index: number) => Awaitable<unknown>
 ): Promise<boolean> {
   let index = 0
 

@@ -8,13 +8,13 @@ export function zip<T, U extends Array<Iterable<unknown>>>(
   iterable: Iterable<T>
 , ...otherIterables: U
 ): IterableIterator<[T, ...ExtractTypeTupleFromIterableTuple<U>]> {
-  return zipWithSize(
+  return _zip(
     iterable
   , ...otherIterables
   ) as IterableIterator<[T, ...ExtractTypeTupleFromIterableTuple<U>]>
 }
 
-function* zipWithSize<T>(...iterables: Array<Iterable<T>>): IterableIterator<T[]> {
+function* _zip<T>(...iterables: Array<Iterable<T>>): IterableIterator<T[]> {
   const length = iterables.length
   const iterators = iterables.map(iterable => iterable[Symbol.iterator]())
   const dones = iterators.map(() => false)

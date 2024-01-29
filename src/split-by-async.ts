@@ -2,9 +2,9 @@ import { Awaitable } from 'justypes'
 
 export async function* splitByAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
-, predicate: (element: T, index: number) => Awaitable<unknown>
-): AsyncIterableIterator<T[]> {
-  let buffer: T[] = []
+, predicate: (element: Awaited<T>, index: number) => Awaitable<unknown>
+): AsyncIterableIterator<Array<Awaited<T>>> {
+  let buffer: Array<Awaited<T>> = []
   let index = 0
 
   for await (const element of iterable) {

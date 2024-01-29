@@ -3,9 +3,9 @@ import { eachAsync } from '@src/each-async.js'
 
 export async function groupByAsync<T, U>(
   iterable: Iterable<T> | AsyncIterable<T>
-, fn: (element: T, index: number) => Awaitable<U>
-): Promise<Map<U, T[]>> {
-  const map = new Map<U, T[]>()
+, fn: (element: Awaited<T>, index: number) => Awaitable<U>
+): Promise<Map<Awaited<U>, Array<Awaited<T>>>> {
+  const map = new Map<Awaited<U>, Array<Awaited<T>>>()
 
   await eachAsync(iterable, async (element, index) => {
     const group = await fn(element, index)

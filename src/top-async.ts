@@ -4,12 +4,12 @@ import { findInsertionIndex } from './utils.js'
 export async function topAsync<T>(
   iterable: AsyncIterable<T>
 , num: number
-, compare: (a: T, b: T) => number
-): Promise<T[]> {
+, compare: (a: Awaited<T>, b: Awaited<T>) => number
+): Promise<Array<Awaited<T>>> {
   assert(Number.isInteger(num), 'The parameter num must be an integer')
   assert(num > 0, 'The parameter num must be greater than 0')
 
-  const result: T[] = []
+  const result: Array<Awaited<T>> = []
 
   for await (const element of iterable) {
     if (result.length > 0) {

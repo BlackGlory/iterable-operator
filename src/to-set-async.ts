@@ -1,11 +1,9 @@
-import { Awaitable } from 'justypes'
-
 export async function toSetAsync<T>(
-  iterable: Iterable<Awaitable<T>> | AsyncIterable<T>
-): Promise<Set<T>> {
-  const result = new Set<T>()
+  iterable: Iterable<T> | AsyncIterable<T>
+): Promise<Set<Awaited<T>>> {
+  const result = new Set<Awaited<T>>()
   for await (const element of iterable) {
-    result.add(await element)
+    result.add(element)
   }
   return result
 }

@@ -2,8 +2,8 @@ import { Awaitable } from 'justypes'
 
 export async function findAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
-, predicate: (element: T, index: number) => Awaitable<unknown>
-): Promise<T | undefined> {
+, predicate: (element: Awaited<T>, index: number) => Awaitable<unknown>
+): Promise<Awaited<T> | undefined> {
   let index = 0
 
   for await (const element of iterable) {
@@ -12,5 +12,4 @@ export async function findAsync<T>(
   }
 
   return undefined
-
 }

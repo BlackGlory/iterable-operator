@@ -45,7 +45,7 @@ function chunk<T>(
 function chunkAsync<T>(
   iterable: AsyncIterable<T>
 , size: number // size > 0
-): AsyncIterableIterator<T[]>
+): AsyncIterableIterator<Array<Awaited<T>>>
 ```
 
 ```ts
@@ -66,8 +66,8 @@ function chunkBy<T>(
 ): IterableIterator<T[]>
 function chunkByAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
-, predicate: (element: T, index: number) => Awaitable<unknown>
-): AsyncIterableIterator<T[]>
+, predicate: (element: Awaited<T>, index: number) => Awaitable<unknown>
+): AsyncIterableIterator<Array<Awaited<T>>>
 ```
 
 ```ts
@@ -85,9 +85,9 @@ function concat<T, U>(
 , ...otherIterables: Iterable<U>[]
 ): IterableIterator<T | U>
 function concatAsync<T, U>(
-  iterable: Iterable<Awaitable<T>> | AsyncIterable<T>
-, ...otherIterables: Array<Iterable<Awaitable<U>> | AsyncIterable<U>>
-): AsyncIterableIterator<T | U>
+  iterable: Iterable<T> | AsyncIterable<T>
+, ...otherIterables: Array<Iterable<Awaitable<U>> | AsyncIterable<Awaitable<U>>>
+): AsyncIterableIterator<Awaited<T> | Awaited<U>>
 ```
 
 ```ts
@@ -99,9 +99,9 @@ concat([1, 2, 3], ['a', 'b', 'c']) // [1, 2, 3, 'a', 'b', 'c']
 ```ts
 function difference<T>(left: Iterable<T>, right: Iterable<T>): IterableIterator<T>
 function differenceAsync<T>(
-  left: Iterable<Awaitable<T>> | AsyncIterable<T>
-, right: Iterable<Awaitable<T>> | AsyncIterable<T>
-): AsyncIterableIterator<T>
+  left: Iterable<Awaitable<T>> | AsyncIterable<Awaitable<T>>
+, right: Iterable<Awaitable<T>> | AsyncIterable<Awaitable<T>>
+): AsyncIterableIterator<Awaited<T>>
 ```
 
 ```ts
@@ -176,9 +176,9 @@ function filter<T, U extends T = T>(
   iterable: Iterable<T>
 , predicate: (element: T, index: number) => unknown
 ): IterableIterator<U>
-function filterAsync<T, U extends T = T>(
+function filterAsync<T, U extends Awaited<T> = Awaited<T>>(
   iterable: Iterable<T> | AsyncIterable<T>
-, predicate: (element: T, index: number) => Awaitable<unknown>
+, predicate: (element: Awaited<T>, index: number) => Awaitable<unknown>
 ): AsyncIterableIterator<U>
 ```
 
@@ -242,7 +242,7 @@ function intersection<T>(left: Iterable<T>, right: Iterable<T>): IterableIterato
 function intersectionAsync<T>(
   left: Iterable<Awaitable<T>> | AsyncIterable<T>
 , right: Iterable<Awaitable<T>> | AsyncIterable<T>
-): AsyncIterableIterator<T>
+): AsyncIterableIterator<Awaited<T>>
 ```
 
 The memory usage of this function depends on `right`.
@@ -259,8 +259,8 @@ function map<T, U>(
 ): IterableIterator<U>
 function mapAsync<T, U>(
   iterable: Iterable<T> | AsyncIterable<T>
-, fn: (element: T, index: number) => Awaitable<U>
-): AsyncIterableIterator<U>
+, fn: (element: Awaited<T>, index: number) => Awaitable<U>
+): AsyncIterableIterator<Awaited<U>>
 ```
 
 ```ts
@@ -275,7 +275,7 @@ function flatMap<T, U>(
 ): IterableIterator<U>
 function flatMapAsync<T, U>(
   iterable: Iterable<T> | AsyncIterable<T>
-, fn: (element: T, index: number) => Awaitable<Iterable<U> | AsyncIterable<U>>
+, fn: (element: Awaited<T>, index: number) => Awaitable<Iterable<U> | AsyncIterable<U>>
 ): AsyncIterableIterator<U>
 ```
 
@@ -292,7 +292,7 @@ function repeat<T>(
 function repeatAsync<T>(
   iterable: AsyncIterable<T>
 , times: number // times >= 0
-): AsyncIterableIterator<T>
+): AsyncIterableIterator<Awaited<T>>
 ```
 
 ```ts
@@ -314,7 +314,7 @@ function sliceAsync<T>(
   iterable: AsyncIterable<T>
 , start: number // start >= 0
 , end: number = Infinity // end >= start
-): AsyncIterableIterator<T>
+): AsyncIterableIterator<Awaited<T>>
 ```
 
 ```ts
@@ -331,7 +331,7 @@ function join<T, U = T>(iterable: Iterable<T>, separator: U): IterableIterator<T
 function joinAsync<T, U = T>(
   iterable: AsyncIterable<T>
 , separator: U
-): AsyncIterableIterator<T | U>
+): AsyncIterableIterator<Awaited<T> | U>
 ```
 
 ```ts
@@ -364,8 +364,8 @@ function splitBy<T>(
 ): IterableIterator<T[]>
 function splitByAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
-, predicate: (element: T, index: number) => Awaitable<unknown>
-): AsyncIterableIterator<T[]>
+, predicate: (element: Awaited<T>, index: number) => Awaitable<unknown>
+): AsyncIterableIterator<Array<Awaited<T>>>
 ```
 
 ```ts
@@ -383,7 +383,7 @@ function take<T>(iterable: Iterable<T>, count: number): IterableIterator<T>
 function takeAsync<T>(
   iterable: AsyncIterable<T>
 , count: number
-): AsyncIterableIterator<T>
+): AsyncIterableIterator<Awaited<T>>
 ```
 
 ```ts
@@ -419,8 +419,8 @@ function takeUntil<T>(
 ): IterableIterator<T>
 function takeUntilAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
-, predicate: (element: T, index: number) => Awaitable<unknown>
-): AsyncIterableIterator<T>
+, predicate: (element: Awaited<T>, index: number) => Awaitable<unknown>
+): AsyncIterableIterator<Awaited<T>>
 ```
 
 ```ts
@@ -435,8 +435,8 @@ function tap<T>(
 ): IterableIterator<T>
 function tapAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
-, fn: (element: T, index: number) => Awaitable<unknown>
-): AsyncIterableIterator<T>
+, fn: (element: Awaited<T>, index: number) => Awaitable<unknown>
+): AsyncIterableIterator<Awaited<T>>
 ```
 
 ```ts
@@ -445,7 +445,9 @@ tap([1, 2, 3], x => console.log(x)) // [1, 2, 3]
 
 ### toAsyncIterable
 ```ts
-function toAsyncIterable<T>(iterable: Iterable<Awaitable<T>>): AsyncIterableIterator<T>
+function toAsyncIterable<T>(
+  iterable: Iterable<Awaitable<T>>
+): AsyncIterableIterator<Awaited<T>>
 ```
 
 ```ts
@@ -496,8 +498,8 @@ function uniqBy<T, U>(
 ): IterableIterator<T>
 function uniqByAsync<T, U>(
   iterable: Iterable<T> | AsyncIterable<T>
-, fn: (element: T, index: number) => Awaitable<U>
-): AsyncIterableIterator<T>
+, fn: (element: Awaited<T>, index: number) => Awaitable<U>
+): AsyncIterableIterator<Awaited<T>>
 ```
 
 ```ts
@@ -512,10 +514,15 @@ function zip<T, U extends Array<Iterable<unknown>>>(
   iterable: Iterable<T>
 , ...otherIterables: U
 ): IterableIterator<[T, ...ExtractTypeTupleFromIterableTuple<U>]>
-function zipAsync<T, U extends Array<Iterable<Awaitable<unknown>> | AsyncIterable<unknown>>>(
-  iterable: Iterable<Awaitable<T>> | AsyncIterable<T>
+function zipAsync<
+  T
+, U extends Array<Iterable<Awaitable<unknown>> | AsyncIterable<Awaitable<unknown>>>
+>(
+  iterable: Iterable<Awaitable<T>> | AsyncIterable<Awaitable<T>>
 , ...otherIterables: U
-): AsyncIterableIterator<[T, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]>
+): AsyncIterableIterator<
+  [Awaited<T>, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]
+>
 ```
 
 ```ts
@@ -549,7 +556,7 @@ function each<T>(
 ): void
 function eachAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
-, fn: (element: T, index: number) => Awaitable<unknown>
+, fn: (element: Awaited<T>, index: number) => Awaitable<unknown>
 ): Promise<void>
 ```
 
@@ -565,7 +572,7 @@ function every<T>(
 ): boolean
 function everyAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
-, predicate: (element: T, index: number) => Awaitable<unknown>
+, predicate: (element: Awaited<T>, index: number) => Awaitable<unknown>
 ): Promise<boolean>
 ```
 
@@ -582,8 +589,8 @@ function find<T>(
 ): T | undefined
 function findAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
-, predicate: (element: T, index: number) => Awaitable<unknown>
-): Promise<T | undefined>
+, predicate: (element: Awaited<T>, index: number) => Awaitable<unknown>
+): Promise<Awaited<T> | undefined>
 ```
 
 ```ts
@@ -606,7 +613,7 @@ findAllIndexes([1, 2, 3], x => x % 2 === 1) // [0, 2]
 ### first, firstAsync
 ```ts
 function first<T>(iterable: Iterable<T>): T | undefined
-function firstAsync<T>(iterable: AsyncIterable<T>): Promise<T | undefined>
+function firstAsync<T>(iterable: AsyncIterable<T>): Promise<Awaited<T> | undefined>
 ```
 
 ```ts
@@ -617,7 +624,10 @@ first([]) // undefined
 ### includes, includesAsync
 ```ts
 function includes<T>(iterable: Iterable<T>, value: T): boolean
-function includesAsync<T>(iterable: AsyncIterable<T>, value: T): Promise<boolean>
+function includesAsync<T>(
+  iterable: AsyncIterable<T>
+, value: Awaited<T>
+): Promise<boolean>
 ```
 
 ```ts
@@ -677,7 +687,7 @@ function some<T>(
 ): boolean
 function someAsync<T>(
   iterable: Iterable<T> | AsyncIterable<T>
-, predicate: (element: T, index: number) => Awaitable<unknown>
+, predicate: (element: Awaited<T>, index: number) => Awaitable<unknown>
 ): Promise<boolean>
 ```
 
@@ -689,7 +699,9 @@ some([1, 2, 3], x => x === 4) // false
 ### toArray, toArrayAsync
 ```ts
 function toArray<T>(iterable: Iterable<T>): T[]
-function toArrayAsync<T>(iterable: AsyncIterable<T>): Promise<T[]>
+function toArrayAsync<T>(
+  iterable: AsyncIterable<T>
+): Promise<Array<Awaited<T>>>
 ```
 
 ```ts
@@ -699,7 +711,9 @@ toArray([1, 2, 3]) // Array [1, 2, 3]
 ### toSet, toSetAsync
 ```ts
 function toSet<T>(iterable: Iterable<T>): Set<T>
-function toSetAsync<T>(iterable: AsyncIterable<T>): Promise<Set<T>>
+function toSetAsync<T>(
+  iterable: Iterable<T> | AsyncIterable<T>
+): Promise<Set<Awaited<T>>>
 ```
 
 ```ts
@@ -724,8 +738,8 @@ function groupBy<T, U>(
 ): Map<U, T[]>
 function groupByAsync<T, U>(
   iterable: Iterable<T> | AsyncIterable<T>
-, fn: (element: T, index: number) => Awaitable<U>
-): Promise<Map<U, T[]>>
+, fn: (element: Awaited<T>, index: number) => Awaitable<U>
+): Promise<Map<Awaited<U>, Array<Awaited<T>>>>
 ```
 
 ```ts
@@ -751,8 +765,8 @@ function top<T>(
 function topAsync<T>(
   iterable: AsyncIterable<T>
 , num: number
-, compare: (a: T, b: T) => number
-): Promise<T[]>
+, compare: (a: Awaited<T>, b: Awaited<T>) => number
+): Promise<Array<Awaited<T>>>
 ```
 
 ```ts

@@ -9,27 +9,31 @@ enum Kind {
 
 export type ExtractTypeTupleFromAsyncLikeIterableTuple<T> = {
   [K in keyof T]:
-    T[K] extends AsyncIterable<infer U> ? U :
-      T[K] extends Iterable<PromiseLike<infer V>> ? V :
+    T[K] extends AsyncIterable<Awaitable<infer U>> ? Awaited<U> :
+      T[K] extends Iterable<PromiseLike<infer V>> ? Awaited<V> :
         GetTypeOfIterable<T[K]>
 }
 
 export function zipAsync<
   T
-, U extends Array<Iterable<Awaitable<unknown>> | AsyncIterable<unknown>>
+, U extends Array<Iterable<Awaitable<unknown>> | AsyncIterable<Awaitable<unknown>>>
 >(
-  iterable: Iterable<Awaitable<T>> | AsyncIterable<T>
+  iterable: Iterable<Awaitable<T>> | AsyncIterable<Awaitable<T>>
 , ...otherIterables: U
-): AsyncIterableIterator<[T, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]> {
-  return zipWithSize(
+): AsyncIterableIterator<
+  [Awaited<T>, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]
+> {
+  return _zipAsync(
     iterable
   , ...otherIterables
-  ) as AsyncIterableIterator<[T, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]>
+  ) as AsyncIterableIterator<
+    [Awaited<T>, ...ExtractTypeTupleFromAsyncLikeIterableTuple<U>]
+  >
 }
 
-async function* zipWithSize<T>(
-  ...iterables: Array<Iterable<Awaitable<T>> | AsyncIterable<T>>
-): AsyncIterableIterator<T[]> {
+async function* _zipAsync<T>(
+  ...iterables: Array<Iterable<Awaitable<T>> | AsyncIterable<Awaitable<T>>>
+): AsyncIterableIterator<Array<Awaited<T>>> {
   const length = iterables.length
   const iterators = iterables.map(iterable => {
     if (isAsyncIterable(iterable)) {
@@ -42,7 +46,7 @@ async function* zipWithSize<T>(
 
   try {
     while (true) {
-      const result = new Array<T>(length)
+      const result = new Array<Awaited<T>>(length)
       for (let i = 0; i < length; i++) {
         const [kind, iterator] = iterators[i]
         let temp: IteratorResult<Awaitable<T>>

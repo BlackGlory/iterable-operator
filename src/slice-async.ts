@@ -4,17 +4,8 @@ import { assert } from '@blackglory/errors'
 export function sliceAsync<T>(
   iterable: AsyncIterable<T>
 , start: number
-): AsyncIterableIterator<T>
-export function sliceAsync<T>(
-  iterable: AsyncIterable<T>
-, start: number
-, end: number
-): AsyncIterableIterator<T>
-export function sliceAsync<T>(
-  iterable: AsyncIterable<T>
-, start: number
 , end: number = Infinity
-): AsyncIterableIterator<T> {
+): AsyncIterableIterator<Awaited<T>> {
   assert(Number.isInteger(start), 'The parameter start must be an integer')
   assert(start >= 0, 'The parameter start must be greater than or equal to 0')
   assert(Number.isInteger(end), 'The parameter end must be an integer')
