@@ -22,7 +22,7 @@ export function dropAsync<T>(
       }
 
       while (!done) {
-        yield await value
+        yield value
         ;({ value, done } = await iterator.next())
       }
     } finally {

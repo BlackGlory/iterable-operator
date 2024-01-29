@@ -4,6 +4,6 @@ export async function* toAsyncIterable<T>(
   iterable: Iterable<Awaitable<T>>
 ): AsyncIterableIterator<Awaited<T>> {
   for (const value of iterable) {
-    yield await value
+    yield value
   }
 }
