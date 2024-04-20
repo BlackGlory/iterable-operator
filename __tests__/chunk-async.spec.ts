@@ -1,3 +1,4 @@
+import { describe, test, expect, it } from 'vitest'
 import { getError } from 'return-style'
 import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync }
   from '@test/utils.js'

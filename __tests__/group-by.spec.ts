@@ -1,12 +1,12 @@
+import { describe, it, expect, vi } from 'vitest'
 import { getError } from 'return-style'
 import { groupBy } from '@src/group-by.js'
 import { toArray } from '@test/utils.js'
-import { jest } from '@jest/globals'
 
 describe('groupBy', () => {
   it('called fn with [element, index]', () => {
     const iter = [1, 2, 3]
-    const fn = jest.fn()
+    const fn = vi.fn()
 
     groupBy(iter, fn)
 

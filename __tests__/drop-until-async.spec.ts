@@ -1,10 +1,10 @@
+import { describe, test, expect, it, vi } from 'vitest'
 import { testIterable, testIterablePromises, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures.js'
 import { toArrayAsync, getCalledTimes, consumeAsync, MockIterable, MockAsyncIterable, takeAsync } from '@test/utils.js'
 import { dropUntilAsync } from '@src/drop-until-async.js'
 import { getErrorPromise } from 'return-style'
 import { go } from '@blackglory/go'
 import { pass } from '@blackglory/pass'
-import { jest } from '@jest/globals'
 
 describe('dropUntilAsync', () => {
   describe('close the unexhausted iterator', () => {
@@ -46,7 +46,7 @@ describe('dropUntilAsync', () => {
   ])('%s', (_, createIter) => {
     test('called fn with [element, index]', async () => {
       const iter = [1, 2, 3]
-      const fn = jest.fn().mockReturnValue(false)
+      const fn = vi.fn().mockReturnValue(false)
 
       const result = dropUntilAsync(iter, fn)
       const calledTimesBeforeConsume = getCalledTimes(fn)
@@ -63,7 +63,7 @@ describe('dropUntilAsync', () => {
     describe('fn returns true on first element', () => {
       it('called fn only once', async () => {
         const iter = [1, 2, 3]
-        const fn = jest.fn().mockReturnValueOnce(true)
+        const fn = vi.fn().mockReturnValueOnce(true)
 
         const result = dropUntilAsync(iter, fn)
         const calledTimesBeforeConsume = getCalledTimes(fn)

@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest'
 import { consume } from '@src/consume.js'
 import { getError } from 'return-style'
 

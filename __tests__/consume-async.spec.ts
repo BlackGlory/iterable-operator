@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest'
 import { toAsyncIterable } from '@test/utils.js'
 import { consumeAsync } from '@src/consume-async.js'
 import { getErrorAsync } from 'return-style'

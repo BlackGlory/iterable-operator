@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest'
 import { toArray } from '@test/utils.js'
 import { toSet } from '@src/to-set.js'
 

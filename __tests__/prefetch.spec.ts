@@ -1,3 +1,4 @@
+import { describe, test, expect } from 'vitest'
 import { prefetch } from '@src/prefetch.js'
 import { MockIterable } from '@test/utils.js'
 import { toArrayAsync } from '@src/to-array-async.js'

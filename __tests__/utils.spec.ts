@@ -1,3 +1,4 @@
+import { describe, test, expect } from 'vitest'
 import { findInsertionIndex, getIntermediateIndex } from '@src/utils.js'
 import { compareNumbersAscending, compareNumbersDescending } from 'extra-sort'
 

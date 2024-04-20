@@ -1,3 +1,4 @@
+import { describe, test, expect, it } from 'vitest'
 import { getError } from 'return-style'
 import { consume, toArray, MockIterable, take } from '@test/utils.js'
 import { chunk } from '@src/chunk.js'

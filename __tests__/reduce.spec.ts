@@ -1,8 +1,8 @@
+import { describe, test, vi, expect, it } from 'vitest'
 import { getError } from 'return-style'
 import { reduce } from '@src/reduce.js'
 import { MockIterable } from '@test/utils.js'
 import { pass } from '@blackglory/pass'
-import { jest } from '@jest/globals'
 
 describe('reduce', () => {
   describe('without initialValue', () => {
@@ -23,7 +23,7 @@ describe('reduce', () => {
 
     test('called fn with [accumulator, currentValue, index]', () => {
       const iter = [1, 2, 3]
-      const fn = jest.fn()
+      const fn = vi.fn()
         .mockReturnValueOnce(1 + 2)
         .mockReturnValueOnce(1 + 2 + 3)
 
@@ -48,7 +48,7 @@ describe('reduce', () => {
     describe('size(iterable) = 1', () => {
       it('returns the element without calling fn', () => {
         const iter: number[] = [1]
-        const fn = jest.fn()
+        const fn = vi.fn()
 
         const result = reduce(iter, fn)
 
@@ -100,7 +100,7 @@ describe('reduce', () => {
 
     test('called fn with [accumulator,currentValue,index]', () => {
       const iter = [1, 2, 3]
-      const fn = jest.fn()
+      const fn = vi.fn()
         .mockReturnValueOnce(0 + 1)
         .mockReturnValueOnce(0 + 1 + 2)
         .mockReturnValueOnce(0 + 1 + 2 + 3)

@@ -1,8 +1,8 @@
+import { describe, it, expect, vi } from 'vitest'
 import { testIterable, testIterablePromises, testAsyncIterable, testAsyncFunction, testFunction } from '@test/test-fixtures.js'
 import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils.js'
 import { getErrorPromise } from 'return-style'
 import { takeUntilAsync } from '@src/take-until-async.js'
-import { jest } from '@jest/globals'
 
 describe('takeUntilAsync', () => {
   describe.each([
@@ -12,7 +12,7 @@ describe('takeUntilAsync', () => {
   ])('%s', (_, createIter) => {
     it('called fn with [element, index]', async () => {
       const iter = createIter([1, 2, 3])
-      const fn = jest.fn().mockReturnValue(false)
+      const fn = vi.fn().mockReturnValue(false)
 
       const result = takeUntilAsync(iter, fn)
       const calledTimesBeforeConsume = getCalledTimes(fn)
@@ -29,7 +29,7 @@ describe('takeUntilAsync', () => {
     describe('returns true on first element', () => {
       it('called fn only once', async () => {
         const iter = createIter([1, 2, 3])
-        const fn = jest.fn().mockReturnValueOnce(true)
+        const fn = vi.fn().mockReturnValueOnce(true)
 
         const result = takeUntilAsync(iter, fn)
         const calledTimesBeforeConsume = getCalledTimes(fn)

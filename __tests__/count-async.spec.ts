@@ -1,3 +1,4 @@
+import { test, expect } from 'vitest'
 import { toAsyncIterable } from '@test/utils.js'
 import { countAsync } from '@src/count-async.js'
 

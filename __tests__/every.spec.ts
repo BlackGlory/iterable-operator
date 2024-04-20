@@ -1,12 +1,12 @@
+import { describe, it, expect, vi } from 'vitest'
 import { getError } from 'return-style'
 import { every } from '@src/every.js'
-import { jest } from '@jest/globals'
 
 describe('every', () => {
   describe('fn returns false on first element', () => {
     it('called fn only once', () => {
       const iter = [1, 2, 3]
-      const fn = jest.fn().mockReturnValueOnce(false)
+      const fn = vi.fn().mockReturnValueOnce(false)
 
       every(iter, fn)
 
@@ -17,7 +17,7 @@ describe('every', () => {
   describe('fn returns true', () => {
     it('called fn with [element, index]', () => {
       const iter = [1, 2, 3]
-      const fn = jest.fn().mockReturnValue(true)
+      const fn = vi.fn().mockReturnValue(true)
 
       every(iter, fn)
 

@@ -1,10 +1,10 @@
+import { describe, vi, test, it, expect } from 'vitest'
 import { getErrorPromise } from 'return-style'
 import { testIterable, testIterablePromises, testAsyncIterable, testFunction, testAsyncFunction }
   from '@test/test-fixtures.js'
 import { reduceAsync } from '@src/reduce-async.js'
 import { getCalledTimes, MockIterable, MockAsyncIterable } from '@test/utils.js'
 import { pass } from '@blackglory/pass'
-import { jest } from '@jest/globals'
 
 describe('reduceAsync', () => {
   describe('without initialValue', () => {
@@ -47,7 +47,7 @@ describe('reduceAsync', () => {
     ])('%s', (_, createIter) => {
       test('called fn with [accumulator, currentValue, index]', async () => {
         const iter = createIter([1, 2, 3])
-        const fn = jest.fn()
+        const fn = vi.fn()
           .mockReturnValueOnce(1 + 2)
           .mockReturnValueOnce(1 + 2 + 3)
 
@@ -76,7 +76,7 @@ describe('reduceAsync', () => {
         describe('size(iterable) = 1', () => {
           it('returns the element without calling fn', async () => {
             const iter = createIter([1])
-            const fn = jest.fn()
+            const fn = vi.fn()
 
             const result = await reduceAsync(iter, fn)
 
@@ -151,7 +151,7 @@ describe('reduceAsync', () => {
     ])('%s', (_, createIter) => {
       it('called fn with [accumulator, currentValue, index]', async () => {
         const iter = createIter([1, 2, 3])
-        const fn = jest.fn()
+        const fn = vi.fn()
           .mockReturnValueOnce(0 + 1)
           .mockReturnValueOnce(0 + 1 + 2)
           .mockReturnValueOnce(0 + 1 + 2 + 3)

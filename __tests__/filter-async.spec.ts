@@ -1,8 +1,8 @@
+import { describe, expect, test, it, vi } from 'vitest'
 import { getErrorPromise } from 'return-style'
 import { testIterable, testIterablePromises, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures.js'
 import { toArrayAsync, consumeAsync, getCalledTimes, MockIterable, takeAsync } from '@test/utils.js'
 import { filterAsync } from '@src/filter-async.js'
-import { jest } from '@jest/globals'
 
 describe('filterAsync', () => {
   describe.each([
@@ -12,7 +12,7 @@ describe('filterAsync', () => {
   ])('%s', (_, createIter) => {
     test('called fn with [element, index]', async () => {
       const iter = createIter([1, 2, 3])
-      const fn = jest.fn()
+      const fn = vi.fn()
 
       const result = filterAsync(iter, fn)
       const calledTimesBeforeConsume = getCalledTimes(fn)

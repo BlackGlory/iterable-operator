@@ -1,3 +1,4 @@
+import { describe, it, expect, test } from 'vitest'
 import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils.js'
 import { uniqAsync } from '@src/uniq-async.js'
 

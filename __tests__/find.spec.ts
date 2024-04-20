@@ -1,11 +1,11 @@
+import { describe, it, expect, vi } from 'vitest'
 import { getError } from 'return-style'
 import { find } from '@src/find.js'
-import { jest } from '@jest/globals'
 
 describe('find', () => {
   it('called fn with [element, index]', () => {
     const iter = [1, 2, 3]
-    const fn = jest.fn()
+    const fn = vi.fn()
       .mockReturnValueOnce(false)
       .mockReturnValueOnce(false)
       .mockReturnValueOnce(true)
@@ -21,7 +21,7 @@ describe('find', () => {
   describe('fn returns true on first time', () => {
     it('called fn only once', () => {
       const iter = [1, 2, 3]
-      const fn = jest.fn().mockReturnValueOnce(true)
+      const fn = vi.fn().mockReturnValueOnce(true)
 
       find(iter, fn)
 

@@ -1,3 +1,4 @@
+import { describe, test, expect, it } from 'vitest'
 import { consume, toArray, MockIterable, take } from '@test/utils.js'
 import { intersection } from '@src/intersection.js'
 

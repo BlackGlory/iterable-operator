@@ -1,3 +1,4 @@
+import { describe, test, expect } from 'vitest'
 import { isAsyncIterable, isntAsyncIterable } from '@src/is-async-iterable.js'
 import { toIterable, toAsyncIterable } from '@test/utils.js'
 

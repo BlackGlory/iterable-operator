@@ -1,9 +1,9 @@
+import { describe, test, it, expect, vi } from 'vitest'
 import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils.js'
 import { dropUntil } from '@src/drop-until.js'
 import { getError } from 'return-style'
 import { go } from '@blackglory/go'
 import { pass } from '@blackglory/pass'
-import { jest } from '@jest/globals'
 
 describe('dropUntil', () => {
   test('close the unexhausted iterator', () => {
@@ -23,7 +23,7 @@ describe('dropUntil', () => {
 
   test('called fn with [element, index]', () => {
     const iter = [1, 2, 3]
-    const fn = jest.fn().mockReturnValue(false)
+    const fn = vi.fn().mockReturnValue(false)
 
     const result = dropUntil(iter, fn)
     const calledTimesBeforeConsume = getCalledTimes(fn)
@@ -40,7 +40,7 @@ describe('dropUntil', () => {
   describe('fn returns true on first element', () => {
     it('called fn only once', () => {
       const iter = [1, 2, 3]
-      const fn = jest.fn().mockReturnValueOnce(true)
+      const fn = vi.fn().mockReturnValueOnce(true)
 
       const result = dropUntil(iter, fn)
       const calledTimesBeforeConsume = getCalledTimes(fn)

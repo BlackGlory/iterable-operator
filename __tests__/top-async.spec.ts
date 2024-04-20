@@ -1,3 +1,4 @@
+import { describe, test, expect } from 'vitest'
 import { toAsyncIterable } from '@test/utils.js'
 import { compareNumbersAscending, compareNumbersDescending } from 'extra-sort'
 import { topAsync } from '@src/top-async.js'

@@ -1,11 +1,11 @@
+import { describe, test, expect, it, vi } from 'vitest'
 import { getError } from 'return-style'
 import { each } from '@src/each.js'
-import { jest } from '@jest/globals'
 
 describe('each', () => {
   test('called fn with [element, index]', () => {
     const iter = [1, 2, 3]
-    const fn = jest.fn()
+    const fn = vi.fn()
 
     each(iter, fn)
 

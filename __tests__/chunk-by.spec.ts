@@ -1,12 +1,12 @@
+import { describe, test, vi, expect, it } from 'vitest'
 import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils.js'
 import { chunkBy } from '@src/chunk-by.js'
 import { getError } from 'return-style'
-import { jest } from '@jest/globals'
 
 describe('chunkBy', () => {
   test('called fn with [element, index]', () => {
     const iter = [1, 2, 3]
-    const fn = jest.fn()
+    const fn = vi.fn()
 
     const result = chunkBy(iter, fn)
     const calledTimesBeforeConsume = getCalledTimes(fn)

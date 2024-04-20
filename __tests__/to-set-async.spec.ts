@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest'
 import { toAsyncIterable, toArray } from '@test/utils.js'
 import { toSetAsync } from '@src/to-set-async.js'
 

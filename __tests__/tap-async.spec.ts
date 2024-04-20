@@ -1,8 +1,8 @@
+import { describe, test, expect, vi, it } from 'vitest'
 import { toArrayAsync, consumeAsync, getCalledTimes, MockIterable, takeAsync } from '@test/utils.js'
 import { getErrorPromise } from 'return-style'
 import { testFunction, testAsyncFunction, testIterable, testIterablePromises, testAsyncIterable } from '@test/test-fixtures.js'
 import { tapAsync } from '@src/tap-async.js'
-import { jest } from '@jest/globals'
 
 describe('tapAsync', () => {
   describe.each([
@@ -12,7 +12,7 @@ describe('tapAsync', () => {
   ])('%s', (_, createIter) => {
     test('called fn with [element, index]', async () => {
       const iter = createIter([1, 2, 3])
-      const fn = jest.fn()
+      const fn = vi.fn()
 
       const result = tapAsync(iter, fn)
       const calledTimesBeforeConsume = getCalledTimes(fn)
@@ -33,7 +33,7 @@ describe('tapAsync', () => {
       test('lazy and partial evaluation', async () => {
         const mock = new MockIterable([1, 2, 3])
         const iter = createIter(mock)
-        const fn = createFn(jest.fn())
+        const fn = createFn(vi.fn())
 
         const result = tapAsync(iter, fn)
         const isLazy = mock.nextIndex === 0

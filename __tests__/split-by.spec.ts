@@ -1,12 +1,12 @@
+import { describe, test, it, expect, vi } from 'vitest'
 import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils.js'
 import { splitBy } from '@src/split-by.js'
 import { getError } from 'return-style'
-import { jest } from '@jest/globals'
 
 describe('splitBy', () => {
   test('called fn with [element, index]', () => {
     const iter = [1, 2, 3]
-    const fn = jest.fn()
+    const fn = vi.fn()
 
     const result = splitBy(iter, fn)
     const calledTimesBeforeConsume = getCalledTimes(fn)

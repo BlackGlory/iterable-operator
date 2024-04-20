@@ -1,5 +1,5 @@
-import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync }
-  from '@test/utils.js'
+import { describe, test, expect, it } from 'vitest'
+import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils.js'
 import { getError } from 'return-style'
 import { dropAsync } from '@src/drop-async.js'
 import { go } from '@blackglory/go'

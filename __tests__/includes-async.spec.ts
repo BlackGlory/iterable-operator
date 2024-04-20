@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest'
 import { toAsyncIterable } from '@test/utils.js'
 import { includesAsync } from '@src/includes-async.js'
 

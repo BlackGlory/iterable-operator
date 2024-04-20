@@ -1,3 +1,4 @@
+import { describe, test, it, expect } from 'vitest'
 import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils.js'
 import { splitAsync } from '@src/split-async.js'
 

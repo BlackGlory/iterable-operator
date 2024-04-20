@@ -1,3 +1,4 @@
+import { describe, test, expect } from 'vitest'
 import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils.js'
 import { joinAsync } from '@src/join-async.js'
 

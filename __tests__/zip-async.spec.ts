@@ -1,3 +1,4 @@
+import { describe, test, expect, it } from 'vitest'
 import { testIterable, testAsyncIterable, testIterablePromises } from '@test/test-fixtures.js'
 import {
   consumeAsync

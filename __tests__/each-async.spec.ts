@@ -1,7 +1,7 @@
+import { describe, expect, it, test, vi } from 'vitest'
 import { getErrorPromise } from 'return-style'
 import { testFunction, testAsyncFunction, testIterable, testIterablePromises, testAsyncIterable } from '@test/test-fixtures.js'
 import { eachAsync } from '@src/each-async.js'
-import { jest } from '@jest/globals'
 
 describe('eachAsync', () => {
   describe.each([
@@ -11,7 +11,7 @@ describe('eachAsync', () => {
   ])('%s', (_, createIter) => {
     test('called fn with [element, index]', async () => {
       const iter = createIter([1, 2, 3])
-      const fn = jest.fn()
+      const fn = vi.fn()
 
       await eachAsync(iter, fn)
 

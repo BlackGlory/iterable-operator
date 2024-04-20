@@ -1,3 +1,4 @@
+import { describe, test, expect, it } from 'vitest'
 import { toAsyncIterable, MockAsyncIterable } from '@test/utils.js'
 import { lastAsync } from '@src/last-async.js'
 import { go } from '@blackglory/go'

@@ -1,3 +1,4 @@
+import { test, expect } from 'vitest'
 import { count } from '@src/count.js'
 
 test('count', () => {

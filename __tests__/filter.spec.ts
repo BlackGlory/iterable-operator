@@ -1,12 +1,12 @@
+import { describe, test, vi, it, expect } from 'vitest'
 import { getError } from 'return-style'
 import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils.js'
 import { filter } from '@src/filter.js'
-import { jest } from '@jest/globals'
 
 describe('filter', () => {
   test('called fn with [element, index]', () => {
     const iter = [1, 2, 3]
-    const fn = jest.fn()
+    const fn = vi.fn()
 
     const result = filter(iter, fn)
     const calledTimesBeforeConsume = getCalledTimes(fn)

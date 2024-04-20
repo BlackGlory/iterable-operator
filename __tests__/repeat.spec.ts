@@ -1,7 +1,7 @@
+import { describe, test, expect, it, vi } from 'vitest'
 import { consume, toArray, MockIterable, take } from '@test/utils.js'
 import { getError } from 'return-style'
 import { repeat } from '@src/repeat.js'
-import { jest } from '@jest/globals'
 import { pass } from '@blackglory/pass'
 
 describe('repeat', () => {
@@ -59,7 +59,7 @@ describe('repeat', () => {
       it('show infinite loop warning', () => {
         const OLD_NODE_ENV = process.env.NODE_ENV
         process.env.NODE_ENV = 'production'
-        const spy = jest.spyOn(console, 'warn').mockImplementation(pass)
+        const spy = vi.spyOn(console, 'warn').mockImplementation(pass)
         const iter: number[] = [1, 2, 3]
 
         try {
@@ -77,7 +77,7 @@ describe('repeat', () => {
       it('show infinite loop warning', () => {
         const OLD_NODE_ENV = process.env.NODE_ENV
         process.env.NODE_ENV = 'development'
-        const spy = jest.spyOn(console, 'warn').mockImplementation(pass)
+        const spy = vi.spyOn(console, 'warn').mockImplementation(pass)
         const iter: number[] = [1, 2, 3]
 
         try {

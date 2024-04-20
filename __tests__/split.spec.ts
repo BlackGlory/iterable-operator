@@ -1,3 +1,4 @@
+import { describe, it, expect, test } from 'vitest'
 import { consume, toArray, MockIterable, take } from '@test/utils.js'
 import { split } from '@src/split.js'
 

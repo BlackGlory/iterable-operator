@@ -1,12 +1,12 @@
+import { describe, test, expect, vi, it } from 'vitest'
 import { getError } from 'return-style'
 import { findAllIndexes } from '@src/find-all-indexes.js'
 import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils.js'
-import { jest } from '@jest/globals'
 
 describe('findAllIndexes', () => {
   test('called fn with [element, index]', () => {
     const iter = [1, 2, 3]
-    const fn = jest.fn()
+    const fn = vi.fn()
 
     const result = findAllIndexes(iter, fn)
     const calledTimesBeforeConsume = getCalledTimes(fn)

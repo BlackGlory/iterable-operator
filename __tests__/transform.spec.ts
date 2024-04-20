@@ -1,3 +1,4 @@
+import { describe, it, test, expect } from 'vitest'
 import { consume, toArray, MockIterable } from '@test/utils.js'
 import { transform } from '@src/transform.js'
 import { getError } from 'return-style'

@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest'
 import { first } from '@src/first.js'
 
 describe('first', () => {

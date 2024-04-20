@@ -1,3 +1,4 @@
+import { describe, test, expect, it } from 'vitest'
 import { consume, toArray, MockIterable } from '@test/utils.js'
 import { getError } from 'return-style'
 import { takeRight } from '@src/take-right.js'

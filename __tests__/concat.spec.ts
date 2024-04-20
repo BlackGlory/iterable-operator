@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest'
 import { consume, toArray, MockIterable, take } from '@test/utils.js'
 import { concat } from '@src/concat.js'
 

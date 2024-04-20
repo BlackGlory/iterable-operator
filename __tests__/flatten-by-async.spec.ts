@@ -1,9 +1,9 @@
+import { describe, test, expect, vi, it } from 'vitest'
 import { isString } from 'extra-utils'
 import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils.js'
 import { testIterable, testIterablePromises, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures.js'
 import { getErrorPromise } from 'return-style'
 import { flattenByAsync } from '@src/flatten-by-async.js'
-import { jest } from '@jest/globals'
 
 describe('flattenByAsync', () => {
   describe.each([
@@ -13,7 +13,7 @@ describe('flattenByAsync', () => {
   ])('%s', (_, createIter) => {
     test('called fn with [element, level]', async () => {
       const iter = createIter([0, [1]])
-      const fn = jest.fn().mockReturnValue(true)
+      const fn = vi.fn().mockReturnValue(true)
 
       const result = flattenByAsync(iter, fn)
       const calledTimesBeforeConsume = getCalledTimes(fn)

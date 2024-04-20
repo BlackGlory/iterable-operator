@@ -1,12 +1,12 @@
+import { describe, test, vi, it, expect } from 'vitest'
 import { getError } from 'return-style'
 import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils.js'
 import { flatMap } from '@src/flat-map.js'
-import { jest } from '@jest/globals'
 
 describe('flatMap', () => {
   test('called fn with [element, index]', () => {
     const iter = [1, 2, 3]
-    const fn = jest.fn(x => [x])
+    const fn = vi.fn(x => [x])
 
     const result = flatMap(iter, fn)
     const calledTimesBeforeConsume = getCalledTimes(fn)
@@ -32,7 +32,7 @@ describe('flatMap', () => {
 
   test('lazy and partial evaluation', () => {
     const iter = new MockIterable([1, 2, 3])
-    const fn = jest.fn(x => [x])
+    const fn = vi.fn(x => [x])
 
     const result = flatMap(iter, fn)
     const isLazy = iter.nextIndex === 0

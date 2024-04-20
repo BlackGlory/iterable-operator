@@ -1,8 +1,8 @@
+import { describe, test, expect, vi, it } from 'vitest'
 import { testIterable, testIterablePromises, testAsyncIterable, testFunction, testAsyncFunction } from '@test/test-fixtures.js'
 import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils.js'
 import { getErrorPromise } from 'return-style'
 import { uniqByAsync } from '@src/uniq-by-async.js'
-import { jest } from '@jest/globals'
 
 describe('uniqByAsync', () => {
   describe.each([
@@ -12,7 +12,7 @@ describe('uniqByAsync', () => {
   ])('%s', (_, createIter) => {
     test('called fn with [element, index]', async () => {
       const iter = createIter([1, 2, 3])
-      const fn = jest.fn()
+      const fn = vi.fn()
 
       const result = uniqByAsync(iter, fn)
       const calledTimesBeforeConsume = getCalledTimes(fn)

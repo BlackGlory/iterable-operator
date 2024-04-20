@@ -1,3 +1,4 @@
+import { describe, test, expect, it } from 'vitest'
 import { consumeAsync, toAsyncIterable, toArrayAsync, MockAsyncIterable, takeAsync } from '@test/utils.js'
 import { flattenAsync } from '@src/flatten-async.js'
 

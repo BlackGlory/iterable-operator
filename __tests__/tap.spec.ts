@@ -1,12 +1,12 @@
+import { describe, test, vi, it, expect } from 'vitest'
 import { getError } from 'return-style'
 import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils.js'
 import { tap } from '@src/tap.js'
-import { jest } from '@jest/globals'
 
 describe('tap', () => {
   test('called fn with [element, index]', () => {
     const iter = [1, 2, 3]
-    const fn = jest.fn()
+    const fn = vi.fn()
 
     const result = tap(iter, fn)
     const calledTimesBeforeConsume = getCalledTimes(fn)
@@ -36,7 +36,7 @@ describe('tap', () => {
 
   test('lazy and partial evaluation', () => {
     const iter = new MockIterable([1, 2, 3])
-    const fn = jest.fn()
+    const fn = vi.fn()
 
     const result = tap(iter, fn)
     const isLazy = iter.nextIndex === 0

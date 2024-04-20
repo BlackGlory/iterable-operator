@@ -1,3 +1,4 @@
+import { describe, test, expect } from 'vitest'
 import { consume, toArray, MockIterable, take } from '@test/utils.js'
 import { join } from '@src/join.js'
 

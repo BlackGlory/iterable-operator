@@ -1,13 +1,13 @@
+import { describe, test, it, expect, vi } from 'vitest'
 import { isString } from 'extra-utils'
 import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils.js'
 import { flattenBy } from '@src/flatten-by.js'
 import { getError } from 'return-style'
-import { jest } from '@jest/globals'
 
 describe('flattenBy', () => {
   test('called fn with [element, level]', () => {
     const iter = [0, [1]]
-    const fn = jest.fn().mockReturnValue(true)
+    const fn = vi.fn().mockReturnValue(true)
 
     const result = flattenBy(iter, fn)
     const calledTimesBeforeConsume = getCalledTimes(fn)

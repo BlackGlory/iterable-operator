@@ -1,8 +1,8 @@
+import { describe, test, vi, expect, it } from 'vitest'
 import { getErrorPromise } from 'return-style'
 import { testIterable, testIterablePromises, testAsyncIterable } from '@test/test-fixtures.js'
 import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils.js'
 import { flatMapAsync } from '@src/flat-map-async.js'
-import { jest } from '@jest/globals'
 
 describe('flatMapAsync', () => {
   describe.each([
@@ -12,7 +12,7 @@ describe('flatMapAsync', () => {
   ])('%s', (_, createIter) => {
     test('called fn with element, index', async () => {
       const iter = createIter([1, 2, 3])
-      const fn = jest.fn(x => [x])
+      const fn = vi.fn(x => [x])
 
       const result = flatMapAsync(iter, fn)
       const calledTimesBeforeConsume = getCalledTimes(fn)
@@ -30,7 +30,7 @@ describe('flatMapAsync', () => {
       it('lazy and partial evaluation', async () => {
         const mock = new MockIterable([1, 2, 3])
         const iter = createIter(mock)
-        const fn = jest.fn((x: number) => createIter([x]))
+        const fn = vi.fn((x: number) => createIter([x]))
 
         const result = flatMapAsync(iter, fn)
         const isLazy = mock.nextIndex === 0
@@ -43,7 +43,7 @@ describe('flatMapAsync', () => {
 
       it('returns the flatten mapped iterable', async () => {
         const iter = createIter([1, 2, 3])
-        const double = jest.fn(async (x: number) => createIter([x, x * 2]))
+        const double = vi.fn(async (x: number) => createIter([x, x * 2]))
 
         const result = flatMapAsync(iter, double)
         const arrResult = await toArrayAsync(result)

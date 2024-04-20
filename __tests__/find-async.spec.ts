@@ -1,8 +1,8 @@
+import { describe, expect, it, vi } from 'vitest'
 import { getErrorPromise } from 'return-style'
 import { testFunction, testAsyncFunction, testIterable, testIterablePromises, testAsyncIterable }
   from '@test/test-fixtures.js'
 import { findAsync } from '@src/find-async.js'
-import { jest } from '@jest/globals'
 
 describe('findAsync', () => {
   describe.each([
@@ -12,7 +12,7 @@ describe('findAsync', () => {
   ])('%s', (_, createIter) => {
     it('called fn with [element, index]', async () => {
       const iter = createIter([1, 2, 3])
-      const fn = jest.fn()
+      const fn = vi.fn()
         .mockReturnValueOnce(false)
         .mockReturnValueOnce(false)
         .mockReturnValueOnce(true)
@@ -28,7 +28,7 @@ describe('findAsync', () => {
     describe('fn returns true on first element', () => {
       it('called fn only once', async () => {
         const iter = createIter([1, 2, 3])
-        const fn = jest.fn().mockReturnValueOnce(true)
+        const fn = vi.fn().mockReturnValueOnce(true)
 
         await findAsync(iter, fn)
 

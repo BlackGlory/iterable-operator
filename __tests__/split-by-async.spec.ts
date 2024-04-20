@@ -1,8 +1,8 @@
+import { describe, it, expect, test, vi } from 'vitest'
 import { getCalledTimes, consumeAsync, toArrayAsync, MockIterable, takeAsync } from '@test/utils.js'
 import { testIterable, testIterablePromises, testAsyncIterable, testAsyncFunction, testFunction } from '@test/test-fixtures.js'
 import { getErrorPromise } from 'return-style'
 import { splitByAsync } from '@src/split-by-async.js'
-import { jest } from '@jest/globals'
 
 describe('splitByAsync', () => {
   describe.each([
@@ -16,7 +16,7 @@ describe('splitByAsync', () => {
     ])('%s', (_, createFn) => {
       test('called fn with [element, index]', async () => {
         const iter = createIter([1, 2, 3])
-        const fn = jest.fn()
+        const fn = vi.fn()
 
         const result = splitByAsync(iter, fn)
         const calledTimesBeforeConsume = getCalledTimes(fn)

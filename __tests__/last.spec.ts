@@ -1,3 +1,4 @@
+import { describe, test, expect, it } from 'vitest'
 import { last } from '@src/last.js'
 import { MockIterable } from '@test/utils.js'
 import { go } from '@blackglory/go'

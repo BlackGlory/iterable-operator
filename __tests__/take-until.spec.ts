@@ -1,12 +1,12 @@
+import { describe, test, expect, vi, it } from 'vitest'
 import { toArray, getCalledTimes, consume, MockIterable, take } from '@test/utils.js'
 import { takeUntil } from '@src/take-until.js'
 import { getError } from 'return-style'
-import { jest } from '@jest/globals'
 
 describe('takeUntil', () => {
   test('called fn with [element, index]', () => {
     const iter = [1, 2, 3]
-    const fn = jest.fn().mockReturnValue(false)
+    const fn = vi.fn().mockReturnValue(false)
 
     const result = takeUntil(iter, fn)
     const calledTimesBeforeConsume = getCalledTimes(fn)
@@ -23,7 +23,7 @@ describe('takeUntil', () => {
   describe('returns true on first element', () => {
     it('called fn only once', () => {
       const iter = [1, 2, 3]
-      const fn = jest.fn().mockReturnValueOnce(true)
+      const fn = vi.fn().mockReturnValueOnce(true)
 
       const result = takeUntil(iter, fn)
       const calledTimesBeforeConsume = getCalledTimes(fn)

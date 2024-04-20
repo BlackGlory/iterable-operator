@@ -1,3 +1,4 @@
+import { describe, test, it, expect } from 'vitest'
 import { consumeAsync, toArrayAsync, MockIterable, toIterable, toAsyncIterable, takeAsync } from '@test/utils.js'
 import { testIterable, testAsyncIterable, testIterablePromises } from '@test/test-fixtures.js'
 import { intersectionAsync } from '@src/intersection-async.js'

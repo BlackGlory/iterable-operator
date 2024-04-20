@@ -1,4 +1,5 @@
 import { pass } from '@blackglory/pass'
+import { Mock } from 'vitest'
 
 export function toArray<T>(iterable: Iterable<T>, count: number = Infinity): T[] {
   const result: T[] =[]
@@ -35,7 +36,7 @@ export async function consumeAsync<T>(iterable: AsyncIterable<T>) {
   }
 }
 
-export function getCalledTimes(fn: jest.Mock) {
+export function getCalledTimes(fn: Mock) {
   return fn.mock.calls.length
 }
 

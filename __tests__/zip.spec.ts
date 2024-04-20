@@ -1,3 +1,4 @@
+import { describe, test, expect, it } from 'vitest'
 import { consume, toArray, MockIterable } from '@test/utils.js'
 import { zip } from '@src/zip.js'
 import { go } from '@blackglory/go'

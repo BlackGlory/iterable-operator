@@ -1,8 +1,8 @@
+import { describe, test, it, vi, expect } from 'vitest'
 import { getErrorPromise } from 'return-style'
 import { testFunction, testAsyncFunction, testIterable, testIterablePromises, testAsyncIterable } from '@test/test-fixtures.js'
 import { toArray } from '@test/utils.js'
 import { groupByAsync } from '@src/group-by-async.js'
-import { jest } from '@jest/globals'
 
 describe('groupByAsync', () => {
   describe.each([
@@ -12,7 +12,7 @@ describe('groupByAsync', () => {
   ])('%s', (_, createIter) => {
     test('called fn with [element, index]', async () => {
       const iter = createIter([1, 2, 3])
-      const fn = jest.fn()
+      const fn = vi.fn()
 
       await groupByAsync(iter, fn)
 

@@ -1,7 +1,7 @@
+import { describe, expect, test, it, vi } from 'vitest'
 import { getErrorPromise } from 'return-style'
 import { testFunction, testAsyncFunction, testIterable, testIterablePromises, testAsyncIterable } from '@test/test-fixtures.js'
 import { everyAsync } from '@src/every-async.js'
-import { jest } from '@jest/globals'
 
 describe('everyAsync', () => {
   describe.each([
@@ -11,7 +11,7 @@ describe('everyAsync', () => {
   ])('%s', (_, createIter) => {
     test('called fn with [element, index]', async () => {
       const iter = createIter([1, 2, 3])
-      const fn = jest.fn().mockReturnValue(true)
+      const fn = vi.fn().mockReturnValue(true)
 
       await everyAsync(iter, fn)
 
@@ -24,7 +24,7 @@ describe('everyAsync', () => {
     describe('fn returns false on first element', () => {
       it('fn is called once', async () => {
         const iter = createIter([1, 2, 3])
-        const fn = jest.fn().mockReturnValueOnce(false)
+        const fn = vi.fn().mockReturnValueOnce(false)
 
         await everyAsync(iter, fn)
 
