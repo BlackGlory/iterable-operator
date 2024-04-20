@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.1.0](https://github.com/BlackGlory/iterable-operator/compare/v5.0.0...v5.1.0) (2024-04-20)
+
+
+### Features
+
+* add `avg`, `avgAsync` ([36abff9](https://github.com/BlackGlory/iterable-operator/commit/36abff92b9d258d1cbb56029e582723f989486cc))
+
 ## [5.0.0](https://github.com/BlackGlory/iterable-operator/compare/v4.0.7...v5.0.0) (2024-01-29)
 
 
