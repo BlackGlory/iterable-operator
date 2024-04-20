@@ -776,3 +776,13 @@ function topAsync<T>(
 ```ts
 top([1, 2, 3], 2, (a, b) => b - a) // [3, 2]
 ```
+
+### avg, avgAsync
+```ts
+function avg(iterable: Iterable<number>): number
+function avgAsync(iterable: AsyncIterable<number>): Promise<number>
+```
+
+```ts
+avg([1, 2, 3]) // 2
+```

@@ -93,6 +93,8 @@ test('Index', () => {
   , 'prefetchAsync'
   , 'top'
   , 'topAsync'
+  , 'avg'
+  , 'avgAsync'
   ].sort()
 
   const actualExports = Object.keys(Index).sort()
