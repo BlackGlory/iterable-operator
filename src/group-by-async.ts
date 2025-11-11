@@ -8,11 +8,15 @@ export async function groupByAsync<T, U>(
   const map = new Map<Awaited<U>, Array<Awaited<T>>>()
 
   await eachAsync(iterable, async (element, index) => {
-    const group = await fn(element, index)
-    if (!map.has(group)) {
-      map.set(group, [])
+    const key = await fn(element, index)
+
+    let group = map.get(key)
+    if (!group) {
+      group = []
+      map.set(key, group)
     }
-    map.get(group)!.push(element)
+
+    group.push(element)
   })
 
   return map

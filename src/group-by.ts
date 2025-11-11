@@ -7,11 +7,15 @@ export function groupBy<T, U>(
   const map = new Map<U, T[]>()
 
   each(iterable, (element, index) => {
-    const group = fn(element, index)
-    if (!map.has(group)) {
-      map.set(group, [])
+    const key = fn(element, index)
+
+    let group = map.get(key)
+    if (!group) {
+      group = []
+      map.set(key, group)
     }
-    map.get(group)!.push(element)
+
+    group.push(element)
   })
 
   return map
