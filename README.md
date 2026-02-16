@@ -785,4 +785,5 @@ function avgAsync(iterable: AsyncIterable<number>): Promise<number>
 
 ```ts
 avg([1, 2, 3]) // 2
+avg([]) // Error
 ```
