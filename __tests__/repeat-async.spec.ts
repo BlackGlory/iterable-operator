@@ -26,7 +26,7 @@ describe('repeatAsync', () => {
       const result = repeatAsync(iter, times)
       const arrResult = await toArrayAsync(result)
 
-      expect(arrResult).toEqual([1, 2, 3, 1, 2, 3])
+      expect(arrResult).toStrictEqual([1, 2, 3, 1, 2, 3])
     })
   })
 
@@ -38,7 +38,7 @@ describe('repeatAsync', () => {
       const result = repeatAsync(iter, times)
       const arrResult = await toArrayAsync(result)
 
-      expect(arrResult).toEqual([])
+      expect(arrResult).toStrictEqual([])
     })
   })
 
@@ -54,41 +54,12 @@ describe('repeatAsync', () => {
     })
   })
 
-  describe('times = Infinity', () => {
-    describe('NODE_ENV = production', () => {
-      it('show infinite loop warning', () => {
-        const OLD_NODE_ENV = process.env.NODE_ENV
-        process.env.NODE_ENV = 'production'
-        const spy = vi.spyOn(console, 'warn').mockImplementation(pass)
-        const iter = toAsyncIterable([1, 2, 3])
+  test('times = Infinity', async () => {
+    const iter = toAsyncIterable([])
 
-        try {
-          repeatAsync(iter, Infinity)
+    const result = repeatAsync(iter, Infinity)
+    const arrResult = await toArrayAsync(result)
 
-          expect(console.warn).toHaveBeenCalledTimes(0)
-        } finally {
-          spy.mockRestore()
-          process.env.NODE_ENV = OLD_NODE_ENV
-        }
-      })
-    })
-
-    describe('NODE_ENV != production', () => {
-      it('show infinite loop warning', () => {
-        const OLD_NODE_ENV = process.env.NODE_ENV
-        process.env.NODE_ENV = 'development'
-        const spy = vi.spyOn(console, 'warn').mockImplementation(pass)
-        const iter = toAsyncIterable([1, 2, 3])
-
-        try {
-          repeatAsync(iter, Infinity)
-
-          expect(console.warn).toHaveBeenCalledTimes(1)
-        } finally {
-          spy.mockRestore()
-          process.env.NODE_ENV = OLD_NODE_ENV
-        }
-      })
-    })
+    expect(arrResult).toStrictEqual([])
   })
 })

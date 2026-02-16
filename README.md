@@ -299,6 +299,7 @@ function repeatAsync<T>(
 repeat([1, 2, 3], 2) // [1, 2, 3, 1, 2, 3]
 repeat([1, 2, 3], 0) // []
 repeat([1, 2, 3], -1) // throw Error
+repeat([], Infinity) // []
 ```
 
 The memory usage of this function depends on `iterable`.

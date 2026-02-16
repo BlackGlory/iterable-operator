@@ -1,5 +1,6 @@
 import { go } from '@blackglory/go'
 import { assert } from '@blackglory/errors'
+import { isntEmptyArray } from 'extra-utils'
 
 export function repeatAsync<T>(
   iterable: AsyncIterable<T>
@@ -11,7 +12,6 @@ export function repeatAsync<T>(
   )
   assert(times >= 0, 'The parameter times must be greater than or equal to 0')
 
-  if (times === Infinity) warnInfiniteLoop()
   return go(async function* () {
     const cache: T[] = []
     if (times > 0) {
@@ -21,18 +21,10 @@ export function repeatAsync<T>(
       }
       times--
     }
-    while (times > 0) {
+
+    while (isntEmptyArray(cache) && times > 0) {
       yield* cache
       times--
     }
   })
-}
-
-function warnInfiniteLoop(): void {
-  if (isProduction()) return
-  console.warn('When iterable has no elements and times is Infinity, repeat() will be in dead loop')
-}
-
-function isProduction(): boolean {
-  return process.env.NODE_ENV === 'production'
 }

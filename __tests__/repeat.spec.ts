@@ -26,7 +26,7 @@ describe('repeat', () => {
       const result = repeat(iter, times)
       const arrResult = toArray(result)
 
-      expect(arrResult).toEqual([1, 2, 3, 1, 2, 3])
+      expect(arrResult).toStrictEqual([1, 2, 3, 1, 2, 3])
     })
   })
 
@@ -38,7 +38,7 @@ describe('repeat', () => {
       const result = repeat(iter, times)
       const arrResult = toArray(result)
 
-      expect(arrResult).toEqual([])
+      expect(arrResult).toStrictEqual([])
     })
   })
 
@@ -54,41 +54,12 @@ describe('repeat', () => {
     })
   })
 
-  describe('times = Infinity', () => {
-    describe('NODE_ENV = production', () => {
-      it('show infinite loop warning', () => {
-        const OLD_NODE_ENV = process.env.NODE_ENV
-        process.env.NODE_ENV = 'production'
-        const spy = vi.spyOn(console, 'warn').mockImplementation(pass)
-        const iter: number[] = [1, 2, 3]
+  test('times = Infinity', () => {
+    const iter: number[] = []
 
-        try {
-          repeat(iter, Infinity)
+    const result = repeat(iter, Infinity)
+    const arrResult = toArray(result)
 
-          expect(console.warn).toHaveBeenCalledTimes(0)
-        } finally {
-          spy.mockRestore()
-          process.env.NODE_ENV = OLD_NODE_ENV
-        }
-      })
-    })
-
-    describe('NODE_ENV != production', () => {
-      it('show infinite loop warning', () => {
-        const OLD_NODE_ENV = process.env.NODE_ENV
-        process.env.NODE_ENV = 'development'
-        const spy = vi.spyOn(console, 'warn').mockImplementation(pass)
-        const iter: number[] = [1, 2, 3]
-
-        try {
-          repeat(iter, Infinity)
-
-          expect(console.warn).toHaveBeenCalledTimes(1)
-        } finally {
-          spy.mockRestore()
-          process.env.NODE_ENV = OLD_NODE_ENV
-        }
-      })
-    })
+    expect(arrResult).toStrictEqual([])
   })
 })
