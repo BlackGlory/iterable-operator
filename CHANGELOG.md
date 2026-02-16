@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.0.0](https://github.com/BlackGlory/iterable-operator/compare/v5.1.0...v6.0.0) (2026-02-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* **repeat, repeat-async:** Changed the behaviors of `repeat`, `repeatAsync`.
+* Node.js v18 => Node.js v22
+
+### Features
+
+* **avg:** explicit behavior when the iterable has no elements ([6a76d8d](https://github.com/BlackGlory/iterable-operator/commit/6a76d8d97a9867edd9ebb018f928f495b7eea67f))
+* **repeat, repeat-async:** do not yield if the iterable has no elements and `times` is Infinity ([a74980e](https://github.com/BlackGlory/iterable-operator/commit/a74980e0820127dc94a0641ce449097f22269b70))
+
+
+* upgrade dependencies ([d5a4fd9](https://github.com/BlackGlory/iterable-operator/commit/d5a4fd93b8021f6f1a438cce471a8b362b128dd2))
+
 ## [5.1.0](https://github.com/BlackGlory/iterable-operator/compare/v5.0.0...v5.1.0) (2024-04-20)
 
 
