@@ -4,7 +4,7 @@ import { avgAsync } from '@src/avg-async.js'
 import { getErrorPromise } from 'return-style'
 
 describe('avgAsync', () => {
-  test('not empty', async () => {
+  test('general', async () => {
     const iter = toAsyncIterable([1, 2, 3])
 
     const result = await avgAsync(iter)
@@ -12,7 +12,7 @@ describe('avgAsync', () => {
     expect(result).toBe(2)
   })
 
-  test('empty', async () => {
+  test('edge: empty iterable', async () => {
     const iter = toAsyncIterable([])
 
     const error = await getErrorPromise(avgAsync(iter))

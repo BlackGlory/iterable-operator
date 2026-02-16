@@ -3,7 +3,7 @@ import { avg } from '@src/avg.js'
 import { getError } from 'return-style'
 
 describe('avg', () => {
-  test('not empty', () => {
+  test('general', () => {
     const iter: number[] = [1, 2, 3]
 
     const result = avg(iter)
@@ -11,7 +11,7 @@ describe('avg', () => {
     expect(result).toBe(2)
   })
 
-  test('empty', () => {
+  test('edge: empty iterable', () => {
     const iter: number[] = []
 
     const error = getError(() => avg(iter))

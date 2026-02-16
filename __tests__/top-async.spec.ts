@@ -42,4 +42,13 @@ describe('topAsync', () => {
 
     expect(result).toStrictEqual([2, 4])
   })
+
+  test('edge: empty iterable', async () => {
+    const iter = toAsyncIterable([])
+    const num = 1
+
+    const result = await topAsync(iter, num, compareNumbersAscending)
+
+    expect(result).toStrictEqual([])
+  })
 })

@@ -41,4 +41,13 @@ describe('top', () => {
 
     expect(result).toStrictEqual([2, 4])
   })
+
+  test('edge: empty iterable', () => {
+    const iter: number[] = []
+    const num = 1
+
+    const result = top(iter, num, compareNumbersAscending)
+
+    expect(result).toStrictEqual([])
+  })
 })
