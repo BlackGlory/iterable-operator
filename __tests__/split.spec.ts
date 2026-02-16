@@ -65,4 +65,14 @@ describe('split', () => {
     expect(isLazy).toBe(true)
     expect(isPartial).toBe(true)
   })
+
+  test('edge: empty iterable', () => {
+    const iter: number[] = []
+    const sep = 0
+
+    const result = split(iter, sep)
+    const arrResult = toArray(result)
+
+    expect(arrResult).toEqual([[]])
+  })
 })

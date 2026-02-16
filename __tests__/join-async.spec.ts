@@ -24,4 +24,13 @@ describe('joinAsync', () => {
 
     expect(arrResult).toEqual([1, '+', 2, '+', 3])
   })
+
+  test('edge: empty iterable', async () => {
+    const iter = toAsyncIterable([])
+
+    const result = joinAsync(iter, '+')
+    const arrResult = await toArrayAsync(result)
+
+    expect(arrResult).toEqual([])
+  })
 })

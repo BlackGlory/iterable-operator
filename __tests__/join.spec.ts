@@ -24,4 +24,13 @@ describe('join', () => {
 
     expect(arrResult).toEqual([1, '+', 2, '+', 3])
   })
+
+  test('edge: empty iterable', () => {
+    const iter: number[] = []
+
+    const result = join(iter, '+')
+    const arrResult = toArray(result)
+
+    expect(arrResult).toEqual([])
+  })
 })

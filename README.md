@@ -336,6 +336,7 @@ function joinAsync<T, U = T>(
 
 ```ts
 join([1, 2, 3], '+') // [1, '+', 2, '+', 3]
+join([], '+') // []
 ```
 
 ### split, splitAsync
@@ -352,6 +353,7 @@ split([1, 2, 3, 4, 5], 3) // [[1, 2], [4, 5]]
 split([1, 2, 3, 4, 5], 1) // [[], [2, 3, 4, 5]]
 split([1, 2, 3, 4, 5], 5) // [[1, 2, 3, 4], []]
 split([1, 2, 3, 4, 5], 0) // [[1, 2, 3, 4, 5]]
+split([], 0) // [[]]
 ```
 
 The memory usage of this function depends on `iterable` and `separator`.
@@ -373,6 +375,7 @@ splitBy([1, 2, 3, 4, 5], x => x === 3) // [[1, 2], [4, 5]]
 splitBy([1, 2, 3, 4, 5], x => x === 1) // [[], [2, 3, 4, 5]]
 splitBy([1, 2, 3, 4, 5], x => x === 5) // [[1, 2, 3, 4], []]
 splitBy([1, 2, 3, 4, 5], x => x === 0) // [[1, 2, 3, 4, 5]]
+splitBy([], x => true) // [[]]
 ```
 
 The memory usage of this function depends on `iterable` and `predicate`.
@@ -785,5 +788,5 @@ function avgAsync(iterable: AsyncIterable<number>): Promise<number>
 
 ```ts
 avg([1, 2, 3]) // 2
-avg([]) // Error
+avg([]) // throw Error
 ```

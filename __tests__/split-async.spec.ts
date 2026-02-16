@@ -65,4 +65,14 @@ describe('splitAsync', () => {
     expect(isLazy).toBe(true)
     expect(isPartial).toBe(true)
   })
+
+  test('edge: empty iterable', async () => {
+    const iter = toAsyncIterable([])
+    const sep = 0
+
+    const result = splitAsync(iter, sep)
+    const arrResult = await toArrayAsync(result)
+
+    expect(arrResult).toEqual([[]])
+  })
 })
